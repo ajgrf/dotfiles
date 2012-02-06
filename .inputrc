@@ -1,0 +1,8 @@
+# ~/.inputrc
+
+# Case-insensitive tab completion
+set completion-ignore-case on
+
+# Up/Down arrows search the history for whatever you've typed so far
+"\e[A": history-search-backward
+"\e[B": history-search-forward

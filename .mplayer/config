@@ -1,0 +1,4 @@
+# ~/.mplayer/config
+
+af=scaletempo
+zoom=true
