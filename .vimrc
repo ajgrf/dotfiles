@@ -73,6 +73,15 @@ nnoremap <c-w>e <c-w>k
 nnoremap <c-w>k <c-w>n
 nnoremap <c-w>l <c-w>i
 
+" g- movement keys
+noremap gn gj
+noremap gN gJ
+noremap ge gk
+noremap gj ge
+noremap gJ gE
+unmap gk
+unmap gE
+
 " disable netrw's banner
 let g:netrw_banner=0
 " open netrw's files in the second window
