@@ -82,6 +82,9 @@ noremap gJ gE
 unmap gk
 unmap gE
 
+" automatically run gofmt on save
+autocmd BufWritePost *.go :silent Fmt
+
 " disable netrw's banner
 let g:netrw_banner=0
 " open netrw's files in the second window

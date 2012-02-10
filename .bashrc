@@ -9,8 +9,12 @@ case "$TERM" in
 		PROMPT_COMMAND='printf "\e]0;${USER}@${HOSTNAME}: ${PWD}\a"'
 esac
 
+# golang environment variables
+GOROOT="$HOME/.local/go"
+GOBIN="$GOROOT/bin"
+
 # add extra bin directories in home and elsewhere to $PATH
-PATH="$HOME/bin:$PATH"
+PATH="$HOME/bin:$GOBIN:$PATH"
 
 # fall back to simplified chars if using chinese traditional locale
 test "$LANG" = "zh_TW.utf8" && export LANGUAGE="zh_TW.utf8:zh_CN.utf8"
