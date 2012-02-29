@@ -19,8 +19,8 @@ import XMonad.Layout.Grid
 import XMonad.Layout.Reflect
 
 main = xmonad $ gnomeConfig
-	{ normalBorderColor  = "#93a1a1"
-	, focusedBorderColor = "#cb4b16"
+	{ normalBorderColor  = "#c5c5c5"
+	, focusedBorderColor = "#de935f"
 	, borderWidth = 1
 	, terminal = "urxvt"
 	, modMask = mod4Mask
@@ -35,15 +35,7 @@ main = xmonad $ gnomeConfig
 		]
 	}
 	`additionalKeysP`
-		[ ("M-n", windows W.focusDown)
-		, ("M-e", windows W.focusUp)
-		, ("M-S-n", windows W.swapDown)
-		, ("M-S-e", windows W.swapUp)
-		, ("M-i", sendMessage Expand)
-		, ("M-k", refresh)
-		, ("M-f",   screenWorkspace 1 >>= flip whenJust (windows . W.view))  -- focus second screen
-		, ("M-S-f", screenWorkspace 1 >>= flip whenJust (windows . W.shift)) -- move to second screen
-		, ("M-r", banishScreen LowerLeft)
+		[ ("M-r", banishScreen LowerLeft)
 		, ("M-<Tab>", toggleWS)
 		, ("M-s", submap . M.fromList $
 			[ ((0, xK_w), spawn "firefox") 
@@ -54,5 +46,5 @@ main = xmonad $ gnomeConfig
 			])
 		]
 	`removeKeysP`
-		["M-j", "M-k", "M-S-j", "M-S-k", "M-l", "M-S-r", "M-S-p"]
+		["M-S-p"]
 

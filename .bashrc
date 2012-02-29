@@ -1,7 +1,7 @@
 # ~/.bashrc
 
 # prompt
-PS1='\u@\h:\w\$ '
+PS1='\$ '
 
 # set terminal title
 case "$TERM" in
@@ -9,12 +9,8 @@ case "$TERM" in
 		PROMPT_COMMAND='printf "\e]0;${USER}@${HOSTNAME}: ${PWD}\a"'
 esac
 
-# golang environment variables
-GOROOT="$HOME/.local/go"
-GOBIN="$GOROOT/bin"
-
 # add extra bin directories in home and elsewhere to $PATH
-PATH="$HOME/bin:$GOBIN:$PATH"
+PATH="$HOME/bin:$PATH"
 
 # fall back to simplified chars if using chinese traditional locale
 test "$LANG" = "zh_TW.utf8" && export LANGUAGE="zh_TW.utf8:zh_CN.utf8"
@@ -40,18 +36,16 @@ export LESSHISTFILE='/dev/null'
 # enable color when it's available
 if [ $(tput colors) -gt 1 ]; then
 	# colored prompt
-	yl='\[\e[33m\]' gr='\[\e[32m\]' bl='\[\e[34m\]' wh='\[\e[1;37m\]' d='\[\e[0m\]'
-	PS1="${yl}\u${d}@${gr}\h${d}:${bl}\w${wh}\$${d} "
-	unset yl gr bl wh d
+	PS1="\[\e[1;37m\]\$\[\e[0m\] "
 
 	# colored man pages
 	export LESS_TERMCAP_mb=$(printf '\e[1;37m')
 	export LESS_TERMCAP_md=$(printf '\e[1;37m')
 	export LESS_TERMCAP_me=$(printf '\e[0m')
 	export LESS_TERMCAP_se=$(printf '\e[0m')
-	export LESS_TERMCAP_so=$(printf '\e[30;106m')
+	export LESS_TERMCAP_so=$(printf '\e[30;47m')
 	export LESS_TERMCAP_ue=$(printf '\e[0m')
-	export LESS_TERMCAP_us=$(printf '\e[36m')
+	export LESS_TERMCAP_us=$(printf '\e[1;36m')
 
 	# enable color support for ls
 	eval "$(dircolors -b ~/.dircolors 2>/dev/null || dircolors -b)"
