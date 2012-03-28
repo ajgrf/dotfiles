@@ -50,6 +50,7 @@ URxvt*urgentOnBell:      true
 
 !! XTerm settings
 xterm*dynamicColors:     true
+xterm*eightBitInput:     false
 xterm*faceName:          terminus:pixelsize=14
 xterm*faceNameDoublesize:WenQuanYi Zen Hei Mono:pixelsize=14
 xterm*iconName:          Terminal

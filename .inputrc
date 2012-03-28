@@ -6,3 +6,9 @@ set completion-ignore-case on
 # Up/Down arrows search the history for whatever you've typed so far
 "\e[A": history-search-backward
 "\e[B": history-search-forward
+
+$if bash
+	# Alt-Enter pipes the current command through less
+	"\C-\M-j": "\C-e |less\n"
+	"\C-\M-m": "\C-e |less\n"
+$endif
