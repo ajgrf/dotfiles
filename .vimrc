@@ -19,6 +19,14 @@ autocmd BufReadPost * if line("'\"") > 1 && line("'\"") <= line("$") | exe "norm
 set ignorecase
 set smartcase
 
+" highlight matches to a search; use Esc-u to hide highlighting
+set hlsearch
+nnoremap <Esc>u :nohlsearch<cr>
+
+" show tabs and trailing whitespace
+set listchars=tab:»\ ,trail:·
+set list
+
 " only use terminal colors
 set t_Co=16
 
