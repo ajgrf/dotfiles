@@ -1,8 +1,11 @@
 " ~/.pentadactylrc
 
+" use darker colorscheme
+colorscheme natural
+
 " duckduckgo as default search engine
 set defsearch=ddg
 
 " chinese support for ]] and [[
-set nextpattern+='^下一[頁页]$'
-set previouspattern+='^上一[頁页]$'
+set nextpattern^='^下一[頁页]$'
+set previouspattern^='^上一[頁页]$'

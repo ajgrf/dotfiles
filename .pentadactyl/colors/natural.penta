@@ -1,0 +1,65 @@
+" natural pentadactyl color scheme
+
+" clear previous colorscheme
+hi clear
+" statusLine settings
+hi StatusLineNormal                 -a color: #c5c5c5 !important; background-color: #161616 !important; font-weight: bold !important;
+hi StatusLineBroken                 -a color: #161616 !important; background-color: #81a2be !important;
+hi StatusLineSecure                 -a color: #161616 !important; background-color: #b5bd68 !important;
+hi StatusLineExtended               -a color: #161616 !important; background-color: #b5bd68 !important;
+
+" cmdline settings excluding gradient
+hi CmdLine                          -a color: inherit !important; background: inherit !important; font-weight: normal !important; padding: 3px !important;
+hi CmdCmdLine                       -a color: #c5c5c5 !important; background: #161616 !important; font-weight: normal !important;
+hi Normal                           -a color: #c5c5c5 !important; background: #161616 !important; font-weight: bold !important;
+hi CompDesc                         -a color: inherit; width: 50%; font-size: 8pt;
+hi CompGroup                        -a color: inherit; font-weight: bold !important;
+hi CompIcon                         -a display: none;
+hi CompItem                         -a color: inherit; background: inherit; font-weight: bold !important;
+hi CompItem[selected]               -a color: #f7f7f7 !important; background: #5f788c; font-weight: bold !important;
+hi CompLess                         -a text-align: center; height: 0; line-height: .5ex; padding-top: 1ex;
+hi CompMore                         -a text-align: center; height: .5ex; line-height: .5ex; margin-bottom: -.5ex;
+hi CompMsg                          -a font-style: italic;
+hi CompResult                       -a width: 45%; overflow: hidden; font-size: 8pt; font-family: monospace; font-weight: normal;
+hi CompTitle                        -a color: #f7f7f7 !important; background: #4a4a4a !important; font-weight: bold !important;
+hi CompTitle>*                      -a padding: 0 .5ex;
+hi CompTitleSep                     -a background: #8abeb7 !important; background: -moz-linear-gradient(0deg, #4a4a4a, #c5c5c5);
+
+" options for filter
+hi Filter                           -a font-weight: bold; color: #f0c674 !important;
+hi 'CompItem[selected] Filter'      -a color: #f0c674 !important;
+hi 'CompItem[selected] Function'    -a color: #c5c5c5 !important;
+
+" used with ]f and [f
+hi FrameIndicator                   -a background-color: #4a4a4a; opacity: 0.6; z-index: 999; position: fixed; top: 0; bottom: 0; left: 0; right: 0;
+
+
+" hint section
+hi Hint                             font-family: Sans; font-size: 11px !important; font-weight: bold !important; color: #c5c5c5 !important; background-color: rgba(0, 0, 0, 0.7) !important; border: solid 1px #161616 !important; position: absolute !important;
+hi Hint::after                      content: attr(number);
+hi HintActive                       background: #5f788c !important; color: #c5c5c5 !important;
+hi HintElem                         background-color: inherit !important;
+hi HintImage                        opacity: .5 !important;
+
+
+" other important stuff
+hi Bell                             -a border: 0 none; background-color: inherit;
+hi ErrorMsg                         -a color: #a65353 !important; background: inherit !important;
+hi Function                         -a color: #909653 !important; background: inherit !important;
+hi Indicator                        -a color: #a65353 !important; font-weight: bold; width: 4px;
+hi InfoMsg                          -a color: #c5c5c5 !important; background: #4a4a4a !important; font-weight: normal !important;
+hi LineNr                           -a color: #a65353 !important; background: inherit !important;
+hi Message                          -a color: #c5c5c5 !important; background: #4a4a4a !important; font-weight: bold; white-space: normal; min-width: 100%; padding-left: 2em; text-indent: -2em; display: block;
+
+" cmdline when not in use
+hi ModeMsg                          -a color: inherit !important; background: inherit !important; font-weight: bold !important;
+hi MoreMsg                          -a color: inherit !important; background: inherit !important;
+hi NonText                          -a color: #81a2be !important; min-height: 16px; padding-left: 2px;
+hi Object                           -a color: #f0c674 !important; background: inherit !important;
+hi Question                         -a color: inherit !important; background: inherit !important; font-weight: bold;
+hi Search                           -a font-size: inherit !important; padding: 0; color: inherit !important; background-color: #f0c674; padding: 0;
+hi Tag                              -a color: inherit !important; background: inherit !important;
+hi Title                            -a color: inherit !important; background: inherit !important; font-weight: bold;
+hi URL                              -a text-decoration: none; color: inherit; background: inherit;
+hi URL:hover                        -a text-decoration: underline; cursor: pointer;
+hi WarningMsg                       -a color: #a65353 !important; background: inherit !important;
