@@ -9,8 +9,13 @@ case "$TERM" in
 		PROMPT_COMMAND='printf "\e]0;${USER}@${HOSTNAME}: ${PWD}\a"'
 esac
 
+# golang env variables
+GOROOT="$HOME/.local/go"
+GOPATH="$HOME"
+GOBIN="$GOROOT/bin"
+
 # add extra bin directories in home and elsewhere to $PATH
-PATH="$HOME/bin:$PATH"
+PATH="$HOME/bin:$GOBIN:$PATH:$HOME/.cabal/bin"
 
 # fall back to simplified chars if using chinese traditional locale
 test "$LANG" = "zh_TW.utf8" && export LANGUAGE="zh_TW.utf8:zh_CN.utf8"
@@ -79,7 +84,7 @@ alias pgrep='pgrep -l'
 alias startx='exec xinit "${XINITRC:-$HOME/.xinitrc}"'
 alias svi='sudo vi'
 
-:h() {	vim --cmd ":silent help $@" --cmd "only"; }
+:h() { vim --cmd ":silent help $@" --cmd "only"; }
 
 mkcd() {
 	mkdir "$1" && cd "$1"

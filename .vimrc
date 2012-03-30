@@ -37,7 +37,7 @@ autocmd BufEnter * silent! lcd %:p:h
 autocmd FileType python setlocal tabstop=8 expandtab shiftwidth=4 softtabstop=4
 
 " automatically run gofmt on save
-autocmd BufWritePost *.go :silent Fmt
+autocmd BufWritePre *.go :silent Fmt
 
 " disable netrw's banner
 let g:netrw_banner=0
