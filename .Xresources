@@ -35,6 +35,8 @@ URxvt*font:              -*-terminus-medium-r-*-*-16-*-*-*-*-*-*-*,\
 URxvt*iconFile:          /usr/share/icons/elementary/apps/32/terminal.svg
 URxvt*iconName:          Terminal
 URxvt*inputMethod:       ibus
+!URxvt*keysym.C-Tab:      [27;5;9~
+!URxvt*keysym.S-C-Tab:    [27;6;9~
 URxvt*matcher.button:    1
 URxvt*perl-ext:          matcher
 URxvt*saveLines:         10000
@@ -56,3 +58,6 @@ xterm*iconName:          Terminal
 xterm*saveLines:         10000
 xterm*scrollKey:         true
 xterm*scrollTtyOutput:   false
+*vt100.translations: #override \n\
+	Ctrl ~Shift <Key>Tab: string(0x1b) string("[27;5;9~") \n \
+	Ctrl Shift <Key>Tab: string(0x1b) string("[27;6;9~") \n

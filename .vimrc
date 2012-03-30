@@ -30,6 +30,9 @@ set list
 " only use terminal colors
 set t_Co=16
 
+" fix <s-tab>
+set t_kB=[Z
+
 " set cwd to that of the current file
 autocmd BufEnter * silent! lcd %:p:h
 
@@ -43,3 +46,11 @@ autocmd BufWritePre *.go :silent Fmt
 let g:netrw_banner=0
 " open netrw's files in the second window
 let g:netrw_chgwin=2
+
+" better mappings for snippets
+let g:UltiSnipsExpandTrigger="<tab>"
+let g:UltiSnipsJumpForwardTrigger="<tab>"
+let g:UltiSnipsJumpBackwardTrigger="<s-tab>"
+
+" use omni-completion by default w/ supertab
+let g:SuperTabDefaultCompletionType="<c-x><c-o>"
