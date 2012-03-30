@@ -10,8 +10,8 @@ case "$TERM" in
 esac
 
 # golang env variables
-GOROOT="$HOME/.local/go"
-GOPATH="$HOME"
+export GOROOT="$HOME/.local/go"
+export GOPATH="$HOME"
 GOBIN="$GOROOT/bin"
 
 # add extra bin directories in home and elsewhere to $PATH
