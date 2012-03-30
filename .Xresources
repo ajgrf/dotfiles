@@ -32,7 +32,6 @@
 !! URxvt settings
 URxvt*font:              -*-terminus-medium-r-*-*-16-*-*-*-*-*-*-*,\
                          xft:WenQuanYi Zen Hei Mono
-URxvt*geometry:          80x48
 URxvt*iconFile:          /usr/share/icons/elementary/apps/32/terminal.svg
 URxvt*iconName:          Terminal
 URxvt*inputMethod:       ibus
