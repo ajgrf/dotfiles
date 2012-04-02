@@ -1,7 +1,7 @@
 " ~/.pentadactylrc
 
 " use darker colorscheme
-colorscheme natural
+colorscheme tomorrow
 
 " duckduckgo as default search engine
 set defsearch=ddg
