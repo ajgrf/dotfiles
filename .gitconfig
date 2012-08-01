@@ -1,0 +1,10 @@
+[user]
+	name = Alex Griffin
+	email = alex@alexjgriffin.com
+[alias]
+	st = status
+	co = checkout
+	com = commit
+	ci = commit
+	br = branch
+	ls = ls-files

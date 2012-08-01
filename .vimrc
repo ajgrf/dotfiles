@@ -19,6 +19,12 @@ autocmd BufReadPost * if line("'\"") > 1 && line("'\"") <= line("$") | exe "norm
 set ignorecase
 set smartcase
 
+" display line numbers
+set number
+
+" always show the status bar
+set laststatus=2
+
 " highlight matches to a search; use Esc-u to hide highlighting
 set hlsearch
 nnoremap <Esc>u :nohlsearch<cr>
@@ -27,8 +33,17 @@ nnoremap <Esc>u :nohlsearch<cr>
 set listchars=tab:»\ ,trail:·
 set list
 
-" only use terminal colors
-set t_Co=16
+" use 256 terminal colors
+set t_Co=256
+
+" set colorscheme
+colorscheme Tomorrow-Night
+
+" gui settings
+if has("gui_running")
+    set guioptions+=c
+    colorscheme Tomorrow
+endif
 
 " fix <s-tab>
 set t_kB=[Z
@@ -42,13 +57,18 @@ autocmd BufEnter * silent! lcd %:p:h
 " use standard indentation in python files
 autocmd FileType python setlocal tabstop=8 expandtab shiftwidth=4 softtabstop=4
 
+" use 4 space tabs in go files
+autocmd FileType go setlocal tabstop=4 shiftwidth=4 nolist
+
 " automatically run gofmt on save
 autocmd BufWritePre *.go :silent Fmt
 
 " disable netrw's banner
 let g:netrw_banner=0
-" open netrw's files in the second window
-let g:netrw_chgwin=2
 
-" use omni-completion by default w/ supertab
-let g:SuperTabDefaultCompletionType="<c-x><c-o>"
+" contextual tab completion w/ supertab
+let g:SuperTabDefaultCompletionType="context"
+let g:SuperTabContextDefaultCompletionType="<tab>"
+
+" use unicode to emulate drawing characters in powerline's status bar
+let g:Powerline_symbols="unicode"
