@@ -31,8 +31,11 @@
 
 !! URxvt settings
 URxvt*font:              -*-terminus-medium-r-*-*-16-*-*-*-*-*-*-*,\
-                         xft:WenQuanYi Zen Hei Mono
-URxvt*iconFile:          /usr/share/icons/elementary/apps/32/terminal.svg
+                         xft:WenQuanYi Micro Hei Mono,\
+                         xft:DejaVu Sans Mono for Powerline
+URxvt*boldFont:          -*-terminus-bold-r-*-*-16-*-*-*-*-*-*-*,\
+                         xft:WenQuanYi Micro Hei Mono,\
+                         xft:DejaVu Sans Mono for Powerline:bold
 URxvt*iconName:          Terminal
 URxvt*inputMethod:       ibus
 !URxvt*keysym.C-Tab:      [27;5;9~
@@ -52,8 +55,8 @@ URxvt*urgentOnBell:      true
 !! XTerm settings
 xterm*dynamicColors:     true
 xterm*eightBitInput:     false
-xterm*faceName:          terminus:pixelsize=14
-xterm*faceNameDoublesize:WenQuanYi Zen Hei Mono:pixelsize=14
+xterm*faceName:          terminus:pixelsize=16
+xterm*faceNameDoublesize:WenQuanYi Micro Hei Mono:pixelsize=16
 xterm*iconName:          Terminal
 xterm*saveLines:         10000
 xterm*scrollKey:         true

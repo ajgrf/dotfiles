@@ -70,5 +70,5 @@ let g:netrw_banner=0
 let g:SuperTabDefaultCompletionType="context"
 let g:SuperTabContextDefaultCompletionType="<tab>"
 
-" use unicode to emulate drawing characters in powerline's status bar
-let g:Powerline_symbols="unicode"
+" use patched font to make powerline status bar look nicer
+let g:Powerline_symbols="fancy"
