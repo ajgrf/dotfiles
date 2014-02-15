@@ -1,0 +1,5 @@
+# ~/.mpv/config
+
+af = "scaletempo, drc"
+hwdec = vaapi
+vo = vaapi
