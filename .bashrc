@@ -1,98 +1,162 @@
-# ~/.bashrc
+# ~/.bashrc: executed by bash(1) for non-login shells.
 
-# prompt
-PS1='\$ '
+#
+# ENVIRONMENT
+#
 
-# set terminal title
-case "$TERM" in
-	*xterm* | rxvt* | screen)
-		PROMPT_COMMAND='printf "\e]0;${USER}@${HOSTNAME}: ${PWD}\a"'
-esac
+export DEBFULLNAME="Alex Griffin"
+export DEBEMAIL="alex@alexjgriffin.com"
 
-# golang env variables
 export GOROOT="$HOME/.local/go"
 export GOPATH="$HOME"
-GOBIN="$GOROOT/bin"
 
-# add extra bin directories in home and elsewhere to $PATH
-PATH="$HOME/bin:$GOBIN:$PATH:$HOME/.cabal/bin"
+export VIMINIT="source ${XDG_CONFIG_HOME:=$HOME/.config}/vim/init"
+export GVIMINIT="$VIMINIT"
 
-# fall back to simplified chars if using chinese traditional locale
+# Locale Settings
 test "$LANG" = "zh_TW.utf8" && export LANGUAGE="zh_TW.utf8:zh_CN.utf8"
+
+#
+# PATH HELPER FUNCTIONS
+#
+
+# remove the given dir from $PATH
+pathremove() {
+	PATH=$(echo "$PATH" |
+		awk -F: '{
+			for (i = 1; i <= NF; i++) 
+				if ($i == dir)
+					$i = ""
+			gsub(/:+/, ":")
+			gsub(/^:|:$/, "")
+			print
+		}' OFS=":" dir="$1"
+	)
+}
+
+# add or move the given dir to the beginning of $PATH
+pathprepend() {
+	if [ -d "$1" ]; then
+		pathremove "$1"
+		PATH="${1:+$1:}$PATH"
+	else
+		return 1
+	fi
+}
+
+# add or move the given dir to the end of $PATH
+pathappend() {
+	if [ -d "$1" ]; then
+		pathremove "$1"
+		PATH="$PATH${1:+:$1}"
+	else
+		return 1
+	fi
+}
+
+#
+# PATH
+#
+
+pathprepend "$HOME/bin"
+pathprepend "$GOROOT/bin"
+pathprepend "$HOME/.local/jdk1.8.0/bin"
+pathprepend "$HOME/.local/eclipse"
+
+#
+# INTERACTIVE SHELL SETTINGS
+#
+
+# If not running interactively, don't do anything
+case $- in
+*i*)
+	;;
+*)
+	return
+esac
 
 # history settings
 shopt -s histappend
-HISTFILESIZE=10000
-HISTSIZE="$HISTFILESIZE"
-HISTCONTROL='ignoreboth'
-HISTIGNORE='ls:l:la:ll:clear:reset'
+HISTSIZE=1000
+HISTFILESIZE=2000
+HISTCONTROL=ignoreboth
+HISTIGNORE=ls:clear:reset
 
-# enable programmable completion features
-test -r /etc/bash_completion && . /etc/bash_completion
+# check the window size after each command and, if necessary,
+# update the values of LINES and COLUMNS.
+shopt -s checkwinsize
 
-# change directory upon exiting mc
-test -r /usr/share/mc/bin/mc.sh && . /usr/share/mc/bin/mc.sh
+# If set, the pattern "**" used in a pathname expansion context will
+# match all files and zero or more directories and subdirectories.
+#shopt -s globstar
 
-# make less more friendly for non-text input files, see lesspipe(1)
-eval "$(lesspipe)"
-# disable less history file
-export LESSHISTFILE='/dev/null'
+#
+# PROMPT
+#
 
-# enable color when it's available
-if [ $(tput colors) -gt 1 ]; then
-	# colored prompt
-	PS1="\[\e[1;37m\]\$\[\e[0m\] "
-
-	# colored man pages
-	export LESS_TERMCAP_mb=$(printf '\e[1;37m')
-	export LESS_TERMCAP_md=$(printf '\e[1;37m')
-	export LESS_TERMCAP_me=$(printf '\e[0m')
-	export LESS_TERMCAP_se=$(printf '\e[0m')
-	export LESS_TERMCAP_so=$(printf '\e[30;47m')
-	export LESS_TERMCAP_ue=$(printf '\e[0m')
-	export LESS_TERMCAP_us=$(printf '\e[1;36m')
-
-	# enable color support for ls
-	eval "$(dircolors -b ~/.dircolors 2>/dev/null || dircolors -b)"
-	alias ls='LC_COLLATE=C ls --group-directories-first --color=auto'
-
-	# colored grep
-	alias grep='grep --color=auto'
-	alias fgrep='fgrep --color=auto'
-	alias egrep='egrep --color=auto'
-else
-	# if color isn't available, use filetype indicators in ls
-	alias ls='LC_COLLATE=C ls --group-directories --classify'
+# set variable identifying the chroot you work in (used in the prompt below)
+if [ -z "${debian_chroot:-}" ] && [ -r /etc/debian_chroot ]; then
+	debian_chroot=$(cat /etc/debian_chroot)
 fi
 
-# other aliases & functions:
-alias 9='env PATH="/usr/lib/plan9/bin:$PATH"'
-alias clamz='clamz --default-output-dir=\${XDG_MUSIC_DIR:-\$HOME/Music}/\${album_artist}/\${album}'
-alias df='df -h'
-alias du='du -h'
-alias flashdump='lsof -n -P | awk '\''
-	/FlashXX/ {
+precmd() {
+	local e=$?
+
+	if [ $e -ne 0 ]; then
+		echo -n "$e|"
+	fi
+}
+
+PS1='${debian_chroot:+($debian_chroot)}$(precmd)\u@\h:\w\$ '
+
+#
+# TERMINAL TITLE
+#
+
+# If this is an xterm set the title to user@host:dir
+case "$TERM" in
+xterm*|rxvt*)
+	PS1="\[\e]0;${debian_chroot:+($debian_chroot)}\u@\h: \w\a\]$PS1"
+esac
+
+#
+# ALIASES, FUNCTIONS, ETC.
+#
+
+# make less more friendly for non-text input files, see lesspipe(1)
+[ -x /usr/bin/lesspipe ] && eval "$(SHELL=/bin/sh lesspipe)"
+# disable less history file
+export LESSHISTFILE=/dev/null
+export LESS="-i"
+
+alias doch='eval sudo $(fc -ln -1)'
+alias dot='GIT_DIR="$HOME/.dot" GIT_WORK_TREE="$HOME" git'
+
+# some ls aliases
+alias ls='LC_COLLATE=C ls -Ap --time-style=long-iso'
+alias l='ls'
+alias la='ls'
+alias ll='ls -la'
+alias lh='ll -h'
+alias open='xdg-open'
+alias nb='newsbeuter'
+
+# open vim help
+:h() {
+	vim -c ":help $*| only"
+}
+
+# prints paths to currently playing flash videos
+flashdump() {
+	lsof -n -P |
+	awk '/FlashXX/ {
 		fd="/proc/" $2 "/fd/" substr($(NF-6), 1, length($(NF-6))-1)
 		if (!a[fd]++)
 			print fd
-	}'\'
-alias l='ls'
-alias la='ls -A'
-alias ll='la -lh'
-alias less='less -i'
-alias open='xdg-open'
-alias pgrep='pgrep -l'
-alias startx='exec xinit "${XINITRC:-$HOME/.xinitrc}"'
-alias svi='sudo vi'
-
-:h() { vim --cmd ":silent help $@" --cmd "only"; }
-
-mkcd() {
-	mkdir "$1" && cd "$1"
+	}'
 }
 
-mpd-wait() {
-	for n in `seq "${1:-1}"`; do
-		mpc current --wait >/dev/null
-	done
+# create a directory (if necessary) and cd into it
+mkcd() {
+	mkdir -p "$@" && cd "$1"
 }
