@@ -127,7 +127,7 @@ esac
 [ -x /usr/bin/lesspipe ] && eval "$(SHELL=/bin/sh lesspipe)"
 # disable less history file
 export LESSHISTFILE=/dev/null
-export LESS="-i"
+export LESS="--ignore-case --no-init --quit-if-one-screen --RAW-CONTROL-CHARS "
 
 alias doch='eval sudo $(fc -ln -1)'
 alias dot='GIT_DIR="$HOME/.dot" GIT_WORK_TREE="$HOME" git'
