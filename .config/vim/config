@@ -1,13 +1,8 @@
-" ~/.vimrc: initialization file for vim
-
 " initialize pathogen
-runtime bundle/pathogen/autoload/pathogen.vim
 call pathogen#infect()
-syntax on
-filetype plugin indent on
 
 " disable "splash" screen
-set shortmess+=I
+"set shortmess+=I
 
 " enable mouse support
 set mouse=a
@@ -20,27 +15,28 @@ set ignorecase
 set smartcase
 
 " display line numbers
-set number
+" set number
 
 " always show the status bar
-set laststatus=2
+"set laststatus=2
 
 " highlight matches to a search; use Esc-u to hide highlighting
 set hlsearch
-nnoremap <Esc>u :nohlsearch<cr>
+nnoremap <silent> <Esc>u :nohlsearch<cr>
 
 " show tabs and trailing whitespace
-set listchars=tab:Â»\ ,trail:Â·
+set listchars=tab:»\ ,trail:·
 set list
 
 " use 256 terminal colors
 set t_Co=256
 
 " set colorscheme
-colorscheme Tomorrow-Night
+"colorscheme base16-default
 
 " gui settings
 if has("gui_running")
+    set lines=43 columns=132
     set guioptions+=c
     colorscheme Tomorrow
 endif
@@ -60,8 +56,14 @@ autocmd FileType python setlocal tabstop=8 expandtab shiftwidth=4 softtabstop=4
 " use 4 space tabs in go files
 autocmd FileType go setlocal tabstop=4 shiftwidth=4 nolist
 
+let g:gofmt_command = "goimports"
+
+autocmd FileType rust setlocal tabstop=8 expandtab shiftwidth=4 softtabstop=4
+
 " automatically run gofmt on save
 autocmd BufWritePre *.go :silent Fmt
+
+autocmd BufWritePost .Xresources :silent !/usr/bin/xrdb ~/.Xresources
 
 " disable netrw's banner
 let g:netrw_banner=0
