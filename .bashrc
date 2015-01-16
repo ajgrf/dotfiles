@@ -7,6 +7,8 @@
 export DEBFULLNAME="Alex Griffin"
 export DEBEMAIL="alex@alexjgriffin.com"
 
+export EDITOR="vim"
+
 export LD_LIBRARY_PATH="$HOME/.local/lib"
 
 export GOROOT="$HOME/.local/go"
