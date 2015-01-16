@@ -92,7 +92,7 @@ extra-prog-path: /home/alex/.cabal/bin
 -- force-reinstalls: False
 -- upgrade-dependencies: False
 -- root-cmd:
--- symlink-bindir:
+symlink-bindir: /home/alex/.local/bin
 build-summary: /home/alex/.cabal/logs/build.log
 -- build-log:
 remote-build-reporting: anonymous
