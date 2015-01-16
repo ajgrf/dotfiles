@@ -2,9 +2,16 @@
 	name = Alex Griffin
 	email = alex@alexjgriffin.com
 [alias]
-	st = status
+	st = status --short --branch
 	co = checkout
 	com = commit
 	ci = commit
 	br = branch
 	ls = ls-files
+[color]
+	ui = false
+[format]
+	pretty = oneline
+[log]
+	abbrevCommit = true
+	decorate = short
