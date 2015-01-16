@@ -15,3 +15,5 @@
 [log]
 	abbrevCommit = true
 	decorate = short
+[push]
+	default = simple
