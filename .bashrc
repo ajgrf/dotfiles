@@ -57,8 +57,6 @@ pathappend() {
 
 pathprepend "$HOME/bin"
 pathprepend "$GOROOT/bin"
-pathprepend "$HOME/.local/jdk1.8.0/bin"
-pathprepend "$HOME/.local/eclipse"
 
 #
 # INTERACTIVE SHELL SETTINGS
@@ -127,7 +125,6 @@ export LESSHISTFILE=/dev/null
 export LESS="--ignore-case --no-init --quit-if-one-screen --RAW-CONTROL-CHARS "
 
 alias doch='eval sudo $(fc -ln -1)'
-alias dot='GIT_DIR="$HOME/.dot" GIT_WORK_TREE="$HOME" git'
 
 # some ls aliases
 alias ls='LC_COLLATE=C ls -Ap --time-style=long-iso'

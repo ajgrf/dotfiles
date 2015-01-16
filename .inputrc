@@ -1,5 +1,3 @@
-# ~/.inputrc
-
 # Case-insensitive tab completion
 set completion-ignore-case on
 
@@ -13,8 +11,8 @@ set bind-tty-special-chars off
 "\e[A": history-search-backward
 "\e[B": history-search-forward
 
+# Alt-Enter pipes the current command through less
 $if bash
-	# Alt-Enter pipes the current command through less
 	"\C-\M-j": "\C-e |less\n"
 	"\C-\M-m": "\C-e |less\n"
 $endif
