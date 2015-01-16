@@ -62,9 +62,6 @@ pathappend() {
 pathprepend "$HOME/bin"
 pathprepend "$HOME/.local/bin"
 pathprepend "$GOROOT/bin"
-for pkg in ghc-7.8.4 cabal-1.18 alex-3.1.3 happy-1.19.4; do
-	pathprepend "/opt/${pkg%-*}/${pkg##*-}/bin"
-done
 
 #
 # INTERACTIVE SHELL SETTINGS
