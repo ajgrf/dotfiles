@@ -7,6 +7,8 @@
 export DEBFULLNAME="Alex Griffin"
 export DEBEMAIL="alex@alexjgriffin.com"
 
+export LD_LIBRARY_PATH="$HOME/.local/lib"
+
 export GOROOT="$HOME/.local/go"
 export GOPATH="$HOME"
 
@@ -56,7 +58,11 @@ pathappend() {
 #
 
 pathprepend "$HOME/bin"
+pathprepend "$HOME/.local/bin"
 pathprepend "$GOROOT/bin"
+for pkg in ghc-7.8.4 cabal-1.18 alex-3.1.3 happy-1.19.4; do
+	pathprepend "/opt/${pkg%-*}/${pkg##*-}/bin"
+done
 
 #
 # INTERACTIVE SHELL SETTINGS
@@ -75,7 +81,7 @@ shopt -s histappend
 HISTSIZE=1000
 HISTFILESIZE=2000
 HISTCONTROL=ignoreboth
-HISTIGNORE=ls:clear:reset
+HISTIGNORE='ls:lc:l:la:ll:lh:clear:reset'
 
 # check the window size after each command and, if necessary,
 # update the values of LINES and COLUMNS.
@@ -127,13 +133,15 @@ export LESS="--ignore-case --no-init --quit-if-one-screen --RAW-CONTROL-CHARS "
 alias doch='eval sudo $(fc -ln -1)'
 
 # some ls aliases
-alias ls='LC_COLLATE=C ls -Ap --time-style=long-iso'
-alias l='ls'
+alias ls='LC_COLLATE=C ls -A1 --time-style=long-iso'
+alias lc='LC_COLLATE=C command ls -Ap --time-style=long-iso'
+alias l='lc'
 alias la='ls'
 alias ll='ls -la'
 alias lh='ll -h'
 alias open='xdg-open'
 alias nb='newsbeuter'
+alias gpg='gpg2'
 
 # open vim help
 :h() {
@@ -153,4 +161,55 @@ flashdump() {
 # create a directory (if necessary) and cd into it
 mkcd() {
 	mkdir -p "$@" && cd "$1"
+}
+
+rustup() {
+	curl -s https://static.rust-lang.org/rustup.sh |
+		sh -s -- --prefix="$HOME/.local" "$@"
+}
+
+godoc() {
+	command godoc "$@" |less
+}
+
+# automatically invoke sudo with apt when needed
+apt() {
+	local cmd skip
+
+	# don't bother if we're root or sudo/apt isn't installed
+	if [[ "$EUID" -eq 0 || ( ! -x /usr/bin/sudo && ! -x /usr/bin/apt ) ]]; then
+		command apt "$@"
+		return
+	fi
+
+	# determine command given to apt
+	for arg in "$@"; do
+		if [[ -n "$skip" ]]; then
+			unset skip
+			continue
+		fi
+		case "$arg" in
+		-h*|--help|-v*|--version)
+			break
+			;;
+		-o|-c|-t|-a)
+			skip=1
+			;;
+		-*)
+			;;
+		*)
+			cmd="$arg"
+			break
+			;;
+		esac
+	done
+
+	case "$cmd" in
+	install|remove|update|upgrade|full-upgrade|edit-sources)
+		/usr/bin/sudo /usr/bin/apt "$@"
+		;;
+	*)
+		command apt "$@"
+		;;
+	esac
 }
