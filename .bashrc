@@ -10,9 +10,6 @@ export DEBEMAIL="alex@alexjgriffin.com"
 export GOROOT="$HOME/.local/go"
 export GOPATH="$HOME"
 
-export VIMINIT="source ${XDG_CONFIG_HOME:=$HOME/.config}/vim/init"
-export GVIMINIT="$VIMINIT"
-
 # Locale Settings
 test "$LANG" = "zh_TW.utf8" && export LANGUAGE="zh_TW.utf8:zh_CN.utf8"
 
