@@ -1,0 +1,44 @@
+color: no
+original_date: yes
+sort_album: albumartist+ album+
+paths:
+    default: $albumartist_sort/$album%aunique{}/$track $title
+    singleton: Non-Album/$artist_sort/$title
+    albumtype:soundtrack: Soundtracks/$album%aunique{}/$track $title
+    comp: Compilations/$album%aunique{}/$track $title
+per_disc_numbering: no
+import:
+    move: yes
+    languages: []
+    # languages: ['zho', 'zh_TW', 'zh_CN', 'en_US', 'en']
+match:
+    preferred:
+        countries: ['US']
+        media: ['CD', 'Digital Media|File']
+        original_year: yes
+plugins: chroma convert echonest embedart fetchart info lastgenre lyrics mbsync replaygain scrub
+chroma:
+    auto: no
+embedart:
+    auto: no
+replaygain:
+    backend: gstreamer
+convert:
+    format: opus
+    dest: ~/Opus
+    embed: no
+    copy_album_art: yes
+    max_bitrate: 160
+    formats:
+        # These are identical to the defaults, except `s/ffmpeg/avconv/`
+        alac:
+            command: avconv -i $source -y -vn -acodec alac $dest
+            extension: m4a
+        aac:
+            command: avconv -i $source -y -vn -acodec libfaac -aq 100 $dest
+            extension: m4a
+        opus: avconv -i $source -y -vn -acodec libopus -ab 96k $dest
+        mp3: avconv -i $source -y -vn -aq 2 $dest
+        flac: avconv -i $source -y -vn -acodec flac $dest
+        ogg: avconv -i $source -y -vn -acodec libvorbis -aq 2 $dest
+        wma: avconv -i $source -y -vn -acodec wmav2 -vn $dest
