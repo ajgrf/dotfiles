@@ -12,56 +12,17 @@ export EDITOR="vim"
 export LD_LIBRARY_PATH="$HOME/.local/lib"
 
 export GOROOT="$HOME/.local/go"
-export GOPATH="$HOME"
+export GOPATH="$HOME/.local:$HOME"
 
 # Locale Settings
 test "$LANG" = "zh_TW.utf8" && export LANGUAGE="zh_TW.utf8:zh_CN.utf8"
 
 #
-# PATH HELPER FUNCTIONS
-#
-
-# remove the given dir from $PATH
-pathremove() {
-	PATH=$(echo "$PATH" |
-		awk -F: '{
-			for (i = 1; i <= NF; i++) 
-				if ($i == dir)
-					$i = ""
-			gsub(/:+/, ":")
-			gsub(/^:|:$/, "")
-			print
-		}' OFS=":" dir="$1"
-	)
-}
-
-# add or move the given dir to the beginning of $PATH
-pathprepend() {
-	if [ -d "$1" ]; then
-		pathremove "$1"
-		PATH="${1:+$1:}$PATH"
-	else
-		return 1
-	fi
-}
-
-# add or move the given dir to the end of $PATH
-pathappend() {
-	if [ -d "$1" ]; then
-		pathremove "$1"
-		PATH="$PATH${1:+:$1}"
-	else
-		return 1
-	fi
-}
-
-#
 # PATH
 #
 
-pathprepend "$HOME/bin"
-pathprepend "$HOME/.local/bin"
-pathprepend "$GOROOT/bin"
+PREPATH="$HOME/bin:$HOME/.local/bin:$GOROOT/bin"
+PATH="$PREPATH:${PATH#$PREPATH:}"
 
 #
 # INTERACTIVE SHELL SETTINGS
@@ -80,7 +41,7 @@ shopt -s histappend
 HISTSIZE=1000
 HISTFILESIZE=2000
 HISTCONTROL=ignoreboth
-HISTIGNORE='ls:lc:l:la:ll:lh:clear:reset'
+HISTIGNORE='l:l[salhc]:cd:clear:reset'
 
 # check the window size after each command and, if necessary,
 # update the values of LINES and COLUMNS.
