@@ -1,0 +1,5 @@
+auto_view text/html
+alternative_order text/plain text/html
+set folder="~/mail"
+set spoolfile="~/mail/Inbox"
+set sort=reverse-date

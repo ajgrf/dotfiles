@@ -1,0 +1,66 @@
+! ~/.Xresources
+
+!! terminal color scheme
+*background:             #161616
+*foreground:             #c5c5c5
+
+! black
+*color0:                 #161616
+*color8:                 #4a4a4a
+! red
+*color1:                 #a65353
+*color9:                 #cc6666
+! green
+*color2:                 #909653
+*color10:                #b5bd68
+! yellow
+*color3:                 #bd9c5a
+*color11:                #f0c674
+! blue
+*color4:                 #5f788c
+*color12:                #81a2be
+! magenta
+*color5:                 #816b87
+*color13:                #b294bb
+! cyan
+*color6:                 #668c88
+*color14:                #8abeb7
+! white
+*color7:                 #c5c5c5
+*color15:                #f7f7f7
+
+!! URxvt settings
+URxvt*font:              -*-terminus-medium-r-*-*-16-*-*-*-*-*-*-*,\
+                         xft:WenQuanYi Micro Hei Mono,\
+                         xft:DejaVu Sans Mono for Powerline
+URxvt*boldFont:          -*-terminus-bold-r-*-*-16-*-*-*-*-*-*-*,\
+                         xft:WenQuanYi Micro Hei Mono,\
+                         xft:DejaVu Sans Mono for Powerline:bold
+URxvt*iconName:          Terminal
+URxvt*inputMethod:       ibus
+!URxvt*keysym.C-Tab:      [27;5;9~
+!URxvt*keysym.S-C-Tab:    [27;6;9~
+URxvt*matcher.button:    1
+URxvt*perl-ext:          matcher
+URxvt*saveLines:         10000
+URxvt*scrollBar:         false
+URxvt*scrollTtyKeypress: true
+URxvt*scrollWithBuffer:  true
+URxvt*scrollTtyOutput:   false
+URxvt*termname:          rxvt-unicode
+URxvt*title:             Terminal
+URxvt*urlLauncher:       firefox
+URxvt*urgentOnBell:      true
+
+!! XTerm settings
+xterm*dynamicColors:     true
+xterm*eightBitInput:     false
+xterm*faceName:          terminus:pixelsize=16
+xterm*faceNameDoublesize:WenQuanYi Micro Hei Mono:pixelsize=16
+xterm*iconName:          Terminal
+xterm*saveLines:         10000
+xterm*scrollKey:         true
+xterm*scrollTtyOutput:   false
+*vt100.translations: #override \n\
+	Ctrl ~Shift <Key>Tab: string(0x1b) string("[27;5;9~") \n \
+	Ctrl Shift <Key>Tab: string(0x1b) string("[27;6;9~") \n
