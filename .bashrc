@@ -5,11 +5,9 @@
 #
 
 export DEBFULLNAME="Alex Griffin"
-export DEBEMAIL="alex@alexjgriffin.com"
+export DEBEMAIL="a@ajgrf.com"
 
 export EDITOR="vim"
-
-export LD_LIBRARY_PATH="$HOME/.local/lib"
 
 export GOROOT="$HOME/.local/go"
 export GOPATH="$HOME/.local:$HOME"
@@ -21,8 +19,14 @@ test "$LANG" = "zh_TW.utf8" && export LANGUAGE="zh_TW.utf8:zh_CN.utf8"
 # PATH
 #
 
-PREPATH="$HOME/bin:$HOME/.local/bin:$GOROOT/bin"
+PREPATH="$HOME/.local/bin:$GOROOT/bin"
+for pkg in alex/3.1.4 cabal/1.22 ghc/7.10.2 happy/1.19.5; do
+	POSTPATH="$POSTPATH:/opt/${pkg}/bin"
+done
+POSTPATH="${POSTPATH#:}"
 PATH="$PREPATH:${PATH#$PREPATH:}"
+PATH="${PATH%:$POSTPATH}:$POSTPATH"
+unset PREPATH POSTPATH
 
 #
 # INTERACTIVE SHELL SETTINGS
@@ -54,6 +58,8 @@ shopt -s checkwinsize
 #
 # PROMPT
 #
+
+PROMPT_DIRTRIM=3
 
 # set variable identifying the chroot you work in (used in the prompt below)
 if [ -z "${debian_chroot:-}" ] && [ -r /etc/debian_chroot ]; then
@@ -102,20 +108,12 @@ alias lh='ll -h'
 alias open='xdg-open'
 alias nb='newsbeuter'
 alias gpg='gpg2'
+alias ag='ag --nocolor --nogroup'
+alias emacs='emacs -nw'
 
 # open vim help
 :h() {
 	vim -c ":help $*| only"
-}
-
-# prints paths to currently playing flash videos
-flashdump() {
-	lsof -n -P |
-	awk '/FlashXX/ {
-		fd="/proc/" $2 "/fd/" substr($(NF-6), 1, length($(NF-6))-1)
-		if (!a[fd]++)
-			print fd
-	}'
 }
 
 # create a directory (if necessary) and cd into it
@@ -123,14 +121,19 @@ mkcd() {
 	mkdir -p "$@" && cd "$1"
 }
 
-rustup() {
-	curl -s https://static.rust-lang.org/rustup.sh |
-		sh -s -- --prefix="$HOME/.local" "$@"
-}
-
 godoc() {
 	command godoc "$@" |less
 }
+# enable programmable completion features (you don't need to enable
+# this, if it's already enabled in /etc/bash.bashrc and /etc/profile
+# sources /etc/bash.bashrc).
+if ! shopt -oq posix; then
+  if [ -f /usr/share/bash-completion/bash_completion ]; then
+    . /usr/share/bash-completion/bash_completion
+  elif [ -f /etc/bash_completion ]; then
+    . /etc/bash_completion
+  fi
+fi
 
 # automatically invoke sudo with apt when needed
 apt() {

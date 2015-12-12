@@ -1,6 +1,6 @@
 [user]
 	name = Alex Griffin
-	email = alex@alexjgriffin.com
+	email = a@ajgrf.com
 [alias]
 	st = status --short --branch
 	co = checkout
