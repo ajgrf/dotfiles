@@ -8,13 +8,13 @@ if v:progname !=# "vi"
   call plug#begin('~/.vim/bundle')
   Plug '~/src/github.com/ajgrf/sprinkles'
   Plug 'tpope/vim-fugitive', {'tag': 'v2.2'}
-  Plug 'fatih/vim-go',       {'tag': 'v1.2'}
+  Plug 'fatih/vim-go',       {'tag': 'v1.4'}
   Plug 'rust-lang/rust.vim'
   Plug 'tpope/vim-sensible', {'tag': 'v1.1'}
   Plug 'tpope/vim-eunuch',   {'tag': 'v1.1'}
   Plug 'tpope/vim-surround', {'tag': 'v2.1'}
   Plug 'tpope/vim-repeat',   {'tag': 'v1.1'}
-  Plug 'bling/vim-airline' ",  {'tag': 'v0.7'}
+  "Plug 'bling/vim-airline' ",  {'tag': 'v0.7'}
   "Plug 'justinmk/vim-sneak', {'tag': '1.7.4'}
   Plug 'ervandew/supertab',  {'tag': '2.1'}
   Plug 'gerw/vim-HiLinkTrace'
@@ -58,6 +58,8 @@ if v:progname !=# "vi"
 
   set path+=~/Wiki
   set suffixesadd+=.md
+
+  let g:go_fmt_command = "goimports"
 
   let g:plug_window = "new"
 
