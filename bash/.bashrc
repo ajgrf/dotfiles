@@ -110,6 +110,7 @@ alias nb='newsbeuter'
 alias gpg='gpg2'
 alias ag='ag --nocolor --nogroup'
 alias emacs='emacs -nw'
+alias apt='sudo apt'
 
 # open vim help
 :h() {
@@ -135,44 +136,11 @@ if ! shopt -oq posix; then
   fi
 fi
 
-# automatically invoke sudo with apt when needed
-apt() {
-	local cmd skip
-
-	# don't bother if we're root or sudo/apt isn't installed
-	if [[ "$EUID" -eq 0 || ( ! -x /usr/bin/sudo && ! -x /usr/bin/apt ) ]]; then
-		command apt "$@"
-		return
-	fi
-
-	# determine command given to apt
-	for arg in "$@"; do
-		if [[ -n "$skip" ]]; then
-			unset skip
-			continue
-		fi
-		case "$arg" in
-		-h*|--help|-v*|--version)
-			break
-			;;
-		-o|-c|-t|-a)
-			skip=1
-			;;
-		-*)
-			;;
-		*)
-			cmd="$arg"
-			break
-			;;
-		esac
+article-convert() {
+	local title
+	for article in *.html; do
+		title="${article%.html}"
+		ebook-convert "$article" "${title}.mobi" &&
+		trash         "$article" "${title}-Dateien"
 	done
-
-	case "$cmd" in
-	install|remove|update|upgrade|full-upgrade|edit-sources)
-		/usr/bin/sudo /usr/bin/apt "$@"
-		;;
-	*)
-		command apt "$@"
-		;;
-	esac
 }
