@@ -10,10 +10,7 @@
 	ls = ls-files
 [color]
 	ui = false
-[format]
-	pretty = oneline
 [log]
-	abbrevCommit = true
 	decorate = short
 [push]
 	default = simple
