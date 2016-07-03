@@ -1,22 +1,16 @@
 # ~/.profile: executed by the command interpreter for login shells.
-# This file is not read by bash(1), if ~/.bash_profile or ~/.bash_login
-# exists.
-# see /usr/share/doc/bash/examples/startup-files for examples.
-# the files are located in the bash-doc package.
 
-# the default umask is set in /etc/profile; for setting the umask
-# for ssh logins, install and configure the libpam-umask package.
-#umask 022
+export EDITOR="vim"
 
-# if running bash
-if [ -n "$BASH_VERSION" ]; then
-    # include .bashrc if it exists
-    if [ -f "$HOME/.bashrc" ]; then
-	. "$HOME/.bashrc"
-    fi
-fi
+# Guix
+export GUIX_PACKAGE_PATH="$HOME/src/myguix"
 
-# set PATH so it includes user's private bin if it exists
-if [ -d "$HOME/bin" ] ; then
-    PATH="$HOME/bin:$PATH"
-fi
+# Go
+export GOPATH="$HOME/.local:$HOME"
+export GOBIN="$HOME/.local/bin"
+if [ -d "$HOME/.local/go" ]; then export GOROOT="$HOME/.local/go"; fi
+
+# Python
+export PYTHONPATH="/home/ajgrf/.guix-profile/lib/python2.7/site-packages"
+
+export PATH="$HOME/bin:$HOME/.local/bin:${GOROOT:+$GOROOT/bin:}$PATH"
