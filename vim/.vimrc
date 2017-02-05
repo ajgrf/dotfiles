@@ -77,7 +77,7 @@ if v:progname !=# "vi"
   "let g:airline_symbols.linenr = ''
 
   " Adjust keybindings for the Colemak keyboard layout
-  function! s:Colemak()
+  if $COLEMAK
     " basic key rearrangements
     noremap n j
     noremap e k
@@ -118,8 +118,7 @@ if v:progname !=# "vi"
     " qwerty <c-w>n and <c-w>i stolen but do nothing so map back
     nnoremap <c-w>k <c-w>n
     nnoremap <c-w>l <c-w>i
-  endfunction
-  call s:Colemak()
+  endif
 
   finish
 
