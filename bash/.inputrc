@@ -15,4 +15,6 @@ set bind-tty-special-chars off
 $if bash
 	"\C-\M-j": "\C-e |less\n"
 	"\C-\M-m": "\C-e |less\n"
+
+	" ": magic-space
 $endif
