@@ -1,0 +1,41 @@
+%sh{
+	if test -n "$COLEMAK"; then
+		cat <<- EOF
+			# minimal vi-like remapping for colemak layout
+			map global normal n j
+			map global normal e k
+			map global normal i l
+			map global normal k n
+			map global normal u i
+			map global normal l u
+			map global normal j e
+
+			# now for upper case
+			map global normal N J
+			map global normal E K
+			map global normal I L
+			map global normal K N
+			map global normal U I
+			map global normal L U
+			map global normal J E
+
+			# with alt modifier
+			map global normal <A-n> <A-j>
+			map global normal <A-e> <A-k>
+			map global normal <A-i> <A-l>
+			map global normal <A-k> <A-n>
+			map global normal <A-u> <A-i>
+			map global normal <A-l> <A-u>
+			map global normal <A-j> <A-e>
+
+			# with ctrl modifier
+			map global normal <C-n> <C-j>
+			map global normal <C-e> <C-k>
+			map global normal <C-i> <C-l>
+			map global normal <C-k> <C-n>
+			map global normal <C-u> <C-i>
+			map global normal <C-l> <C-u>
+			map global normal <C-j> <C-e>
+		EOF
+	fi
+}
