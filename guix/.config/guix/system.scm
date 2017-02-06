@@ -1,5 +1,6 @@
 (use-modules (gnu)
              (gnu services)
+             (gnu system locale)
              (gnu system nss))
 (use-service-modules desktop xorg)
 (use-package-modules certs gnome linux)
@@ -8,8 +9,9 @@
   (host-name "polaris")
   (timezone "America/Chicago")
   (locale "en_US.UTF-8")
+  (locale-libcs (cons glibc-2.22 %default-locale-libcs))
 
-  (kernel linux-libre-4.1)
+  ;; (kernel linux-libre-4.1)
   (kernel-arguments '("modprobe.blacklist=kvm,kvm_intel"))
 
   (bootloader (grub-configuration (device #f)
