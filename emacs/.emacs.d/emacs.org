@@ -78,11 +78,16 @@ Leuven is the one true theme.
   (setq ido-enable-flex-matching t)
   (setq ido-everywhere t)
   (ido-mode 1)
+  (setq ido-file-extensions-order '(".org" ".scm"))
 
   (setq frame-title-format "%b - GNU Emacs")
   (setq icon-title-format frame-title-format)
 
   (setq mouse-autoselect-window t)
+
+  (setq whitespace-style '(face lines-tail trailing))
+  (setq whitespace-line-column 79)
+  (global-whitespace-mode 1)
 #+END_SRC
 
 ** Validate TLS Connections
@@ -144,7 +149,10 @@ Every other package will be managed by use-package, so it needs to be
     (define-key evil-normal-state-map "k" 'evil-search-next)
     (define-key evil-normal-state-map "u" 'evil-insert)
     (define-key evil-normal-state-map "l" 'undo-tree-undo)
-    (define-key evil-normal-state-map "j" 'evil-forward-word-end))
+    (define-key evil-normal-state-map "j" 'evil-forward-word-end)
+    (setq evil-emacs-state-modes
+          (append evil-emacs-state-modes
+                  (list 'elfeed-show-mode 'elfeed-search-mode 'help-mode ))))
 #+END_SRC
 
 ** TODO Colemak
@@ -198,6 +206,15 @@ Search my org directory for agenda items.
     (customize-set-variable 'ledger-clear-whole-transactions t))
 #+END_SRC
 
+* Feeds
+
+#+BEGIN_SRC emacs-lisp
+  (use-package elfeed-org
+    :config
+    (elfeed-org)
+    (setq rmh-elfeed-org-files (list "~/feeds.org")))
+#+END_SRC
+
 * Programming
 
 ** git
@@ -209,6 +226,24 @@ Search my org directory for agenda items.
 #+END_SRC
 
 ** Languages
+*** APL
+
+#+BEGIN_SRC emacs-lisp
+  (use-package gnu-apl-mode
+    :commands gnu-apl
+    :init
+    (fset 'apl 'gnu-apl)
+    :config
+    (setq gnu-apl-show-keymap-on-startup nil
+          gnu-apl-show-tips-on-start nil)
+    (defun gnu-apl-input-hook ()
+      (set-input-method "APL-Z"))
+    (add-hook 'gnu-apl-interactive-mode-hook 'gnu-apl-input-hook)
+    (add-hook 'gnu-apl-mode-hook 'gnu-apl-input-hook))
+
+  (set-fontset-font "fontset-default" '(#x2300 . #x23ff) "PragmataPro Mono")
+#+END_SRC
+
 *** C
 *** Go
 *** Scheme
