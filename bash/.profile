@@ -3,9 +3,6 @@
 export EDITOR="vim"
 export TERMINFO="$HOME/.local/share/terminfo"
 
-# Guix
-export GUIX_PACKAGE_PATH="$HOME/src/myguix"
-
 # Go
 export GOPATH="${XDG_CACHE_HOME:-$HOME/.cache}/go:$HOME"
 export GOBIN="$HOME/.local/bin"
