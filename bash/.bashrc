@@ -66,12 +66,6 @@ esac
 # ALIASES, FUNCTIONS, ETC.
 #
 
-# make less more friendly for non-text input files, see lesspipe(1)
-hash lesspipe 2> /dev/null && eval "$(SHELL=/bin/sh lesspipe)"
-# disable less history file
-export LESSHISTFILE=/dev/null
-export LESS="--ignore-case --no-init --quit-if-one-screen --RAW-CONTROL-CHARS "
-
 alias doch='eval sudo $(fc -ln -1)'
 
 # some ls aliases
