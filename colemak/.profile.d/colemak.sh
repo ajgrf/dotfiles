@@ -1,0 +1,1 @@
+export COLEMAK=1
