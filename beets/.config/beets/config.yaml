@@ -1,4 +1,4 @@
-directory: /media/ajgrf/ajgdepot/Music
+directory: ~/Music
 ui:
     color: no
 original_date: yes
@@ -19,16 +19,24 @@ match:
         countries: ['US']
         media: ['CD', 'Digital Media|File']
         original_year: yes
-plugins: chroma convert embedart fetchart info lastgenre lyrics replaygain scrub
+plugins: chroma convert edit embedart fetchart info lastgenre lyrics replaygain scrub types
 chroma:
-    auto: no
+    auto: yes
 embedart:
     auto: no
+lyrics:
+    force: yes
 replaygain:
-    backend: gstreamer
+    backend: bs1770gain
+    overwrite: yes
+types:
+    pirated: bool
+    portable: bool
 convert:
-    format: opus
-    dest: ~/Music
+    format: ogg
+    dest: ~/Downloads/Portable Music
     embed: no
     copy_album_art: yes
     max_bitrate: 160
+    formats:
+        mp3: ffmpeg -i $source -y -vn -aq 5 $dest
