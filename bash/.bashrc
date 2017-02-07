@@ -8,6 +8,8 @@
 # honor it and otherwise use /bin/sh.
 #export SHELL
 
+#export GPG_TTY="$(tty)"
+
 # Set $PATH and friends in non-interactive SSH sessions.
 if [ -n "$SSH_CLIENT" -a -z "`type -P cat`" ]; then . /etc/profile; fi
 
@@ -56,7 +58,7 @@ PS1='${debian_chroot:+($debian_chroot)}$(if_err)\u@\h:\w${GUIX_ENVIRONMENT:+ [en
 
 # If this is an xterm set the title to user@host:dir
 case "$TERM" in
-xterm*|rxvt*)
+xterm*|rxvt*|st*|dvtm*)
 	PS1="\[\e]0;${debian_chroot:+($debian_chroot)}\u@\h: \w\a\]$PS1"
 esac
 
@@ -73,17 +75,18 @@ export LESS="--ignore-case --no-init --quit-if-one-screen --RAW-CONTROL-CHARS "
 alias doch='eval sudo $(fc -ln -1)'
 
 # some ls aliases
-alias ls='LC_COLLATE=C ls -A1 --time-style=long-iso'
-alias lc='LC_COLLATE=C command ls -Ap --time-style=long-iso'
-alias l='lc'
+alias ls='LC_COLLATE=C ls --time-style=long-iso -A -1'
+alias lc='LC_COLLATE=C command ls --time-style=long-iso -A'
+alias l='lc -p'
 alias la='ls'
 alias ll='ls -la'
 alias lh='ll -h'
-alias open='xdg-open'
-alias nb='newsbeuter'
-#alias gpg='gpg2'
+
 alias ag='ag --nocolor --nogroup'
 alias emacs='emacs -nw'
+#alias gpg='gpg2'
+alias nb='newsbeuter'
+alias open='xdg-open'
 
 # open vim help
 :h() {
@@ -109,10 +112,11 @@ article-convert() {
 	local title
 	pushd "${1:-$HOME/Downloads}" > /dev/null
 	mkdir -p "$HOME/Downloads/articles"
-	for article in *.html; do
-		title="${article%.html}"
-		ebook-convert "$article" "$HOME/Downloads/articles/${title}.mobi" &&
-		trash "$article" "${title}_files"
+	for article in *_files; do
+		title="${article%_files}"
+                mv "$title" "${title}.html"
+		ebook-convert "${title}.html" "$HOME/Downloads/articles/${title}.mobi" &&
+		trash "${title}.html" "${title}_files"
 	done
 	popd > /dev/null
 }
