@@ -30,37 +30,39 @@ values."
    dotspacemacs-configuration-layer-path '()
    ;; List of configuration layers to load.
    dotspacemacs-configuration-layers
-   '(
-     ;; ----------------------------------------------------------------
-     ;; Example of useful layers you may want to use right away.
-     ;; Uncomment some layer names and press <SPC f e R> (Vim style) or
-     ;; <M-m f e R> (Emacs style) to install them.
-     ;; ----------------------------------------------------------------
-     helm
-     auto-completion
-     ;; better-defaults
-     emacs-lisp
-     finance
-     git
-     (go :variables
-         gofmt-command "goimports"
-         go-tab-width 4)
-     (haskell :variables
-              haskell-completion-backend 'intero
-              haskell-enable-hindent-style "johan-tibell")
-     (keyboard-layout :variables
-                      kl-layout 'colemak)
-     markdown
-     org
-     (rust :variables
-           rust-format-on-save t)
-     (shell :variables
-            shell-default-height 30
-            shell-default-position 'bottom)
-     spell-checking
-     syntax-checking
-     version-control
-     )
+   (append
+    '(
+      ;; ----------------------------------------------------------------
+      ;; Example of useful layers you may want to use right away.
+      ;; Uncomment some layer names and press <SPC f e R> (Vim style) or
+      ;; <M-m f e R> (Emacs style) to install them.
+      ;; ----------------------------------------------------------------
+      helm
+      auto-completion
+      ;; better-defaults
+      emacs-lisp
+      finance
+      git
+      (go :variables
+          gofmt-command "goimports"
+          go-tab-width 4)
+      (haskell :variables
+               haskell-completion-backend 'intero
+               haskell-enable-hindent-style "johan-tibell")
+      markdown
+      org
+      (rust :variables
+            rust-format-on-save t)
+      (shell :variables
+             shell-default-height 30
+             shell-default-position 'bottom)
+      spell-checking
+      syntax-checking
+      version-control
+      )
+    (if (equal (getenv "COLEMAK") "1")
+        '((keyboard-layout :variables
+                           kl-layout 'colemak))))
    ;; List of additional packages that will be installed without being
    ;; wrapped in a layer. If you need some configuration for these
    ;; packages, then consider creating a layer. You can also put the
