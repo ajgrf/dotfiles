@@ -5,7 +5,7 @@ export LESSHISTFILE=/dev/null
 export LESS="--ignore-case --no-init --quit-if-one-screen --RAW-CONTROL-CHARS "
 
 # Use Colemak bindings or not
-if test -n "$COLEMAK" -a ! -r "$HOMEe/.lesskey"; then
+if test -n "$COLEMAK" -a ! -r "$HOME/.lesskey"; then
 	lesskey
 elif test -w "$HOME/.lesskey"; then
 	rm "$HOME/.lesskey"
