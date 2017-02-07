@@ -95,6 +95,16 @@ mkcd() {
 	mkdir -p "$@" && cd "$1"
 }
 
+ytdl() {
+	local selection
+	selection="$(xclip -out)"
+	if [ $# -eq 0 ] && [ -n "$selection" ]; then
+		youtube-dl -- "$selection"
+	else
+		youtube-dl "$@"
+	fi
+}
+
 article-convert() {
 	local title
 	pushd "${1:-$HOME/Downloads}" > /dev/null
