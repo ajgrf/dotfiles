@@ -117,6 +117,48 @@ article-convert() {
 	popd > /dev/null
 }
 
+# automatically invoke sudo with apt when needed
+apt() {
+	local cmd skip
+
+	# don't bother if we're root
+	if [ "$(id -u)" -eq 0 ]; then
+		command apt "$@"
+		return
+	fi
+
+	# determine command given to apt
+	for arg in "$@"; do
+		if [ -n "$skip" ]; then
+			skip=""
+			continue
+		fi
+		case "$arg" in
+		-h*|--help|-v*|--version)
+			break
+			;;
+		-o|-c|-t|-a)
+			skip=1
+			;;
+		-*)
+			;;
+		*)
+			cmd="$arg"
+			break
+			;;
+		esac
+	done
+
+	case "$cmd" in
+	install|remove|update|upgrade|full-upgrade|edit-sources)
+		sudo apt "$@"
+		;;
+	*)
+		command apt "$@"
+		;;
+	esac
+}
+
 guix() {
 	local fmtstr guixdir guixenv
 	guixdir="${XDG_CONFIG_HOME:-$HOME/.config}/guix"
