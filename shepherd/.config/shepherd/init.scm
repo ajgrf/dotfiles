@@ -31,4 +31,4 @@
             '("redshift"))
    #:stop (make-kill-destructor)))
 
-(for-each start '(gpg-agent mcron mpd redshift))
+(for-each start '(mcron mpd redshift))
