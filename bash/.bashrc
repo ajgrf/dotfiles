@@ -161,3 +161,16 @@ guix() {
 		;;
 	esac
 }
+
+mkguix() (
+	cd ~/src/guix
+	guix environment guix -- make
+)
+
+remkguix() {
+	rm ~/.config/guix/latest
+	guix pull
+	guix environment guix -- bash -c 'cd ~/src/guix && git clean -fdx && ./bootstrap && ./configure --localstatedir=/var && make && git checkout po/'
+	rm ~/.config/guix/latest
+	ln -s ../../src/guix ~/.config/guix/latest
+}
