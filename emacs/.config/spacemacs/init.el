@@ -342,6 +342,9 @@ you should place your code here."
           ("\\.(flac|m4a|mp3|ogg|opus)$" "mpv")
           ("\\.jpg$" "feh --cycle-once -dFZD-10 *")))
   (setq image-dired-external-viewermage nil)
+
+  (add-to-list 'load-path "~/src/guix/emacs")
+  (require 'guix-emacs nil 'noerror)
   )
 
 ;; Do not write anything past this comment. This is where Emacs will
