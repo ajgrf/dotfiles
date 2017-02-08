@@ -1,0 +1,3 @@
+if test -d ~/.guix-profile/share/fonts/truetype; then
+	xset +fp ~/.guix-profile/share/fonts/truetype
+fi
