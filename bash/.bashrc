@@ -158,7 +158,7 @@ apt() {
 }
 
 guix() {
-	local fmtstr guixdir guixenv
+	local fmtstr guixdir guixenv url
 	guixdir="${XDG_CONFIG_HOME:-$HOME/.config}/guix"
 
 	guixenv="$guixdir/latest/pre-inst-env"
@@ -205,6 +205,12 @@ guix() {
 	try)
 		shift
 		"$guixenv" guix environment --ad-hoc "$@"
+		;;
+	visit)
+		url=$("$guixenv" guix package --show="$2" |
+			recsel -CP homepage |
+			uniq)
+		xdg-open "$url" 2> /dev/null
 		;;
 	*)
 		"$guixenv" guix "$@"
