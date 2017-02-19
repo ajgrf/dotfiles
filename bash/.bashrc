@@ -172,19 +172,23 @@ guix() {
 		"$guixenv" guix package --install "$@"
 		;;
 	clean)
-		git -C ~/src/guix clean --exclude='/gnu/packages/bootstrap' -fdx
+		git -C "$guixdir/latest" clean --exclude='/gnu/packages/bootstrap' -fdx
 		;;
 	env)
 		shift
 		"$guixenv" guix environment "$@"
 		;;
 	make)
-		"$guixenv" guix environment guix -- bash -c '
-			cd ~/src/guix &&
-			./bootstrap &&
-			./configure --localstatedir=/var &&
-			make &&
-			git checkout po/'
+		if test -f "$guixdir/latest/Makefile"; then
+			"$guixenv" guix environment guix -- make -C "$guixdir/latest"
+		else
+			"$guixenv" guix environment guix -- bash -c "
+				cd \"$guixdir/latest\" &&
+				./bootstrap &&
+				./configure --localstatedir=/var &&
+				make &&
+				git checkout po/"
+		fi
 		;;
 	manifest)
 		"$guixenv" guix package --manifest="${2:-$guixdir/profile.scm}"
