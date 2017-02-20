@@ -178,6 +178,9 @@ guix() {
 		shift
 		"$guixenv" guix environment "$@"
 		;;
+	ls)
+		(cd $(guix build "$2") && ls -d **)
+		;;
 	make)
 		if test -f "$guixdir/latest/Makefile"; then
 			"$guixenv" guix environment guix -- make -C "$guixdir/latest"
