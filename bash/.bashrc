@@ -179,7 +179,13 @@ guix() {
 		"$guixenv" guix environment "$@"
 		;;
 	ls)
-		(cd $(guix build "$2") && ls -d **)
+		for dir in $(guix build "$2"); do
+			echo
+			echo "$dir:"
+			(cd "$dir" && find) |
+				sed -e '/^\.$/d' -e 's/^\.\/\?//' |
+				sort
+		done | sed 1d
 		;;
 	make)
 		if test -f "$guixdir/latest/Makefile"; then
