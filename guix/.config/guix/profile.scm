@@ -1,62 +1,116 @@
-(use-package-modules admin apl attr audio backup base code databases ebook
-                     emacs feh file finance fonts games gnome gnupg gnuzilla
-                     gstreamer guile moreutils mpd music package-management
-                     parallel password-utils rsync screen shellutils ssh
-                     version-control video vim xdisorg xorg)
+(use-modules (guix packages)
+             (guix profiles)
+             (ice-9 match)
+             (vis))
 
-(define emacs-pkgs
-  (list emacs
-        emacs-elfeed
-        emacs-org-bullets
-        geiser
-        magit
-        paredit))
+(use-package-modules admin abduco attr audio backup bittorrent certs entr code
+                     compression cryptsetup databases ebook emacs file finance
+                     fonts games geo gnome gnupg gnuzilla golang gstreamer guile
+                     image-viewers linux moreutils mpd music package-management
+                     parallel password-utils perl rsync screen shellutils ssh
+                     version-control video vim web xdisorg xorg)
 
-(packages->manifest
- (append
-  emacs-pkgs
-  (list apl
+;; Redefinition of `packages->manifest` function, with added support for raw
+;; store paths.
+(define (packages->manifest* packages)
+  "Return a list of manifest entries, one for each item listed in PACKAGES.
+Elements of PACKAGES can be either package objects, package/string tuples
+denoting a specific output of a package, or store paths."
+  (define store-item->manifest-entry
+    (@@ (guix scripts package) store-item->manifest-entry))
+  (manifest
+   (map (match-lambda
+          ((package output)
+           (package->manifest-entry package output))
+          ((? package? package)
+           (package->manifest-entry package))
+          ((? file-exists? store-item)
+           (store-item->manifest-entry store-item)))
+        packages)))
+
+(define foreign-pkgs
+  (list glibc-utf8-locales
+        guix
+        nss-certs))
+
+(define common-pkgs
+  (list abduco
+        emacs
+        emacs-guix
+        entr
+        font-comic-neue
+        font-go
+        font-iosevka
+        go
+        guile-2.0
+        mcron2
+        recutils
+        shepherd
+        trash-cli
+        vis-git
+        youtube-dl))
+
+(define guixsd-pkgs
+  (list aria2
         attr
         beets
+        bluez
         borg
         bs1770gain
         calibre
+        cryptsetup
+        emacs-elfeed
+        emacs-guix
+        emacs-org-bullets
         feh
         ffmpeg
         file
         font-dejavu
         font-google-noto
         font-wqy-zenhei
+        geiser
         git
-        git-manpages
+        gnome-maps
         gnome-mpv
         gnome-tweak-tool
         gnupg
-        gst-plugins-ugly
         gst-plugins-bad
+        gst-plugins-ugly
+        guile-json
         icecat
-        ledger
-        mcron2
+        jq
+        ;; ledger
+        "/gnu/store/wppn6nyy97spa92p1wd9pn457p330l53-ledger-3.1.1"
+        lvm2
+        magit
         moreutils
         mpd
         mpd-mpc
         mpv
         ncmpc
         openssh
-        password-store
+        p7zip
         parallel
+        paredit
+        password-store
+        perl
+        ;; perl-file-rename
         pinentry
-        recutils
+        powertop
         redshift
         reptyr
         rsync
         screen
         stow
         the-silver-searcher
-        trash-cli
         vim
-        xclip
-        xset
-        youtube-dl
         wesnoth
-        which)))
+        which
+        xclip
+        xset))
+
+(packages->manifest
+ (append (if (file-exists? "/run/system")
+             guixsd-pkgs
+             foreign-pkgs)
+         common-pkgs))
