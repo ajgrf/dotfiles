@@ -41,6 +41,8 @@
   (services (cons* (gnome-desktop-service)
                    (console-keymap-service "en-latin9")
                    (bluetooth-service)
+                   (extra-special-file "/usr/bin/env"
+                                       (file-append coreutils "/bin/env"))
                    (modify-services %desktop-services
                      (slim-service-type config =>
                                         (slim-configuration
