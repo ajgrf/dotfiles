@@ -191,12 +191,12 @@ guix() {
 		if test -f "$guixdir/latest/Makefile"; then
 			"$guixenv" guix environment guix -- make -C "$guixdir/latest"
 		else
-			"$guixenv" guix environment guix -- bash -c "
-				cd \"$guixdir/latest\" &&
+			guixdir="$guixdir" "$guixenv" guix environment guix -- bash -c '
+				cd "$guixdir/latest" &&
 				./bootstrap &&
 				./configure --localstatedir=/var --sysconfdir=/etc &&
 				make &&
-				git checkout po/"
+				git checkout po/'
 		fi
 		;;
 	manifest)
