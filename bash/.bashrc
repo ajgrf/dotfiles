@@ -194,7 +194,7 @@ guix() {
 			"$guixenv" guix environment guix -- bash -c "
 				cd \"$guixdir/latest\" &&
 				./bootstrap &&
-				./configure --localstatedir=/var &&
+				./configure --localstatedir=/var --sysconfdir=/etc &&
 				make &&
 				git checkout po/"
 		fi
