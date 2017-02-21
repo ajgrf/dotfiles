@@ -9,11 +9,8 @@
   (host-name "polaris")
   (timezone "America/Chicago")
   (locale "en_US.UTF-8")
-  (locale-libcs (cons glibc-2.22 %default-locale-libcs))
 
-  ;; (kernel linux-libre-4.1)
   (kernel-arguments '("modprobe.blacklist=kvm,kvm_intel"))
-
   (bootloader (grub-configuration (device #f)
                                   (timeout 2)))
   (mapped-devices (list (mapped-device
@@ -36,7 +33,7 @@
                 (home-directory "/home/ajgrf"))
                %base-user-accounts))
 
-  (packages (cons* nss-certs         ;for HTTPS access
+  (packages (cons* nss-certs         ; for HTTPS access
                    %base-packages))
 
   ;; Use the "desktop" services, which include the X11
