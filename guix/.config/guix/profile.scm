@@ -31,7 +31,8 @@ denoting a specific output of a package, or store paths."
 (define foreign-pkgs
   (list glibc-utf8-locales
         guix
-        nss-certs))
+        nss-certs
+        shepherd))
 
 (define common-pkgs
   (list abduco
@@ -45,7 +46,6 @@ denoting a specific output of a package, or store paths."
         guile-2.0
         mcron2
         recutils
-        shepherd
         trash-cli
         vis-git
         youtube-dl))
@@ -95,6 +95,7 @@ denoting a specific output of a package, or store paths."
         password-store
         perl
         ;; perl-file-rename
+        "/gnu/store/miizffw02271ivf0m5m8jkqzkrldpffv-perl-file-rename-0.20"
         pinentry
         powertop
         redshift
@@ -109,8 +110,8 @@ denoting a specific output of a package, or store paths."
         xclip
         xset))
 
-(packages->manifest
- (append (if (file-exists? "/run/system")
+(packages->manifest*
+ (append (if (file-exists? "/run/current-system")
              guixsd-pkgs
              foreign-pkgs)
          common-pkgs))
