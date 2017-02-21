@@ -31,4 +31,6 @@
             '("redshift"))
    #:stop (make-kill-destructor)))
 
-(for-each start '(mcron mpd redshift))
+(when (file-exists? "/run/current-system")
+  (start 'gpg-agent))
+(for-each start '(mcron redshift))
