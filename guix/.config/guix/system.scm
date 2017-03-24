@@ -2,7 +2,7 @@
              (gnu services)
              (gnu system locale)
              (gnu system nss))
-(use-service-modules desktop xorg)
+(use-service-modules desktop pm xorg)
 (use-package-modules certs gnome linux)
 
 (operating-system
@@ -41,6 +41,7 @@
   (services (cons* (gnome-desktop-service)
                    (console-keymap-service "en-latin9")
                    (bluetooth-service)
+                   (service tlp-service-type (tlp-configuration))
                    (extra-special-file "/usr/bin/env"
                                        (file-append coreutils "/bin/env"))
                    (modify-services %desktop-services
