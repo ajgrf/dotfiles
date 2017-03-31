@@ -2,7 +2,7 @@
              (guix profiles)
              (ice-9 match))
 
-(use-package-modules admin abduco attr audio backup bittorrent certs entr code
+(use-package-modules admin attr audio backup bittorrent certs entr code
                      compression cryptsetup databases ebook emacs file finance
                      fonts games geo gnome gnupg gnuzilla gstreamer guile
                      image-viewers linux moreutils mpd music package-management
@@ -34,19 +34,14 @@ denoting a specific output of a package, or store paths."
         shepherd))
 
 (define common-pkgs
-  (list abduco
-        emacs
-        emacs-guix
-        entr
-        font-comic-neue
+  (list font-comic-neue
         font-go
         font-iosevka
         guile-2.0
         mcron2
         recutils
         trash-cli
-        vis
-        youtube-dl))
+        vis))
 
 (define guixsd-pkgs
   (list aria2
@@ -57,9 +52,11 @@ denoting a specific output of a package, or store paths."
         bs1770gain
         calibre
         cryptsetup
+        emacs
         emacs-elfeed
         emacs-guix
         emacs-org-bullets
+        entr
         feh
         ffmpeg
         file
@@ -106,7 +103,8 @@ denoting a specific output of a package, or store paths."
         wesnoth
         which
         xclip
-        xset))
+        xset
+        youtube-dl))
 
 (packages->manifest*
  (append (if (file-exists? "/run/current-system")
