@@ -10,14 +10,6 @@ if echo "$input_file" | egrep -q "\.(3g[p2]|avi|divx|f[l4]v|mp4|mov|wmv)$"; then
     echo "[postcmd] Remuxing to '$output_file'"
     ffmpeg -hide_banner -loglevel error -i "$input_file" -c:v copy -c:a copy \
            -c:s copy "$output_file"
-
-    # preserve xattrs
-    {
-        echo "# file: $output_file"
-        getfattr --absolute-names -d "$input_file" \
-            | sed "/^# file: /d"
-    } | setfattr --restore=-
-
     echo "[postcmd] Deleting original file '$input_file'"
     rm "$input_file"
 fi

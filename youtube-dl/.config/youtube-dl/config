@@ -10,9 +10,8 @@
 # dump metadata for resuming download later
 --write-info-json
 
-# embed metadata in the file and filesystem too
+# embed metadata in the file too
 --add-metadata
---xattrs
 
 # format selection
 --format (bestvideo+bestaudio/best)[height<=?1080]
