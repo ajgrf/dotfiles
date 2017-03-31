@@ -104,12 +104,12 @@ ytdl() {
 
 article-convert() {
 	local title
-	pushd "${1:-$HOME/Downloads}" > /dev/null
-	mkdir -p "$HOME/Downloads/articles"
+	pushd "${1:-$HOME/tmp}" > /dev/null
+	mkdir -p "$HOME/tmp/articles"
 	for article in *_files; do
 		title="${article%_files}"
                 mv "$title" "${title}.html"
-		ebook-convert "${title}.html" "$HOME/Downloads/articles/${title}.mobi" &&
+		ebook-convert "${title}.html" "$HOME/tmp/articles/${title}.mobi" &&
 		trash "${title}.html" "${title}_files"
 	done
 	popd > /dev/null

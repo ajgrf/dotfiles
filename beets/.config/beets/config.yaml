@@ -34,7 +34,7 @@ types:
     portable: bool
 convert:
     format: ogg
-    dest: ~/Downloads/Portable Music
+    dest: ~/tmp/Portable Music
     embed: no
     copy_album_art: yes
     max_bitrate: 160

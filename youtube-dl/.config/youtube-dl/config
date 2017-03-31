@@ -4,7 +4,7 @@
 --no-color
 
 # filename template
---output ~/Downloads/%(title)s.%(ext)s
+--output ~/tmp/%(title)s.%(ext)s
 --autonumber-size 2
 
 # dump metadata for resuming download later
