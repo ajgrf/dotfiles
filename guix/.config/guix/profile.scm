@@ -1,14 +1,13 @@
 (use-modules (guix packages)
              (guix profiles)
-             (ice-9 match)
-             (vis))
+             (ice-9 match))
 
 (use-package-modules admin abduco attr audio backup bittorrent certs entr code
                      compression cryptsetup databases ebook emacs file finance
-                     fonts games geo gnome gnupg gnuzilla golang gstreamer guile
+                     fonts games geo gnome gnupg gnuzilla gstreamer guile
                      image-viewers linux moreutils mpd music package-management
                      parallel password-utils perl rsync screen shellutils ssh
-                     version-control video vim web xdisorg xorg)
+                     text-editors version-control video vim web xdisorg xorg)
 
 ;; Redefinition of `packages->manifest` function, with added support for raw
 ;; store paths.
@@ -42,12 +41,11 @@ denoting a specific output of a package, or store paths."
         font-comic-neue
         font-go
         font-iosevka
-        go
         guile-2.0
         mcron2
         recutils
         trash-cli
-        vis-git
+        vis
         youtube-dl))
 
 (define guixsd-pkgs
