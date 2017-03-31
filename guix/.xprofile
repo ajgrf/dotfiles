@@ -1,3 +1,6 @@
-if test -d ~/.guix-profile/share/fonts/truetype; then
-	xset +fp ~/.guix-profile/share/fonts/truetype
+if test -d ~/.guix-profile/share/fonts; then
+	find ~/.guix-profile/share/fonts -name fonts.dir |
+	while read -r fontdir; do
+		xset +fp $(dirname "$fontdir")
+	done
 fi
