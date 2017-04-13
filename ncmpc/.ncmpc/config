@@ -1,3 +1,0 @@
-scroll-offset = 1
-set-xterm-title = yes
-xterm-title-format = "[[%artist% - ]%title%]|%file%"
