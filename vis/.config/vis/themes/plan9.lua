@@ -30,3 +30,9 @@ lexers.STYLE_CURSOR_PRIMARY = lexers.STYLE_CURSOR..',fore:magenta'
 lexers.STYLE_CURSOR_LINE = 'underlined'
 lexers.STYLE_COLOR_COLUMN = 'reverse,fore:red'
 lexers.STYLE_SELECTION = 'back:yellow'
+
+lexers.STYLE_STATUS = 'fore:black,back:cyan'
+lexers.STYLE_STATUS_FOCUSED = 'fore:white,back:blue,bold'
+lexers.STYLE_SEPARATOR = lexers.STYLE_DEFAULT
+lexers.STYLE_INFO = 'fore:default,back:default,bold'
+lexers.STYLE_EOF = ''
