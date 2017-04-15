@@ -1,41 +1,43 @@
 ! ~/.Xresources
 
 !! terminal color scheme
-*background:             #161616
-*foreground:             #c5c5c5
+*background:             #ffffea
+*foreground:             #000000
 
 ! black
-*color0:                 #161616
-*color8:                 #4a4a4a
+*color0:                 #000000
+*color8:                 #000000
 ! red
-*color1:                 #a65353
-*color9:                 #cc6666
+*color1:                 #880000
+*color9:                 #880000
 ! green
-*color2:                 #909653
-*color10:                #b5bd68
+*color2:                 #004d00
+*color10:                #004d00
 ! yellow
-*color3:                 #bd9c5a
-*color11:                #f0c674
+*color3:                 #eeee9e
+*color11:                #eeee9e
 ! blue
-*color4:                 #5f788c
-*color12:                #81a2be
+*color4:                 #004488
+*color12:                #004488
 ! magenta
-*color5:                 #816b87
-*color13:                #b294bb
+*color5:                 #770077
+*color13:                #770077
 ! cyan
-*color6:                 #668c88
-*color14:                #8abeb7
+*color6:                 #eaffff
+*color14:                #eaffff
 ! white
-*color7:                 #c5c5c5
-*color15:                #f7f7f7
+*color7:                 #ffffea
+*color15:                #ffffea
 
 !! URxvt settings
-URxvt*font:              -*-terminus-medium-r-*-*-16-*-*-*-*-*-*-*,\
-                         xft:WenQuanYi Micro Hei Mono,\
-                         xft:DejaVu Sans Mono for Powerline
-URxvt*boldFont:          -*-terminus-bold-r-*-*-16-*-*-*-*-*-*-*,\
-                         xft:WenQuanYi Micro Hei Mono,\
-                         xft:DejaVu Sans Mono for Powerline:bold
+URxvt*font:              xft:Go Mono:size=11,\
+                         xft:WenQuanYi Micro Hei Mono:size=12
+URxvt*boldFont:          xft:Go Mono:bold:size=11,\
+                         xft:WenQuanYi Micro Hei Mono:bold:size=12
+URxvt*italicFont:        xft:Go Mono:italic:size=11,\
+                         xft:WenQuanYi Micro Hei Mono:italic:size=12
+URxvt*boldItalicFont:    xft:Go Mono:bold:italic:size=11,\
+                         xft:WenQuanYi Micro Hei Mono:bold:italic:size=12
 URxvt*iconName:          Terminal
 URxvt*inputMethod:       ibus
 !URxvt*keysym.C-Tab:      [27;5;9~
@@ -55,8 +57,9 @@ URxvt*urgentOnBell:      true
 !! XTerm settings
 xterm*dynamicColors:     true
 xterm*eightBitInput:     false
-xterm*faceName:          terminus:pixelsize=16
-xterm*faceNameDoublesize:WenQuanYi Micro Hei Mono:pixelsize=16
+! XTerm always uses italics for Go Mono :-(
+xterm*faceName:          Terminus:size=12
+xterm*faceNameDoublesize:WenQuanYi Micro Hei Mono:size=12
 xterm*iconName:          Terminal
 xterm*saveLines:         10000
 xterm*scrollKey:         true
