@@ -6,7 +6,6 @@ if v:progname !=# "vi"
 
   " load any plugin bundles
   call plug#begin('~/.vim/bundle')
-  Plug '~/src/github.com/ajgrf/sprinkles'
   Plug 'tpope/vim-fugitive', {'tag': 'v2.2'}
   Plug 'fatih/vim-go',       {'tag': 'v1.11'}
   Plug 'rust-lang/rust.vim'
@@ -25,7 +24,7 @@ if v:progname !=# "vi"
 
   " syntax highlighting settings
   syntax on
-  colorscheme sprinkles
+  colorscheme plan9
 
   " enable loading plugins and indent rules based on filetype
   filetype plugin indent on
@@ -41,7 +40,7 @@ if v:progname !=# "vi"
 
   set completeopt=menu,menuone,longest  " disable completion scratch window
   set guioptions+=c                     " popup blocker
-  set guifont=Iosevka\ 13
+  set guifont=Go\ Mono\ 11
 
   " case-insensitive search
   set ignorecase smartcase
