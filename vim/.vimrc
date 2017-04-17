@@ -20,6 +20,7 @@ if v:progname !=# "vi"
   Plug 'terryma/vim-multiple-cursors', {'tag': 'v2.2'}
   Plug 'cespare/vim-toml'
   "Plug 'neovimhaskell/haskell-vim'
+  Plug 'ledger/vim-ledger'
   call plug#end()
 
   " syntax highlighting settings
@@ -48,10 +49,14 @@ if v:progname !=# "vi"
   set hlsearch
   nnoremap <silent> <Esc>u :nohlsearch<cr>
 
+  " disable folding by default
+  set nofoldenable
+
   autocmd FileType vim setlocal foldmethod=marker tabstop=8 expandtab
     \ shiftwidth=2 softtabstop=2
   autocmd FileType go setlocal tabstop=4 shiftwidth=4 nolist
   autocmd FileType haskell setlocal tabstop=8 expandtab shiftwidth=4 softtabstop=4
+  autocmd FileType ledger setlocal tabstop=8 expandtab shiftwidth=4 softtabstop=4
   autocmd BufNewFile,BufRead *.json setlocal filetype=javascript expandtab shiftwidth=2 softtabstop=4
   autocmd BufNewFile,BufReadPost *.md set filetype=markdown
 
