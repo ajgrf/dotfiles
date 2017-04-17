@@ -7,7 +7,7 @@ if v:progname !=# "vi"
   " load any plugin bundles
   call plug#begin('~/.vim/bundle')
   Plug 'tpope/vim-fugitive', {'tag': 'v2.2'}
-  Plug 'fatih/vim-go',       {'tag': 'v1.11'}
+  Plug 'fatih/vim-go',       {'tag': 'v1.12'}
   Plug 'rust-lang/rust.vim'
   Plug 'tpope/vim-sensible', {'tag': 'v1.1'}
   Plug 'tpope/vim-eunuch',   {'tag': 'v1.1'}
