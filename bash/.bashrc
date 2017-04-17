@@ -50,7 +50,7 @@ if_err() {
 	fi
 }
 
-PS1='${debian_chroot:+($debian_chroot)}$(if_err)\u@\h:\w${GUIX_ENVIRONMENT:+ [env]}\$ '
+PS1='${debian_chroot:+($debian_chroot)}$(if_err)\u@\h:\w\$ '
 
 #
 # TERMINAL TITLE
@@ -153,91 +153,6 @@ apt() {
 		;;
 	*)
 		command apt "$@"
-		;;
-	esac
-}
-
-guix() {
-	local fmtstr guixdir guixenv url
-	guixdir="${XDG_CONFIG_HOME:-$HOME/.config}/guix"
-
-	guixenv="$guixdir/latest/pre-inst-env"
-	if [ ! -x "$guixenv" ]; then
-		guixenv="env"
-	fi
-
-	case "$1" in
-	add|install)
-		shift
-		"$guixenv" guix package --install "$@"
-		;;
-	clean)
-		git -C "$guixdir/latest" clean --exclude='/gnu/packages/bootstrap' -fdx
-		;;
-	env)
-		shift
-		"$guixenv" guix environment "$@"
-		;;
-	ls)
-		for dir in $(guix build "$2"); do
-			echo
-			echo "$dir:"
-			(cd "$dir" && find) |
-				sed -e '/^\.$/d' -e 's/^\.\/\?//' |
-				sort
-		done | sed 1d
-		;;
-	make)
-		if test -f "$guixdir/latest/Makefile"; then
-			"$guixenv" guix environment guix -- make -C "$guixdir/latest"
-		else
-			guixdir="$guixdir" "$guixenv" guix environment guix -- bash -c '
-				cd "$guixdir/latest" &&
-				./bootstrap &&
-				./configure --localstatedir=/var --sysconfdir=/etc &&
-				make &&
-				git checkout po/'
-		fi
-		;;
-	manifest)
-		"$guixenv" guix package --manifest="${2:-$guixdir/profile.scm}"
-		;;
-	profile)
-		shift
-		"$guixenv" guix package "$@"
-		;;
-	reconfigure)
-		"$guixenv" sudo guix system reconfigure "${2:-$guixdir/system.scm}"
-		;;
-	remove|uninstall)
-		shift
-		"$guixenv" guix package --remove "$@"
-		;;
-	repl)
-		shift
-		"$guixenv" guile "$@"
-		;;
-	search)
-		fmtstr="{{name}} {{version}} - {{synopsis}}"
-		"$guixenv" guix package --search="$2" |
-			recfmt -f <(echo "$fmtstr") |
-			uniq
-		;;
-	show|info)
-		"$guixenv" guix package --show="$2"
-		;;
-	try)
-		shift
-		"$guixenv" guix environment --ad-hoc "$@"
-		;;
-	visit)
-		url=$("$guixenv" guix package --show="$2" |
-			recsel -CP homepage |
-			uniq)
-		xdg-open "$url" 2> /dev/null
-		;;
-	*)
-		"$guixenv" guix "$@"
 		;;
 	esac
 }
