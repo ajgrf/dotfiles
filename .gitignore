@@ -2,3 +2,4 @@
 /guix/.config/guix/latest
 /ncmpc/.ncmpc/keys
 /shepherd/.config/shepherd/shepherd.log
+/vim/.vim/bundle
