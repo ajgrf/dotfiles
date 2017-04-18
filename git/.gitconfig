@@ -8,6 +8,9 @@
 	ci = commit
 	br = branch
 	ls = ls-files
+	log1 = log --oneline
+	unmerged = log --oneline ^@{upstream} @
+	unpulled = log --oneline ^@ @{upstream}
 [color]
 	ui = false
 [log]
