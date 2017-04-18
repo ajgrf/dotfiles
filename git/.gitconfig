@@ -2,13 +2,13 @@
 	name = Alex Griffin
 	email = a@ajgrf.com
 [alias]
-	st = status --short --branch
+	br = branch
 	ci = commit --verbose
 	co = checkout
 	com = commit --verbose
-	br = branch
-	ls = ls-files
 	log1 = log --oneline
+	ls = ls-files
+	st = status --short --branch
 	unmerged = log --oneline ^@{upstream} @
 	unpulled = log --oneline ^@ @{upstream}
 [color]
