@@ -3,9 +3,9 @@
 	email = a@ajgrf.com
 [alias]
 	st = status --short --branch
+	ci = commit --verbose
 	co = checkout
-	com = commit
-	ci = commit
+	com = commit --verbose
 	br = branch
 	ls = ls-files
 	log1 = log --oneline
