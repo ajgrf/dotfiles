@@ -13,7 +13,6 @@ if v:progname !=# "vi"
   Plug 'tpope/vim-eunuch',   {'tag': 'v1.1'}
   Plug 'tpope/vim-surround', {'tag': 'v2.1'}
   Plug 'tpope/vim-repeat',   {'tag': 'v1.1'}
-  "Plug 'bling/vim-airline' ",  {'tag': 'v0.8'}
   "Plug 'justinmk/vim-sneak', {'tag': '1.8.1'}
   Plug 'ervandew/supertab',  {'tag': '2.1'}
   Plug 'gerw/vim-HiLinkTrace'
@@ -66,19 +65,6 @@ if v:progname !=# "vi"
   let g:go_fmt_command = "goimports"
 
   let g:plug_window = "new"
-
-  let g:airline_theme='sprinkles'
-  "let g:airline_left_sep = ''
-  "let g:airline_left_alt_sep = ''
-  "let g:airline_right_sep = ''
-  "let g:airline_right_alt_sep = ''
-  let g:airline_left_sep = ''
-  let g:airline_left_alt_sep = ''
-  let g:airline_right_sep = ''
-  let g:airline_right_alt_sep = ''
-  "let g:airline_symbols.branch = ''
-  "let g:airline_symbols.readonly = ''
-  "let g:airline_symbols.linenr = ''
 
   " Adjust keybindings for the Colemak keyboard layout
   if $COLEMAK
