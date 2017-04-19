@@ -94,12 +94,21 @@ mkcd() {
 
 ytdl() {
 	local selection
-	selection="$(xclip -out)"
-	if [ $# -eq 0 ] && [ -n "$selection" ]; then
+	if [ $# -eq 0 ] && [ -n "${selection:=$(xclip -out)}" ]; then
 		youtube-dl -- "$selection"
-	else
-		youtube-dl "$@"
 	fi
+	while [ $# -gt 0 ]; do
+		case "$1" in
+		*.info.json)
+			youtube-dl --load-info-json "$1"
+			shift
+			;;
+		*)
+			youtube-dl "$@"
+			break
+			;;
+		esac
+	done
 }
 
 article-convert() {
