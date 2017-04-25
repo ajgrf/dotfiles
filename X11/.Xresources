@@ -40,6 +40,12 @@ URxvt*boldItalicFont:    xft:Go Mono:bold:italic:size=11,\
                          xft:WenQuanYi Micro Hei Mono:bold:italic:size=12
 URxvt*iconName:          Terminal
 URxvt*inputMethod:       ibus
+URxvt*iso14755:          false
+URxvt*iso14755_52:       false
+URxvt*keysym.C-M-c:      builtin-string:
+URxvt*keysym.C-M-v:      builtin-string:
+URxvt*keysym.C-S-0x43:   eval:selection_to_clipboard
+URxvt*keysym.C-S-0x56:   eval:paste_clipboard
 !URxvt*keysym.C-Tab:      [27;5;9~
 !URxvt*keysym.S-C-Tab:    [27;6;9~
 URxvt*matcher.button:    1
