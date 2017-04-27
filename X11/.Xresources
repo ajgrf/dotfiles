@@ -63,8 +63,7 @@ URxvt*urgentOnBell:      true
 !! XTerm settings
 xterm*dynamicColors:     true
 xterm*eightBitInput:     false
-! XTerm always uses italics for Go Mono :-(
-xterm*faceName:          Terminus:size=12
+xterm*faceName:          Go Mono:size=12
 xterm*faceNameDoublesize:WenQuanYi Micro Hei Mono:size=12
 xterm*iconName:          Terminal
 xterm*saveLines:         10000
