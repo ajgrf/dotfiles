@@ -31,13 +31,13 @@
 
 !! URxvt settings
 URxvt*font:              xft:Go Mono:size=11,\
-                         xft:WenQuanYi Micro Hei Mono:size=12
+                         xft:WenQuanYi Micro Hei Mono:size=11
 URxvt*boldFont:          xft:Go Mono:bold:size=11,\
-                         xft:WenQuanYi Micro Hei Mono:bold:size=12
+                         xft:WenQuanYi Micro Hei Mono:bold:size=11
 URxvt*italicFont:        xft:Go Mono:italic:size=11,\
-                         xft:WenQuanYi Micro Hei Mono:italic:size=12
+                         xft:WenQuanYi Micro Hei Mono:italic:size=11
 URxvt*boldItalicFont:    xft:Go Mono:bold:italic:size=11,\
-                         xft:WenQuanYi Micro Hei Mono:bold:italic:size=12
+                         xft:WenQuanYi Micro Hei Mono:bold:italic:size=11
 URxvt*iconName:          Terminal
 URxvt*inputMethod:       ibus
 URxvt*iso14755:          false
@@ -63,8 +63,8 @@ URxvt*urgentOnBell:      true
 !! XTerm settings
 xterm*dynamicColors:     true
 xterm*eightBitInput:     false
-xterm*faceName:          Go Mono:size=12
-xterm*faceNameDoublesize:WenQuanYi Micro Hei Mono:size=12
+xterm*faceName:          Go Mono:size=11
+xterm*faceNameDoublesize:WenQuanYi Micro Hei Mono:size=11
 xterm*iconName:          Terminal
 xterm*saveLines:         10000
 xterm*scrollKey:         true
