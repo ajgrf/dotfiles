@@ -66,50 +66,6 @@ if v:progname !=# "vi"
 
   let g:plug_window = "new"
 
-  " Adjust keybindings for the Colemak keyboard layout
-  if $COLEMAK
-    " basic key rearrangements
-    noremap n j
-    noremap e k
-    noremap i l
-    noremap k n
-    noremap u i
-    noremap l u
-    noremap j e
-
-    noremap N J
-    noremap E K
-    noremap I L
-    noremap K N
-    noremap U I
-    noremap L U
-    noremap J E
-
-    " g- movement keys
-    noremap gn gj
-    noremap gN gJ
-    noremap ge gk
-    noremap gj ge
-    noremap gJ gE
-    unmap gk
-    unmap gE
-
-    " get control-j back, so switch it with ctrl-n at qwerty position of j
-    imap <c-n> <cr>
-    cmap <c-n> <cr>
-    inoremap <c-j> <c-n>
-    cnoremap <c-j> <c-n>
-
-    " window movement
-    nnoremap <c-w>n <c-w>j
-    nnoremap <c-w>i <c-w>l
-    nnoremap <c-w>e <c-w>k
-
-    " qwerty <c-w>n and <c-w>i stolen but do nothing so map back
-    nnoremap <c-w>k <c-w>n
-    nnoremap <c-w>l <c-w>i
-  endif
-
   finish
 
 endif
