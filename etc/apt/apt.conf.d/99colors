@@ -1,9 +1,0 @@
-# Highlight package names red in search results.
-APT::Color::Highlight "[31m";
-
-# Redefine yellow as magenta because the `apt update` status text
-# is hard-coded to yellow.
-APT::Color::Yellow "[35m";
-
-# Use cyan background for apt's progress bar.
-DPkg::Progress-Fancy::Progress-Bg "%1b[46m";
