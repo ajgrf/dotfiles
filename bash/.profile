@@ -12,8 +12,8 @@ export RUST_SRC_PATH="$HOME/.multirust/toolchains/stable-x86_64-unknown-linux-gn
 
 export PATH="$HOME/bin:$HOME/.local/bin:$PATH"
 
-# Load profile fragments from directory
-for f in ~/.profile.d/*.sh; do
-	test -r "$f" && . "$f"
-done
-unset f
+# make less more friendly for non-text input files, see lesspipe(1)
+type lesspipe >/dev/null 2>&1 && eval "$(SHELL=/bin/sh lesspipe)"
+# disable less history file
+export LESSHISTFILE=/dev/null
+export LESS="--ignore-case --no-init --quit-if-one-screen --RAW-CONTROL-CHARS "
