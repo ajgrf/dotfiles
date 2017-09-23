@@ -40,7 +40,7 @@ endfunction
 
 " Standard Syntax Highlighting Groups {{{
 
-if has("gui_running")
+if has("gui_running") || exists("g:GuiLoaded")
   call s:Style("Normal", s:black, s:white, "")
 else
   call s:Style("Normal", [], [], "")
