@@ -6,11 +6,11 @@
 	ci = commit --verbose
 	co = checkout
 	com = commit --verbose
-	log1 = log --oneline
+	log1 = log --format=format:'%ad %h%d %s' --date=short
 	ls = ls-files
 	st = status --short --branch
-	unmerged = log --oneline ^@{upstream} @
-	unpulled = log --oneline ^@ @{upstream}
+	unmerged = log --format=format:'%ad %h%d %s' --date=short ^@{upstream} @
+	unpulled = log --format=format:'%ad %h%d %s' --date=short ^@ @{upstream}
 [color]
 	ui = false
 [log]
