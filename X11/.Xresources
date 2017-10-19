@@ -63,16 +63,16 @@ URxvt*urlLauncher:       firefox
 URxvt*urgentOnBell:      true
 
 !! XTerm settings
-xterm*boldColors:        false
-xterm*dynamicColors:     true
-xterm*eightBitInput:     false
-xterm*faceName:          Go Mono:size=11
-xterm*faceNameDoublesize:WenQuanYi Micro Hei Mono:size=11
-xterm*geometry:          80x43
-xterm*iconName:          Terminal
-xterm*saveLines:         10000
-xterm*scrollKey:         true
-xterm*scrollTtyOutput:   false
+XTerm*boldColors:        false
+XTerm*dynamicColors:     true
+XTerm*eightBitInput:     false
+XTerm*faceName:          Go Mono:size=11
+XTerm*faceNameDoublesize:WenQuanYi Micro Hei Mono:size=11
+XTerm*geometry:          80x43
+XTerm*iconName:          Terminal
+XTerm*saveLines:         10000
+XTerm*scrollKey:         true
+XTerm*scrollTtyOutput:   false
 *vt100.translations: #override \n\
 	Ctrl ~Shift <Key>Tab: string(0x1b) string("[27;5;9~") \n \
 	Ctrl Shift <Key>Tab: string(0x1b) string("[27;6;9~") \n
