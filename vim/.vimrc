@@ -6,6 +6,7 @@ if v:progname !=# "vi"
 
   " load any plugin bundles
   call plug#begin('~/.vim/bundle')
+  Plug '~/src/github.com/ajgrf/parchment'
   Plug 'tpope/vim-fugitive', {'tag': 'v2.2'}
   Plug 'fatih/vim-go',       {'tag': 'v1.12'}
   Plug 'rust-lang/rust.vim'
@@ -24,7 +25,7 @@ if v:progname !=# "vi"
 
   " syntax highlighting settings
   syntax on
-  colorscheme plan9
+  colorscheme parchment
 
   " enable loading plugins and indent rules based on filetype
   filetype plugin indent on

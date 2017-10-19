@@ -1,2 +1,2 @@
-colorscheme plan9
+colorscheme parchment
 Guifont Go Mono:h11
