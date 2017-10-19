@@ -38,6 +38,7 @@ URxvt*italicFont:        xft:Go Mono:italic:size=11,\
                          xft:WenQuanYi Micro Hei Mono:italic:size=11
 URxvt*boldItalicFont:    xft:Go Mono:bold:italic:size=11,\
                          xft:WenQuanYi Micro Hei Mono:bold:italic:size=11
+URxvt*geometry:          80x43
 URxvt*iconName:          Terminal
 URxvt*inputMethod:       ibus
 URxvt*intensityStyles:   false
@@ -67,6 +68,7 @@ xterm*dynamicColors:     true
 xterm*eightBitInput:     false
 xterm*faceName:          Go Mono:size=11
 xterm*faceNameDoublesize:WenQuanYi Micro Hei Mono:size=11
+xterm*geometry:          80x43
 xterm*iconName:          Terminal
 xterm*saveLines:         10000
 xterm*scrollKey:         true
