@@ -4,7 +4,7 @@
 --no-color
 
 # filename template
---output ~/tmp/%(title)s.%(ext)s
+--output %(title)s.%(ext)s
 
 # dump metadata for resuming download later
 --write-info-json
