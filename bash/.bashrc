@@ -84,11 +84,6 @@ alias feh1='feh --cycle-once'
 alias nb='newsbeuter -q'
 alias open='xdg-open'
 
-# open vim help
-:h() {
-	vim -c ":help $*| only"
-}
-
 # create a directory (if necessary) and cd into it
 mkcd() {
 	mkdir -p "$@" && cd "$1"
