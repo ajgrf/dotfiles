@@ -10,8 +10,10 @@
 
 #export GPG_TTY="$(tty)"
 
-# Set $PATH and friends in non-interactive SSH sessions.
-if [ -n "$SSH_CLIENT" -a -z "`type -P cat`" ]; then . /etc/profile; fi
+if test -z "$ENV"; then
+	test -f "$HOME/.profile" && . "$HOME/.profile"
+fi
+test -f "${ENV:=$HOME/.shinit}" && . "$ENV"
 
 #
 # INTERACTIVE SHELL SETTINGS
@@ -61,80 +63,3 @@ case "$TERM" in
 xterm*|rxvt*|st*|dvtm*)
 	PS1="\[\e]0;${debian_chroot:+($debian_chroot)}\u@\h: \w\a\]$PS1"
 esac
-
-#
-# ALIASES, FUNCTIONS, ETC.
-#
-
-alias ls='LC_COLLATE=C ls --time-style=long-iso -A -1'
-alias lc='LC_COLLATE=C command ls --time-style=long-iso -A'
-alias l='lc -p'
-alias la='ls'
-alias ll='ls -la'
-alias lh='ll -h'
-
-alias ag='ag --nocolor --nogroup'
-alias doch='eval sudo $(fc -ln -1)'
-alias emacs='emacs -nw'
-alias feh='feh -FZD-10'
-alias feh1='feh --cycle-once'
-alias nb='newsbeuter -q'
-alias open='xdg-open'
-alias rg='rg --color never --no-heading'
-
-mkcd() { mkdir -p "$@" && cd "$1"; }
-
-article-convert() {
-	local title
-	pushd "${1:-$HOME/tmp}" > /dev/null
-	mkdir -p "$HOME/tmp/articles"
-	for article in *_files; do
-		title="${article%_files}"
-                mv "$title" "${title}.html"
-		ebook-convert "${title}.html" "$HOME/tmp/articles/${title}.mobi" &&
-		trash "${title}.html" "${title}_files"
-	done
-	popd > /dev/null
-}
-
-# automatically invoke sudo with apt when needed
-apt() {
-	local cmd skip
-
-	# don't bother if we're root
-	if [ "$(id -u)" -eq 0 ]; then
-		command apt "$@"
-		return
-	fi
-
-	# determine command given to apt
-	for arg in "$@"; do
-		if [ -n "$skip" ]; then
-			skip=""
-			continue
-		fi
-		case "$arg" in
-		-h*|--help|-v*|--version)
-			break
-			;;
-		-o|-c|-t|-a)
-			skip=1
-			;;
-		-*)
-			;;
-		*)
-			cmd="$arg"
-			break
-			;;
-		esac
-	done
-
-	case "$cmd" in
-	install|remove|update|upgrade|full-upgrade|edit-sources)
-		sudo apt "$@"
-		;;
-	*)
-		command apt "$@"
-		;;
-	esac
-}
