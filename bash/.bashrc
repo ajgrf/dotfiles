@@ -81,7 +81,7 @@ alias emacs='emacs -nw'
 alias feh='feh -FZD-10'
 alias feh1='feh --cycle-once'
 #alias gpg='gpg2'
-alias nb='newsbeuter'
+alias nb='newsbeuter -q'
 alias open='xdg-open'
 
 # open vim help
