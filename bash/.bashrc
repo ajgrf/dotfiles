@@ -94,25 +94,6 @@ mkcd() {
 	mkdir -p "$@" && cd "$1"
 }
 
-ytdl() {
-	local selection
-	if [ $# -eq 0 ] && [ -n "${selection:=$(xclip -out)}" ]; then
-		youtube-dl -- "$selection"
-	fi
-	while [ $# -gt 0 ]; do
-		case "$1" in
-		*.info.json)
-			youtube-dl --load-info-json "$1"
-			shift
-			;;
-		*)
-			youtube-dl "$@"
-			break
-			;;
-		esac
-	done
-}
-
 article-convert() {
 	local title
 	pushd "${1:-$HOME/tmp}" > /dev/null
