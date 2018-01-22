@@ -83,6 +83,7 @@ alias feh1='feh --cycle-once'
 #alias gpg='gpg2'
 alias nb='newsbeuter -q'
 alias open='xdg-open'
+alias rg='rg --color never --no-heading'
 
 # create a directory (if necessary) and cd into it
 mkcd() {
