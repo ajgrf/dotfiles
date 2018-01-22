@@ -1,7 +1,7 @@
 # ~/.profile: executed by the command interpreter for login shells.
 
 export EDITOR="vim"
-export TERMINFO="$HOME/.local/share/terminfo"
+export TERMINFO_DIRS="$HOME/.local/share/terminfo"
 
 # Go
 export GOPATH="${XDG_CACHE_HOME:-$HOME/.cache}/go:$HOME"
