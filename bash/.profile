@@ -1,6 +1,6 @@
 # ~/.profile: executed by the command interpreter for login shells.
 
-export EDITOR="vim"
+export EDITOR="nvim"
 export TERMINFO_DIRS="$HOME/.local/share/terminfo"
 
 # Go
