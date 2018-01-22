@@ -66,9 +66,6 @@ esac
 # ALIASES, FUNCTIONS, ETC.
 #
 
-alias doch='eval sudo $(fc -ln -1)'
-
-# some ls aliases
 alias ls='LC_COLLATE=C ls --time-style=long-iso -A -1'
 alias lc='LC_COLLATE=C command ls --time-style=long-iso -A'
 alias l='lc -p'
@@ -77,18 +74,15 @@ alias ll='ls -la'
 alias lh='ll -h'
 
 alias ag='ag --nocolor --nogroup'
+alias doch='eval sudo $(fc -ln -1)'
 alias emacs='emacs -nw'
 alias feh='feh -FZD-10'
 alias feh1='feh --cycle-once'
-#alias gpg='gpg2'
 alias nb='newsbeuter -q'
 alias open='xdg-open'
 alias rg='rg --color never --no-heading'
 
-# create a directory (if necessary) and cd into it
-mkcd() {
-	mkdir -p "$@" && cd "$1"
-}
+mkcd() { mkdir -p "$@" && cd "$1"; }
 
 article-convert() {
 	local title
