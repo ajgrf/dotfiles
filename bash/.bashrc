@@ -38,8 +38,6 @@ shopt -s globstar
 # PROMPT
 #
 
-PROMPT_DIRTRIM=3
-
 # set variable identifying the chroot you work in (used in the prompt below)
 if [ -z "${debian_chroot:-}" ] && [ -r /etc/debian_chroot ]; then
 	debian_chroot=$(cat /etc/debian_chroot)
@@ -52,7 +50,16 @@ if_err() {
 	fi
 }
 
-PS1='${debian_chroot:+($debian_chroot)}$(if_err)\u@\h:\w\$ '
+# pretty print working directory
+ppwd() {
+	local dir="${PWD}/" n="${1:-255}"
+
+	dir="${dir/#$HOME\//\~/}"; dir="${dir%/}"
+	test "${#dir}" -gt "$n"  && dir="...${dir:(-$((n-3)))}"
+	echo "$dir"
+}
+
+PS1='$(if_err)${debian_chroot:+($debian_chroot)}\u@\h:$(ppwd 28)\$ '
 
 #
 # TERMINAL TITLE
