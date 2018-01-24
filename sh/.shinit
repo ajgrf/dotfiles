@@ -5,8 +5,12 @@ alias la='ls'
 alias ll='ls -la'
 alias lh='ll -h'
 
+if ! type doas >/dev/null 2>&1; then
+	alias doas='sudo -p "doas (%u@%H) password: "'
+fi
+
 alias ag='ag --nocolor --nogroup'
-alias doch='eval sudo $(fc -ln -1)'
+alias doch='eval doas $(fc -ln -1)'
 alias emacs='emacs -nw'
 alias feh='feh -FZD-10'
 alias feh1='feh --cycle-once'
