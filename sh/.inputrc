@@ -7,9 +7,9 @@ set bind-tty-special-chars off
 # Redefine delete word behavior to stop at filename slashes
 "\C-w": unix-filename-rubout
 
-# Up/Down arrows search the history for whatever you've typed so far
-"\e[A": history-search-backward
-"\e[B": history-search-forward
+# PageUp/PageDown search the history for whatever you've typed so far
+"\e[5~": history-search-backward
+"\e[6~": history-search-forward
 
 # Alt-Enter pipes the current command through less
 $if bash
