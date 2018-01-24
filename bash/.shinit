@@ -12,7 +12,9 @@ alias feh='feh -FZD-10'
 alias feh1='feh --cycle-once'
 alias nb='newsbeuter -q'
 alias open='xdg-open'
+alias reset='reset -Q'
 alias rg='rg --color never --no-heading'
+alias stack='stack --color never'
 
 mkcd() { mkdir -p "$@" && cd "$1"; }
 
