@@ -32,10 +32,10 @@ ppwd() {
 	echo "$dir"
 }
 
-PS1='$(if_err)${debian_chroot:+($debian_chroot)}\u@\h:$(ppwd 28)\$ '
+PS1='$(if_err)\u@\h:$(ppwd 28)\$ '
 
 # If this is an xterm set the title to user@host:dir
 case "$TERM" in
 xterm*|rxvt*|st*|screen*|tmux*|dvtm*)
-	PS1="\[\e]0;${debian_chroot:+($debian_chroot)}\u@\h: \w\a\]$PS1"
+	PS1="\[\e]0;\u@\h: \w\a\]$PS1"
 esac

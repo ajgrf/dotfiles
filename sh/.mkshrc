@@ -20,7 +20,7 @@ prompt() {
 	esac
 
 	test "${#dir}" -gt 28 && dir="...${dir:(-25)}"
-	echo -n "${title}${e:+$e|}${debian_chroot:+($debian_chroot)}${USER}@${HOSTNAME%%.*}:${dir}$S "
+	echo -n "${title}${e:+$e|}${USER}@${HOSTNAME%%.*}:${dir}$S "
 }
 PS1='$(prompt)'
 
