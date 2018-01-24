@@ -60,6 +60,11 @@ apt() {
 	esac
 }
 
+# set variable identifying the chroot you work in (used in the prompt below)
+if [ -z "${debian_chroot:-}" ] && [ -r /etc/debian_chroot ]; then
+	debian_chroot=$(cat /etc/debian_chroot)
+fi
+
 # pretty print working directory
 ppwd() {
 	local dir="${PWD}/" n="${1:-255}"
@@ -87,7 +92,7 @@ prompt() {
 	test "$e" -eq 0 && e=""
 	#test "$USER_ID" -eq 0 && S='#'
 
-	echo -n "${e:+$e|}${USER}@${HOSTNAME%%.*}:$(ppwd 28)$S "
+	echo -n "${e:+$e|}${debian_chroot:+($debian_chroot)}${USER}@${HOSTNAME%%.*}:$(ppwd 28)$S "
 }
 PS1='$(prompt)'
 

@@ -16,11 +16,6 @@ shopt -s checkwinsize
 # enable "**" globbing
 shopt -s globstar
 
-# set variable identifying the chroot you work in (used in the prompt below)
-if [ -z "${debian_chroot:-}" ] && [ -r /etc/debian_chroot ]; then
-	debian_chroot=$(cat /etc/debian_chroot)
-fi
-
 if_err() {
 	local e=$?
 	if [ $e -ne 0 ]; then
