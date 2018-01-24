@@ -59,3 +59,41 @@ apt() {
 		;;
 	esac
 }
+
+# pretty print working directory
+ppwd() {
+	local dir="${PWD}/" n="${1:-255}"
+
+	case "$dir" in
+	"${HOME}/"*)
+		dir="~/${dir#$HOME/}"
+		;;
+	esac
+	dir="${dir%/}"
+
+	if test "${#dir}" -gt "$n"; then
+		n=$(( n - 3 ))
+		while test "${#dir}" -gt "$n"; do
+			dir="${dir#?}"
+		done
+		dir="...${dir}"
+	fi
+
+	echo "$dir"
+}
+
+prompt() {
+	local e=$?  title="" S='$'
+	test "$e" -eq 0 && e=""
+	#test "$USER_ID" -eq 0 && S='#'
+
+	echo -n "${e:+$e|}${USER}@${HOSTNAME%%.*}:$(ppwd 28)$S "
+}
+PS1='$(prompt)'
+
+#case "$TERM" in
+#xterm*|rxvt*|st*|screen*|tmux*|dvtm*)
+#	title="${USER}@${HOSTNAME%%.*}: ${dir}"
+#	title=$'\001\r\001\e]0;'"$title"$'\a\001'
+#	;;
+#esac
