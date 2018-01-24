@@ -1,5 +1,5 @@
-alias ls='LC_COLLATE=C ls --time-style=long-iso -A -1'
-alias lc='LC_COLLATE=C command ls --time-style=long-iso -A'
+alias ls='LC_COLLATE=C ls -A -1'
+alias lc='LC_COLLATE=C command ls -A'
 alias l='lc -p'
 alias la='ls'
 alias ll='ls -la'
