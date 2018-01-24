@@ -1,7 +1,7 @@
 if test -z "$ENV"; then
 	test -f "$HOME/.profile" && . "$HOME/.profile"
 fi
-test -f "${ENV:=$HOME/.shinit}" && . "$ENV"
+. "${ENV:-$HOME/.shinit}"
 
 # history settings
 shopt -s histappend
