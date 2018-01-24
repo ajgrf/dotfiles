@@ -5,8 +5,8 @@ test -f "${ENV:=$HOME/.shinit}" && . "$ENV"
 
 # history settings
 shopt -s histappend
-HISTSIZE=1000
-HISTFILESIZE=2000
+HISTSIZE=10000
+HISTFILESIZE=20000
 HISTCONTROL=ignoreboth
 HISTIGNORE='l:l[salhc]:cd:clear:reset'
 
