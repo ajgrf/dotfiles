@@ -6,6 +6,24 @@ fi
 HISTFILE="$HOME/.mksh_history"
 HISTSIZE=10000
 
+prompt() {
+	local e="$?"  dir="${PWD}/" title="" S='$'
+	test "$e" -eq 0 && e=""
+	dir="${dir/#$HOME\//\~/}"; dir="${dir%/}"
+	test "$USER_ID" -eq 0 && S='#'
+
+	case "$TERM" in
+	xterm*|rxvt*|st*|screen*|tmux*|dvtm*)
+		title="${USER}@${HOSTNAME%%.*}: ${dir}"
+		title=$'\001\r\001\e]0;'"$title"$'\a\001'
+		;;
+	esac
+
+	test "${#dir}" -gt 28 && dir="...${dir:(-25)}"
+	echo -n "${title}${e:+$e|}${debian_chroot:+($debian_chroot)}${USER}@${HOSTNAME%%.*}:${dir}$S "
+}
+PS1='$(prompt)'
+
 bind    ^L='clear-screen'
 bind -m ^U='^[0^K'
 bind -m ^[^M='^E |less^M'
