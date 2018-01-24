@@ -6,7 +6,7 @@ alias ll='ls -la'
 alias lh='ll -h'
 
 if ! type doas >/dev/null 2>&1; then
-	alias doas='sudo -p "doas (%u@%H) password: "'
+	alias doas='sudo -p "doas (%u@%h) password: "'
 fi
 
 alias ag='ag --nocolor --nogroup'
