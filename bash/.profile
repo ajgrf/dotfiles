@@ -1,3 +1,7 @@
+if test -e "${XDG_CONFIG_HOME:-$HOME/.config}/user-dirs.dirs"; then
+	. "${XDG_CONFIG_HOME:-$HOME/.config}/user-dirs.dirs"
+fi
+
 export EDITOR="nvim"
 export ENV="$HOME/.shinit"
 export GOBIN="$HOME/.local/bin"
