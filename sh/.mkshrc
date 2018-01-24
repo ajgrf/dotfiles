@@ -1,0 +1,11 @@
+if test -z "$ENV"; then
+	test -f "$HOME/.profile" && . "$HOME/.profile"
+	test -f "${ENV:=$HOME/.shinit}" && . "$ENV"
+fi
+
+HISTFILE="$HOME/.mksh_history"
+HISTSIZE=10000
+
+bind    ^L='clear-screen'
+bind -m ^U='^[0^K'
+bind -m ^[^M='^E |less^M'
