@@ -54,7 +54,7 @@ prompt() {
 PS1='$(prompt)'
 
 #case "$TERM" in
-#xterm*|rxvt*|st*|screen*|tmux*|dvtm*)
+#xterm*|rxvt*|st*|screen*|tmux*)
 #	title="${USER}@${HOSTNAME%%.*}: ${dir}"
 #	title=$'\001\r\001\e]0;'"$title"$'\a\001'
 #	;;
