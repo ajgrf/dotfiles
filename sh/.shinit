@@ -1,3 +1,5 @@
+HISTSIZE=10000
+
 alias ls='LC_COLLATE=C ls -A -1'
 alias lc='LC_COLLATE=C command ls -A'
 alias l='lc -p'

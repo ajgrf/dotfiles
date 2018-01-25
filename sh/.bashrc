@@ -4,7 +4,6 @@ fi
 . "${ENV:-$HOME/.shinit}"
 
 shopt -s histappend
-HISTSIZE=10000
 HISTFILESIZE=20000
 HISTCONTROL=ignoreboth
 

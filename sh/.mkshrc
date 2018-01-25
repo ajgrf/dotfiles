@@ -4,7 +4,6 @@ if test -z "$ENV"; then
 fi
 
 HISTFILE="$HOME/.mksh_history"
-HISTSIZE=10000
 
 prompt() {
 	local e="$?"  dir="${PWD}/" title="" S='$'
