@@ -12,4 +12,3 @@ export LESS="--ignore-case --no-init --quit-if-one-screen --RAW-CONTROL-CHARS "
 export LESSHISTFILE=-
 export PATH="$HOME/bin:$HOME/.local/bin:$PATH"
 export TERMINFO_DIRS="$HOME/.local/share/terminfo"
-export USER="${USER:-$(id -un)}"
