@@ -10,5 +10,6 @@ export HOSTNAME="${HOSTNAME:-$(hostname)}"
 export LEDGER_FILE="${XDG_DOCUMENTS_DIR:-$HOME/Documents}/Finance/all.ledger"
 export LESS="--ignore-case --no-init --quit-if-one-screen --RAW-CONTROL-CHARS "
 export LESSHISTFILE=-
+export MANWIDTH=80
 export PATH="$HOME/bin:$HOME/.local/bin:$PATH"
 export TERMINFO_DIRS="$HOME/.local/share/terminfo"
