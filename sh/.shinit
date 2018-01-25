@@ -52,12 +52,11 @@ prompt() {
 }
 PS1='$(prompt)'
 
-#case "$TERM" in
-#xterm*|rxvt*|st*|screen*|tmux*)
-#	title="${USER}@${HOSTNAME%%.*}: ${dir}"
-#	title=$'\001\r\001\e]0;'"$title"$'\a\001'
-#	;;
-#esac
+case "$TERM" in
+xterm*|rxvt*|st*|screen*|tmux*)
+	printf '\e]0;%s\a' "${USER}@${HOSTNAME%%.*} ($0)"
+	;;
+esac
 
 case "$KSH_VERSION" in
 *LEGACY\ KSH*|*MIRBSD\ KSH*)
