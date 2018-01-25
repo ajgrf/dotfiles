@@ -46,7 +46,7 @@ ppwd() {
 prompt() {
 	local e=$?  title="" S='$'
 	test "$e" -eq 0 && e=""
-	#test "$USER_ID" -eq 0 && S='#'
+	test "${USER_ID:=$(id -u)}" -eq 0 && S='#'
 
 	echo -n "${e:+$e|}${USER}@${HOSTNAME%%.*}:$(ppwd 28)$S "
 }
