@@ -22,7 +22,6 @@ prompt() {
 	test "${#dir}" -gt 28 && dir="...${dir:(-25)}"
 	echo -n "${title}${e:+$e|}${USER}@${HOSTNAME%%.*}:${dir}$S "
 }
-PS1='$(prompt)'
 
 bind    ^L='clear-screen'
 bind -m ^U='^[0^K'
