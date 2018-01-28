@@ -48,8 +48,8 @@ URxvt*keysym.C-M-c:      builtin-string:
 URxvt*keysym.C-M-v:      builtin-string:
 URxvt*keysym.C-S-0x43:   eval:selection_to_clipboard
 URxvt*keysym.C-S-0x56:   eval:paste_clipboard
-!URxvt*keysym.C-Tab:      [27;5;9~
-!URxvt*keysym.S-C-Tab:    [27;6;9~
+!URxvt*keysym.C-Tab:      \033[27;5;9~
+!URxvt*keysym.S-C-Tab:    \033[27;6;9~
 URxvt*matcher.button:    1
 URxvt*perl-ext:          matcher
 URxvt*saveLines:         10000
