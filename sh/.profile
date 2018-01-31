@@ -13,3 +13,9 @@ export LESSHISTFILE=-
 export MANWIDTH=80
 export PATH="$HOME/bin:$HOME/.local/bin:$PATH"
 export TERMINFO_DIRS="$HOME/.local/share/terminfo"
+
+if test -e "$HOME/.nix-profile/etc/profile.d/nix.sh"; then
+	. "$HOME/.nix-profile/etc/profile.d/nix.sh"
+	export TERMINFO_DIRS="$HOME/.nix-profile/share/terminfo${TERMINFO_DIRS:+:}$TERMINFO_DIRS"
+	export XDG_DATA_DIRS="$HOME/.nix-profile/share${XDG_DATA_DIRS:+:}$XDG_DATA_DIRS"
+fi
