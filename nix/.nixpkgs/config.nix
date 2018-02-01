@@ -9,6 +9,7 @@ with import <nixpkgs> {};
 
     common = with pkgs; buildEnv {
       name = "common";
+      extraOutputsToInstall = [ "doc" "man" ];
       paths = [
         anki
 	goDev
@@ -28,6 +29,7 @@ with import <nixpkgs> {};
 
     nixosProfile = with pkgs; buildEnv {
       name = "nixosProfile";
+      extraOutputsToInstall = [ "doc" "man" ];
       paths = [
         common
 	alacritty
@@ -61,6 +63,7 @@ with import <nixpkgs> {};
 
     debianProfile = with pkgs; buildEnv {
       name = "debianProfile";
+      extraOutputsToInstall = [ "doc" "man" ];
       paths = [
         common
 	go-font
