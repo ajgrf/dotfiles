@@ -7,25 +7,64 @@ with import <nixpkgs> {};
       enableOfficialBranding = true;
     }) { };
 
-    all = with pkgs; buildEnv {
-      name = "all";
+    common = with pkgs; buildEnv {
+      name = "common";
       paths = [
         anki
-	firefoxBranded
 	goDev
-	go-font
 	hledger
 	lr
         mblaze
         neovim
 	newsboat
-        nix
-        python35Packages.youtube-dl
+        python36Packages.youtube-dl
         restic
 	ripgrep
         shfmt
         stack
         trash-cli
+      ];
+    };
+
+    nixosProfile = with pkgs; buildEnv {
+      name = "nixosProfile";
+      paths = [
+        common
+	alacritty
+	calibre
+	chromium
+	feh
+	ffmpeg
+	file
+	firefoxBranded
+	gitAndTools.gitFull
+	gnome3.gnome-mines
+	gnome-mpv
+	isync
+	jq
+	ledger
+	libreoffice
+	moreutils
+	mpv
+	pass
+	pdfshuffler
+	#quodlibet
+	rxvt_unicode-with-plugins
+	stow
+	syncthing
+	tmux
+	transmission_gtk
+	vim
+	xclip
+      ];
+    };
+
+    debianProfile = with pkgs; buildEnv {
+      name = "debianProfile";
+      paths = [
+        common
+	go-font
+	nix
       ];
     };
 
