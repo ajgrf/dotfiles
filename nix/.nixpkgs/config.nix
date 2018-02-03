@@ -12,15 +12,15 @@ with import <nixpkgs> {};
       extraOutputsToInstall = [ "doc" "man" ];
       paths = [
         anki
-	goDev
-	hledger
-	lr
+        goDev
+        hledger
+        lr
         mblaze
         neovim
-	newsboat
+        newsboat
         python36Packages.youtube-dl
         restic
-	ripgrep
+        ripgrep
         shfmt
         stack
         trash-cli
@@ -32,33 +32,33 @@ with import <nixpkgs> {};
       extraOutputsToInstall = [ "doc" "man" ];
       paths = [
         common
-	alacritty
-	calibre
-	chromium
-	entr
-	feh
-	ffmpeg
-	file
-	firefoxBranded
-	gitAndTools.gitFull
-	gnome3.gnome-mines
-	gnome-mpv
-	isync
-	jq
-	ledger
-	libreoffice
-	moreutils
-	mpv
-	pass
-	pdfshuffler
-	#quodlibet
-	rxvt_unicode-with-plugins
-	stow
-	syncthing
-	tmux
-	transmission_gtk
-	vim
-	xclip
+        alacritty
+        calibre
+        chromium
+        entr
+        feh
+        ffmpeg
+        file
+        firefoxBranded
+        gitAndTools.gitFull
+        gnome3.gnome-mines
+        gnome-mpv
+        isync
+        jq
+        ledger
+        libreoffice
+        moreutils
+        mpv
+        pass
+        pdfshuffler
+        #quodlibet
+        rxvt_unicode-with-plugins
+        stow
+        syncthing
+        tmux
+        transmission_gtk
+        vim
+        xclip
       ];
     };
 
@@ -67,21 +67,21 @@ with import <nixpkgs> {};
       extraOutputsToInstall = [ "doc" "man" ];
       paths = [
         common
-	go-font
-	nix
+        go-font
+        nix
       ];
     };
 
     goDev = with pkgs; buildEnv {
       name = "goDev";
       paths = [
-	delve
+        delve
         go
-	gocode
-	godef
-	#goimports
-	gotags
-	gotools
+        gocode
+        godef
+        #goimports
+        gotags
+        gotools
       ];
     };
   };
