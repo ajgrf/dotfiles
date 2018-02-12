@@ -21,6 +21,8 @@ alias open='xdg-open'
 alias reset='reset -Q'
 alias rg='rg --color never --no-heading'
 alias stack='stack --color never'
+alias nixos-rebuild='doas env NIXOS_CONFIG="${XDG_CONFIG_HOME:-$HOME/.config}'\
+'/nix/$HOSTNAME.nix" nixos-rebuild'
 
 mkcd() { mkdir -p "$@" && cd "$1"; }
 
