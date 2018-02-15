@@ -48,7 +48,10 @@ with import <nixpkgs> {};
         ledger
         libreoffice
         moreutils
+	mpc_cli
+	mpd
         mpv
+	ncmpc
         pass
         pdfshuffler
         #quodlibet
