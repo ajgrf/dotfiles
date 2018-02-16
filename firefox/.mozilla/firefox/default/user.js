@@ -1099,3 +1099,26 @@ user_pref("security.ssl3.dhe_dss_camellia_256_sha",		false);
 // PREF: Fallbacks due compatibility reasons
 user_pref("security.ssl3.rsa_aes_256_sha",			true); // 0x35
 user_pref("security.ssl3.rsa_aes_128_sha",			true); // 0x2f
+
+/******************************************************************************
+ * SECTION: My Preferences                                                    *
+ ******************************************************************************/
+
+// Set the default search engine to DuckDuckGo
+user_pref("browser.search.defaultenginename",                   "DuckDuckGo");
+user_pref("browser.search.order.1",                             "DuckDuckGo");
+user_pref("keyword.URL",                                        "https://duckduckgo.com/html/?q=!+");
+
+// Make address bar useful again
+user_pref("keyword.enabled",					true);
+user_pref("browser.urlbar.suggest.history",			true);
+
+// Re-enable history
+user_pref("places.history.enabled",				true);
+user_pref("privacy.clearOnShutdown.downloads",			false);
+user_pref("privacy.clearOnShutdown.history",			false);
+user_pref("privacy.clearOnShutdown.openWindows",		false);
+user_pref("browser.download.manager.retention",			2);
+
+// Disable DRM
+user_pref("media.eme.enabled",                                  false);
