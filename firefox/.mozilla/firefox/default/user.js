@@ -1122,3 +1122,6 @@ user_pref("browser.download.manager.retention",			2);
 
 // Disable DRM
 user_pref("media.eme.enabled",                                  false);
+
+// Re-enable SVG support
+user_pref("svg.disabled",                                       false);
