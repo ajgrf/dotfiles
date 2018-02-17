@@ -1115,6 +1115,7 @@ user_pref("browser.urlbar.suggest.history",			true);
 
 // Re-enable history
 user_pref("places.history.enabled",				true);
+user_pref("privacy.clearOnShutdown.cookies",  			false);
 user_pref("privacy.clearOnShutdown.downloads",			false);
 user_pref("privacy.clearOnShutdown.history",			false);
 user_pref("privacy.clearOnShutdown.openWindows",		false);
