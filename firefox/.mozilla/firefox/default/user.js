@@ -1109,6 +1109,9 @@ user_pref("browser.search.defaultenginename",                   "DuckDuckGo");
 user_pref("browser.search.order.1",                             "DuckDuckGo");
 user_pref("keyword.URL",                                        "https://duckduckgo.com/html/?q=!+");
 
+// Prevent Firefox from stealing focus
+user_pref("browser.tabs.loadDivertedInBackground",              true);
+
 // Make address bar useful again
 user_pref("keyword.enabled",					true);
 user_pref("browser.urlbar.suggest.history",			true);
