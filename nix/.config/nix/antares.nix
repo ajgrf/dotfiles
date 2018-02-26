@@ -46,6 +46,7 @@
   # $ nix-env -qaP | grep wget
   environment.systemPackages = with pkgs; [
     file
+    kdeApplications.okular
     vim
   ];
 
@@ -63,13 +64,17 @@
   # Enable CUPS to print documents.
   services.printing.enable = true;
 
+  hardware.bluetooth.enable = true;
+  hardware.pulseaudio.enable = true;
+
   # Enable the X11 windowing system.
   services.xserver = {
     enable = true;
     # layout = "us";
     # xkbOptions = "eurosign:e";
-    desktopManager.gnome3.enable = true;
-    displayManager.gdm = {
+    synaptics.enable = true;
+    desktopManager.plasma5.enable = true;
+    displayManager.sddm = {
       enable = true;
       autoLogin = {
         enable = true;
@@ -77,15 +82,6 @@
       };
     };
   };
-
-  environment.gnome3.excludePackages = with pkgs; [
-    epiphany
-    gnome3.accerciser
-    gnome3.evolution
-    gnome3.gnome-packagekit
-    gnome3.gnome-software
-    gnome3.totem
-  ];
 
   services.redshift = {
     enable = true;
