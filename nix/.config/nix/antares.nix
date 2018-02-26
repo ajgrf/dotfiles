@@ -78,7 +78,7 @@
   services.xserver = {
     enable = true;
     # layout = "us";
-    # xkbOptions = "eurosign:e";
+    xkbOptions = "shift:both_capslock_cancel,caps:ctrl_modifier,lv3:ralt_alt,compose:102";
     synaptics.enable = true;
     desktopManager.plasma5.enable = true;
     displayManager.sddm = {
