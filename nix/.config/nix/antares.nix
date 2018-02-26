@@ -28,8 +28,14 @@
     };
   };
 
-  networking.hostName = "antares"; # Define your hostname.
-  networking.networkmanager.enable = true;
+  networking = {
+    hostName = "antares";
+    networkmanager.enable = true;
+    firewall = {
+      allowedTCPPortRanges = [ { from = 1714; to = 1764; } ];
+      allowedUDPPortRanges = [ { from = 1714; to = 1764; } ];
+    };
+  };
 
   # Select internationalisation properties.
   i18n = {
@@ -46,6 +52,7 @@
   # $ nix-env -qaP | grep wget
   environment.systemPackages = with pkgs; [
     file
+    kdeconnect
     kdeApplications.okular
     vim
   ];
