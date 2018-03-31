@@ -1124,6 +1124,9 @@ user_pref("privacy.clearOnShutdown.history",			false);
 user_pref("privacy.clearOnShutdown.openWindows",		false);
 user_pref("browser.download.manager.retention",			2);
 
+// Disable auto-playing videos
+user_pref("media.autoplay.enabled",                             false);
+
 // Disable DRM
 user_pref("media.eme.enabled",                                  false);
 
