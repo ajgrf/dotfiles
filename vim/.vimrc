@@ -47,6 +47,7 @@ if v:progname !=# "vi"
   set path+=**
   set wildmenu
   set wildignorecase
+  set suffixes+=.go
 
   set backspace=2  " more powerful backspacing
   set mouse=a      " enable mouse support
@@ -70,6 +71,7 @@ if v:progname !=# "vi"
   autocmd FileType go setlocal tabstop=4 shiftwidth=4 nolist
   autocmd FileType haskell setlocal tabstop=8 expandtab shiftwidth=4 softtabstop=4
   autocmd FileType ledger setlocal tabstop=8 expandtab shiftwidth=4 softtabstop=4
+  autocmd FileType scheme setlocal tabstop=8 expandtab shiftwidth=2 softtabstop=2
   autocmd BufNewFile,BufRead *.json setlocal filetype=javascript expandtab shiftwidth=2 softtabstop=4
   autocmd BufNewFile,BufReadPost *.md set filetype=markdown
 
