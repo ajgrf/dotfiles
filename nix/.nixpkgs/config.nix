@@ -7,6 +7,14 @@ with import <nixpkgs> {};
       enableOfficialBranding = true;
     }) { };
 
+    stCustom = st.override {
+      conf = builtins.readFile ./st-config.h;
+      patches = [ (fetchurl {
+        url = "https://st.suckless.org/patches/solarized/st-no_bold_colors-0.7.diff";
+        sha256 = "2e8cdbeaaa79ed067ffcfdcf4c5f09fb5c8c984906cde97226d4dd219dda39dc";
+        }) ];
+    };
+
     common = with pkgs; buildEnv {
       name = "common";
       extraOutputsToInstall = [ "doc" "man" ];
@@ -59,6 +67,7 @@ with import <nixpkgs> {};
         poppler_utils
         #quodlibet
         rxvt_unicode-with-plugins
+        stCustom
         stow
         syncthing
         tmux
