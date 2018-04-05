@@ -45,6 +45,7 @@ with import <nixpkgs> {};
         alacritty
         calibre
         chromium
+        dmenu
         entr
         feh
         ffmpeg
