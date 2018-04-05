@@ -53,7 +53,7 @@ with import <nixpkgs> {};
         mpv
         ncmpc
         pass
-        pdfshuffler
+        poppler_utils
         #quodlibet
         rxvt_unicode-with-plugins
         stow
