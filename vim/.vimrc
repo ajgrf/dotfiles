@@ -8,12 +8,12 @@ if v:progname !=# "vi"
   call plug#begin('~/.vim/bundle')
   Plug '~/src/github.com/ajgrf/parchment'
   Plug 'tpope/vim-fugitive', {'tag': 'v2.2'}
-  Plug 'fatih/vim-go',       {'tag': 'v1.12'}
+  Plug 'fatih/vim-go',       {'tag': 'v1.17'}
   Plug 'rust-lang/rust.vim'
-  Plug 'tpope/vim-sensible', {'tag': 'v1.1'}
+  Plug 'tpope/vim-sensible', {'tag': 'v1.2'}
   Plug 'tpope/vim-eunuch',   {'tag': 'v1.1'}
   Plug 'tpope/vim-surround', {'tag': 'v2.1'}
-  Plug 'tpope/vim-repeat',   {'tag': 'v1.1'}
+  Plug 'tpope/vim-repeat',   {'tag': 'v1.2'}
   "Plug 'justinmk/vim-sneak', {'tag': '1.8.1'}
   Plug 'ervandew/supertab',  {'tag': '2.1'}
   Plug 'gerw/vim-HiLinkTrace'
