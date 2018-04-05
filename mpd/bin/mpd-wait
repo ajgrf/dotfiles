@@ -1,0 +1,31 @@
+#!/bin/sh
+set -e
+
+usage() {
+	fmt <<-EOF 1>&2
+		usage: mpd-wait [nsongs]
+
+		mpd-wait waits for nsongs (default: 1) songs to finish playing
+		in MPD before returning.  Use the MPD_HOST and MPD_PORT
+		environment variables to specify alternative server details.
+	EOF
+	exit 2
+}
+
+nsongs="$1"
+if [ $# -eq 0 ]; then
+	nsongs=1
+elif [ $# -gt 1 ]; then
+	usage
+elif ! [ "$nsongs" -eq 0 -o "$nsongs" -ne 0  2> /dev/null ]; then
+	# input is not an integer
+	usage
+elif [ "$nsongs" -lt 0 ]; then
+	usage
+elif [ "$nsongs" -eq 0 ]; then
+	exit 0
+fi
+
+for i in $(seq "$nsongs"); do
+	mpc current --wait > /dev/null
+done
