@@ -45,6 +45,8 @@ if v:progname !=# "vi"
   autocmd BufReadPost * if line("'\"") > 1 && line("'\"") <= line("$") | exe "normal! g'\"z." | endif
 
   set path+=**
+  set wildmenu
+  set wildignorecase
 
   set backspace=2  " more powerful backspacing
   set mouse=a      " enable mouse support
