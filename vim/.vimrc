@@ -43,8 +43,8 @@ if v:progname !=# "vi"
 
   " resume last cursor position
   autocmd BufReadPost * if line("'\"") > 1 && line("'\"") <= line("$") | exe "normal! g'\"z." | endif
-  " set cwd to that of the current file
-  autocmd BufEnter * silent! lcd %:p:h
+
+  set path+=**
 
   set backspace=2  " more powerful backspacing
   set mouse=a      " enable mouse support
@@ -70,9 +70,6 @@ if v:progname !=# "vi"
   autocmd FileType ledger setlocal tabstop=8 expandtab shiftwidth=4 softtabstop=4
   autocmd BufNewFile,BufRead *.json setlocal filetype=javascript expandtab shiftwidth=2 softtabstop=4
   autocmd BufNewFile,BufReadPost *.md set filetype=markdown
-
-  set path+=~/Wiki
-  set suffixesadd+=.md
 
   let g:go_fmt_command = "goimports"
 
