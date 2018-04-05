@@ -50,6 +50,7 @@ with import <nixpkgs> {};
         moreutils
         mpc_cli
         mpd
+        mpdris2
         mpv
         ncmpc
         pass
