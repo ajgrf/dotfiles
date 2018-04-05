@@ -40,6 +40,10 @@
   # Select internationalisation properties.
   i18n = {
     consoleFont = "ter-132n";
+    consoleColors = [
+      "161616" "a65353" "909653" "bd9c5a" "5f788c" "816b87" "668c88" "c5c5c5"
+      "4a4a4a" "cc6666" "b5bd68" "f0c674" "81a2be" "b294bb" "8abeb7" "f7f7f7"
+    ];
     consoleKeyMap = "us";
     consolePackages = with pkgs; [ terminus_font ];
     defaultLocale = "en_US.UTF-8";
