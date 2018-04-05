@@ -30,6 +30,10 @@ if v:progname !=# "vi"
   Plug 'enomsg/vim-haskellConcealPlus'
   call plug#end()
 
+  if $TERM ==# "xterm-256color"
+    set termguicolors
+  endif
+
   " syntax highlighting settings
   syntax on
   colorscheme parchment
