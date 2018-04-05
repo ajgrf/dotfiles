@@ -55,7 +55,10 @@
   # List packages installed in system profile. To search by name, run:
   # $ nix-env -qaP | grep wget
   environment.systemPackages = with pkgs; [
+    ark
     file
+    gwenview
+    kate
     kdeconnect
     kdeApplications.okular
     vim
@@ -63,6 +66,7 @@
 
   fonts.fonts = with pkgs; [
     go-font
+    noto-fonts
     wqy_microhei
     wqy_zenhei
   ];
