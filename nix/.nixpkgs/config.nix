@@ -12,8 +12,10 @@ with import <nixpkgs> {};
       extraOutputsToInstall = [ "doc" "man" ];
       paths = [
         anki
+        gnuapl
         goDev
         hledger
+        iosevka-bin
         lr
         mblaze
         neovim
