@@ -75,6 +75,9 @@
   # Enable CUPS to print documents.
   services.printing.enable = true;
 
+  # Enable cron service
+  services.cron.enable = true;
+
   hardware.bluetooth.enable = true;
   hardware.pulseaudio.enable = true;
 
