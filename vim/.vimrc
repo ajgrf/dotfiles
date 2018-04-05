@@ -42,7 +42,7 @@ if v:progname !=# "vi"
   filetype plugin indent on
 
   " resume last cursor position
-  autocmd BufReadPost * if line("'\"") > 1 && line("'\"") <= line("$") | exe "normal! g'\"" | endif
+  autocmd BufReadPost * if line("'\"") > 1 && line("'\"") <= line("$") | exe "normal! g'\"z." | endif
   " set cwd to that of the current file
   autocmd BufEnter * silent! lcd %:p:h
 
