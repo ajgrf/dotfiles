@@ -2,6 +2,7 @@ if test -e "${XDG_CONFIG_HOME:-$HOME/.config}/user-dirs.dirs"; then
 	. "${XDG_CONFIG_HOME:-$HOME/.config}/user-dirs.dirs"
 fi
 
+export APL_LIB_ROOT="${XDG_DATA_HOME:-$HOME/.local/share}/gnu-apl"
 export EDITOR="nvim"
 export ENV="$HOME/.shinit"
 export GOBIN="$HOME/.local/bin"
