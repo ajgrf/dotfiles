@@ -7,6 +7,7 @@ if v:progname !=# "vi"
   " load any plugin bundles
   call plug#begin('~/.vim/bundle')
   Plug '~/src/github.com/ajgrf/parchment'
+  Plug '~/src/github.com/ajgrf/sprinkles'
   Plug 'tpope/vim-fugitive', {'tag': 'v2.2'}
   Plug 'fatih/vim-go',       {'tag': 'v1.17'}
   Plug 'rust-lang/rust.vim'
@@ -20,7 +21,13 @@ if v:progname !=# "vi"
   Plug 'terryma/vim-multiple-cursors', {'tag': 'v2.2'}
   Plug 'cespare/vim-toml'
   "Plug 'neovimhaskell/haskell-vim'
-  Plug 'ledger/vim-ledger'
+  Plug 'ajgrf/vim-ledger'
+  "Plug 'jreybert/vimagit', {'tag': '1.7.2'}
+  "Plug 'ap/vim-css-color'
+  "Plug 'bhurlow/vim-parinfer', {'tag': 'v1.0.0'}
+  Plug 'jceb/vim-orgmode'
+  Plug 'tpope/vim-markdown'
+  Plug 'enomsg/vim-haskellConcealPlus'
   call plug#end()
 
   " syntax highlighting settings
