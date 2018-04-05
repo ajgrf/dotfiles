@@ -58,14 +58,12 @@
   # List packages installed in system profile. To search by name, run:
   # $ nix-env -qaP | grep wget
   environment.systemPackages = with pkgs; [
-    ark
     file
-    gwenview
-    kate
-    kdeconnect
-    kdeApplications.okular
     vim
   ];
+
+  # Add slock as a setuid program
+  programs.slock.enable = true;
 
   fonts.fonts = with pkgs; [
     go-font
@@ -93,14 +91,18 @@
     enable = true;
     # layout = "us";
     xkbOptions = "shift:both_capslock_cancel,caps:ctrl_modifier,lv3:ralt_alt,compose:102";
-    synaptics.enable = true;
-    desktopManager.plasma5.enable = true;
-    displayManager.sddm = {
-      enable = true;
-      autoLogin = {
-        enable = true;
-        user = "ajgrf";
-      };
+    libinput.enable = true;
+    displayManager = {
+      lightdm.enable = true;
+      session = [
+        { manage = "window";
+          name = "startdwm";
+          start = ''
+            $HOME/bin/startdwm &
+            waitPID=$!
+          '';
+        }
+      ];
     };
   };
 

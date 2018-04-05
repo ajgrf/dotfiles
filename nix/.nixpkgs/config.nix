@@ -7,6 +7,10 @@ with import <nixpkgs> {};
       enableOfficialBranding = true;
     }) { };
 
+    dwmCustom = dwm.override {
+      patches = [ ./dwm-ajgrf-6.1.diff ];
+    };
+
     stCustom = st.override {
       conf = builtins.readFile ./st-config.h;
       patches = [ (fetchurl {
@@ -46,6 +50,7 @@ with import <nixpkgs> {};
         calibre
         chromium
         dmenu
+        dwmCustom
         entr
         feh
         ffmpeg
