@@ -52,6 +52,9 @@
   # Set your time zone.
   time.timeZone = "America/Chicago";
 
+  # Add mksh as a shell
+  environment.shells = [ pkgs.mksh ];
+
   # List packages installed in system profile. To search by name, run:
   # $ nix-env -qaP | grep wget
   environment.systemPackages = with pkgs; [
