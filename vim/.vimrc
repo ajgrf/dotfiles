@@ -67,11 +67,12 @@ if v:progname !=# "vi"
 
   set backspace=indent,eol,start
   set mouse=a      " enable mouse support
-  set number
   set laststatus=1
   set autoindent
   set incsearch
   set cursorline
+
+  autocmd VimEnter,VimResized * if &columns > 85 | set number | set laststatus=2 | else | set nonumber | set laststatus=1 | endif
 
   set completeopt=menu,menuone,longest  " disable completion scratch window
   set guioptions+=c                     " popup blocker
