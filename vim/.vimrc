@@ -87,6 +87,12 @@ if v:progname !=# "vi"
   " disable folding by default
   set nofoldenable
 
+  xnoremap @ :<C-u>call ExecuteMacroOverVisualRange()<CR>
+  function! ExecuteMacroOverVisualRange()
+    echo "@".getcmdline()
+    execute ":'<,'>normal @".nr2char(getchar())
+  endfunction
+
   autocmd FileType vim setlocal foldmethod=marker tabstop=8 expandtab
     \ shiftwidth=2 softtabstop=2
   autocmd FileType go setlocal tabstop=4 shiftwidth=4 nolist
