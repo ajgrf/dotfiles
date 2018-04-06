@@ -110,8 +110,10 @@ if v:progname !=# "vi"
   autocmd FileType haskell setlocal tabstop=8 expandtab shiftwidth=2 softtabstop=2
   autocmd FileType scheme setlocal tabstop=8 expandtab shiftwidth=2 softtabstop=2
   autocmd BufNewFile,BufRead *.json setlocal filetype=javascript expandtab shiftwidth=2 softtabstop=2
-  autocmd BufNewFile,BufReadPost *.md set filetype=markdown
   autocmd BufNewFile,BufRead *.nix setlocal tabstop=8 expandtab shiftwidth=2 softtabstop=2
+  autocmd BufNewFile,BufReadPost *.md set filetype=markdown
+  autocmd FileType markdown setlocal spell
+  "autocmd FileType text setlocal spell
 
   let g:go_fmt_command = "goimports"
 
