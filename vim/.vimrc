@@ -49,9 +49,13 @@ if v:progname !=# "vi"
   set wildignorecase
   set suffixes+=.go
 
-  set backspace=2  " more powerful backspacing
+  set backspace=indent,eol,start
   set mouse=a      " enable mouse support
   set number
+  set laststatus=1
+  set autoindent
+  set incsearch
+  set cursorline
 
   set completeopt=menu,menuone,longest  " disable completion scratch window
   set guioptions+=c                     " popup blocker
