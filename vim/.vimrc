@@ -69,11 +69,12 @@ if v:progname !=# "vi"
   autocmd FileType vim setlocal foldmethod=marker tabstop=8 expandtab
     \ shiftwidth=2 softtabstop=2
   autocmd FileType go setlocal tabstop=4 shiftwidth=4 nolist
-  autocmd FileType haskell setlocal tabstop=8 expandtab shiftwidth=4 softtabstop=4
+  autocmd FileType haskell setlocal tabstop=8 expandtab shiftwidth=2 softtabstop=2
   autocmd FileType ledger setlocal tabstop=8 expandtab shiftwidth=4 softtabstop=4
   autocmd FileType scheme setlocal tabstop=8 expandtab shiftwidth=2 softtabstop=2
-  autocmd BufNewFile,BufRead *.json setlocal filetype=javascript expandtab shiftwidth=2 softtabstop=4
+  autocmd BufNewFile,BufRead *.json setlocal filetype=javascript expandtab shiftwidth=2 softtabstop=2
   autocmd BufNewFile,BufReadPost *.md set filetype=markdown
+  autocmd BufNewFile,BufRead *.nix setlocal tabstop=8 expandtab shiftwidth=2 softtabstop=2
 
   let g:go_fmt_command = "goimports"
 
