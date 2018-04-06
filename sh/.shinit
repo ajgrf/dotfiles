@@ -14,8 +14,7 @@ fi
 
 alias doch='eval doas $(fc -ln -1)'
 alias emacs='emacs -nw'
-alias feh='feh -FZD-10'
-alias feh1='feh --cycle-once'
+alias feh='feh -. -Z -B black -D -10'
 alias nb='newsboat -q'
 alias reset='reset -Q'
 alias rg='rg --color never --no-heading'
