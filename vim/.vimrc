@@ -34,6 +34,22 @@ if v:progname !=# "vi"
     set termguicolors
   endif
 
+  if executable('rg')
+    set grepprg=rg\ --color\ never\ --column
+    set grepformat=%f:%l:%c%m
+  endif
+
+  function! s:Grep(txt)
+    silent! execute 'grep! ' . a:txt
+    if len(getqflist())
+      copen
+    else
+      echo "No match found for " . a:txt
+    endif
+    redraw!
+  endfunction
+  command! -nargs=* -complete=file Grep :call s:Grep(<q-args>)
+
   " syntax highlighting settings
   syntax on
   colorscheme parchment
