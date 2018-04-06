@@ -13,10 +13,16 @@ with import <nixpkgs> {};
 
     stCustom = st.override {
       conf = builtins.readFile ./st-config.h;
-      patches = [ (fetchurl {
-        url = "https://st.suckless.org/patches/solarized/st-no_bold_colors-0.7.diff";
-        sha256 = "2e8cdbeaaa79ed067ffcfdcf4c5f09fb5c8c984906cde97226d4dd219dda39dc";
-        }) ];
+      patches = [ 
+        (fetchurl {
+          url = "https://st.suckless.org/patches/solarized/st-no_bold_colors-0.7.diff";
+          sha256 = "2e8cdbeaaa79ed067ffcfdcf4c5f09fb5c8c984906cde97226d4dd219dda39dc";
+        })
+        (fetchurl {
+          url = "https://st.suckless.org/patches/scrollback/st-scrollback-0.7.diff";
+          sha256 = "f721b15a5aa8d77a4b6b44713131c5f55e7fca04006bc0a3cb140ed51c14cfb6";
+        })
+      ];
     };
 
     common = with pkgs; buildEnv {
