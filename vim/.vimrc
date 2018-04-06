@@ -119,6 +119,11 @@ if v:progname !=# "vi"
 
   let g:plug_window = "new"
 
+  if $TERM ==# "linux"
+    colorscheme sprinkles
+    set nocursorline
+  endif
+
   finish
 
 endif
