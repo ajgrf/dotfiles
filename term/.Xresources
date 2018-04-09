@@ -71,6 +71,7 @@ XTerm*faceNameDoublesize:WenQuanYi Micro Hei Mono:size=11
 XTerm*geometry:          80x43
 XTerm*iconName:          Terminal
 XTerm*saveLines:         10000
+XTerm*scrollBar:         false
 XTerm*scrollKey:         true
 XTerm*scrollTtyOutput:   false
 *vt100.translations: #override \n\
