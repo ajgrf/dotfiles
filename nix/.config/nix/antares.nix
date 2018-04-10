@@ -77,6 +77,9 @@
   # Enable the OpenSSH daemon.
   # services.openssh.enable = true;
 
+  # Enable the libvirt service.
+  virtualisation.libvirtd.enable = true;
+
   # Enable CUPS to print documents.
   services.printing.enable = true;
 
@@ -117,7 +120,7 @@
   # Define a user account. Don't forget to set a password with ‘passwd’.
   users.extraUsers.ajgrf = {
     description = "Alex Griffin";
-    extraGroups = [ "wheel" "networkmanager" ];
+    extraGroups = [ "wheel" "networkmanager" "libvirtd" ];
     isNormalUser = true;
     shell = pkgs.mksh;
     uid = 1000;
