@@ -95,17 +95,12 @@
     # layout = "us";
     xkbOptions = "shift:both_capslock_cancel,caps:ctrl_modifier,lv3:ralt_alt,compose:102";
     libinput.enable = true;
-    displayManager = {
-      lightdm.enable = true;
-      session = [
-        { manage = "window";
-          name = "startdwm";
-          start = ''
-            $HOME/bin/startdwm &
-            waitPID=$!
-          '';
-        }
-      ];
+    displayManager.lightdm = {
+      enable = true;
+      autoLogin = {
+        enable = true;
+        user = "ajgrf";
+      };
     };
   };
 
