@@ -6,6 +6,9 @@
 # filename template
 --output %(title)s.%(ext)s
 
+# avoid special characters in filenames
+--restrict-filenames
+
 # dump metadata for resuming download later
 --write-info-json
 
