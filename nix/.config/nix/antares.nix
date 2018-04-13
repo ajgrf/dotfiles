@@ -104,14 +104,6 @@
     };
   };
 
-  services.redshift = {
-    enable = true;
-    latitude = "44.78";
-    longitude = "-93.27";
-    brightness.day = "1.0";
-    brightness.night = "0.7";
-  };
-
   # Define a user account. Don't forget to set a password with ‘passwd’.
   users.extraUsers.ajgrf = {
     description = "Alex Griffin";

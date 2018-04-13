@@ -78,6 +78,7 @@ with import <nixpkgs> {};
         pass
         poppler_utils
         #quodlibet
+        redshift
         rxvt_unicode-with-plugins
         stCustom
         stow
