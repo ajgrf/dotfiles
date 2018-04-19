@@ -8,26 +8,16 @@ if v:progname !=# "vi"
   call plug#begin('~/.vim/bundle')
   Plug '~/src/github.com/ajgrf/parchment'
   Plug '~/src/github.com/ajgrf/sprinkles'
-  Plug 'tpope/vim-fugitive', {'tag': 'v2.2'}
+  Plug '~/src/github.com/ajgrf/vim-ledger'
+  "Plug 'ap/vim-css-color'
+  Plug 'cespare/vim-toml'
   Plug 'fatih/vim-go',       {'tag': 'v1.17'}
-  Plug 'rust-lang/rust.vim'
+  Plug 'gerw/vim-HiLinkTrace'
+  Plug 'tpope/vim-fugitive', {'tag': 'v2.2'}
+  Plug 'tpope/vim-markdown'
   Plug 'tpope/vim-sensible', {'tag': 'v1.2'}
-  Plug 'tpope/vim-eunuch',   {'tag': 'v1.1'}
   Plug 'tpope/vim-surround', {'tag': 'v2.1'}
   Plug 'tpope/vim-repeat',   {'tag': 'v1.2'}
-  "Plug 'justinmk/vim-sneak', {'tag': '1.8.1'}
-  Plug 'ervandew/supertab',  {'tag': '2.1'}
-  Plug 'gerw/vim-HiLinkTrace'
-  Plug 'terryma/vim-multiple-cursors', {'tag': 'v2.2'}
-  Plug 'cespare/vim-toml'
-  "Plug 'neovimhaskell/haskell-vim'
-  Plug 'ajgrf/vim-ledger'
-  "Plug 'jreybert/vimagit', {'tag': '1.7.2'}
-  "Plug 'ap/vim-css-color'
-  "Plug 'bhurlow/vim-parinfer', {'tag': 'v1.0.0'}
-  Plug 'jceb/vim-orgmode'
-  Plug 'tpope/vim-markdown'
-  Plug 'enomsg/vim-haskellConcealPlus'
   call plug#end()
 
   if $TERM ==# "xterm-256color"
