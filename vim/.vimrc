@@ -20,13 +20,18 @@ if v:progname !=# "vi"
   Plug 'tpope/vim-repeat',   {'tag': 'v1.2'}
   call plug#end()
 
-  if $TERM ==# "xterm-256color"
-    set termguicolors
-  endif
-
   " syntax highlighting settings
   syntax on
-  colorscheme parchment
+  if $TERM ==# "linux"
+    colorscheme sprinkles
+  else
+    colorscheme parchment
+    set cursorline
+    " use 24-bit true color support if available
+    if $COLORTERM ==# "truecolor"
+      set termguicolors
+    endif
+  endif
 
   " enable loading plugins and indent rules based on filetype
   filetype plugin indent on
@@ -44,7 +49,6 @@ if v:progname !=# "vi"
   set laststatus=1
   set autoindent
   set incsearch
-  set cursorline
 
   autocmd VimEnter,VimResized * if &columns > 85 | set number | set laststatus=2 | else | set nonumber | set laststatus=1 | endif
 
@@ -92,11 +96,6 @@ if v:progname !=# "vi"
   let g:go_fmt_command = "goimports"
 
   let g:plug_window = "new"
-
-  if $TERM ==# "linux"
-    colorscheme sprinkles
-    set nocursorline
-  endif
 
   finish
 
