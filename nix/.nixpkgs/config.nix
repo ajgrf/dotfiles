@@ -31,7 +31,6 @@ with import <nixpkgs> {};
       paths = [
         anki
         gnuapl
-        goDev
         hledger
         iosevka-bin
         lr
@@ -75,6 +74,9 @@ with import <nixpkgs> {};
         mpdris2
         mpv
         ncmpc
+        pamix
+        pamixer
+        pandoc
         pass
         poppler_utils
         #quodlibet
@@ -86,7 +88,11 @@ with import <nixpkgs> {};
         tmux
         transmission_gtk
         vim
+        virtmanager
         xclip
+        xdotool
+        xorg.xbacklight
+        zathura
       ];
     };
 
