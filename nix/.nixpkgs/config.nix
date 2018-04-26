@@ -3,10 +3,6 @@ with import <nixpkgs> {};
 {
   packageOverrides = pkgs: rec {
 
-    firefoxBranded = wrapFirefox (firefox-unwrapped.override {
-      enableOfficialBranding = true;
-    }) { };
-
     dwmCustom = dwm.override {
       patches = [ ./dwm-ajgrf-6.1.diff ];
     };
@@ -60,7 +56,7 @@ with import <nixpkgs> {};
         feh
         ffmpeg
         file
-        firefoxBranded
+        firefox
         gitAndTools.gitFull
         gnome3.gnome-mines
         gnome-mpv
