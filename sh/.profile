@@ -13,7 +13,8 @@ export LESS="--ignore-case --no-init --quit-if-one-screen --RAW-CONTROL-CHARS "
 export LESSHISTFILE=-
 export MANPAGER=less
 export MANWIDTH=80
-export PATH="$HOME/bin:$HOME/.local/bin:$PATH"
+export PLAN9="$HOME/.local/lib/plan9"
+export PATH="$HOME/bin:$HOME/.local/bin:$PATH:$PLAN9/bin"
 export TERMINFO_DIRS="$HOME/.local/share/terminfo"
 
 if test -e "$HOME/.nix-profile/etc/profile.d/nix.sh"; then
