@@ -2,7 +2,7 @@
 set -e
 
 usage() {
-	fmt <<-EOF 1>&2
+	cat <<-EOF 1>&2
 		usage: mpd-wait [nsongs]
 
 		mpd-wait waits for nsongs (default: 1) songs to finish playing
@@ -12,20 +12,17 @@ usage() {
 	exit 2
 }
 
-nsongs="$1"
-if [ $# -eq 0 ]; then
-	nsongs=1
-elif [ $# -gt 1 ]; then
+nsongs=1
+if test "$1" -eq 0 -o "$1" -ne 0 2>/dev/null; then
+	nsongs="$1"
+	shift
+elif test $# -gt 0; then
 	usage
-elif ! [ "$nsongs" -eq 0 -o "$nsongs" -ne 0  2> /dev/null ]; then
-	# input is not an integer
-	usage
-elif [ "$nsongs" -lt 0 ]; then
-	usage
-elif [ "$nsongs" -eq 0 ]; then
-	exit 0
 fi
 
-for i in $(seq "$nsongs"); do
+i=1
+while test $i -le $nsongs; do
 	mpc current --wait > /dev/null
+	i=$((i + 1))
 done
+unset i
