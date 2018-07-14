@@ -15,6 +15,7 @@ export MANPAGER=less
 export MANWIDTH=80
 export PLAN9="$HOME/.local/lib/plan9"
 export PATH="$HOME/bin:$HOME/.local/bin:$PATH:$PLAN9/bin"
+export STEWPKGS="$HOME/src/github.com/ajgrf/stewpkgs"
 export TERMINFO_DIRS="$HOME/.local/share/terminfo"
 
 if test -e "$HOME/.nix-profile/etc/profile.d/nix.sh"; then
