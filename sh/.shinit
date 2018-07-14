@@ -23,6 +23,7 @@ alias nixos-rebuild='doas env NIXOS_CONFIG="${XDG_CONFIG_HOME:-$HOME/.config}'\
 '/nix/$HOSTNAME.nix" nixos-rebuild'
 
 mkcd() { mkdir -p "$@" && cd "$1"; }
+mq() { mpv --no-terminal --force-window "$@" & }
 
 # pretty print working directory
 ppwd() {
