@@ -13,6 +13,7 @@ export LESS="--ignore-case --no-init --quit-if-one-screen --RAW-CONTROL-CHARS "
 export LESSHISTFILE=-
 export MANPAGER=less
 export MANWIDTH=80
+export NO_COLOR=1
 export PLAN9="$HOME/.local/lib/plan9"
 export PATH="$HOME/bin:$HOME/.local/bin:$PATH:$PLAN9/bin"
 export STEWPKGS="$HOME/src/github.com/ajgrf/stewpkgs"
