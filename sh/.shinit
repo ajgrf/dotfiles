@@ -62,6 +62,12 @@ xterm*|rxvt*|st*|screen*|tmux*)
 	;;
 esac
 
+if test "$PWD" != "$HOME"; then
+	echo "${PWD}:"
+	l -a
+	echo
+fi
+
 case "$KSH_VERSION" in
 *LEGACY\ KSH*|*MIRBSD\ KSH*)
 	. "$HOME/.mkshrc"
