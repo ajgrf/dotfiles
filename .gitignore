@@ -1,1 +1,4 @@
-/.stowrc
+/crontab
+/mail/mbsyncrc
+/mail/msmtprc
+/mail/private.muttrc
