@@ -91,6 +91,7 @@ if v:progname !=# "vi"
   autocmd BufNewFile,BufRead *.nix setlocal tabstop=8 expandtab shiftwidth=2 softtabstop=2
   autocmd BufNewFile,BufReadPost *.md set filetype=markdown
   autocmd FileType markdown setlocal spell linebreak
+  autocmd FileType mail setlocal formatoptions=nawrtcq spell textwidth=72
   "autocmd FileType text setlocal spell
 
   let g:go_fmt_command = "goimports"
