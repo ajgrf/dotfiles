@@ -1,0 +1,35 @@
+# UI Colors
+color error      red           default
+color indicator  brightwhite   blue
+color markers    brightcyan    default
+color message    default       default
+color normal     default       default
+color prompt     default       default
+color search     brightblack   default
+color status     default       color14
+color tree       default       default
+color index      brightblack   default  "~U"
+color index      red           default  "~F"
+color index      brightred     default  "~F~U"
+color index      yellow        default  "~D"
+color index      brightyellow  default  "~D~U"
+
+color sidebar_indicator brightblack white
+color sidebar_new brightblack  default
+
+# Pager Colors
+color attachment magenta       default
+color hdrdefault default       default
+color header     blue          default  "^(to|from|date):"
+color header     brightblack   color8   "^subject:"
+color quoted1    green         default
+color quoted2    yellow        default
+color quoted3    blue          default
+color quoted4    green         default
+color quoted5    yellow        default
+color quoted6    blue          default
+color quoted7    green         default
+color quoted8    yellow        default
+color quoted     blue          default
+color signature  default       default
+color tilde      default       default

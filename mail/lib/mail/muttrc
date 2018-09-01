@@ -1,0 +1,51 @@
+source "$HOME/lib/mail/private.muttrc"
+source "$HOME/lib/mail/colors.muttrc"
+
+# Composing
+set autoedit = yes
+set edit_headers = yes
+set forward_format = "Fwd: %s"
+set include = yes
+set reply_to = yes
+set reverse_name = yes
+set sendmail = "msmtp -C $HOME/lib/mail/msmtprc"
+set signature = "echo '$realname\n' |"
+set sig_on_top = yes
+set use_envelope_from = yes
+set user_agent = no
+
+# Sidebar
+set mail_check_stats = yes
+set sidebar_format = "%B%?F? [%F]?%* %?N?%N?"
+set sidebar_new_mail_only = yes
+set sidebar_visible = yes
+set sidebar_width = 12
+
+# Viewing
+auto_view text/html
+set index_format = "%4C %Z %{%b %d} %-15.15L %s"
+set mailcap_path = ~/lib/mail/mailcap
+set sort_aux = reverse-last-date-received
+set sort = threads
+
+# Prefer plain text mail to HTML mail, except for addresses in
+# the forcehtml group.
+message-hook '%f forcehtml' 'unalternative_order text/plain text/html'
+message-hook '! %f forcehtml' 'alternative_order text/plain text/html'
+
+# Shortcuts
+bind pager j      next-line
+bind pager k      previous-line
+bind pager <down> next-line
+bind pager <up>   previous-line
+bind pager \Cd    half-down
+bind pager \Cu    half-up
+bind pager \Cf    next-page
+bind pager \Cb    previous-page
+bind pager g      top
+bind pager G      bottom
+bind index,pager \Cp sidebar-prev
+bind index,pager \Cn sidebar-next
+bind index,pager \Co sidebar-open
+macro index,pager B |urlview\n
+macro index,pager a ":set confirmappend=no delete=yes\n<tag-prefix><save-message>=Archive\n<sync-mailbox>:set confirmappend=yes delete=ask-yes\n" "Archive"
