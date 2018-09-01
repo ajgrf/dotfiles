@@ -13,14 +13,11 @@ if ! type doas >/dev/null 2>&1; then
 fi
 
 alias doch='eval doas $(fc -ln -1)'
-alias emacs='emacs -nw'
 alias feh='feh -. -Z -B black -D -10'
 alias nb='newsboat -q'
 alias reset='reset -Q'
 alias rg='rg --color never --no-heading'
 alias stack='stack --color never'
-alias nixos-rebuild='doas env NIXOS_CONFIG="${XDG_CONFIG_HOME:-$HOME/.config}'\
-'/nix/$HOSTNAME.nix" nixos-rebuild'
 
 mkcd() { mkdir -p -- "$@" && cd -- "$1"; }
 mq() { mpv --no-terminal --force-window -- "$@" & }
