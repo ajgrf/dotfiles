@@ -77,7 +77,7 @@ XTerm*scrollBar:         false
 XTerm*scrollKey:         true
 XTerm*scrollTtyOutput:   false
 XTerm*charClass:         33-126:48
-*vt100.translations: #override \n\
+*VT100.translations: #override \n\
 	Ctrl ~Shift <Key>Tab: string(0x1b) string("[27;5;9~") \n\
 	Ctrl Shift <Key>Tab: string(0x1b) string("[27;6;9~") \n\
 	Ctrl Shift <KeyPress> C: copy-selection(CLIPBOARD) \n\
