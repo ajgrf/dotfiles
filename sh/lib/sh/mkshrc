@@ -1,6 +1,6 @@
 if test -z "$ENV"; then
 	. "$HOME/.profile"
-	. "${ENV:-$HOME/.shinit}"
+	. "${ENV:-$HOME/lib/sh/shinit}"
 fi
 
 HISTFILE="$HOME/.mksh_history"

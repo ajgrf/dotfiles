@@ -67,9 +67,9 @@ fi
 
 case "$KSH_VERSION" in
 *LEGACY\ KSH*|*MIRBSD\ KSH*)
-	. "$HOME/.mkshrc"
+	. "$HOME/lib/sh/mkshrc"
 	;;
 *PD\ KSH*)
-	. "$HOME/.kshrc"
+	. "$HOME/lib/sh/kshrc"
 	;;
 esac
