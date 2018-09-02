@@ -1,6 +1,6 @@
 # UI Colors
 color error      red           default
-color indicator  brightwhite   blue
+color indicator  brightcolor15 blue
 color markers    brightcyan    default
 color message    default       default
 color normal     default       default

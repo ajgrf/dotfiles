@@ -27,6 +27,7 @@ set index_format = "%4C %Z %{%b %d} %-15.15L %s"
 set mailcap_path = ~/lib/mail/mailcap
 set sort_aux = reverse-last-date-received
 set sort = threads
+set ts_enabled = yes
 
 # Prefer plain text mail to HTML mail, except for addresses in
 # the forcehtml group.
