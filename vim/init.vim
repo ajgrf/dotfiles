@@ -20,6 +20,7 @@ if v:progname !=# "vi"
   Plug 'tpope/vim-repeat',   {'tag': 'v1.2'}
   Plug 'jceb/vim-orgmode',   {'tag': 'v0.6.0'}
   Plug 'tpope/vim-speeddating'
+  Plug 'jamessan/vim-gnupg', {'tag': 'v2.6.1'}
   call plug#end()
 
   set title
@@ -32,9 +33,9 @@ if v:progname !=# "vi"
     colorscheme parchment
     set cursorline
     " use 24-bit true color support if available
-    if $COLORTERM ==# "truecolor"
-      set termguicolors
-    endif
+    "if $COLORTERM ==# "truecolor"
+      "set termguicolors
+    "endif
   endif
 
   " enable loading plugins and indent rules based on filetype
