@@ -102,6 +102,11 @@ if v:progname !=# "vi"
 
   let g:plug_window = "new"
 
+  " use workman bindings if found
+  if filereadable($HOME . "/.workman/vimrc")
+    source ~/.workman/vimrc
+  endif
+
   finish
 
 endif
