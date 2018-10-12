@@ -1,5 +1,6 @@
 source "$HOME/lib/mail/private.muttrc"
 source "$HOME/lib/mail/colors.muttrc"
+source "test -f $HOME/.workman/muttrc && cat $HOME/.workman/muttrc |"
 
 # Composing
 set autoedit = yes
