@@ -1,0 +1,14 @@
+color article           default default
+color background        default default
+color info              default color14
+color listnormal        default default
+color listnormal_unread default default bold
+color listfocus         blue    color15 bold reverse
+color listfocus_unread  blue    color15 bold reverse
+search-highlight-colors black   color11
+
+highlight article "^(Feed|Link|Date|Author):.*" blue default
+highlight article "^Title:.*"                black   color8  bold
+highlight article "https?://[^ ]+"           blue    default underline
+highlight article "\\[[0-9]+\\]"             cyan    default bold
+highlight article "\\[image\\ [0-9]+\\]"     magenta color13

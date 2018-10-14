@@ -15,6 +15,7 @@ fi
 alias doch='eval doas $(fc -ln -1)'
 alias feh='feh -. -Z -B black -D -10'
 alias nb='newsboat -q'
+alias pb='podboat'
 alias reset='reset -Q'
 alias rg='rg --color never --no-heading'
 alias stack='stack --color never'

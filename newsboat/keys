@@ -1,0 +1,54 @@
+bind-key j next            feedlist
+bind-key k prev            feedlist
+bind-key J next-unread     feedlist
+bind-key j next            articlelist
+bind-key k prev            articlelist
+bind-key j next            articlelist
+bind-key k prev            articlelist
+bind-key J next-feed       articlelist
+bind-key K prev-feed       articlelist
+bind-key j down            article
+bind-key k up              article
+bind-key j down            podbeuter
+bind-key k up              podbeuter
+
+bind-key o sort            feedlist
+bind-key o sort            articlelist
+bind-key O rev-sort        feedlist
+bind-key O rev-sort        articlelist
+bind-key b open-in-browser feedlist
+bind-key b open-in-browser articlelist
+bind-key b open-in-browser article
+bind-key B open-in-browser-and-mark-read articlelist
+bind-key g home            feedlist
+bind-key g home            articlelist
+bind-key g home            article
+bind-key g home            podbeuter
+bind-key G end             feedlist
+bind-key G end             articlelist
+bind-key G end             article
+bind-key G end             podbeuter
+bind-key ENTER pb-download podbeuter
+
+include "~/.workman/newsboat.config"
+
+bind-key n next            feedlist
+bind-key e prev            feedlist
+bind-key N next-unread     feedlist
+bind-key n next            articlelist
+bind-key e prev            articlelist
+bind-key n next            articlelist
+bind-key e prev            articlelist
+bind-key N next-feed       articlelist
+bind-key E prev-feed       articlelist
+bind-key n down            article
+bind-key e up              article
+bind-key n down            podbeuter
+bind-key e up              podbeuter
+
+bind-key o sort            feedlist
+bind-key o sort            articlelist
+bind-key O rev-sort        feedlist
+bind-key O rev-sort        articlelist
+bind-key l toggle-show-read-feeds feedlist
+bind-key l toggle-show-read-feeds articlelist
