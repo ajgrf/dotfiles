@@ -1,6 +1,5 @@
 source "$HOME/lib/mail/private.muttrc"
 source "$HOME/lib/mail/colors.muttrc"
-source "test -f $HOME/.workman/muttrc && cat $HOME/.workman/muttrc |"
 
 # Composing
 set autoedit = yes
@@ -51,3 +50,10 @@ bind index,pager \Cn sidebar-next
 bind index,pager \Co sidebar-open
 macro index,pager B |urlview\n
 macro index,pager a ":set confirmappend=no delete=yes\n<tag-prefix><save-message>=Archive\n<sync-mailbox>:set confirmappend=yes delete=ask-yes\n" "Archive"
+
+# Workman Shortcuts
+source "$HOME/.workman/muttrc"
+bind pager n      next-line
+bind pager e      previous-line
+bind pager N      next-undeleted
+bind pager E      previous-undeleted
