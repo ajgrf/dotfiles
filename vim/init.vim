@@ -13,10 +13,10 @@ if v:progname !=# "vi"
   Plug 'cespare/vim-toml'
   Plug 'fatih/vim-go',       {'tag': 'v1.18'}
   Plug 'gerw/vim-HiLinkTrace'
-  Plug 'tpope/vim-fugitive', {'tag': 'v2.2'}
+  "Plug 'tpope/vim-fugitive', {'tag': 'v2.2'}
   Plug 'tpope/vim-markdown'
   Plug 'tpope/vim-sensible', {'tag': 'v1.2'}
-  Plug 'tpope/vim-surround', {'tag': 'v2.1'}
+  "Plug 'tpope/vim-surround', {'tag': 'v2.1'}
   Plug 'tpope/vim-repeat',   {'tag': 'v1.2'}
   Plug 'jceb/vim-orgmode',   {'tag': 'v0.6.0'}
   Plug 'tpope/vim-speeddating'
