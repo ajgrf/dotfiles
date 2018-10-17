@@ -7,7 +7,7 @@ export BROWSER="firefox"
 export EDITOR="nvim"
 export ENV="$HOME/lib/sh/shinit"
 export GOBIN="$HOME/.local/bin"
-export GOPATH="${XDG_CACHE_HOME:-$HOME/.cache}/go:$HOME"
+export GOPATH="${XDG_CACHE_HOME:-$HOME/.cache}/go"
 export HOSTNAME="${HOSTNAME:-$(hostname)}"
 export LEDGER_FILE="${XDG_DOCUMENTS_DIR:-$HOME/Documents}/Finance/all.ledger"
 export LESS="--ignore-case --no-init --quit-if-one-screen --RAW-CONTROL-CHARS "
@@ -18,7 +18,7 @@ export MPV_HOME="$HOME/lib/mpv"
 export NO_COLOR=1
 export PLAN9="$HOME/.local/lib/plan9"
 export PATH="$HOME/bin:$HOME/.local/bin:$PATH:$PLAN9/bin"
-export STEWPKGS="$HOME/src/github.com/ajgrf/stewpkgs"
+export STEWPKGS="$HOME/src/stewpkgs"
 export TERMINFO_DIRS="$HOME/.local/share/terminfo"
 
 if test -e "$HOME/.nix-profile/etc/profile.d/nix.sh"; then

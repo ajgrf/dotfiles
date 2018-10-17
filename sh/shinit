@@ -1,4 +1,4 @@
-CDPATH=":$HOME:$HOME/src:$HOME/src/github.com/ajgrf"
+CDPATH=":$HOME:$HOME/src"
 HISTSIZE=10000
 
 alias ls='LC_COLLATE=C ls -A -1'

@@ -6,9 +6,9 @@ if v:progname !=# "vi"
 
   " load any plugin bundles
   call plug#begin('~/.vim/bundle')
-  Plug '~/src/github.com/ajgrf/parchment'
-  Plug '~/src/github.com/ajgrf/sprinkles'
-  Plug '~/src/github.com/ajgrf/vim-ledger'
+  Plug '~/src/parchment'
+  Plug '~/src/sprinkles'
+  Plug 'ajgrf/vim-ledger'
   "Plug 'ap/vim-css-color'
   Plug 'cespare/vim-toml'
   Plug 'fatih/vim-go',       {'tag': 'v1.18'}
