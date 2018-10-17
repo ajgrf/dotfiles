@@ -64,6 +64,7 @@ with import <nixpkgs> {};
         pandoc
         (pass.withExtensions (ext: with ext; [ pass-otp pass-import ]))
         poppler_utils
+        pinentry_gnome
         qtpass
         #quodlibet
         rxvt_unicode-with-plugins
