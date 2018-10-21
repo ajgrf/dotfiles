@@ -21,6 +21,11 @@ export PATH="$HOME/bin:$HOME/.local/bin:$PATH:$PLAN9/bin"
 export STEWPKGS="$HOME/src/stewpkgs"
 export TERMINFO_DIRS="$HOME/.local/share/terminfo"
 
+unset SSH_AGENT_PID
+if test "${gnupg_SSH_AUTH_SOCK_by:-0}" -ne $$; then
+	export SSH_AUTH_SOCK="$(gpgconf --list-dirs agent-ssh-socket)"
+fi
+
 if test -e "$HOME/.nix-profile/etc/profile.d/nix.sh"; then
 	. "$HOME/.nix-profile/etc/profile.d/nix.sh"
 	export TERMINFO_DIRS="$HOME/.nix-profile/share/terminfo${TERMINFO_DIRS:+:}$TERMINFO_DIRS"
