@@ -14,10 +14,11 @@ prompt() {
 	local e="$?"  dir="${PWD}/" S='$'
 	test "$e" -eq 0 && e=""
 	dir="${dir/#$HOME\//\~/}"; dir="${dir%/}"
+	branch=$(git symbolic-ref --short HEAD 2>/dev/null)
 	test "$UID" -eq 0 && S='#'
 
 	test "${#dir}" -gt 28 && dir="...${dir:(-25)}"
-	echo -n "${e:+$e|}${USER}@${HOSTNAME%%.*}:${dir}$S "
+	echo -n "${e:+$e|}${USER}@${HOSTNAME%%.*}:${dir}${branch:+ ($branch)}$S "
 }
 
 case "$TERM" in

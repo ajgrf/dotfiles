@@ -9,6 +9,7 @@ prompt() {
 	local e="$?"  dir="${PWD}/" title="" S='$'
 	test "$e" -eq 0 && e=""
 	dir="${dir/#$HOME\//\~/}"; dir="${dir%/}"
+	branch=$(git symbolic-ref --short HEAD 2>/dev/null)
 	test "$USER_ID" -eq 0 && S='#'
 
 	case "$TERM" in
@@ -19,7 +20,7 @@ prompt() {
 	esac
 
 	test "${#dir}" -gt 28 && dir="...${dir:(-25)}"
-	echo -n "${title}${e:+$e|}${USER}@${HOSTNAME%%.*}:${dir}$S "
+	echo -n "${title}${e:+$e|}${USER}@${HOSTNAME%%.*}:${dir}${branch:+ ($branch)}$S "
 }
 
 bind    ^L='clear-screen'
