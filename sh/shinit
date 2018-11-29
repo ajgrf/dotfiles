@@ -21,6 +21,7 @@ alias pb='podboat'
 alias reset='reset -Q'
 alias rg='rg --color never --no-heading'
 alias stack='stack --color never'
+alias t='todo-txt -d ~/lib/todo.cfg'
 alias nixos-rebuild='doas env NIXOS_CONFIG="$HOME/lib/nix/$HOSTNAME.nix" nixos-rebuild'
 
 mkcd() { mkdir -p -- "$@" && cd -- "$1"; }
