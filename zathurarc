@@ -4,7 +4,6 @@ include ../../.workman/zathurarc
 # General
 set adjust-open             width
 set font                    "Go Mono Bold 11"
-set recolor                 true
 
 # Colors
 set recolor-lightcolor      "#ffffea"
@@ -19,10 +18,10 @@ set index-active-fg         "#ffffff"
 set index-active-bg         "#004488"
 set render-loading-fg       "#000000"
 set render-loading-bg       "#eaeaea"
-set statusbar-fg            "#ffffea"
+set statusbar-fg            "#ffffff"
 set statusbar-bg            "#004488"
 set inputbar-fg             "#000000"
-set inputbar-bg             "#ffffea"
+set inputbar-bg             "#eaeaea"
 set completion-fg           "#000000"
 set completion-bg           "#eaffff"
 set completion-group-fg     "#004488"
