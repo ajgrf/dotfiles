@@ -17,4 +17,20 @@ vis.events.subscribe(vis.events.WIN_OPEN, function(win)
 	vis:command('set number')
 	vis:command('set autoindent')
 	vis:command('set cursorline')
+
+	if win.syntax == 'go' then
+		vis:command('set tabwidth 4')
+	elseif win.syntax == 'python' then
+		vis:command('set tabwidth 4')
+		vis:command('set expandtab')
+	elseif win.syntax == 'rust' then
+		vis:command('set tabwidth 4')
+		vis:command('set expandtab')
+	elseif win.syntax == 'vim' then
+		vis:command('set tabwidth 2')
+		vis:command('set expandtab')
+	elseif win.syntax == 'haskell' then
+		vis:command('set tabwidth 2')
+		vis:command('set expandtab')
+	end
 end)
