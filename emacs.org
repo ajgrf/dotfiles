@@ -1,0 +1,619 @@
+#+TITLE: My Emacs Configuration
+#+AUTHOR: Alex Griffin
+#+STARTUP: content
+#+PROPERTY: header-args :tangle ~/.emacs.d/init.el
+
+* General
+
+This file describes my GNU Emacs configuration in a literate
+programming style. Run the Emacs command =org-babel-tangle= on this
+document to generate the actual config.
+
+** Initialization
+
+*** Optimize startup time
+
+From doom-emacs and John Wiegley.
+
+#+BEGIN_SRC emacs-lisp
+  ;;; -*- lexical-binding: t -*-
+
+  (defvar file-name-handler-alist-old file-name-handler-alist)
+
+  (setq file-name-handler-alist nil
+        gc-cons-threshold 402653184
+        gc-cons-percentage 0.6
+        package-enable-at-startup nil
+        package--init-file-ensured t)
+
+  (add-hook 'after-init-hook
+            `(lambda ()
+               (setq file-name-handler-alist file-name-handler-alist-old
+                     gc-cons-threshold 800000
+                     gc-cons-percentage 0.1)
+               (garbage-collect))
+            t)
+#+END_SRC
+
+*** Persistence Files
+
+Use a separate file for customization system.
+
+#+BEGIN_SRC emacs-lisp
+  (setq custom-file (concat user-emacs-directory "custom.el"))
+  (load custom-file t)
+#+END_SRC
+
+Don't litter the filesystem with backup files
+
+#+BEGIN_SRC emacs-lisp
+  (setq make-backup-files nil)
+#+END_SRC
+
+*** Package Management
+
+**** Specify Package Repositories
+
+Use TLS for ELPA, and add MELPA as an additional repository.
+
+#+BEGIN_SRC emacs-lisp
+  (setq package-archives
+        '(("gnu" . "https://elpa.gnu.org/packages/")
+          ("melpa" . "https://melpa.org/packages/")))
+#+END_SRC
+
+**** Bootstrap use-package
+
+Every other package will be managed by use-package.
+
+#+BEGIN_SRC emacs-lisp
+  (eval-when-compile
+    (require 'package)
+    (package-initialize)
+    (unless (package-installed-p 'use-package)
+      (package-refresh-contents)
+      (package-install 'use-package))
+    (require 'use-package)
+    (setq use-package-always-ensure t))
+  (require 'bind-key)
+#+END_SRC
+
+**** Automatic updates
+
+Check for package updates every 7 days.
+
+#+BEGIN_SRC emacs-lisp
+  (use-package auto-package-update
+    :config
+    (setq auto-package-update-delete-old-versions t
+          auto-package-update-hide-results t)
+    (auto-package-update-maybe))
+#+END_SRC
+
+** Interface Elements
+
+Emacs' interface is a little too busy for me by default.
+
+Disable the tool bar and menu bar.
+
+#+BEGIN_SRC emacs-lisp
+  (if (fboundp 'menu-bar-mode) (menu-bar-mode -1))
+  (if (fboundp 'tool-bar-mode) (tool-bar-mode -1))
+#+END_SRC
+
+Don't show the normal Emacs welcome screen or related messages.
+
+#+BEGIN_SRC emacs-lisp
+  (setq inhibit-startup-message t)
+  (defun display-startup-echo-area-message ()
+    (message ""))
+#+END_SRC
+
+Empty the scratch buffer and remove lisp-interaction-mode from it.
+
+#+BEGIN_SRC emacs-lisp
+  (setq initial-scratch-message nil
+        initial-major-mode 'fundamental-mode)
+#+END_SRC
+
+Set the window title format.
+
+#+BEGIN_SRC emacs-lisp
+  (setq frame-title-format "%b - GNU Emacs")
+  (setq icon-title-format frame-title-format)
+#+END_SRC
+
+Set default window geometry.
+
+#+BEGIN_SRC emacs-lisp
+  (if (display-graphic-p)
+      (setq default-frame-alist
+            '((width . 80)
+              (height . 43))))
+#+END_SRC
+
+Prompt for 'y' or 'n' instead of 'yes' or 'no'.
+
+#+BEGIN_SRC emacs-lisp
+  (fset 'yes-or-no-p 'y-or-n-p)
+#+END_SRC
+
+** Cursor
+
+Highlight the line that the cursor is currently on.
+
+#+BEGIN_SRC emacs-lisp
+  (global-hl-line-mode)
+#+END_SRC
+
+Don't blink the cursor and use a separate cursor color in Emacs mode.
+
+#+BEGIN_SRC emacs-lisp
+  (blink-cursor-mode 0)
+  (setq evil-normal-state-cursor '(box "#000000")
+        evil-emacs-state-cursor  '(box "#7F5AB6"))
+#+END_SRC
+
+Use a blinking bar-style cursor in insert mode.
+
+#+BEGIN_SRC emacs-lisp
+  (setq evil-insert-state-cursor  '(bar "#000000"))
+  (add-hook 'evil-insert-state-entry-hook (lambda () (blink-cursor-mode 1)))
+  (add-hook 'evil-insert-state-exit-hook  (lambda () (blink-cursor-mode 0)))
+#+END_SRC
+
+** Window Management
+
+Focus follows mouse.
+
+#+BEGIN_SRC emacs-lisp
+  (setq mouse-autoselect-window t)
+#+END_SRC
+
+Multiple workspaces/tabs.
+
+#+BEGIN_SRC emacs-lisp
+  (use-package eyebrowse
+    :bind (("M-1" . eyebrowse-switch-to-window-config-1)
+           ("M-2" . eyebrowse-switch-to-window-config-2)
+           ("M-3" . eyebrowse-switch-to-window-config-3)
+           ("M-4" . eyebrowse-switch-to-window-config-4)
+           ("M-5" . eyebrowse-switch-to-window-config-5)
+           ("M-6" . eyebrowse-switch-to-window-config-6)
+           ("M-7" . eyebrowse-switch-to-window-config-7)
+           ("M-8" . eyebrowse-switch-to-window-config-8)
+           ("M-9" . eyebrowse-switch-to-window-config-9)
+           ("M-0" . eyebrowse-switch-to-window-config-0)
+           :map evil-motion-state-map
+           ("gt" . eyebrowse-next-window-config)
+           ("gT" . eyebrowse-prev-window-config)
+           ("gc" . eyebrowse-close-window-config))
+    :config
+    (setq eyebrowse-new-workspace t)
+    (eyebrowse-mode t))
+#+END_SRC
+
+** Whitespace
+
+#+BEGIN_SRC emacs-lisp
+  (setq whitespace-line-column 79
+        whitespace-style '(face lines-tail trailing))
+  (global-whitespace-mode 1)
+#+END_SRC
+
+Don't indent with tabs by default.
+
+#+BEGIN_SRC emacs-lisp
+  (setq-default indent-tabs-mode nil)
+#+END_SRC
+
+Load style settings from =.editorconfig=
+
+#+BEGIN_SRC emacs-lisp
+  (use-package editorconfig
+    :commands editorconfig-mode
+    :init (add-hook 'prog-mode-hook #'editorconfig-mode))
+  #+END_SRC
+ 
+Automatically trim whitespace only from lines edited.
+
+#+BEGIN_SRC emacs-lisp
+  (use-package ws-butler
+    :hook prog-mode)
+#+END_SRC
+
+** Completion
+
+I'll probably switch to ivy or helm soon.
+
+#+BEGIN_SRC emacs-lisp
+  (setq ido-everywhere t
+        ido-enable-flex-matching t
+        ido-file-extensions-order '(".org" ".scm"))
+  (ido-mode 1)
+#+END_SRC
+
+** Appearance
+
+*** Theme
+
+Leuven is a good theme for now, and the best theme for org.
+
+#+BEGIN_SRC emacs-lisp
+  (load-theme 'leuven)
+#+END_SRC
+
+*** Fonts
+
+#+BEGIN_SRC emacs-lisp
+  (set-face-font 'default           "Go Mono 11")
+  (set-face-font 'fixed-pitch       "Noto Mono 11")
+  (set-face-font 'fixed-pitch-serif "Go Mono 11")
+  (set-face-font 'variable-pitch    "Noto Sans 11")
+#+END_SRC
+
+**** Proportional Fonts
+
+Use a mix of proportional fonts and fixed-width fonts where
+appropriate. This applies to any mode based on text-mode, including
+org and markdown.
+
+#+BEGIN_SRC emacs-lisp
+  (use-package mixed-pitch
+    :if window-system
+    :hook (text-mode . mixed-pitch-mode))
+#+END_SRC
+
+* Modal Editing
+
+** Evil
+
+Evil is an extensible vi layer for Emacs.
+
+#+BEGIN_SRC emacs-lisp
+  (use-package evil
+    :init
+    (setq evil-want-keybinding nil)
+    :config
+    (evil-mode 1))
+#+END_SRC
+
+** Surround
+
+Edit pairs of surroundings together, like parentheses, brackets, quotes, tags.
+
+#+BEGIN_SRC emacs-lisp
+  (use-package evil-surround
+    :after evil
+    :config
+    (global-evil-surround-mode 1))
+#+END_SRC
+
+** Matchit
+
+Extend % to jump between matching tags or code branches.
+
+#+BEGIN_SRC emacs-lisp
+  (use-package evil-matchit
+    :after evil
+    :config
+    (global-evil-matchit-mode 1))
+#+END_SRC
+
+** TODO Multiple Cursors
+
+Edit text with multiple cursors. Disabled for now until I figure out bindings.
+
+#+BEGIN_SRC emacs-lisp
+  (use-package evil-mc
+    :disabled
+    :after evil
+    :config
+    (global-evil-mc-mode 1))
+#+END_SRC
+
+** Workman Layout
+
+#+BEGIN_SRC emacs-lisp
+  (use-package evil-collection
+    :after evil
+    :config
+    (defun workman-evil-bindings (state keymap &rest _rest)
+      (evil-collection-translate-key state keymap
+        "n" "j"  "N" "J"
+        "e" "k"  "E" "K"
+        "y" "h"  "Y" "H"
+        "o" "l"  "O" "L"
+        "j" "y"  "J" "Y"
+        "k" "n"  "K" "N"
+        "h" "e"  "H" "E"
+        "l" "o"  "L" "O"))
+    (add-hook 'evil-collection-setup-hook #'workman-evil-bindings)
+    (workman-evil-bindings nil
+                           '(evil-motion-state-map evil-normal-state-map
+                             evil-visual-state-map evil-window-map))
+
+    ;; (define-key evil-inner-text-objects-map "l"    'evil-inner-symbol)
+    ;; (define-key evil-inner-text-objects-map "o"    nil)
+    ;; (define-key evil-outer-text-objects-map "l"    'evil-a-symbol)
+    ;; (define-key evil-outer-text-objects-map "o"    nil)
+
+    (defmacro evil-add-yneo-bindings (keymap &optional state &rest bindings)
+      "Add \"y\", \"n\", \"e\", \"o\" bindings to KEYMAP in STATE.
+  Add additional BINDINGS if specified."
+      (declare (indent defun))
+      `(evil-define-key ,state ,keymap
+         "y" (lookup-key evil-motion-state-map "y")
+         "n" (lookup-key evil-motion-state-map "n")
+         "e" (lookup-key evil-motion-state-map "e")
+         "o" (lookup-key evil-motion-state-map "o")
+         ":" (lookup-key evil-motion-state-map ":")
+         ,@bindings))
+    (add-hook 'Info-mode-hook (lambda () (evil-add-yneo-bindings Info-mode-map 'normal)))
+
+    (evil-collection-init))
+#+END_SRC
+
+** Ex Commands
+
+Tangle an org-babel file.
+
+#+BEGIN_SRC emacs-lisp
+  (evil-define-command evil-tangle (file)
+    (interactive "<f>")
+    (require 'org)
+    (if file
+        (org-babel-tangle-file file)
+        (org-babel-tangle)))
+  (evil-ex-define-cmd "tangle" 'evil-tangle)
+#+END_SRC
+
+Tangle and reload Emacs config.
+
+#+BEGIN_SRC emacs-lisp
+  (evil-define-command evil-reload ()
+    (require 'org)
+    (org-babel-tangle-file "~/lib/emacs.org")
+    (load-file user-init-file))
+  (evil-ex-define-cmd "reload" 'evil-reload)
+#+END_SRC
+
+Restart Emacs.
+
+#+BEGIN_SRC emacs-lisp
+  (use-package restart-emacs
+    :commands restart-emacs)
+
+  (evil-define-command evil-restart ()
+    (require 'org)
+    (org-babel-tangle-file "~/lib/emacs.org")
+    ;; (setq restart-emacs-restore-frames t)
+    (restart-emacs))
+  (evil-ex-define-cmd "restart" 'evil-restart)
+#+END_SRC
+
+* Org Mode
+
+** Appearance
+
+Open org documents in a folded outline view. Indent nodes to the
+appropriate level, and use real bullets instead of asterisks.
+
+#+BEGIN_SRC emacs-lisp
+  (setq org-startup-folded 'showall)
+
+  (add-hook 'org-mode-hook (lambda () (org-indent-mode 1)))
+
+  (use-package org-bullets
+    :commands org-bullets-mode
+    :hook (org-mode . org-bullets-mode))
+#+END_SRC
+
+Display images inline.
+
+#+BEGIN_SRC emacs-lisp
+  (setq org-startup-with-inline-images t)
+#+END_SRC
+
+** Agenda
+
+Search my org directory for agenda items.
+
+#+BEGIN_SRC emacs-lisp
+  (setq org-agenda-files '("~/org/"))
+#+END_SRC
+
+** Task Keywords
+
+#+BEGIN_SRC emacs-lisp
+  (setq org-todo-keywords
+        '((sequence "TODO" "WAITING" "NEXT" "DONE")))
+#+END_SRC
+
+** Capture
+** Archive
+
+* Ledger
+
+#+BEGIN_SRC emacs-lisp
+  (use-package ledger-mode
+    :mode ("\\.ledger\\'" . ledger-mode)
+    :custom
+    (ledger-post-auto-adjust-amounts t)
+    (ledger-init-file-name "~/.ledgerrc")
+    (ledger-clear-whole-transactions t)
+    :config
+    (setq ledger-post-amount-alignment-column 52))
+#+END_SRC
+
+* Tools
+
+** Emacs Shell
+
+TUI commands must be listed here so they can open in a terminal emulator.
+
+#+BEGIN_SRC emacs-lisp :tangle ~/.emacs.d/eshell/login
+  (add-to-list 'eshell-visual-commands "ncmpc") >/dev/null
+#+END_SRC
+
+Close terminal emulator when the command exits.
+
+#+BEGIN_SRC emacs-lisp
+  (setq eshell-destroy-buffer-when-process-dies t)
+#+END_SRC
+
+Add some aliases.
+
+#+BEGIN_SRC emacs-lisp :tangle ~/.emacs.d/eshell/alias
+  alias date *date $*
+  alias edit find-file $1
+  alias l ls $*
+  alias mpc *mpc $*
+#+END_SRC
+
+** File Management
+
+#+BEGIN_SRC emacs-lisp
+  (setq dired-dwim-target t)
+  (setq dired-guess-shell-alist-user
+        '(("\\.info\\.json$" "ytdl")
+          ("\\.pdf$" "zathura")
+          ("\\.(avi|mkv|mp4|webm)$" "mpv -fs")
+          ("\\.(flac|m4a|mp3|ogg|opus)$" "mpv")
+          ("\\.jpg$" "feh --cycle-once -dFZD-10 *")))
+  (setq image-dired-external-viewermage nil)
+  (add-to-list 'directory-abbrev-alist
+    '("^/egnyte" . "/davs:focusengineering.egnyte.com:/webdav/Shared"))
+#+END_SRC
+
+** Feeds
+
+#+BEGIN_SRC emacs-lisp
+  (use-package elfeed-org
+    :disabled
+    :config
+    (elfeed-org)
+    (setq rmh-elfeed-org-files (list "~/feeds.org")))
+#+END_SRC
+
+** Epub Reader
+
+#+BEGIN_SRC emacs-lisp
+(use-package nov)
+#+END_SRC
+
+* Version Control
+
+Magit is the best porcelain for git.
+
+#+BEGIN_SRC emacs-lisp
+  (use-package magit
+    :bind (:map evil-motion-state-map
+           ("gs" . magit-status)))
+
+  (use-package evil-magit
+    :after (evil evil-collection magit)
+    :config
+    (evil-define-key '(normal visual) magit-mode-map
+      "\C-n" 'magit-section-forward
+      "gn"   'magit-section-forward-sibling
+      "\C-e" 'magit-section-backward
+      "ge"   'magit-section-backward-sibling
+      "n"    'evil-next-visual-line
+      "e"    'evil-previous-visual-line
+      "j"    nil
+      "jj"   'evil-yank-line
+      "jr"   'magit-show-refs-popup
+      "js"   'magit-copy-section-value
+      "jb"   'magit-copy-buffer-revision
+      "y"    nil
+      "/"    'evil-search-forward
+      "k"    'evil-search-next
+      "K"    'evil-search-previous)
+    (evil-define-key 'visual magit-mode-map
+      "j"    'evil-yank
+      "y"    nil)
+    (evil-define-key '(normal visual) magit-diff-mode-map
+      "gn"   'magit-section-forward)
+    (evil-define-key '(normal visual) 'magit-blob-mode-map
+      "gn"   'magit-blob-next
+      "ge"   'magit-blob-previous)
+    (evil-define-key '(normal visual) 'git-commit-mode-map
+      "gn"   'git-commit-next-message
+      "ge"   'git-commit-prev-message)
+    (evil-define-key 'normal 'magit-blame-read-only-mode-map
+      "n"    'evil-next-visual-line
+      "\C-n" 'magit-blame-next-chunk
+      "gn"   'magit-blame-next-chunk
+      "gN"   'magit-blame-next-chunk-same-commit
+      "e"    'evil-previous-visual-line
+      "\C-e" 'magit-blame-previous-chunk
+      "ge"   'magit-blame-previous-chunk
+      "gE"   'magit-blame-previous-chunk-same-commit)
+    (evil-define-key 'normal git-rebase-mode-map
+      "n"    'evil-next-visual-line
+      "e"    'evil-previous-visual-line
+      "\M-n" 'git-rebase-move-line-down
+      "\M-e" 'git-rebase-move-line-up
+      "h"    'git-rebase-edit))
+#+END_SRC
+
+* Languages
+
+** Markdown
+
+#+BEGIN_SRC emacs-lisp
+  (use-package markdown-mode
+    :commands (markdown-mode gfm-mode)
+    :mode (("README\\.md\\'" . gfm-mode)
+           ("\\.md\\'" . markdown-mode)
+           ("\\.mdwn\\'" . markdown-mode)
+           ("\\.markdown\\'" . markdown-mode))
+    :config (setq markdown-command "pandoc"))
+#+END_SRC
+
+** APL
+
+#+BEGIN_SRC emacs-lisp
+  (use-package gnu-apl-mode
+    :disabled
+    :commands gnu-apl
+    :init
+    (fset 'apl 'gnu-apl)
+    :config
+    (setq gnu-apl-show-keymap-on-startup nil
+          gnu-apl-show-tips-on-start nil)
+    (defun gnu-apl-input-hook ()
+      (set-input-method "APL-Z"))
+    (add-hook 'gnu-apl-interactive-mode-hook 'gnu-apl-input-hook)
+    (add-hook 'gnu-apl-mode-hook 'gnu-apl-input-hook))
+
+  ;; (set-fontset-font "fontset-default" '(#x2300 . #x23ff) "Iosevka Term Slab")
+#+END_SRC
+
+** C
+** Go
+
+#+BEGIN_SRC emacs-lisp
+  (use-package go-mode
+    :mode ("\\.go\\'" . go-mode)
+    :config
+    (setq gofmt-command "goimports")
+    (add-hook 'before-save-hook 'gofmt-before-save))
+#+END_SRC
+
+** Lisp-like
+*** Scheme
+
+#+BEGIN_SRC emacs-lisp
+  (use-package geiser
+    :commands run-geiser
+    :config
+    (setq geiser-active-implementations '(guile)))
+
+  (use-package guix-emacs
+    :disabled
+    :load-path "~/src/guix/emacs")
+#+END_SRC
+
+** sh
