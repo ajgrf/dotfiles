@@ -74,7 +74,8 @@ Every other package will be managed by use-package.
       (package-refresh-contents)
       (package-install 'use-package))
     (require 'use-package)
-    (setq use-package-always-ensure t))
+    (setq use-package-always-ensure t)
+    (use-package diminish))
   (require 'bind-key)
 #+END_SRC
 
@@ -189,7 +190,8 @@ Multiple workspaces/tabs.
            ("gT" . eyebrowse-prev-window-config)
            ("gc" . eyebrowse-close-window-config))
     :config
-    (setq eyebrowse-new-workspace t)
+    (setq eyebrowse-mode-line-separator " "
+          eyebrowse-new-workspace t)
     (eyebrowse-mode t))
 #+END_SRC
 
@@ -199,6 +201,7 @@ Multiple workspaces/tabs.
   (setq whitespace-line-column 79
         whitespace-style '(face lines-tail trailing))
   (global-whitespace-mode 1)
+  (diminish 'global-whitespace-mode)
 #+END_SRC
 
 Don't indent with tabs by default.
@@ -211,15 +214,18 @@ Load style settings from =.editorconfig=
 
 #+BEGIN_SRC emacs-lisp
   (use-package editorconfig
+    :diminish
     :commands editorconfig-mode
     :init (add-hook 'prog-mode-hook #'editorconfig-mode))
   #+END_SRC
- 
+
 Automatically trim whitespace only from lines edited.
 
 #+BEGIN_SRC emacs-lisp
   (use-package ws-butler
-    :hook prog-mode)
+    :diminish
+    :commands ws-butler-mode
+    :init (add-hook 'prog-mode-hook #'ws-butler-mode))
 #+END_SRC
 
 ** Completion
@@ -260,6 +266,7 @@ org and markdown.
 
 #+BEGIN_SRC emacs-lisp
   (use-package mixed-pitch
+    :diminish
     :if window-system
     :hook (text-mode . mixed-pitch-mode))
 #+END_SRC
@@ -272,9 +279,11 @@ Evil is an extensible vi layer for Emacs.
 
 #+BEGIN_SRC emacs-lisp
   (use-package evil
+    :diminish undo-tree-mode
     :init
     (setq evil-want-keybinding nil)
     :config
+    (setq evil-mode-line-format nil)
     (evil-mode 1))
 #+END_SRC
 
@@ -402,7 +411,9 @@ appropriate level, and use real bullets instead of asterisks.
 #+BEGIN_SRC emacs-lisp
   (setq org-startup-folded 'showall)
 
-  (add-hook 'org-mode-hook (lambda () (org-indent-mode 1)))
+  (add-hook 'org-mode-hook
+    (lambda () (org-indent-mode 1)
+               (diminish 'org-indent-mode)))
 
   (use-package org-bullets
     :commands org-bullets-mode
