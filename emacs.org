@@ -139,30 +139,6 @@ Prompt for 'y' or 'n' instead of 'yes' or 'no'.
   (fset 'yes-or-no-p 'y-or-n-p)
 #+END_SRC
 
-** Cursor
-
-Highlight the line that the cursor is currently on.
-
-#+BEGIN_SRC emacs-lisp
-  (global-hl-line-mode)
-#+END_SRC
-
-Don't blink the cursor and use a separate cursor color in Emacs mode.
-
-#+BEGIN_SRC emacs-lisp
-  (blink-cursor-mode 0)
-  (setq evil-normal-state-cursor '(box "#000000")
-        evil-emacs-state-cursor  '(box "#7F5AB6"))
-#+END_SRC
-
-Use a blinking bar-style cursor in insert mode.
-
-#+BEGIN_SRC emacs-lisp
-  (setq evil-insert-state-cursor  '(bar "#000000"))
-  (add-hook 'evil-insert-state-entry-hook (lambda () (blink-cursor-mode 1)))
-  (add-hook 'evil-insert-state-exit-hook  (lambda () (blink-cursor-mode 0)))
-#+END_SRC
-
 ** Window Management
 
 Focus follows mouse.
@@ -193,6 +169,68 @@ Multiple workspaces/tabs.
     (setq eyebrowse-mode-line-separator " "
           eyebrowse-new-workspace t)
     (eyebrowse-mode t))
+#+END_SRC
+
+** Appearance
+
+*** Theme
+
+Leuven is a good theme for now, and the best theme for org.
+
+#+BEGIN_SRC emacs-lisp
+  (load-theme 'leuven)
+#+END_SRC
+
+Highlight matching braces & parentheses.
+
+#+BEGIN_SRC emacs-lisp
+  (show-paren-mode)
+#+END_SRC
+
+*** Fonts
+
+#+BEGIN_SRC emacs-lisp
+  (set-face-font 'default           "Go Mono 11")
+  (set-face-font 'fixed-pitch       "Noto Mono 11")
+  (set-face-font 'fixed-pitch-serif "Go Mono 11")
+  (set-face-font 'variable-pitch    "Noto Sans 11")
+#+END_SRC
+
+**** Proportional Fonts
+
+Use a mix of proportional fonts and fixed-width fonts where
+appropriate. This applies to any mode based on text-mode, including
+org and markdown.
+
+#+BEGIN_SRC emacs-lisp
+  (use-package mixed-pitch
+    :diminish
+    :if window-system
+    :hook (text-mode . mixed-pitch-mode))
+#+END_SRC
+
+*** Cursor
+
+Highlight the line that the cursor is currently on.
+
+#+BEGIN_SRC emacs-lisp
+  (global-hl-line-mode)
+#+END_SRC
+
+Don't blink the cursor and use a separate cursor color in Emacs mode.
+
+#+BEGIN_SRC emacs-lisp
+  (blink-cursor-mode 0)
+  (setq evil-normal-state-cursor '(box "#000000")
+        evil-emacs-state-cursor  '(box "#7F5AB6"))
+#+END_SRC
+
+Use a blinking bar-style cursor in insert mode.
+
+#+BEGIN_SRC emacs-lisp
+  (setq evil-insert-state-cursor  '(bar "#000000"))
+  (add-hook 'evil-insert-state-entry-hook (lambda () (blink-cursor-mode 1)))
+  (add-hook 'evil-insert-state-exit-hook  (lambda () (blink-cursor-mode 0)))
 #+END_SRC
 
 ** Whitespace
@@ -237,38 +275,6 @@ I'll probably switch to ivy or helm soon.
         ido-enable-flex-matching t
         ido-file-extensions-order '(".org" ".scm"))
   (ido-mode 1)
-#+END_SRC
-
-** Appearance
-
-*** Theme
-
-Leuven is a good theme for now, and the best theme for org.
-
-#+BEGIN_SRC emacs-lisp
-  (load-theme 'leuven)
-#+END_SRC
-
-*** Fonts
-
-#+BEGIN_SRC emacs-lisp
-  (set-face-font 'default           "Go Mono 11")
-  (set-face-font 'fixed-pitch       "Noto Mono 11")
-  (set-face-font 'fixed-pitch-serif "Go Mono 11")
-  (set-face-font 'variable-pitch    "Noto Sans 11")
-#+END_SRC
-
-**** Proportional Fonts
-
-Use a mix of proportional fonts and fixed-width fonts where
-appropriate. This applies to any mode based on text-mode, including
-org and markdown.
-
-#+BEGIN_SRC emacs-lisp
-  (use-package mixed-pitch
-    :diminish
-    :if window-system
-    :hook (text-mode . mixed-pitch-mode))
 #+END_SRC
 
 * Modal Editing
