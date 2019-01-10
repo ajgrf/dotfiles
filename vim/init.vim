@@ -6,21 +6,8 @@ if v:progname !=# "vi"
 
   " load any plugin bundles
   call plug#begin('~/.vim/bundle')
-  Plug '~/src/parchment'
-  Plug '~/src/sprinkles'
-  Plug 'ajgrf/vim-ledger'
-  "Plug 'ap/vim-css-color'
-  Plug 'cespare/vim-toml'
-  Plug 'fatih/vim-go',       {'tag': 'v1.18'}
-  Plug 'gerw/vim-HiLinkTrace'
-  "Plug 'tpope/vim-fugitive', {'tag': 'v2.2'}
-  Plug 'tpope/vim-markdown'
-  Plug 'tpope/vim-sensible', {'tag': 'v1.2'}
-  "Plug 'tpope/vim-surround', {'tag': 'v2.1'}
-  Plug 'tpope/vim-repeat',   {'tag': 'v1.2'}
-  Plug 'jceb/vim-orgmode',   {'tag': 'v0.6.0'}
-  Plug 'tpope/vim-speeddating'
-  Plug 'jamessan/vim-gnupg', {'tag': 'v2.6.1'}
+  Plug 'ajgrf/parchment'
+  Plug 'ajgrf/sprinkles'
   call plug#end()
 
   set title
@@ -32,10 +19,6 @@ if v:progname !=# "vi"
   else
     colorscheme parchment
     set cursorline
-    " use 24-bit true color support if available
-    "if $COLORTERM ==# "truecolor"
-      "set termguicolors
-    "endif
   endif
 
   " enable loading plugins and indent rules based on filetype
@@ -47,15 +30,14 @@ if v:progname !=# "vi"
   set path+=**
   set wildmenu
   set wildignorecase
-  set suffixes+=.go
 
   set backspace=indent,eol,start
   set mouse=a      " enable mouse support
-  set laststatus=1
+  set laststatus=2
   set autoindent
   set incsearch
 
-  autocmd VimEnter,VimResized * if &columns >= 85 | set number | set laststatus=2 | else | set nonumber | set laststatus=1 | endif
+  autocmd VimEnter,VimResized * if &columns >= 85 | set number | else | set nonumber | endif
 
   set completeopt=menu,menuone,longest  " disable completion scratch window
   set guioptions+=c                     " popup blocker
@@ -76,17 +58,6 @@ if v:progname !=# "vi"
     execute ":'<,'>normal @".nr2char(getchar())
   endfunction
 
-  let g:ledger_align_at = 50
-  let g:ledger_qf_reconcile_format = '%(date) %-24(payee) %-22(account) %10(amount) %10(total)\n'
-  let g:ledger_qf_register_format = '%(date) %-24(payee) %-22(account) %10(amount) %10(total)\n'
-  autocmd FileType ledger setlocal tabstop=8 expandtab shiftwidth=4 softtabstop=4
-  autocmd FileType ledger nnoremap [ ?^2<cr>nz.V/_<cr>
-  autocmd FileType ledger nnoremap ] /^2<cr>z.V/_<cr>
-  autocmd FileType ledger vmap [ <esc>[
-  autocmd FileType ledger vmap ] <esc>]
-  autocmd FileType ledger nnoremap <silent><buffer> <Leader><Space> :call ledger#transaction_state_toggle(line('.'), ' *')<CR>
-  autocmd FileType ledger noremap <silent> <Leader>q :LedgerAlign<CR>
-
   autocmd FileType vim setlocal foldmethod=marker tabstop=8 expandtab
     \ shiftwidth=2 softtabstop=2
   autocmd FileType go setlocal tabstop=4 shiftwidth=4 nolist
@@ -96,10 +67,6 @@ if v:progname !=# "vi"
   autocmd BufNewFile,BufRead *.nix setlocal tabstop=8 expandtab shiftwidth=2 softtabstop=2
   autocmd BufNewFile,BufReadPost *.md set filetype=markdown
   autocmd FileType markdown setlocal spell linebreak
-  autocmd FileType mail setlocal formatoptions=nawrtcq spell textwidth=72
-  "autocmd FileType text setlocal spell
-
-  let g:go_fmt_command = "goimports"
 
   let g:plug_window = "new"
 
