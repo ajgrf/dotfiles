@@ -293,40 +293,6 @@ Evil is an extensible vi layer for Emacs.
     (evil-mode 1))
 #+END_SRC
 
-** Surround
-
-Edit pairs of surroundings together, like parentheses, brackets, quotes, tags.
-
-#+BEGIN_SRC emacs-lisp
-  (use-package evil-surround
-    :after evil
-    :config
-    (global-evil-surround-mode 1))
-#+END_SRC
-
-** Matchit
-
-Extend % to jump between matching tags or code branches.
-
-#+BEGIN_SRC emacs-lisp
-  (use-package evil-matchit
-    :after evil
-    :config
-    (global-evil-matchit-mode 1))
-#+END_SRC
-
-** TODO Multiple Cursors
-
-Edit text with multiple cursors. Disabled for now until I figure out bindings.
-
-#+BEGIN_SRC emacs-lisp
-  (use-package evil-mc
-    :disabled
-    :after evil
-    :config
-    (global-evil-mc-mode 1))
-#+END_SRC
-
 ** Workman Layout
 
 #+BEGIN_SRC emacs-lisp
@@ -367,6 +333,50 @@ Edit text with multiple cursors. Disabled for now until I figure out bindings.
     (add-hook 'Info-mode-hook (lambda () (evil-add-yneo-bindings Info-mode-map 'normal)))
 
     (evil-collection-init))
+#+END_SRC
+
+** which-key
+
+Show a popup with completions for partially-entered keybindings.
+
+#+BEGIN_SRC emacs-lisp
+  (use-package which-key
+    :diminish
+    :config (which-key-mode 1))
+#+END_SRC
+
+** Surround
+
+Edit pairs of surroundings together, like parentheses, brackets, quotes, tags.
+
+#+BEGIN_SRC emacs-lisp
+  (use-package evil-surround
+    :after evil
+    :config
+    (global-evil-surround-mode 1))
+#+END_SRC
+
+** Matchit
+
+Extend % to jump between matching tags or code branches.
+
+#+BEGIN_SRC emacs-lisp
+  (use-package evil-matchit
+    :after evil
+    :config
+    (global-evil-matchit-mode 1))
+#+END_SRC
+
+** TODO Multiple Cursors
+
+Edit text with multiple cursors. Disabled for now until I figure out bindings.
+
+#+BEGIN_SRC emacs-lisp
+  (use-package evil-mc
+    :disabled
+    :after evil
+    :config
+    (global-evil-mc-mode 1))
 #+END_SRC
 
 ** Ex Commands
