@@ -293,41 +293,50 @@ Evil is an extensible vi layer for Emacs.
     (evil-mode 1))
 #+END_SRC
 
-** Workman Layout
+Integrate evil with much of the rest of Emacs.
 
-#+BEGIN_SRC emacs-lisp
+#+BEGIN_SRC emacs-lisp :noweb yes
   (use-package evil-collection
     :after evil
     :config
-    (defun workman-evil-bindings (state keymap &rest _rest)
-      (evil-collection-translate-key nil keymap
-        "n" "j"  "N" "J"
-        "e" "k"  "E" "K"
-        "y" "h"  "Y" "H"
-        "o" "l"  "O" "L"
-        "j" "y"  "J" "Y"
-        "k" "n"  "K" "N"
-        "h" "e"  "H" "E"
-        "l" "o"  "L" "O"))
-    (add-hook 'evil-collection-setup-hook #'workman-evil-bindings)
-    (workman-evil-bindings nil
-                           '(evil-motion-state-map evil-normal-state-map
-                             evil-visual-state-map evil-window-map))
-
-    (defmacro evil-add-yneo-bindings (keymap &optional state &rest bindings)
-      "Add \"y\", \"n\", \"e\", \"o\" bindings to KEYMAP in STATE.
-  Add additional BINDINGS if specified."
-      (declare (indent defun))
-      `(evil-define-key ,state ,keymap
-         "y" (lookup-key evil-motion-state-map "y")
-         "n" (lookup-key evil-motion-state-map "n")
-         "e" (lookup-key evil-motion-state-map "e")
-         "o" (lookup-key evil-motion-state-map "o")
-         ":" (lookup-key evil-motion-state-map ":")
-         ,@bindings))
-    (add-hook 'Info-mode-hook (lambda () (evil-add-yneo-bindings Info-mode-map 'normal)))
-
+    <<evil-collection-workman>>
     (evil-collection-init))
+#+END_SRC
+
+** Workman Layout
+
+Use Workman bindings in evil-mode because I'm a snowflake.
+
+#+NAME: evil-collection-workman
+#+BEGIN_SRC emacs-lisp :tangle no
+  (defun workman-evil-bindings (_mode keymap &rest _rest)
+    (evil-collection-translate-key nil keymap
+      "n" "j"  "N" "J"
+      "e" "k"  "E" "K"
+      "y" "h"  "Y" "H"
+      "o" "l"  "O" "L"
+      "j" "y"  "J" "Y"
+      "k" "n"  "K" "N"
+      "h" "e"  "H" "E"
+      "l" "o"  "L" "O"))
+  (add-hook 'evil-collection-setup-hook #'workman-evil-bindings)
+
+  (workman-evil-bindings nil
+                         '(evil-motion-state-map evil-normal-state-map
+                           evil-visual-state-map evil-window-map))
+
+  (defmacro evil-add-yneo-bindings (keymap &optional state &rest bindings)
+    "Add \"y\", \"n\", \"e\", \"o\" bindings to KEYMAP in STATE.
+  Add additional BINDINGS if specified."
+    (declare (indent defun))
+    `(evil-define-key ,state ,keymap
+       "y" (lookup-key evil-motion-state-map "y")
+       "n" (lookup-key evil-motion-state-map "n")
+       "e" (lookup-key evil-motion-state-map "e")
+       "o" (lookup-key evil-motion-state-map "o")
+       ":" (lookup-key evil-motion-state-map ":")
+       ,@bindings))
+  (add-hook 'Info-mode-hook (lambda () (evil-add-yneo-bindings Info-mode-map 'normal)))
 #+END_SRC
 
 ** which-key
