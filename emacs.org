@@ -634,3 +634,9 @@ Magit is the best porcelain for git.
 #+END_SRC
 
 ** sh
+** Vimscript
+
+#+BEGIN_SRC emacs-lisp
+  (use-package vimrc-mode
+    :mode ("\\.vim\\(rc\\)?\\'" . vimrc-mode))
+#+END_SRC
