@@ -300,7 +300,7 @@ Evil is an extensible vi layer for Emacs.
     :after evil
     :config
     (defun workman-evil-bindings (state keymap &rest _rest)
-      (evil-collection-translate-key state keymap
+      (evil-collection-translate-key nil keymap
         "n" "j"  "N" "J"
         "e" "k"  "E" "K"
         "y" "h"  "Y" "H"
@@ -313,11 +313,6 @@ Evil is an extensible vi layer for Emacs.
     (workman-evil-bindings nil
                            '(evil-motion-state-map evil-normal-state-map
                              evil-visual-state-map evil-window-map))
-
-    ;; (define-key evil-inner-text-objects-map "l"    'evil-inner-symbol)
-    ;; (define-key evil-inner-text-objects-map "o"    nil)
-    ;; (define-key evil-outer-text-objects-map "l"    'evil-a-symbol)
-    ;; (define-key evil-outer-text-objects-map "o"    nil)
 
     (defmacro evil-add-yneo-bindings (keymap &optional state &rest bindings)
       "Add \"y\", \"n\", \"e\", \"o\" bindings to KEYMAP in STATE.
