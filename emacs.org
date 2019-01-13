@@ -303,43 +303,82 @@ Integrate evil with much of the rest of Emacs.
     (evil-collection-init))
 #+END_SRC
 
-** Workman Layout
+** Leader Keys
 
-Use Workman bindings in evil-mode because I'm a snowflake.
+Use general.el to manage keybindings more easily and set up
+Spacemacs-like leader keys.
 
-#+NAME: evil-collection-workman
-#+BEGIN_SRC emacs-lisp :tangle no
-  (defun workman-evil-bindings (_mode keymap &rest _rest)
-    (evil-collection-translate-key nil keymap
-      "n" "j"  "N" "J"
-      "e" "k"  "E" "K"
-      "y" "h"  "Y" "H"
-      "o" "l"  "O" "L"
-      "j" "y"  "J" "Y"
-      "k" "n"  "K" "N"
-      "h" "e"  "H" "E"
-      "l" "o"  "L" "O"))
-  (add-hook 'evil-collection-setup-hook #'workman-evil-bindings)
+#+BEGIN_SRC emacs-lisp
+  (use-package general
+    :config
+    (general-override-mode 1)
 
-  (workman-evil-bindings nil
-                         '(evil-motion-state-map evil-normal-state-map
-                           evil-visual-state-map evil-window-map))
+    (defun find-emacs-config ()
+      "Edit my Emacs configuration file in the current window."
+      (interactive)
+      (find-file-existing "~/lib/emacs.org"))
 
-  (defmacro evil-add-yneo-bindings (keymap &optional state &rest bindings)
-    "Add \"y\", \"n\", \"e\", \"o\" bindings to KEYMAP in STATE.
-  Add additional BINDINGS if specified."
-    (declare (indent defun))
-    `(evil-define-key ,state ,keymap
-       "y" (lookup-key evil-motion-state-map "y")
-       "n" (lookup-key evil-motion-state-map "n")
-       "e" (lookup-key evil-motion-state-map "e")
-       "o" (lookup-key evil-motion-state-map "o")
-       ":" (lookup-key evil-motion-state-map ":")
-       ,@bindings))
-  (add-hook 'Info-mode-hook (lambda () (evil-add-yneo-bindings Info-mode-map 'normal)))
+    (defun reload-emacs-config ()
+      "Reload my Emacs configuration."
+      (interactive)
+      (require 'org)
+      (org-babel-tangle-file "~/lib/emacs.org")
+      (load-file user-init-file))
+
+    (general-create-definer tyrant-def
+      :states '(normal visual insert motion emacs)
+      :prefix "SPC"
+      :non-normal-prefix "C-SPC")
+
+    (tyrant-def
+     ""    nil
+
+     "a"   '(:ignore t :which-key "app")
+     "ac"  'calc
+     "ad"  'dired
+     "ak"  'list-packages
+     "aP"  'proced
+     "as"  '(:ignore t :which-key "shell")
+     "asi" 'shell
+     "ase" 'eshell
+
+     "b"   '(:ignore t :which-key "buffer")
+     "bb"  'buffer-menu
+     "bd"  'evil-delete-buffer
+
+     "f"   '(:ignore t :which-key "file")
+     "ff"  'find-file
+     "fe"  '(:ignore t :which-key "emacs")
+     "fec" 'find-emacs-config
+     "fer" 'reload-emacs-config
+
+     "h"   '(:ignore t :which-key "help")
+     "hh"  'help
+     "hi"  'info
+     "hm"  '(woman :which-key "man")
+
+     "q"   '(:ignore t :which-key "quit")
+     "qq"  'kill-emacs
+
+     "w"   '(evil-window-map :which-key "window")))
 #+END_SRC
 
-** which-key
+Restart Emacs.
+
+#+BEGIN_SRC emacs-lisp
+  (use-package restart-emacs
+    :commands restart-emacs
+    :general (tyrant-def "qr" 'reload-and-restart-emacs)
+    :config
+    (defun reload-and-restart-emacs ()
+      "Reload Emacs configuration and restart Emacs."
+      (interactive)
+      (reload-emacs-config)
+      ;; (setq restart-emacs-restore-frames t)
+      (restart-emacs)))
+#+END_SRC
+
+** Keybinding Popup
 
 Show a popup with completions for partially-entered keybindings.
 
@@ -383,42 +422,40 @@ Edit text with multiple cursors. Disabled for now until I figure out bindings.
     (global-evil-mc-mode 1))
 #+END_SRC
 
-** Ex Commands
+** Workman Layout
 
-Tangle an org-babel file.
+Use Workman bindings in evil-mode because I'm a snowflake.
 
-#+BEGIN_SRC emacs-lisp
-  (evil-define-command evil-tangle (file)
-    (interactive "<f>")
-    (require 'org)
-    (if file
-        (org-babel-tangle-file file)
-        (org-babel-tangle)))
-  (evil-ex-define-cmd "tangle" 'evil-tangle)
-#+END_SRC
+#+NAME: evil-collection-workman
+#+BEGIN_SRC emacs-lisp :tangle no
+  (defun workman-evil-bindings (_mode keymap &rest _rest)
+    (evil-collection-translate-key nil keymap
+      "n" "j"  "N" "J"
+      "e" "k"  "E" "K"
+      "y" "h"  "Y" "H"
+      "o" "l"  "O" "L"
+      "j" "y"  "J" "Y"
+      "k" "n"  "K" "N"
+      "h" "e"  "H" "E"
+      "l" "o"  "L" "O"))
+  (add-hook 'evil-collection-setup-hook #'workman-evil-bindings)
 
-Tangle and reload Emacs config.
+  (workman-evil-bindings nil
+                         '(evil-motion-state-map evil-normal-state-map
+                           evil-visual-state-map evil-window-map))
 
-#+BEGIN_SRC emacs-lisp
-  (evil-define-command evil-reload ()
-    (require 'org)
-    (org-babel-tangle-file "~/lib/emacs.org")
-    (load-file user-init-file))
-  (evil-ex-define-cmd "reload" 'evil-reload)
-#+END_SRC
-
-Restart Emacs.
-
-#+BEGIN_SRC emacs-lisp
-  (use-package restart-emacs
-    :commands restart-emacs)
-
-  (evil-define-command evil-restart ()
-    (require 'org)
-    (org-babel-tangle-file "~/lib/emacs.org")
-    ;; (setq restart-emacs-restore-frames t)
-    (restart-emacs))
-  (evil-ex-define-cmd "restart" 'evil-restart)
+  (defmacro evil-add-yneo-bindings (keymap &optional state &rest bindings)
+    "Add \"y\", \"n\", \"e\", \"o\" bindings to KEYMAP in STATE.
+  Add additional BINDINGS if specified."
+    (declare (indent defun))
+    `(evil-define-key ,state ,keymap
+       "y" (lookup-key evil-motion-state-map "y")
+       "n" (lookup-key evil-motion-state-map "n")
+       "e" (lookup-key evil-motion-state-map "e")
+       "o" (lookup-key evil-motion-state-map "o")
+       ":" (lookup-key evil-motion-state-map ":")
+       ,@bindings))
+  (add-hook 'Info-mode-hook (lambda () (evil-add-yneo-bindings Info-mode-map 'normal)))
 #+END_SRC
 
 * Org Mode
@@ -539,8 +576,11 @@ Magit is the best porcelain for git.
 
 #+BEGIN_SRC emacs-lisp
   (use-package magit
-    :bind (:map evil-motion-state-map
-           ("gs" . magit-status)))
+    :general
+    (tyrant-def
+      "g"  '(:ignore t :which-key "git")
+      "gm" 'magit-dispatch-popup
+      "gs" 'magit-status))
 
   (use-package evil-magit
     :after (evil evil-collection magit)
