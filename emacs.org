@@ -576,6 +576,7 @@ Magit is the best porcelain for git.
 
 #+BEGIN_SRC emacs-lisp
   (use-package magit
+    :diminish auto-revert-mode
     :general
     (tyrant-def
       "g"  '(:ignore t :which-key "git")
