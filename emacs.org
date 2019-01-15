@@ -293,6 +293,94 @@ Evil is an extensible vi layer for Emacs.
     (evil-mode 1))
 #+END_SRC
 
+** Workman Layout
+
+I need to use Workman bindings in evil-mode because I'm a snowflake.
+
+#+BEGIN_SRC emacs-lisp
+  (setq evil-workman (file-exists-p "~/.workman"))
+#+END_SRC
+
+Define the keys to translate.
+
+#+BEGIN_SRC emacs-lisp
+  (defvar workman-base-translations
+    (list "n" "j"
+          "e" "k"
+          "y" "h"
+          "o" "l"
+          "j" "y"
+          "k" "n"
+          "h" "e"
+          "l" "o")
+    "The basic evil keys to translate for the Workman keyboard layout.")
+
+  (defvar workman-translations
+    (append workman-base-translations
+            (mapcar #'upcase workman-base-translations)
+            (mapcar (lambda (c) (kbd (concat "C-" c)))
+                    workman-base-translations)
+            (mapcar (lambda (c) (kbd (concat "M-" c)))
+                    workman-base-translations))
+    "Evil keys to translate for the Workman keyboard layout.")
+
+  (defvar workman-extended-translations
+    (append workman-translations
+            (mapcar (lambda (c) (kbd (concat "g" c)))
+                    workman-base-translations)
+            (mapcar (lambda (c) (kbd (concat "g" (upcase c))))
+                    workman-base-translations)
+            (mapcar (lambda (c) (kbd (concat "z" c)))
+                    workman-base-translations)
+            (mapcar (lambda (c) (kbd (concat "z" (upcase c))))
+                    workman-base-translations))
+    "Extended set of Workman key translations (for evil keymaps).")
+#+END_SRC
+
+Fix my movement keys in modes that don't translate quite right.
+
+#+BEGIN_SRC emacs-lisp
+  (defmacro evil-add-yneo-bindings (keymap &optional state &rest bindings)
+    "Add \"y\", \"n\", \"e\", \"o\" bindings to KEYMAP in STATE.
+  Add additional BINDINGS if specified."
+    (declare (indent defun))
+    `(when evil-workman
+       (evil-define-key ,state ,keymap
+         "y" (lookup-key evil-motion-state-map "y")
+         "n" (lookup-key evil-motion-state-map "n")
+         "e" (lookup-key evil-motion-state-map "e")
+         "o" (lookup-key evil-motion-state-map "o")
+         ":" (lookup-key evil-motion-state-map ":")
+         ,@bindings)))
+  (add-hook 'Info-mode-hook
+            (lambda () (evil-add-yneo-bindings Info-mode-map 'normal)))
+#+END_SRC
+
+Set up the translation in evil-collection's config.
+
+#+NAME: evil-collection-workman
+#+BEGIN_SRC emacs-lisp :tangle no
+  (defun workman-translate-keys (mode keymaps &optional states &rest _rest)
+    (let ((translations (if (or states (eq mode 'evil-mode))
+                            workman-extended-translations
+                          workman-translations)))
+      (when (and evil-workman keymaps)
+        (apply #'evil-collection-translate-key
+               states
+               keymaps
+               translations))))
+
+  (workman-translate-keys 'evil-mode
+                          '(evil-normal-state-map
+                            evil-motion-state-map
+                            evil-visual-state-map
+                            evil-window-map))
+
+  (add-hook 'evil-collection-setup-hook #'workman-translate-keys)
+#+END_SRC
+
+** Evil Integration
+
 Integrate evil with much of the rest of Emacs.
 
 #+BEGIN_SRC emacs-lisp :noweb yes
@@ -420,42 +508,6 @@ Edit text with multiple cursors. Disabled for now until I figure out bindings.
     :after evil
     :config
     (global-evil-mc-mode 1))
-#+END_SRC
-
-** Workman Layout
-
-Use Workman bindings in evil-mode because I'm a snowflake.
-
-#+NAME: evil-collection-workman
-#+BEGIN_SRC emacs-lisp :tangle no
-  (defun workman-evil-bindings (_mode keymap &rest _rest)
-    (evil-collection-translate-key nil keymap
-      "n" "j"  "N" "J"
-      "e" "k"  "E" "K"
-      "y" "h"  "Y" "H"
-      "o" "l"  "O" "L"
-      "j" "y"  "J" "Y"
-      "k" "n"  "K" "N"
-      "h" "e"  "H" "E"
-      "l" "o"  "L" "O"))
-  (add-hook 'evil-collection-setup-hook #'workman-evil-bindings)
-
-  (workman-evil-bindings nil
-                         '(evil-motion-state-map evil-normal-state-map
-                           evil-visual-state-map evil-window-map))
-
-  (defmacro evil-add-yneo-bindings (keymap &optional state &rest bindings)
-    "Add \"y\", \"n\", \"e\", \"o\" bindings to KEYMAP in STATE.
-  Add additional BINDINGS if specified."
-    (declare (indent defun))
-    `(evil-define-key ,state ,keymap
-       "y" (lookup-key evil-motion-state-map "y")
-       "n" (lookup-key evil-motion-state-map "n")
-       "e" (lookup-key evil-motion-state-map "e")
-       "o" (lookup-key evil-motion-state-map "o")
-       ":" (lookup-key evil-motion-state-map ":")
-       ,@bindings))
-  (add-hook 'Info-mode-hook (lambda () (evil-add-yneo-bindings Info-mode-map 'normal)))
 #+END_SRC
 
 * Org Mode
@@ -586,48 +638,49 @@ Magit is the best porcelain for git.
   (use-package evil-magit
     :after (evil evil-collection magit)
     :config
-    (evil-define-key '(normal visual) magit-mode-map
-      "\C-n" 'magit-section-forward
-      "gn"   'magit-section-forward-sibling
-      "\C-e" 'magit-section-backward
-      "ge"   'magit-section-backward-sibling
-      "n"    'evil-next-visual-line
-      "e"    'evil-previous-visual-line
-      "j"    nil
-      "jj"   'evil-yank-line
-      "jr"   'magit-show-refs-popup
-      "js"   'magit-copy-section-value
-      "jb"   'magit-copy-buffer-revision
-      "y"    nil
-      "/"    'evil-search-forward
-      "k"    'evil-search-next
-      "K"    'evil-search-previous)
-    (evil-define-key 'visual magit-mode-map
-      "j"    'evil-yank
-      "y"    nil)
-    (evil-define-key '(normal visual) magit-diff-mode-map
-      "gn"   'magit-section-forward)
-    (evil-define-key '(normal visual) 'magit-blob-mode-map
-      "gn"   'magit-blob-next
-      "ge"   'magit-blob-previous)
-    (evil-define-key '(normal visual) 'git-commit-mode-map
-      "gn"   'git-commit-next-message
-      "ge"   'git-commit-prev-message)
-    (evil-define-key 'normal 'magit-blame-read-only-mode-map
-      "n"    'evil-next-visual-line
-      "\C-n" 'magit-blame-next-chunk
-      "gn"   'magit-blame-next-chunk
-      "gN"   'magit-blame-next-chunk-same-commit
-      "e"    'evil-previous-visual-line
-      "\C-e" 'magit-blame-previous-chunk
-      "ge"   'magit-blame-previous-chunk
-      "gE"   'magit-blame-previous-chunk-same-commit)
-    (evil-define-key 'normal git-rebase-mode-map
-      "n"    'evil-next-visual-line
-      "e"    'evil-previous-visual-line
-      "\M-n" 'git-rebase-move-line-down
-      "\M-e" 'git-rebase-move-line-up
-      "h"    'git-rebase-edit))
+    (when evil-workman
+      (evil-define-key '(normal visual) magit-mode-map
+        "\C-n" 'magit-section-forward
+        "gn"   'magit-section-forward-sibling
+        "\C-e" 'magit-section-backward
+        "ge"   'magit-section-backward-sibling
+        "n"    'evil-next-visual-line
+        "e"    'evil-previous-visual-line
+        "j"    nil
+        "jj"   'evil-yank-line
+        "jr"   'magit-show-refs-popup
+        "js"   'magit-copy-section-value
+        "jb"   'magit-copy-buffer-revision
+        "y"    nil
+        "/"    'evil-search-forward
+        "k"    'evil-search-next
+        "K"    'evil-search-previous)
+      (evil-define-key 'visual magit-mode-map
+        "j"    'evil-yank
+        "y"    nil)
+      (evil-define-key '(normal visual) magit-diff-mode-map
+        "gn"   'magit-section-forward)
+      (evil-define-key '(normal visual) 'magit-blob-mode-map
+        "gn"   'magit-blob-next
+        "ge"   'magit-blob-previous)
+      (evil-define-key '(normal visual) 'git-commit-mode-map
+        "gn"   'git-commit-next-message
+        "ge"   'git-commit-prev-message)
+      (evil-define-key 'normal 'magit-blame-read-only-mode-map
+        "n"    'evil-next-visual-line
+        "\C-n" 'magit-blame-next-chunk
+        "gn"   'magit-blame-next-chunk
+        "gN"   'magit-blame-next-chunk-same-commit
+        "e"    'evil-previous-visual-line
+        "\C-e" 'magit-blame-previous-chunk
+        "ge"   'magit-blame-previous-chunk
+        "gE"   'magit-blame-previous-chunk-same-commit)
+      (evil-define-key 'normal git-rebase-mode-map
+        "n"    'evil-next-visual-line
+        "e"    'evil-previous-visual-line
+        "\M-n" 'git-rebase-move-line-down
+        "\M-e" 'git-rebase-move-line-up
+        "h"    'git-rebase-edit)))
 #+END_SRC
 
 * Languages
