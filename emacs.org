@@ -512,46 +512,42 @@ Edit text with multiple cursors. Disabled for now until I figure out bindings.
 
 * Org Mode
 
-** Appearance
-
-Open org documents in a folded outline view. Indent nodes to the
-appropriate level, and use real bullets instead of asterisks.
-
 #+BEGIN_SRC emacs-lisp
-  (setq org-startup-folded 'showall)
-
-  (add-hook 'org-mode-hook
-    (lambda () (org-indent-mode 1)
-               (diminish 'org-indent-mode)))
+  (use-package org
+    :diminish org-indent-mode
+    :hook (org-mode . org-indent-mode)
+    :general
+    (tyrant-def
+      "o"   '(:ignore t :which-key "org")
+      "oa"  'org-agenda
+      "oc"  'org-capture
+      "ol"  'org-store-link)
+    :config
+    (setq org-agenda-files '("~/org/")
+          org-default-notes-file (concat org-directory "/capture.org")
+          org-startup-folded 'showall
+          org-startup-with-inline-images t
+          org-todo-keywords '((sequence "TODO" "WAITING" "NEXT" "DONE"))))
 
   (use-package org-bullets
     :commands org-bullets-mode
     :hook (org-mode . org-bullets-mode))
+
+  (use-package evil-org
+    :diminish
+    :after (evil evil-collection org)
+    :hook (org-mode . evil-org-mode)
+    :config
+    (evil-org-set-key-theme)
+    (evil-define-key '(normal visual) evil-org-mode-map
+      (kbd "<backtab>") 'org-shifttab)
+    (workman-translate-keys 'org-mode
+                            'evil-org-mode-map
+                            '(normal motion visual))
+    (require 'evil-org-agenda)
+    (evil-org-agenda-set-keys)
+    (workman-translate-keys 'org-mode 'org-agenda-mode-map))
 #+END_SRC
-
-Display images inline.
-
-#+BEGIN_SRC emacs-lisp
-  (setq org-startup-with-inline-images t)
-#+END_SRC
-
-** Agenda
-
-Search my org directory for agenda items.
-
-#+BEGIN_SRC emacs-lisp
-  (setq org-agenda-files '("~/org/"))
-#+END_SRC
-
-** Task Keywords
-
-#+BEGIN_SRC emacs-lisp
-  (setq org-todo-keywords
-        '((sequence "TODO" "WAITING" "NEXT" "DONE")))
-#+END_SRC
-
-** Capture
-** Archive
 
 * Ledger
 
