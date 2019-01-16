@@ -478,8 +478,8 @@ Spacemacs-like leader keys.
      "f"   '(:ignore t :which-key "file")
      "ff"  'find-file
      "fe"  '(:ignore t :which-key "emacs")
-     "fec" 'find-emacs-config
-     "fer" 'reload-emacs-config
+     "fed" 'find-emacs-config
+     "feR" 'reload-emacs-config
 
      "h"   '(:ignore t :which-key "help")
      "ha"  'apropos-command
