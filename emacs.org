@@ -259,8 +259,8 @@ Load style settings from =.editorconfig=
 #+BEGIN_SRC emacs-lisp
   (use-package editorconfig
     :diminish
-    :commands editorconfig-mode
-    :init (add-hook 'prog-mode-hook #'editorconfig-mode))
+    :hook (prog-mode . editorconfig-mode)
+    :commands editorconfig-mode)
   #+END_SRC
 
 Automatically trim whitespace only from lines edited.
@@ -268,8 +268,8 @@ Automatically trim whitespace only from lines edited.
 #+BEGIN_SRC emacs-lisp
   (use-package ws-butler
     :diminish
-    :commands ws-butler-mode
-    :init (add-hook 'prog-mode-hook #'ws-butler-mode))
+    :hook (prog-mode . ws-butler-mode)
+    :commands ws-butler-mode)
 #+END_SRC
 
 ** Completion
@@ -560,7 +560,7 @@ Edit text with multiple cursors. Disabled for now until I figure out bindings.
 
 #+BEGIN_SRC emacs-lisp
   (use-package ledger-mode
-    :mode ("\\.ledger\\'" . ledger-mode)
+    :mode "\\.ledger\\'"
     :custom
     (ledger-post-auto-adjust-amounts t)
     (ledger-init-file-name "~/.ledgerrc")
@@ -622,7 +622,8 @@ Add some aliases.
 ** Epub Reader
 
 #+BEGIN_SRC emacs-lisp
-(use-package nov)
+  (use-package nov
+    :mode ("\\.epub\\'" . nov-mode))
 #+END_SRC
 
 * Version Control
@@ -753,5 +754,5 @@ Magit is the best porcelain for git.
 
 #+BEGIN_SRC emacs-lisp
   (use-package vimrc-mode
-    :mode ("\\.vim\\(rc\\)?\\'" . vimrc-mode))
+    :mode "\\.vim\\(rc\\)?\\'")
 #+END_SRC
