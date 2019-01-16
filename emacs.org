@@ -133,6 +133,12 @@ Set default window geometry.
               (height . 43))))
 #+END_SRC
 
+Scroll one line at a time.
+
+#+BEGIN_SRC emacs-lisp
+  (setq scroll-conservatively 10000)
+#+END_SRC
+
 Prompt for 'y' or 'n' instead of 'yes' or 'no'.
 
 #+BEGIN_SRC emacs-lisp
@@ -287,7 +293,8 @@ Evil is an extensible vi layer for Emacs.
   (use-package evil
     :diminish undo-tree-mode
     :init
-    (setq evil-want-keybinding nil)
+    (setq evil-want-keybinding nil
+          evil-want-C-u-scroll t)
     :config
     (setq evil-mode-line-format nil)
     (evil-mode 1))
