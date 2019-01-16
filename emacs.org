@@ -539,6 +539,24 @@ Use ivy for generic input completion.
     :config (counsel-mode))
 #+END_SRC
 
+*** Snippets
+
+#+BEGIN_SRC emacs-lisp
+  (use-package yasnippet
+    :diminish yas-minor-mode
+    :hook ((prog-mode org-mode) . yas-minor-mode)
+    :general
+    (tyrant-def
+      "i"   '(:ignore t :which-key "insert")
+      "is"  'yas-insert-snippet
+      "iS"  '(:ignore t :which-key "snippet")
+      "iSv" 'yas-visit-snippet-file
+      "iSn" 'yas-new-snippet))
+
+  (use-package yasnippet-snippets
+    :after yasnippet)
+#+END_SRC
+
 * Org Mode
 
 #+BEGIN_SRC emacs-lisp
