@@ -448,9 +448,18 @@ Spacemacs-like leader keys.
      "fer" 'reload-emacs-config
 
      "h"   '(:ignore t :which-key "help")
+     "ha"  'apropos-command
+     "hb"  'describe-bindings
+     "hc"  'describe-key-briefly
+     "hf"  'describe-function
+     "hF"  'describe-face
      "hh"  'help
      "hi"  'info
-     "hm"  '(woman :which-key "man")
+     "hk"  'describe-key
+     "hm"  'describe-mode
+     "hM"  'man
+     "hP"  'describe-package
+     "hv"  'describe-variable
 
      "q"   '(:ignore t :which-key "quit")
      "qq"  'kill-emacs
