@@ -274,13 +274,23 @@ Automatically trim whitespace only from lines edited.
 
 ** Completion
 
-I'll probably switch to ivy or helm soon.
+Use ivy for generic input completion.
 
 #+BEGIN_SRC emacs-lisp
-  (setq ido-everywhere t
-        ido-enable-flex-matching t
-        ido-file-extensions-order '(".org" ".scm"))
-  (ido-mode 1)
+  (use-package ivy
+    :diminish
+    :hook (after-init . ivy-mode)
+    :config
+    (setq ivy-use-virtual-buffers t
+          ivy-count-format "(%d/%d) "
+          ivy-magic-tilde nil
+          ivy-initial-inputs-alist nil
+          ivy-re-builders-alist '((t . ivy--regex-ignore-order))))
+
+  (use-package counsel
+    :diminish
+    :after ivy
+    :config (counsel-mode))
 #+END_SRC
 
 * Modal Editing
@@ -440,6 +450,7 @@ Spacemacs-like leader keys.
      "b"   '(:ignore t :which-key "buffer")
      "bb"  'buffer-menu
      "bd"  'evil-delete-buffer
+     "bm"  'ivy-switch-buffer
 
      "f"   '(:ignore t :which-key "file")
      "ff"  'find-file
