@@ -239,6 +239,8 @@ Use a blinking bar-style cursor in insert mode.
   (add-hook 'evil-insert-state-exit-hook  (lambda () (blink-cursor-mode 0)))
 #+END_SRC
 
+* Editing
+
 ** Whitespace
 
 #+BEGIN_SRC emacs-lisp
@@ -272,30 +274,7 @@ Automatically trim whitespace only from lines edited.
     :commands ws-butler-mode)
 #+END_SRC
 
-** Completion
-
-Use ivy for generic input completion.
-
-#+BEGIN_SRC emacs-lisp
-  (use-package ivy
-    :diminish
-    :hook (after-init . ivy-mode)
-    :config
-    (setq ivy-use-virtual-buffers t
-          ivy-count-format "(%d/%d) "
-          ivy-magic-tilde nil
-          ivy-initial-inputs-alist nil
-          ivy-re-builders-alist '((t . ivy--regex-ignore-order))))
-
-  (use-package counsel
-    :diminish
-    :after ivy
-    :config (counsel-mode))
-#+END_SRC
-
-* Modal Editing
-
-** Evil
+** Modal Editing
 
 Evil is an extensible vi layer for Emacs.
 
@@ -310,7 +289,7 @@ Evil is an extensible vi layer for Emacs.
     (evil-mode 1))
 #+END_SRC
 
-** Workman Layout
+*** Workman Layout
 
 I need to use Workman bindings in evil-mode because I'm a snowflake.
 
@@ -396,7 +375,7 @@ Set up the translation in evil-collection's config.
   (add-hook 'evil-collection-setup-hook #'workman-translate-keys)
 #+END_SRC
 
-** Evil Integration
+*** Integration
 
 Integrate evil with much of the rest of Emacs.
 
@@ -406,6 +385,50 @@ Integrate evil with much of the rest of Emacs.
     :config
     <<evil-collection-workman>>
     (evil-collection-init))
+#+END_SRC
+
+*** Surround
+
+Edit pairs of surroundings together, like parentheses, brackets, quotes, tags.
+
+#+BEGIN_SRC emacs-lisp
+  (use-package evil-surround
+    :after evil
+    :config
+    (global-evil-surround-mode 1))
+#+END_SRC
+
+*** Matchit
+
+Extend % to jump between matching tags or code branches.
+
+#+BEGIN_SRC emacs-lisp
+  (use-package evil-matchit
+    :after evil
+    :config
+    (global-evil-matchit-mode 1))
+#+END_SRC
+
+*** TODO Multiple Cursors
+
+Edit text with multiple cursors. Disabled for now until I figure out bindings.
+
+#+BEGIN_SRC emacs-lisp
+  (use-package evil-mc
+    :disabled
+    :after evil
+    :config
+    (global-evil-mc-mode 1))
+#+END_SRC
+
+** Keybinding Popup
+
+Show a popup with completions for partially-entered keybindings.
+
+#+BEGIN_SRC emacs-lisp
+  (use-package which-key
+    :diminish
+    :config (which-key-mode 1))
 #+END_SRC
 
 ** Leader Keys
@@ -493,48 +516,27 @@ Restart Emacs.
       (restart-emacs)))
 #+END_SRC
 
-** Keybinding Popup
+** Completion
 
-Show a popup with completions for partially-entered keybindings.
+*** Input Completion
+
+Use ivy for generic input completion.
 
 #+BEGIN_SRC emacs-lisp
-  (use-package which-key
+  (use-package ivy
     :diminish
-    :config (which-key-mode 1))
-#+END_SRC
-
-** Surround
-
-Edit pairs of surroundings together, like parentheses, brackets, quotes, tags.
-
-#+BEGIN_SRC emacs-lisp
-  (use-package evil-surround
-    :after evil
+    :hook (after-init . ivy-mode)
     :config
-    (global-evil-surround-mode 1))
-#+END_SRC
+    (setq ivy-use-virtual-buffers t
+          ivy-count-format "(%d/%d) "
+          ivy-magic-tilde nil
+          ivy-initial-inputs-alist nil
+          ivy-re-builders-alist '((t . ivy--regex-ignore-order))))
 
-** Matchit
-
-Extend % to jump between matching tags or code branches.
-
-#+BEGIN_SRC emacs-lisp
-  (use-package evil-matchit
-    :after evil
-    :config
-    (global-evil-matchit-mode 1))
-#+END_SRC
-
-** TODO Multiple Cursors
-
-Edit text with multiple cursors. Disabled for now until I figure out bindings.
-
-#+BEGIN_SRC emacs-lisp
-  (use-package evil-mc
-    :disabled
-    :after evil
-    :config
-    (global-evil-mc-mode 1))
+  (use-package counsel
+    :diminish
+    :after ivy
+    :config (counsel-mode))
 #+END_SRC
 
 * Org Mode
