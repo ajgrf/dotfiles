@@ -223,6 +223,30 @@ Highlight the line that the cursor is currently on.
   (global-hl-line-mode)
 #+END_SRC
 
+Fix describe-face when using hl-line-mode. From
+https://emacs.stackexchange.com/a/45719:
+
+#+BEGIN_SRC emacs-lisp
+  (defun my-face-at-point ()
+    (let ((face (get-text-property (point) 'face)))
+      (or (and (face-list-p face)
+               (car face))
+          (and (symbolp face)
+               face))))
+
+  (defun my-describe-face (&rest ignore)
+    (interactive (list (read-face-name "Describe face"
+                                       (or (my-face-at-point) 'default)
+                                       t)))
+    ;; This only needs to change the `interactive` spec, so:
+    nil)
+
+  (eval-after-load "hl-line"
+    '(progn
+       (advice-add 'describe-face :before #'my-describe-face)
+       (advice-add 'counsel-describe-face :before #'my-describe-face)))
+#+END_SRC
+
 Don't blink the cursor and use a separate cursor color in Emacs mode.
 
 #+BEGIN_SRC emacs-lisp
