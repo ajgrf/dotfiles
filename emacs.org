@@ -479,6 +479,7 @@ Spacemacs-like leader keys.
 
     (general-create-definer tyrant-def
       :states '(normal visual insert motion emacs)
+      :keymaps 'override
       :prefix "SPC"
       :non-normal-prefix "C-SPC")
 
