@@ -691,6 +691,13 @@ Add some aliases.
     :mode ("\\.epub\\'" . nov-mode))
 #+END_SRC
 
+** Password Manager
+
+#+BEGIN_SRC emacs-lisp
+  (use-package pass
+    :general (tyrant-def "ap" 'pass))
+#+END_SRC
+
 * Version Control
 
 Magit is the best porcelain for git.
