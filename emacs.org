@@ -494,6 +494,7 @@ Spacemacs-like leader keys.
      "as"  '(:ignore t :which-key "shell")
      "asi" 'shell
      "ase" 'eshell
+     "ast" 'ansi-term
 
      "b"   '(:ignore t :which-key "buffer")
      "bb"  'buffer-menu
