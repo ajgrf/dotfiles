@@ -674,14 +674,34 @@ Add some aliases.
     '("^/egnyte" . "/davs:focusengineering.egnyte.com:/webdav/Shared"))
 #+END_SRC
 
-** Feeds
+** Feed Aggregator
 
 #+BEGIN_SRC emacs-lisp
-  (use-package elfeed-org
-    :disabled
+  (use-package elfeed
+    :general (tyrant-def "af" 'elfeed)
     :config
     (elfeed-org)
-    (setq rmh-elfeed-org-files (list "~/feeds.org")))
+    (setq elfeed-enclosure-default-dir "~/tmp/"
+          elfeed-search-filter "@1-month-ago +unread "
+          rmh-elfeed-org-files (list (concat org-directory "/feeds.org")))
+    (add-hook 'elfeed-new-entry-hook
+              (elfeed-make-tagger :feed-title "LWN\\.net"
+                                  :entry-title '("Kernel prepatch"
+                                                 "Security-updates"
+                                                 "Weekly Edition")
+                                  :remove 'unread))
+    (add-hook 'elfeed-new-entry-hook
+              (elfeed-make-tagger :feed-title "Slate Star Codex"
+                                  :entry-title '("Link" "OT" "Thread"
+                                                 "Highlights")
+                                  :remove 'unread))
+    (add-hook 'elfeed-new-entry-hook
+              (elfeed-make-tagger :feed-title "Barbell Logic Channel"
+                                  :entry-title "^#[0-9]"
+                                  :remove 'unread)))
+
+  (use-package elfeed-org
+    :commands elfeed-org)
 #+END_SRC
 
 ** Epub Reader
