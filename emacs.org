@@ -145,6 +145,13 @@ Prompt for 'y' or 'n' instead of 'yes' or 'no'.
   (fset 'yes-or-no-p 'y-or-n-p)
 #+END_SRC
 
+Disable that infernal beep!
+
+#+BEGIN_SRC emacs-lisp
+  (setq ring-bell-function 'ignore
+        visible-bell nil)
+#+END_SRC
+
 ** Window Management
 
 Focus follows mouse.
