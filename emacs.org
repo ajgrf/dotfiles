@@ -464,6 +464,7 @@ Spacemacs-like leader keys.
   (use-package general
     :config
     (general-override-mode 1)
+    (general-auto-unbind-keys)
 
     (defun find-emacs-config ()
       "Edit my Emacs configuration file in the current window."
@@ -483,9 +484,11 @@ Spacemacs-like leader keys.
       :prefix "SPC"
       :non-normal-prefix "C-SPC")
 
-    (tyrant-def
-     ""    nil
+    (general-define-key
+      :states '(normal visual)
+      "," (general-simulate-key "SPC m"))
 
+    (tyrant-def
      "a"   '(:ignore t :which-key "app")
      "ac"  'calc
      "ad"  'dired
@@ -520,6 +523,8 @@ Spacemacs-like leader keys.
      "hM"  'man
      "hP"  'describe-package
      "hv"  'describe-variable
+
+     "m"   '(:ignore t :which-key "mode")
 
      "q"   '(:ignore t :which-key "quit")
      "qq"  'kill-emacs
@@ -595,6 +600,14 @@ Use ivy for generic input completion.
       "oa"  'org-agenda
       "oc"  'org-capture
       "ol"  'org-store-link)
+    (tyrant-def org-mode-map
+      "m'" 'org-edit-special)
+    (tyrant-def
+      :definer 'minor-mode
+      :keymaps 'org-src-mode
+      "m'" 'org-edit-src-exit
+      "mk" 'org-edit-src-abort
+      "ma" 'org-edit-src-abort)
     :config
     (setq org-agenda-files '("~/org/")
           org-default-notes-file (concat org-directory "/capture.org")
