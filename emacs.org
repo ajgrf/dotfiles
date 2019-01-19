@@ -749,6 +749,7 @@ Magit is the best porcelain for git.
     :general
     (tyrant-def
       "g"  '(:ignore t :which-key "git")
+      "gf" 'magit-file-popup
       "gm" 'magit-dispatch-popup
       "gs" 'magit-status))
 
