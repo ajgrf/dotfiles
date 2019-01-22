@@ -642,19 +642,6 @@ Use ivy for generic input completion.
     (workman-translate-keys 'org-mode 'org-agenda-mode-map))
 #+END_SRC
 
-* Ledger
-
-#+BEGIN_SRC emacs-lisp
-  (use-package ledger-mode
-    :mode "\\.ledger\\'"
-    :custom
-    (ledger-post-auto-adjust-amounts t)
-    (ledger-init-file-name "~/.ledgerrc")
-    (ledger-clear-whole-transactions t)
-    :config
-    (setq ledger-post-amount-alignment-column 52))
-#+END_SRC
-
 * Tools
 
 ** Emacs Shell
@@ -678,6 +665,81 @@ Add some aliases.
   alias edit find-file $1
   alias l ls $*
   alias mpc *mpc $*
+#+END_SRC
+
+** Ledger
+
+#+BEGIN_SRC emacs-lisp
+  (use-package ledger-mode
+    :mode "\\.ledger\\'"
+    :general
+    (tyrant-def ledger-mode-map
+      "mb"  'ledger-post-edit-amount
+      "mc"  'ledger-toggle-current
+      "md"  'ledger-delete-current-transaction
+      "mf"  'ledger-occur
+      "mi"  'ledger-add-transaction
+      "ml"  'ledger-display-ledger-stats
+      "mp"  'ledger-display-balance-at-point
+      "mr"  'ledger-reconcile
+      "mR"  'ledger-report
+      "ms"  'ledger-sort-region
+      "mt"  'ledger-insert-effective-date)
+    (tyrant-def ledger-reconcile-mode-map
+      "m," 'ledger-reconcile-toggle
+      "ma" 'ledger-reconcile-quit
+      "mi" 'ledger-reconcile-add
+      "mk" 'ledger-reconcile-quit
+      "mt" 'ledger-reconcile-change-target
+      "m RET" 'ledger-reconcile-finish)
+    (general-define-key
+     :states  '(normal visual)
+     :keymaps 'ledger-mode-map
+     "gj"  'ledger-navigate-next-xact-or-directive
+     "gk"  'ledger-navigate-prev-xact-or-directive
+     "M-j" 'ledger-navigate-next-xact-or-directive
+     "M-k" 'ledger-navigate-prev-xact-or-directive
+     "["   'ledger-navigate-prev-xact-or-directive
+     "]"   'ledger-navigate-next-xact-or-directive
+     "("   'ledger-navigate-beginning-of-xact
+     ")"   'ledger-navigate-end-of-xact
+     "="   (general-key-dispatch 'evil-indent
+             "=" 'ledger-post-align-dwim))
+    (general-define-key
+     :states  'visual
+     :keymaps 'ledger-mode-map
+     "="   'evil-indent)
+    (general-define-key
+     :states  'normal
+     :keymaps 'ledger-reconcile-mode-map
+     "gr"  'ledger-reconcile-refresh
+     "q"   'ledger-reconcile-quit
+     "ZQ"  'ledger-reconcile-quit
+     "ZZ"  'ledger-reconcile-finish)
+    (general-define-key
+     :states  'normal
+     :keymaps 'ledger-report-mode-map
+     "q"   'ledger-report-quit)
+    (workman-translate-keys 'ledger-mode
+                            'ledger-mode-map
+                            'normal)
+    :config
+    (setq ledger-init-file-name "~/.ledgerrc"
+          ledger-clear-whole-transactions t
+          ledger-post-amount-alignment-column 52
+          ledger-reconcile-buffer-line-format "%(date)s  %-30(payee)s %-25(account)s %10(amount)s\n"
+          ledger-reconcile-buffer-account-max-chars 25
+          ledger-reconcile-buffer-payee-max-chars 30)
+    (add-to-list 'ledger-reports
+                 '("month" "./bin/run-reports"))
+    (add-to-list 'ledger-reports
+                 '("mtd" "./bin/run-reports -mtd"))
+    (add-to-list 'ledger-reports
+                 '("reimbursements" "./bin/invoice-reimbursements"))
+    (add-hook 'ledger-mode-hook
+              (lambda () (mixed-pitch-mode 0)))
+    (add-hook 'ledger-reconcile-mode-hook
+              (lambda () (mixed-pitch-mode 0))))
 #+END_SRC
 
 ** File Management
