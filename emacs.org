@@ -690,7 +690,6 @@ Add some aliases.
     (tyrant-def ledger-reconcile-mode-map
       "m," 'ledger-reconcile-toggle
       "ma" 'ledger-reconcile-quit
-      "mi" 'ledger-reconcile-add
       "mk" 'ledger-reconcile-quit
       "mt" 'ledger-reconcile-change-target
       "m RET" 'ledger-reconcile-finish)
@@ -714,6 +713,10 @@ Add some aliases.
     (general-define-key
      :states  'normal
      :keymaps 'ledger-reconcile-mode-map
+     "SPC" 'ledger-reconcile-toggle
+     "a"   'ledger-reconcile-add
+     "d"   'ledger-reconcile-delete
+     "t"   'ledger-reconcile-change-target
      "gr"  'ledger-reconcile-refresh
      "q"   'ledger-reconcile-quit
      "ZQ"  'ledger-reconcile-quit
