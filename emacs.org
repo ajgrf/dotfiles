@@ -732,12 +732,13 @@ Add some aliases.
           ledger-reconcile-buffer-line-format "%(date)s  %-30(payee)s %-25(account)s %10(amount)s\n"
           ledger-reconcile-buffer-account-max-chars 25
           ledger-reconcile-buffer-payee-max-chars 30)
-    (add-to-list 'ledger-reports
-                 '("month" "./bin/run-reports"))
-    (add-to-list 'ledger-reports
-                 '("mtd" "./bin/run-reports -mtd"))
-    (add-to-list 'ledger-reports
-                 '("reimbursements" "./bin/invoice-reimbursements"))
+    (dolist (report '("summary" "balancesheet" "incomestatement" "budget"
+                      "reconciled" "reimbursements" "monthly"))
+      (add-to-list 'ledger-reports
+                   (list report
+                         (concat "./run-report.sh "
+                                 report
+                                 " --force-color -f %(ledger-file)"))))
     (add-hook 'ledger-mode-hook
               (lambda () (mixed-pitch-mode 0)))
     (add-hook 'ledger-reconcile-mode-hook
