@@ -608,11 +608,13 @@ Use ivy for generic input completion.
       "oc"  'org-capture
       "ol"  'org-store-link)
     (tyrant-def org-mode-map
-      "m'" 'org-edit-special)
+      "m," 'org-edit-special
+      "mn" 'org-toggle-narrow-to-subtree)
     (tyrant-def
       :definer 'minor-mode
       :keymaps 'org-src-mode
-      "m'" 'org-edit-src-exit
+      "m," 'org-edit-src-exit
+      "mc" 'org-edit-src-exit
       "mk" 'org-edit-src-abort
       "ma" 'org-edit-src-abort)
     :config
