@@ -507,11 +507,13 @@ Spacemacs-like leader keys.
      "ast" 'ansi-term
 
      "b"   '(:ignore t :which-key "buffer")
-     "bb"  'buffer-menu
+     "bb"  'ivy-switch-buffer
      "bd"  'evil-delete-buffer
-     "bm"  'ivy-switch-buffer
+     "bl"  'evil-switch-to-windows-last-buffer
+     "bw"  'read-only-mode
 
      "f"   '(:ignore t :which-key "file")
+     "fb"  'bookmark-jump
      "ff"  'find-file
      "fe"  '(:ignore t :which-key "emacs")
      "fed" 'find-emacs-config
@@ -534,7 +536,7 @@ Spacemacs-like leader keys.
      "m"   '(:ignore t :which-key "mode")
 
      "q"   '(:ignore t :which-key "quit")
-     "qq"  'kill-emacs
+     "qq"  'save-buffers-kill-terminal
 
      "w"   '(evil-window-map :which-key "window")))
 #+END_SRC
