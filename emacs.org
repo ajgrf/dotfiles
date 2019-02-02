@@ -772,7 +772,8 @@ Add some aliases.
     :general (tyrant-def "af" 'elfeed)
     :config
     (elfeed-org)
-    (setq elfeed-enclosure-default-dir "~/tmp/"
+    (setq elfeed-db-directory "~/.local/share/elfeed"
+          elfeed-enclosure-default-dir "~/tmp/"
           elfeed-search-filter "@1-month-ago +unread "
           rmh-elfeed-org-files (list (concat org-directory "/feeds.org")))
     (add-hook 'elfeed-new-entry-hook

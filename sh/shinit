@@ -16,12 +16,14 @@ fi
 
 alias doch='eval doas $(fc -ln -1)'
 alias feh='feh -. -Z -B black -D -10'
-alias pb='podboat'
+alias info='info --init-file "$XDG_CONFIG_HOME/info/infokey"'
+alias mbsync='mbsync -c "$XDG_CONFIG_HOME/isync/mbsyncrc"'
 alias reset='reset -Q'
 alias rg='rg --color never --no-heading'
 alias stack='stack --color never'
-alias t='todo-txt -d ~/lib/todo.cfg'
-alias nixos-rebuild='doas env NIXOS_CONFIG="$HOME/lib/nix/$HOSTNAME.nix" nixos-rebuild'
+alias tmux='tmux -f $XDG_CONFIG_HOME/tmux/tmux.conf'
+alias nixos-rebuild='doas env NIXOS_CONFIG="$HOME/.nixpkgs/$HOSTNAME.nix" nixos-rebuild'
+alias reportbug='reportbug --mode=standard --ui=text --mutt'
 
 mkcd() { mkdir -p -- "$@" && cd -- "$1"; }
 mq() { mpv --no-terminal --force-window -- "$@" & }
@@ -72,9 +74,9 @@ fi
 
 case "$KSH_VERSION" in
 *LEGACY\ KSH*|*MIRBSD\ KSH*)
-	. "$HOME/lib/sh/mkshrc"
+	. "$HOME/.mkshrc"
 	;;
 *PD\ KSH*)
-	. "$HOME/lib/sh/kshrc"
+	. "$HOME/.kshrc"
 	;;
 esac

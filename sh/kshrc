@@ -1,6 +1,6 @@
 if test -z "$ENV"; then
 	. "$HOME/.profile"
-	. "${ENV:-$HOME/lib/sh/shinit}"
+	. "${ENV:-$HOME/.shinit}"
 fi
 
-HISTFILE="$HOME/.ksh_history"
+HISTFILE="${XDG_DATA_HOME:-$HOME/.local/share}/ksh_history"

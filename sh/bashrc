@@ -1,9 +1,10 @@
 if test -z "$ENV"; then
 	test -f "$HOME/.profile" && . "$HOME/.profile"
 fi
-. "${ENV:-$HOME/lib/sh/shinit}"
+. "${ENV:-$HOME/.shinit}"
 
 shopt -s histappend
+HISTFILE="${XDG_DATA_HOME:-$HOME/.local/share}/bash_history"
 HISTFILESIZE=20000
 HISTCONTROL=ignoreboth
 

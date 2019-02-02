@@ -1,5 +1,5 @@
-source "$HOME/lib/mail/private.muttrc"
-source "$HOME/lib/mail/colors.muttrc"
+source "$XDG_CONFIG_HOME/mutt/private.muttrc"
+source "$XDG_CONFIG_HOME/mutt/colors.muttrc"
 
 # Composing
 set autoedit = yes
@@ -8,7 +8,7 @@ set forward_format = "Fwd: %s"
 set include = yes
 set reply_to = yes
 set reverse_name = yes
-set sendmail = "msmtp -C $HOME/lib/mail/msmtprc"
+set sendmail = "msmtp -C $XDG_CONFIG_HOME/msmtp/msmtprc"
 set signature = "echo '$realname\n' |"
 set sig_on_top = yes
 set use_envelope_from = yes
@@ -24,7 +24,7 @@ set sidebar_width = 12
 # Viewing
 auto_view text/html
 set index_format = "%4C %Z %{%b %d} %-15.15L %s"
-set mailcap_path = ~/lib/mail/mailcap
+set mailcap_path = ~/.config/mutt/mailcap
 set sort_aux = reverse-last-date-received
 set sort = threads
 set ts_enabled = yes

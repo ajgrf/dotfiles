@@ -4,8 +4,14 @@ set nomodeline
 " use these settings only if (argv[0] != "vi")
 if v:progname !=# "vi"
 
+  " file locations
+  set runtimepath=$XDG_CONFIG_HOME/vim,$VIM,$VIMRUNTIME
+  if !has('nvim')
+    set viminfo+=n$XDG_CACHE_HOME/vim/viminfo
+  endif
+
   " load any plugin bundles
-  call plug#begin('~/.vim/bundle')
+  call plug#begin("$XDG_DATA_HOME/vim/bundle")
   Plug 'ajgrf/parchment'
   Plug 'ajgrf/sprinkles'
   call plug#end()

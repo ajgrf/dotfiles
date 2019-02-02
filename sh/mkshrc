@@ -1,9 +1,9 @@
 if test -z "$ENV"; then
 	. "$HOME/.profile"
-	. "${ENV:-$HOME/lib/sh/shinit}"
+	. "${ENV:-$HOME/.shinit}"
 fi
 
-HISTFILE="$HOME/.mksh_history"
+HISTFILE="${XDG_DATA_HOME:-$HOME/.local/share}/mksh_history"
 
 prompt() {
 	local e="$?"  dir="${PWD}/" title="" S='$'

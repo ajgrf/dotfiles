@@ -27,4 +27,4 @@
 --convert-subs vtt
 
 # run post-processing hook
---exec '$HOME/lib/youtube-dl/postcmd.sh {}'
+--exec '${XDG_CONFIG_HOME:-$HOME/.config}/youtube-dl/postcmd.sh {}'
