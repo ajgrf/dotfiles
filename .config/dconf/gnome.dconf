@@ -1,5 +1,5 @@
 # Run the following command to apply these settings:
-# dconf load / < gnome.conf
+# dconf load / < gnome.dconf
 
 # Input Settings
 

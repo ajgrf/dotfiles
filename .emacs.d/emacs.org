@@ -476,13 +476,13 @@ Spacemacs-like leader keys.
     (defun find-emacs-config ()
       "Edit my Emacs configuration file in the current window."
       (interactive)
-      (find-file-existing "~/lib/emacs.org"))
+      (find-file-existing "~/.emacs.d/emacs.org"))
 
     (defun reload-emacs-config ()
       "Reload my Emacs configuration."
       (interactive)
       (require 'org)
-      (org-babel-tangle-file "~/lib/emacs.org")
+      (org-babel-tangle-file "~/.emacs.d/emacs.org")
       (load-file user-init-file))
 
     (general-create-definer tyrant-def
