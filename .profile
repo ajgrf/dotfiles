@@ -33,6 +33,7 @@ export PATH="$HOME/bin:$HOME/.local/bin:$PATH:$PLAN9/bin"
 export STACK_ROOT="$XDG_DATA_HOME/stack"
 export STEWPKGS="$HOME/src/stewpkgs"
 export TERMINFO_DIRS="$HOME/.local/share/terminfo"
+export VCSH_GITIGNORE=none
 export VIMINIT='let $MYVIMRC="$XDG_CONFIG_HOME/vim/init.vim" | source $MYVIMRC'
 export WEECHAT_HOME="$XDG_DATA_HOME/weechat"
 export XAUTHORITY="$XDG_CACHE_HOME/Xauthority"
