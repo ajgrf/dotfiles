@@ -76,7 +76,4 @@ case "$KSH_VERSION" in
 *LEGACY\ KSH*|*MIRBSD\ KSH*)
 	. "$HOME/.mkshrc"
 	;;
-*PD\ KSH*)
-	. "$HOME/.kshrc"
-	;;
 esac
