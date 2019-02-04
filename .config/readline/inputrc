@@ -1,0 +1,17 @@
+# Allow re-binding special terminal control characters (like C-w)
+set bind-tty-special-chars off
+
+# Redefine delete word behavior to stop at filename slashes
+"\C-w": unix-filename-rubout
+
+# PageUp/PageDown search the history for whatever you've typed so far
+"\e[5~": history-search-backward
+"\e[6~": history-search-forward
+
+# Alt-Enter pipes the current command through less
+$if bash
+	"\C-\M-j": "\C-e |less\n"
+	"\C-\M-m": "\C-e |less\n"
+
+	" ": magic-space
+$endif
