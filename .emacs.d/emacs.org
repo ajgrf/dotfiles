@@ -325,7 +325,7 @@ Evil is an extensible vi layer for Emacs.
 I need to use Workman bindings in evil-mode because I'm a snowflake.
 
 #+BEGIN_SRC emacs-lisp
-  (setq evil-workman (file-exists-p "~/.workman"))
+  (setq evil-workman (getenv "WORKMAN"))
 #+END_SRC
 
 Define the keys to translate.

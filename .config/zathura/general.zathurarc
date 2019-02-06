@@ -1,6 +1,3 @@
-# Use Workman bindings if found
-include ../../.workman/zathurarc
-
 # General
 set adjust-open             width
 set font                    "Go Mono Bold 11"

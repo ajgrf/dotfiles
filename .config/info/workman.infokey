@@ -4,16 +4,16 @@ active-link-style=red,bold
 match-style=nocolor,bold
 
 #info
-j       down-line
-k       up-line
-J       move-to-next-xref
-K       move-to-prev-xref
-h       global-prev-node
-l       global-next-node
-H       history-node
-L       next-node
-n       search-next
-N       search-previous
+n       down-line
+e       up-line
+N       move-to-next-xref
+E       move-to-prev-xref
+y       global-prev-node
+o       global-next-node
+Y       history-node
+O       next-node
+k       search-next
+K       search-previous
 
 gu      up-node
 gU      top-node

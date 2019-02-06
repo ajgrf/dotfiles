@@ -52,8 +52,4 @@ macro index,pager B |urlview\n
 macro index,pager a ":set confirmappend=no delete=yes\n<tag-prefix><save-message>=Archive\n<sync-mailbox>:set confirmappend=yes delete=ask-yes\n" "Archive"
 
 # Workman Shortcuts
-source "$HOME/.workman/muttrc"
-bind pager n      next-line
-bind pager e      previous-line
-bind pager N      next-undeleted
-bind pager E      previous-undeleted
+source "test \"$WORKMAN\" && cat $XDG_CONFIG_HOME/mutt/workman.muttrc|"

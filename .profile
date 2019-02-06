@@ -5,6 +5,8 @@ if test -e "$XDG_CONFIG_HOME/user-dirs.dirs"; then
 	. "$XDG_CONFIG_HOME/user-dirs.dirs"
 fi
 
+export WORKMAN=1
+
 export ANDROID_SDK_HOME="$XDG_DATA_HOME/android"
 export APL_LIB_ROOT="$XDG_DATA_HOME/gnu-apl"
 export BROWSER="plumb"
@@ -21,7 +23,6 @@ export INPUTRC="$XDG_CONFIG_HOME/readline/inputrc"
 export LEDGER_FILE="${XDG_DOCUMENTS_DIR:-$HOME/Documents}/Finance/all.ledger"
 export LESS="--ignore-case --no-init --quit-if-one-screen --RAW-CONTROL-CHARS "
 export LESSHISTFILE="$XDG_CACHE_HOME/less/history"
-export LESSKEY="$XDG_CONFIG_HOME/less/lesskey"
 export MANPAGER=less
 export MANWIDTH=80
 export MBLAZE="$XDG_CONFIG_HOME/mblaze"
@@ -37,6 +38,15 @@ export VCSH_GITIGNORE=none
 export VIMINIT='let $MYVIMRC="$XDG_CONFIG_HOME/vim/init.vim" | source $MYVIMRC'
 export WEECHAT_HOME="$XDG_DATA_HOME/weechat"
 export XAUTHORITY="$XDG_CACHE_HOME/Xauthority"
+
+if test "$WORKMAN"; then
+	export LESSKEY="$XDG_CONFIG_HOME/less/workman.less"
+	ln -sf workman.keys "$XDG_CONFIG_HOME/ncmpc/keys"
+	ln -sf workman.zathurarc "$XDG_CONFIG_HOME/zathura/zathurarc"
+else
+	rm -f "$XDG_CONFIG_HOME/ncmpc/keys"
+	ln -sf general.zathurarc "$XDG_CONFIG_HOME/zathura/zathurarc"
+fi
 
 unset SSH_AGENT_PID
 if test "${gnupg_SSH_AUTH_SOCK_by:-0}" -ne $$; then

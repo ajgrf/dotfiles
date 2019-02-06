@@ -8,7 +8,9 @@ vis.events.subscribe(vis.events.INIT, function()
 	vis:command('set theme parchment')
 
 	-- Use Workman bindings if needed
-	vis:command('langmap neyojkhlNEYOJKHL jkhlyneoJKHLYNEO')
+	if os.getenv('WORKMAN') == '1' then
+		vis:command('langmap neyojkhlNEYOJKHL jkhlyneoJKHLYNEO')
+	end
 end)
 
 vis.events.subscribe(vis.events.WIN_OPEN, function(win)
