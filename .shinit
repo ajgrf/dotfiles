@@ -15,7 +15,9 @@ if ! type doas >/dev/null 2>&1; then
 fi
 
 alias doch='eval doas $(fc -ln -1)'
+alias dot='vcsh dotfiles'
 alias feh='feh -. -Z -B black -D -10'
+alias emacs='emacs -nw'
 alias info='info --init-file "$XDG_CONFIG_HOME/info/infokey"'
 alias mbsync='mbsync -c "$XDG_CONFIG_HOME/isync/mbsyncrc"'
 alias reset='reset -Q'
