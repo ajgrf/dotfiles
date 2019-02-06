@@ -476,13 +476,13 @@ Spacemacs-like leader keys.
     (defun find-emacs-config ()
       "Edit my Emacs configuration file in the current window."
       (interactive)
-      (find-file-existing "~/.emacs.d/emacs.org"))
+      (find-file-existing "/vcsh:dotfiles:~/.emacs.d/emacs.org"))
 
     (defun reload-emacs-config ()
       "Reload my Emacs configuration."
       (interactive)
       (require 'org)
-      (org-babel-tangle-file "~/.emacs.d/emacs.org")
+      (org-babel-tangle-file "/vcsh:dotfiles:~/.emacs.d/emacs.org")
       (load-file user-init-file))
 
     (general-create-definer tyrant-def
@@ -870,6 +870,21 @@ Magit is the best porcelain for git.
         "\M-n" 'git-rebase-move-line-down
         "\M-e" 'git-rebase-move-line-up
         "h"    'git-rebase-edit)))
+#+END_SRC
+
+Add TRAMP method to integrate Magit with vcsh.
+https://github.com/magit/magit/issues/2939
+
+#+BEGIN_SRC emacs-lisp
+  (use-package tramp
+    :defer t
+    :config
+    (add-to-list 'tramp-methods
+                 '("vcsh"
+                   (tramp-login-program "vcsh")
+                   (tramp-login-args (("enter") ("%h")))
+                   (tramp-remote-shell "/bin/sh")
+                   (tramp-remote-shell-args ("-c")))))
 #+END_SRC
 
 * Languages
