@@ -9,6 +9,8 @@ if v:progname !=# "vi"
   if !has('nvim')
     set viminfo+=n$XDG_CACHE_HOME/vim/viminfo
   endif
+  " disable .netrwhist file
+  let g:netrw_dirhistmax = 0
 
   " load any plugin bundles
   call plug#begin("$XDG_DATA_HOME/vim/bundle")
@@ -16,6 +18,10 @@ if v:progname !=# "vi"
   Plug 'ajgrf/sprinkles'
   call plug#end()
 
+  " open vim-plug in new window
+  let g:plug_window = "new"
+
+  " set the xterm title
   set title
 
   " syntax highlighting settings
@@ -73,8 +79,6 @@ if v:progname !=# "vi"
   autocmd BufNewFile,BufRead *.nix setlocal tabstop=8 expandtab shiftwidth=2 softtabstop=2
   autocmd BufNewFile,BufReadPost *.md set filetype=markdown
   autocmd FileType markdown setlocal spell linebreak
-
-  let g:plug_window = "new"
 
   " use workman bindings if found
   if $WORKMAN
