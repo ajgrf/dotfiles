@@ -24,7 +24,6 @@ export LEDGER_FILE="${XDG_DOCUMENTS_DIR:-$HOME/Documents}/Finance/all.ledger"
 export LESS="--ignore-case --no-init --quit-if-one-screen --RAW-CONTROL-CHARS "
 export LESSHISTFILE="$XDG_CACHE_HOME/less/history"
 export MANPAGER=less
-export MANWIDTH=80
 export MBLAZE="$XDG_CONFIG_HOME/mblaze"
 export MU_HOME="$XDG_DATA_HOME/mu"
 export NO_COLOR=1
