@@ -715,8 +715,8 @@ Add some aliases.
     (general-define-key
      :states  'normal
      :keymaps 'ledger-reconcile-mode-map
-     "SPC" 'ledger-reconcile-toggle
      "a"   'ledger-reconcile-add
+     "c"   'ledger-reconcile-toggle
      "d"   'ledger-reconcile-delete
      "t"   'ledger-reconcile-change-target
      "gr"  'ledger-reconcile-refresh
