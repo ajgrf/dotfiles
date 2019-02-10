@@ -731,7 +731,7 @@ Add some aliases.
                             'ledger-mode-map
                             'normal)
     :config
-    (setq ledger-init-file-name "~/.ledgerrc"
+    (setq ledger-init-file-name ".ledgerrc"
           ledger-clear-whole-transactions t
           ledger-post-amount-alignment-column 52
           ledger-reconcile-buffer-line-format "%(date)s  %-30(payee)s %-25(account)s %10(amount)s\n"
@@ -744,6 +744,17 @@ Add some aliases.
                          (concat "./run-report.sh "
                                  report
                                  " --force-color -f %(ledger-file)"))))
+
+    ;; Only reconcile with real transactions
+    (defun ledger-use-real-transactions (&rest ignore)
+      (write-region "--real\n" nil ledger-init-file-name))
+    (defun ledger-use-all-transactions (&rest ignore)
+      (when (file-exists-p ledger-init-file-name)
+        (delete-file ledger-init-file-name)))
+    (advice-add 'ledger-reconcile :before #'ledger-use-real-transactions)
+    (advice-add 'ledger-reconcile-quit :after #'ledger-use-all-transactions)
+    (advice-add 'ledger-reconcile-finish :after #'ledger-use-all-transactions)
+
     (add-hook 'ledger-mode-hook
               (lambda () (mixed-pitch-mode 0)))
     (add-hook 'ledger-reconcile-mode-hook
