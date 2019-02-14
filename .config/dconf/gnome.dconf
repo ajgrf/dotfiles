@@ -4,7 +4,7 @@
 # Input Settings
 
 [org/gnome/desktop/input-sources]
-xkb-options=['shift:both_capslock_cancel', 'caps:ctrl_modifier', 'lv3:ralt_alt', 'compose:102']
+xkb-options=['shift:both_capslock_cancel', 'caps:ctrl_modifier', 'lv3:ralt_alt', 'compose:menu']
 
 [org/gnome/desktop/peripherals/touchpad]
 tap-to-click=true
