@@ -188,10 +188,15 @@ Multiple workspaces/tabs.
 
 *** Theme
 
-Leuven is a good theme for now, and the best theme for org.
+Use parchment, my own light theme inspired by Acme and Leuven.
 
 #+BEGIN_SRC emacs-lisp
-  (load-theme 'leuven)
+  (use-package parchment-theme
+    :load-path "~/src/parchment"
+    :config
+    (setq custom-safe-themes t
+          parchment-want-modify-tty-colors t)
+    (load-theme 'parchment t))
 #+END_SRC
 
 Highlight matching braces & parentheses.
