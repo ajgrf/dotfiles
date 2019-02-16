@@ -23,6 +23,7 @@ From doom-emacs and John Wiegley.
   (setq file-name-handler-alist nil
         gc-cons-threshold 402653184
         gc-cons-percentage 0.6
+        load-prefer-newer t
         package-enable-at-startup nil
         package--init-file-ensured t)
 
@@ -44,10 +45,12 @@ Use a separate file for customization system.
   (load custom-file t)
 #+END_SRC
 
-Don't litter the filesystem with backup files
+Don't litter the filesystem with backup or auto-save files.
 
 #+BEGIN_SRC emacs-lisp
   (setq make-backup-files nil)
+  (setq auto-save-file-name-transforms
+        `((".*" ,(concat user-emacs-directory "auto-save/") t)))
 #+END_SRC
 
 *** Package Management
@@ -124,6 +127,12 @@ Set the window title format.
   (setq icon-title-format frame-title-format)
 #+END_SRC
 
+Disambiguate buffer names by adding its file path to the name when needed.
+
+#+BEGIN_SRC emacs-lisp
+  (set uniquify-buffer-name-style 'forward)
+#+END_SRC
+
 Set default window geometry.
 
 #+BEGIN_SRC emacs-lisp
@@ -145,6 +154,13 @@ Prompt for 'y' or 'n' instead of 'yes' or 'no'.
   (fset 'yes-or-no-p 'y-or-n-p)
 #+END_SRC
 
+Save cursor position to resume editing files.
+
+#+BEGIN_SRC emacs-lisp
+  (setq save-place-file (concat user-emacs-directory "places"))
+  (save-place-mode 1)
+#+END_SRC
+
 Disable that infernal beep!
 
 #+BEGIN_SRC emacs-lisp
@@ -152,12 +168,21 @@ Disable that infernal beep!
         visible-bell nil)
 #+END_SRC
 
-** Terminal
-
 Enable mouse support in terminal mode.
 
 #+BEGIN_SRC emacs-lisp
   (xterm-mouse-mode 1)
+#+END_SRC
+
+Some miscellaneous settings from
+[[https://github.com/technomancy/better-defaults][better-defaults]].
+
+#+BEGIN_SRC emacs-lisp
+  (setq save-interprogram-paste-before-kill t
+        apropos-do-all t
+        mouse-yank-at-point t
+        require-final-newline t
+        ediff-window-setup-function 'ediff-setup-windows-plain)
 #+END_SRC
 
 ** Window Management
