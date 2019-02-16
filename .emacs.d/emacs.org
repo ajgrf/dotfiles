@@ -152,6 +152,14 @@ Disable that infernal beep!
         visible-bell nil)
 #+END_SRC
 
+** Terminal
+
+Enable mouse support in terminal mode.
+
+#+BEGIN_SRC emacs-lisp
+  (xterm-mouse-mode 1)
+#+END_SRC
+
 ** Window Management
 
 Focus follows mouse.
