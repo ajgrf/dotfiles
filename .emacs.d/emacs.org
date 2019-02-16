@@ -682,6 +682,14 @@ Use ivy for generic input completion.
 
 * Tools
 
+** Shell
+
+#+BEGIN_SRC emacs-lisp
+  (setq comint-password-prompt-regexp
+        (concat comint-password-prompt-regexp
+                "\\|^doas (.*@.*) password: \\'"))
+#+END_SRC
+
 ** Emacs Shell
 
 TUI commands must be listed here so they can open in a terminal emulator.
