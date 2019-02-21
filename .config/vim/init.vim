@@ -1,8 +1,8 @@
 " modelines are a possible source of vulnerabilities
 set nomodeline
 
-" use these settings only if (argv[0] != "vi")
-if v:progname !=# "vi"
+" use these settings only if (argv[0] != 'vi')
+if v:progname !=# 'vi'
 
   " file locations
   set runtimepath=$XDG_CONFIG_HOME/vim,$VIM,$VIMRUNTIME
@@ -19,14 +19,14 @@ if v:progname !=# "vi"
   call plug#end()
 
   " open vim-plug in new window
-  let g:plug_window = "new"
+  let g:plug_window = 'new'
 
   " set the xterm title
   set title
 
   " syntax highlighting settings
   syntax on
-  if $TERM ==# "linux"
+  if $TERM ==# 'linux'
     colorscheme sprinkles
   else
     colorscheme parchment
@@ -37,7 +37,7 @@ if v:progname !=# "vi"
   filetype plugin indent on
 
   " resume last cursor position
-  autocmd BufReadPost * if line("'\"") > 1 && line("'\"") <= line("$") | exe "normal! g'\"z." | endif
+  autocmd BufReadPost * if line('''"') > 1 && line('''"') <= line('$') | exe 'normal! g''"z.' | endif
 
   set path+=**
   set wildmenu
@@ -66,8 +66,8 @@ if v:progname !=# "vi"
 
   xnoremap @ :<C-u>call ExecuteMacroOverVisualRange()<CR>
   function! ExecuteMacroOverVisualRange()
-    echo "@".getcmdline()
-    execute ":'<,'>normal @".nr2char(getchar())
+    echo '@'.getcmdline()
+    execute ':''<,''>normal @'.nr2char(getchar())
   endfunction
 
   autocmd FileType vim setlocal foldmethod=marker tabstop=8 expandtab
