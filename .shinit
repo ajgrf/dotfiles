@@ -60,7 +60,7 @@ prompt() {
 
 	echo -n "${e:+$e|}${USER}@${HOSTNAME%%.*}:$(ppwd 28)${branch:+ ($branch)}$S "
 }
-PS1='$(prompt)'
+PS1='$(prompt || echo "> ")'
 
 case "$TERM" in
 xterm*|rxvt*|st*|screen*|tmux*)
