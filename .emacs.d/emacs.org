@@ -62,7 +62,8 @@ Use TLS for ELPA, and add MELPA as an additional repository.
 #+BEGIN_SRC emacs-lisp
   (setq package-archives
         '(("gnu" . "https://elpa.gnu.org/packages/")
-          ("melpa" . "https://melpa.org/packages/")))
+          ("melpa" . "https://melpa.org/packages/")
+          ("melpa-stable" . "https://stable.melpa.org/packages/")))
 #+END_SRC
 
 **** Bootstrap use-package
