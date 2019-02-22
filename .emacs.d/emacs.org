@@ -870,6 +870,7 @@ Magit is the best porcelain for git.
 
 #+BEGIN_SRC emacs-lisp
   (use-package magit
+    :pin melpa-stable
     :diminish auto-revert-mode
     :general
     (tyrant-def
@@ -879,6 +880,7 @@ Magit is the best porcelain for git.
       "gs" 'magit-status))
 
   (use-package evil-magit
+    :pin melpa-stable
     :after (evil evil-collection magit)
     :config
     (when evil-workman
