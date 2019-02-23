@@ -579,6 +579,8 @@ Spacemacs-like leader keys.
      "tl"  'toggle-truncate-lines
      "tm"  'mixed-pitch-mode
      "tn"  'display-line-numbers-mode
+     "ts"  'flyspell-mode
+     "tS"  'flyspell-prog-mode
      "tw"  'whitespace-mode
 
      "T"   '(:ignore t :which-key "UI toggles/themes")
@@ -646,6 +648,13 @@ Use ivy for generic input completion.
 
   (use-package yasnippet-snippets
     :after yasnippet)
+#+END_SRC
+
+** Spell Check
+
+#+BEGIN_SRC emacs-lisp
+  (add-hook 'text-mode-hook 'flyspell-mode)
+  (add-hook 'prog-mode-hook 'flyspell-prog-mode)
 #+END_SRC
 
 * Org Mode
