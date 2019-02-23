@@ -539,6 +539,7 @@ Spacemacs-like leader keys.
      "asi" 'shell
      "ase" 'eshell
      "ast" 'ansi-term
+     "au"  'undo-tree-visualize
 
      "b"   '(:ignore t :which-key "buffer")
      "bb"  'ivy-switch-buffer
