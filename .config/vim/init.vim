@@ -14,8 +14,8 @@ if v:progname !=# 'vi'
 
   " load any plugin bundles
   call plug#begin("$XDG_DATA_HOME/vim/bundle")
-  Plug 'ajgrf/parchment'
-  Plug 'ajgrf/sprinkles'
+  Plug '~/src/parchment'
+  Plug '~/src/sprinkles'
   call plug#end()
 
   " open vim-plug in new window
