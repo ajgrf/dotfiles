@@ -577,6 +577,10 @@ Spacemacs-like leader keys.
      "tF"  'auto-fill-mode
      "th"  '(:ignore t :which-key "highlight")
      "thh" 'global-hl-line-mode
+     "thl" 'highlight-lines-matching-regexp
+     "thr" 'highlight-regexp
+     "thu" 'unhighlight-regexp
+     "thU" 'hi-lock-mode
      "tl"  'toggle-truncate-lines
      "tm"  'mixed-pitch-mode
      "tn"  'display-line-numbers-mode
