@@ -591,9 +591,9 @@ Spacemacs-like leader keys.
      "T"   '(:ignore t :which-key "UI toggles/themes")
      "Tf"  'fringe-foo
      "TF"  'toggle-frame-fullscreen
-     "Tl"  'load-theme
      "TM"  'toggle-frame-maximized
      "Tm"  'menu-bar-mode
+     "Ts"  'load-theme
      "Tt"  'tool-bar-mode
 
      "w"   '(evil-window-map :which-key "window")))
