@@ -616,7 +616,15 @@ Restart Emacs.
 
 ** Completion
 
-*** Input Completion
+*** Auto-Completion
+
+#+BEGIN_SRC emacs-lisp
+  (use-package company
+    :diminish
+    :hook (prog-mode . company-mode))
+#+END_SRC
+
+*** Incremental Completion
 
 Use ivy for generic input completion.
 
