@@ -715,7 +715,12 @@ keybindings.
     :config
     (evil-org-set-key-theme)
     (evil-define-key 'normal outline-mode-map
-      (kbd "TAB") 'org-cycle)
+      (kbd "TAB") 'org-cycle
+      "["  nil
+      "]"  nil
+      "]]" 'outline-next-visible-heading
+      "[[" 'outline-previous-visible-heading
+      "^"  'evil-first-non-blank)
     (evil-define-key '(normal visual) evil-org-mode-map
       (kbd "<backtab>") 'org-shifttab)
     (workman-translate-keys 'org-mode
