@@ -684,9 +684,10 @@ keybindings.
     :general
     (tyrant-def
       "o"   '(:ignore t :which-key "org")
-      "oa"  'org-agenda
+      "oa"  'org-agenda-list
       "oc"  'org-capture
-      "ol"  'org-store-link)
+      "ol"  'org-store-link
+      "oo"  'org-agenda)
     (tyrant-def org-mode-map
       "m," 'org-edit-special
       "mn" 'org-toggle-narrow-to-subtree)
