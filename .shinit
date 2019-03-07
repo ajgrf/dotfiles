@@ -55,8 +55,11 @@ ppwd() {
 prompt() {
 	local e=$?  title="" S='$'
 	test "$e" -eq 0 && e=""
-	branch=$(git symbolic-ref --short HEAD 2>/dev/null)
 	test "${USER_ID:=$(id -u)}" -eq 0 && S='#'
+
+        if type git >/dev/null 2>&1; then
+		branch=$(git symbolic-ref --short HEAD 2>/dev/null)
+	fi
 
 	echo -n "${e:+$e|}${USER}@${HOSTNAME%%.*}:$(ppwd 28)${branch:+ ($branch)}$S "
 }

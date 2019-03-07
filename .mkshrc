@@ -9,8 +9,11 @@ prompt() {
 	local e="$?"  dir="${PWD}/" title="" S='$'
 	test "$e" -eq 0 && e=""
 	dir="${dir/#$HOME\//\~/}"; dir="${dir%/}"
-	branch=$(git symbolic-ref --short HEAD 2>/dev/null)
 	test "$USER_ID" -eq 0 && S='#'
+
+        if type git >/dev/null 2>&1; then
+		branch=$(git symbolic-ref --short HEAD 2>/dev/null)
+	fi
 
 	case "$TERM" in
 	xterm*|rxvt*|st*|screen*|tmux*)

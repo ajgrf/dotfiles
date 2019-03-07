@@ -15,8 +15,11 @@ prompt() {
 	local e="$?"  dir="${PWD}/" S='$'
 	test "$e" -eq 0 && e=""
 	dir="${dir/#$HOME\//\~/}"; dir="${dir%/}"
-	branch=$(git symbolic-ref --short HEAD 2>/dev/null)
 	test "$UID" -eq 0 && S='#'
+
+        if type git >/dev/null 2>&1; then
+		branch=$(git symbolic-ref --short HEAD 2>/dev/null)
+	fi
 
 	test "${#dir}" -gt 28 && dir="...${dir:(-25)}"
 	echo -n "${e:+$e|}${USER}@${HOSTNAME%%.*}:${dir}${branch:+ ($branch)}$S "
