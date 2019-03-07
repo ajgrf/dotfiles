@@ -37,7 +37,6 @@ export TERMINFO_DIRS="$HOME/.local/share/terminfo"
 export VCSH_GITIGNORE=none
 export VIMINIT='if has("eval") | let $MYVIMRC="$XDG_CONFIG_HOME/vim/init.vim" | source $MYVIMRC | endif'
 export WEECHAT_HOME="$XDG_DATA_HOME/weechat"
-export XAUTHORITY="$XDG_CACHE_HOME/Xauthority"
 
 if test "$WORKMAN"; then
 	export LESSKEY="$XDG_CONFIG_HOME/less/workman.less"
