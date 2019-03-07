@@ -5,8 +5,10 @@ set nomodeline
 if v:progname !=# 'vi'
 
   " file locations
-  set runtimepath=$XDG_CONFIG_HOME/vim,$VIM,$VIMRUNTIME
   if !has('nvim')
+    set runtimepath-=~/.vim
+    set runtimepath-=~/.vim/after
+    set runtimepath^=$XDG_CONFIG_HOME/vim
     set viminfo+=n$XDG_CACHE_HOME/vim/viminfo
   endif
   " disable .netrwhist file
