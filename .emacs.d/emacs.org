@@ -873,6 +873,9 @@ Add some aliases.
 ** Feed Aggregator
 
 #+BEGIN_SRC emacs-lisp
+  (use-package elfeed-org
+    :commands elfeed-org)
+
   (use-package elfeed
     :general (tyrant-def "af" 'elfeed)
     :config
@@ -896,9 +899,6 @@ Add some aliases.
               (elfeed-make-tagger :feed-title "Barbell Logic Channel"
                                   :entry-title "^#[0-9]"
                                   :remove 'unread)))
-
-  (use-package elfeed-org
-    :commands elfeed-org)
 #+END_SRC
 
 ** Epub Reader
