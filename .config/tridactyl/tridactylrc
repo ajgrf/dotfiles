@@ -1,0 +1,40 @@
+" turn off persistent tridactyl settings to make it more dotfile-like
+" (commented out due to #1197 until I upgrade to tridactyl 1.14.7+)
+"sanitise tridactyllocal tridactylsync
+
+source ~/.config/tridactyl/quickmarks.tri
+
+bind gp pin
+bind --mode=ex <S-Backspace> text.kill_word
+
+" conditionally set bindings for workman keyboard layout
+jsb if(tri.native.getenv('WORKMAN')){tri.excmds.source('~/.config/tridactyl/workman.tri')}
+
+" narrow hints by typing link text, select with hint digits
+set hintfiltermode vimperator
+set hintchars 1234567890
+
+set editorcmd emacs
+set newtab about:blank
+set searchengine duckduckgo
+set wordpattern [^\s/#]+
+
+setpref browser.homepage https://duckduckgo.com/
+" restore tabs on startup
+setpref browser.startup.page 3
+" always ask for download location
+setpref browser.download.useDownloadDir false
+" prevent new tabs from stealing wm focus
+setpref browser.tabs.loadDivertedInBackground true
+setpref browser.urlbar.trimURLs false
+setpref media.eme.enabled false
+setpref browser.search.defaultenginename DuckDuckGo
+setpref browser.search.suggest.enabled false
+setpref signon.rememberSignons false
+setpref privacy.resistFingerprinting true
+
+" redirect to old reddit design
+autocmd DocStart www.reddit.com js tri.excmds.urlmodify('-t', 'www', 'old')
+
+" always open Facebook in its own container
+autocontain facebook\.com Facebook

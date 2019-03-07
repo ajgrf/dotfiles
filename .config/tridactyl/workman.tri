@@ -1,0 +1,23 @@
+bind n scrollline 10
+bind e scrollline -10
+bind y scrollpx -50
+bind o scrollpx 50
+bind Y back
+bind O forward
+bind l fillcmdline open
+bind L current_url open
+bind jj clipboard yank
+bind js clipboard yankshort
+bind jc clipboard yank
+bind jm clipboard yankmd
+bind jt clipboard title
+
+unbind j
+unbind k
+unbind h
+unbind H
+unbind yy
+unbind ys
+unbind yc
+unbind ym
+unbind yt
