@@ -10,6 +10,10 @@ bind --mode=ex <S-Backspace> text.kill_word
 " conditionally set bindings for workman keyboard layout
 jsb if(tri.native.getenv('WORKMAN')){tri.excmds.source('~/.config/tridactyl/workman.tri')}
 
+" slim down the browser interface
+guiset_quiet navbar autohide
+guiset_quiet tabs always
+
 " narrow hints by typing link text, select with hint digits
 set hintfiltermode vimperator
 set hintchars 1234567890
