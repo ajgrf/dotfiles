@@ -11,6 +11,8 @@ bind js clipboard yankshort
 bind jc clipboard yank
 bind jm clipboard yankmd
 bind jt clipboard title
+bind jd composite get_current_url | ytdl
+bind jv composite get_current_url | exclaim_quiet mpv
 
 unbind j
 unbind k
@@ -21,3 +23,5 @@ unbind ys
 unbind yc
 unbind ym
 unbind yt
+unbind yd
+unbind yv

@@ -7,6 +7,13 @@ source ~/.config/tridactyl/quickmarks.tri
 bind gp pin
 bind --mode=ex <S-Backspace> text.kill_word
 
+" download/play web videos outside the browser
+" ;v is already bound by default
+alias ytdl exclaim_quiet xterm -e ytdl
+bind ;d hint -W ytdl
+bind yd composite get_current_url | ytdl
+bind yv composite get_current_url | exclaim_quiet mpv
+
 " conditionally set bindings for workman keyboard layout
 jsb if(tri.native.getenv('WORKMAN')){tri.excmds.source('~/.config/tridactyl/workman.tri')}
 
