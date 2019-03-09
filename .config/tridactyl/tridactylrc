@@ -44,6 +44,9 @@ setpref browser.search.suggest.enabled false
 setpref signon.rememberSignons false
 setpref privacy.resistFingerprinting true
 
+" don't let sites steal focus from tridactyl
+autocmd DocLoad .* unfocus
+
 " redirect to old reddit design
 autocmd DocStart www.reddit.com js tri.excmds.urlmodify('-t', 'www', 'old')
 
