@@ -1,6 +1,9 @@
 [org/mate/desktop/session/required-components]
 windowmanager='xmonad'
 
+[org/mate/desktop/session]
+gnome-compat-startup=['smproxy']
+
 [org/mate/desktop/peripherals/kbd]
 options=['caps\tcaps:ctrl_modifier', 'lv3\tlv3:ralt_alt', 'Compose key\tcompose:menu']
 
