@@ -15,6 +15,10 @@ import           XMonad.Actions.Warp            ( banishScreen
 import           XMonad.Config.Mate             ( mateConfig )
 import           XMonad.Hooks.EwmhDesktops      ( fullscreenEventHook )
 import           XMonad.Hooks.ManageDocks       ( avoidStruts )
+import           XMonad.Hooks.Place             ( inBounds
+                                                , placeHook
+                                                , underMouse
+                                                )
 import           XMonad.Layout.LayoutHints      ( layoutHintsWithPlacement )
 import           XMonad.Layout.NoBorders        ( smartBorders )
 import           XMonad.Layout.Spacing          ( spacingRaw
@@ -30,6 +34,8 @@ main = do
     , focusedBorderColor = "#4a90d9"
     , terminal           = "xterm"
     , layoutHook         = myLayoutHook
+    , manageHook         = placeHook (inBounds (underMouse (0, 0)))
+                             <+> manageHook mateConfig
     , handleEventHook    = fullscreenEventHook
     , keys               = myKeys (isJust workmanEnv) <+> keys mateConfig
     , borderWidth        = 2
