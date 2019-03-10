@@ -21,6 +21,7 @@ import           XMonad.Hooks.Place             ( inBounds
                                                 )
 import           XMonad.Layout.LayoutHints      ( layoutHintsWithPlacement )
 import           XMonad.Layout.NoBorders        ( smartBorders )
+import           XMonad.Layout.SimplestFloat    ( simplestFloat )
 import           XMonad.Layout.Spacing          ( spacingRaw
                                                 , Border(Border)
                                                 )
@@ -51,7 +52,7 @@ myLayoutHook =
     layouts
  where
   smartSpacing x = spacingRaw True (Border x x x x) True (Border x x x x) True
-  layouts = tiled ||| Full
+  layouts = tiled ||| simplestFloat ||| Full
   tiled   = Tall nmaster delta ratio
   nmaster = 1
   delta   = 1 / 20
