@@ -20,6 +20,8 @@ import           XMonad.Hooks.Place             ( inBounds
                                                 , underMouse
                                                 )
 import           XMonad.Layout.Decoration
+import           XMonad.Layout.DraggingVisualizer
+                                                ( draggingVisualizer )
 import           XMonad.Layout.LayoutHints      ( layoutHintsWithPlacement )
 import           XMonad.Layout.NoBorders        ( smartBorders )
 import           XMonad.Layout.MouseResizableTile
@@ -31,11 +33,12 @@ import           XMonad.Layout.MouseResizableTile
                                                   , ShrinkSlave
                                                   )
                                                 )
-import           XMonad.Layout.SimpleDecoration ( simpleDeco )
 import           XMonad.Layout.SimplestFloat    ( simplestFloat )
 import           XMonad.Layout.Spacing          ( spacingRaw
                                                 , Border(Border)
                                                 )
+import           XMonad.Layout.WindowSwitcherDecoration
+                                                ( windowSwitcherDecoration )
 import qualified Data.Map                      as M
 import qualified XMonad.StackSet               as W
 
@@ -58,7 +61,8 @@ main = do
 myLayoutHook =
   -- See xmonad/xmonad-contrib#280 for smartBorders bug with
   -- multi-head/fullscreen setups.
-  ( simpleDeco shrinkText adwaitaTheme
+  ( windowSwitcherDecoration shrinkText adwaitaTheme
+    . draggingVisualizer
     . avoidStruts
     . smartBorders
     . smartSpacing 4
