@@ -22,6 +22,15 @@ import           XMonad.Hooks.Place             ( inBounds
 import           XMonad.Layout.Decoration
 import           XMonad.Layout.LayoutHints      ( layoutHintsWithPlacement )
 import           XMonad.Layout.NoBorders        ( smartBorders )
+import           XMonad.Layout.MouseResizableTile
+                                                ( mouseResizableTile
+                                                , masterFrac
+                                                , fracIncrement
+                                                , MRTMessage
+                                                  ( ExpandSlave
+                                                  , ShrinkSlave
+                                                  )
+                                                )
 import           XMonad.Layout.SimpleDecoration ( simpleDeco )
 import           XMonad.Layout.SimplestFloat    ( simplestFloat )
 import           XMonad.Layout.Spacing          ( spacingRaw
@@ -59,15 +68,15 @@ myLayoutHook =
  where
   smartSpacing x = spacingRaw True (Border x x x x) True (Border x x x x) True
   layouts = tiled ||| simplestFloat ||| Full
-  tiled   = Tall nmaster delta ratio
-  nmaster = 1
-  delta   = 1 / 20
-  ratio   = 11 / 20
+  tiled   = mouseResizableTile { masterFrac = 11 / 20, fracIncrement = 1 / 20 }
 
 myKeys isWorkman conf@(XConfig { XMonad.modMask = modMask }) =
-  M.fromList $ [((modMask, xK_slash), banishScreen LowerRight)] ++ if isWorkman
-    then workmanKeys
-    else []
+  M.fromList
+    $  [ ((modMask .|. shiftMask, xK_h), sendMessage ShrinkSlave)
+       , ((modMask .|. shiftMask, xK_l), sendMessage ExpandSlave)
+       , ((modMask, xK_slash)          , banishScreen LowerRight)
+       ]
+    ++ if isWorkman then workmanKeys else []
  where
   workmanKeys =
     [ ((modMask, xK_k)              , refresh)
@@ -77,6 +86,8 @@ myKeys isWorkman conf@(XConfig { XMonad.modMask = modMask }) =
       , ((modMask .|. shiftMask, xK_e), windows W.swapUp)
       , ((modMask, xK_y)              , sendMessage Shrink)
       , ((modMask, xK_o)              , sendMessage Expand)
+      , ((modMask .|. shiftMask, xK_y), sendMessage ShrinkSlave)
+      , ((modMask .|. shiftMask, xK_o), sendMessage ExpandSlave)
       ]
       ++ [ ( (m .|. modMask, key)
            , screenWorkspace sc >>= flip whenJust (windows . f)
