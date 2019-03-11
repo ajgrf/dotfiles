@@ -19,8 +19,10 @@ import           XMonad.Hooks.Place             ( inBounds
                                                 , placeHook
                                                 , underMouse
                                                 )
+import           XMonad.Layout.Decoration
 import           XMonad.Layout.LayoutHints      ( layoutHintsWithPlacement )
 import           XMonad.Layout.NoBorders        ( smartBorders )
+import           XMonad.Layout.SimpleDecoration ( simpleDeco )
 import           XMonad.Layout.SimplestFloat    ( simplestFloat )
 import           XMonad.Layout.Spacing          ( spacingRaw
                                                 , Border(Border)
@@ -28,26 +30,30 @@ import           XMonad.Layout.Spacing          ( spacingRaw
 import qualified Data.Map                      as M
 import qualified XMonad.StackSet               as W
 
+
 main = do
   workmanEnv <- lookupEnv "WORKMAN"
   xmonad $ mateConfig
-    { normalBorderColor  = "#b6b6b3"
-    , focusedBorderColor = "#4a90d9"
+    { normalBorderColor  = inactiveBorderColor adwaitaTheme
+    , focusedBorderColor = activeBorderColor adwaitaTheme
     , terminal           = "xterm"
     , layoutHook         = myLayoutHook
     , manageHook         = placeHook (inBounds (underMouse (0, 0)))
                              <+> manageHook mateConfig
     , handleEventHook    = fullscreenEventHook
     , keys               = myKeys (isJust workmanEnv) <+> keys mateConfig
-    , borderWidth        = 2
+    , borderWidth        = 1
     , startupHook        = startupHook mateConfig >> addEWMHFullscreen
     }
 
 myLayoutHook =
   -- See xmonad/xmonad-contrib#280 for smartBorders bug with
   -- multi-head/fullscreen setups.
-  (avoidStruts . smartBorders . smartSpacing 4 . layoutHintsWithPlacement
-      (0.5, 0.5)
+  ( simpleDeco shrinkText adwaitaTheme
+    . avoidStruts
+    . smartBorders
+    . smartSpacing 4
+    . layoutHintsWithPlacement (0.5, 0.5)
     )
     layouts
  where
@@ -78,6 +84,20 @@ myKeys isWorkman conf@(XConfig { XMonad.modMask = modMask }) =
          | (key, sc) <- zip [xK_d, xK_r, xK_w] [0 ..]
          , (f  , m ) <- [(W.view, 0), (W.shift, shiftMask)]
          ]
+
+adwaitaTheme = def { activeColor         = "#dfdcd8"
+                   , inactiveColor       = "#f6f5f4"
+                   , urgentColor         = "#f6f5f4"
+                   , activeBorderColor   = "#bfb8b1"
+                   , inactiveBorderColor = "#cdc7c2"
+                   , urgentBorderColor   = "#4a90d9"
+                   , activeTextColor     = "#2e3436"
+                   , inactiveTextColor   = "#929595"
+                   , urgentTextColor     = "#4a90d9"
+                   , fontName            = "xft:Cantarell:bold:size=11"
+                   , decoWidth           = 7680
+                   , decoHeight          = 35
+                   }
 
 -- Advertise fullscreen support in startupHook.
 -- https://github.com/xmonad/xmonad-contrib/issues/183#issuecomment-307407822
