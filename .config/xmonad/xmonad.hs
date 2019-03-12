@@ -24,6 +24,7 @@ import           XMonad.Hooks.WallpaperSetter   ( defWallpaperConf
                                                 , Wallpaper(WallpaperFix)
                                                 , WallpaperList(WallpaperList)
                                                 )
+import           XMonad.Layout.ButtonDecoration ( buttonDeco )
 import           XMonad.Layout.Decoration
 import           XMonad.Layout.DraggingVisualizer
                                                 ( draggingVisualizer )
@@ -72,8 +73,9 @@ main = do
         }
     }
 
-myLayoutHook = tiled ||| simplestFloat ||| Full
+myLayoutHook = tiled ||| float ||| Full
  where
+  float = buttonDeco shrinkText adwaitaTheme simplestFloat
   tiled =
     ( windowSwitcherDecorationWithButtons shrinkText adwaitaTheme
       . draggingVisualizer
