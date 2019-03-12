@@ -68,7 +68,7 @@ myLayoutHook = tiled ||| simplestFloat ||| Full
       -- See xmonad/xmonad-contrib#280 for smartBorders bug with
       -- multi-head/fullscreen setups.
       . smartBorders
-      . spacingRaw True (Border 4 4 4 4) True (Border 4 4 4 4) True
+      . spacingRaw True (Border 2 2 2 2) True (Border 2 2 2 2) True
       . layoutHintsWithPlacement (0.5, 0.5)
       )
       mouseResizableTile { masterFrac = 11 / 20, fracIncrement = 1 / 20 }
