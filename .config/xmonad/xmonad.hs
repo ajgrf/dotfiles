@@ -38,9 +38,11 @@ import           XMonad.Layout.Spacing          ( spacingRaw
                                                 , Border(Border)
                                                 )
 import           XMonad.Layout.WindowSwitcherDecoration
-                                                ( windowSwitcherDecoration )
+                                                ( windowSwitcherDecorationWithButtons
+                                                )
 import qualified Data.Map                      as M
 import qualified XMonad.StackSet               as W
+import           XMonad.Util.Font               ( Align(AlignRightOffset) )
 
 
 main = do
@@ -61,7 +63,7 @@ main = do
 myLayoutHook =
   -- See xmonad/xmonad-contrib#280 for smartBorders bug with
   -- multi-head/fullscreen setups.
-  ( windowSwitcherDecoration shrinkText adwaitaTheme
+  ( windowSwitcherDecorationWithButtons shrinkText adwaitaTheme
     . draggingVisualizer
     . avoidStruts
     . smartBorders
@@ -100,19 +102,22 @@ myKeys isWorkman conf@(XConfig { XMonad.modMask = modMask }) =
          , (f  , m ) <- [(W.view, 0), (W.shift, shiftMask)]
          ]
 
-adwaitaTheme = def { activeColor         = "#dfdcd8"
-                   , inactiveColor       = "#f6f5f4"
-                   , urgentColor         = "#f6f5f4"
-                   , activeBorderColor   = "#bfb8b1"
-                   , inactiveBorderColor = "#cdc7c2"
-                   , urgentBorderColor   = "#4a90d9"
-                   , activeTextColor     = "#2e3436"
-                   , inactiveTextColor   = "#929595"
-                   , urgentTextColor     = "#4a90d9"
-                   , fontName            = "xft:Cantarell:bold:size=11"
-                   , decoWidth           = 7680
-                   , decoHeight          = 35
-                   }
+adwaitaTheme = Theme
+  { activeColor         = "#dfdcd8"
+  , inactiveColor       = "#f6f5f4"
+  , urgentColor         = "#f6f5f4"
+  , activeBorderColor   = "#bfb8b1"
+  , inactiveBorderColor = "#cdc7c2"
+  , urgentBorderColor   = "#4a90d9"
+  , activeTextColor     = "#2e3436"
+  , inactiveTextColor   = "#929595"
+  , urgentTextColor     = "#4a90d9"
+  , fontName            = "xft:Cantarell:bold:size=11"
+  , decoWidth           = 7680
+  , decoHeight          = 35
+  , windowTitleAddons   = [("×", AlignRightOffset 10)]
+  , windowTitleIcons    = []
+  }
 
 -- Advertise fullscreen support in startupHook.
 -- https://github.com/xmonad/xmonad-contrib/issues/183#issuecomment-307407822
