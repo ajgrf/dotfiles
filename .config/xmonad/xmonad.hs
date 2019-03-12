@@ -17,6 +17,10 @@ import           XMonad.Hooks.ManageDocks       ( avoidStruts )
 import           XMonad.Hooks.Place             ( placeHook
                                                 , smart
                                                 )
+import           XMonad.Hooks.PositionStoreHooks
+                                                ( positionStoreManageHook
+                                                , positionStoreEventHook
+                                                )
 import           XMonad.Hooks.WallpaperSetter   ( defWallpaperConf
                                                 , wallpaperBaseDir
                                                 , wallpaperSetter
@@ -24,11 +28,13 @@ import           XMonad.Hooks.WallpaperSetter   ( defWallpaperConf
                                                 , Wallpaper(WallpaperFix)
                                                 , WallpaperList(WallpaperList)
                                                 )
+import           XMonad.Layout.BorderResize     ( borderResize )
 import           XMonad.Layout.ButtonDecoration ( buttonDeco )
 import           XMonad.Layout.Decoration
 import           XMonad.Layout.DraggingVisualizer
                                                 ( draggingVisualizer )
 import           XMonad.Layout.LayoutHints      ( hintsEventHook
+                                                , layoutHints
                                                 , layoutHintsWithPlacement
                                                 )
 import           XMonad.Layout.NoBorders        ( smartBorders )
@@ -41,7 +47,8 @@ import           XMonad.Layout.MouseResizableTile
                                                   , ShrinkSlave
                                                   )
                                                 )
-import           XMonad.Layout.SimplestFloat    ( simplestFloat )
+import           XMonad.Layout.PositionStoreFloat
+                                                ( positionStoreFloat )
 import           XMonad.Layout.Spacing          ( spacingRaw
                                                 , Border(Border)
                                                 )
@@ -60,8 +67,12 @@ main = do
     , focusedBorderColor = activeBorderColor adwaitaTheme
     , terminal           = "xterm"
     , layoutHook         = myLayoutHook
-    , manageHook = placeHook (smart (0.5, 0.5)) <+> manageHook mateConfig
-    , handleEventHook    = fullscreenEventHook <+> hintsEventHook
+    , manageHook         = placeHook (smart (0.5, 0.5))
+                           <+> positionStoreManageHook (Just adwaitaTheme)
+                           <+> manageHook mateConfig
+    , handleEventHook    = fullscreenEventHook
+                           <+> hintsEventHook
+                           <+> positionStoreEventHook
     , keys               = myKeys (isJust workmanEnv) <+> keys mateConfig
     , borderWidth        = 1
     , startupHook        = startupHook mateConfig >> addEWMHFullscreen
@@ -75,7 +86,8 @@ main = do
 
 myLayoutHook = tiled ||| float ||| Full
  where
-  float = buttonDeco shrinkText adwaitaTheme simplestFloat
+  float = (buttonDeco shrinkText adwaitaTheme . borderResize . layoutHints)
+    positionStoreFloat
   tiled =
     ( windowSwitcherDecorationWithButtons shrinkText adwaitaTheme
       . draggingVisualizer
