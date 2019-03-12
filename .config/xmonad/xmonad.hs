@@ -62,21 +62,19 @@ main = do
     , startupHook        = startupHook mateConfig >> addEWMHFullscreen
     }
 
-myLayoutHook =
-  -- See xmonad/xmonad-contrib#280 for smartBorders bug with
-  -- multi-head/fullscreen setups.
-  ( windowSwitcherDecorationWithButtons shrinkText adwaitaTheme
-    . draggingVisualizer
-    . avoidStruts
-    . smartBorders
-    . smartSpacing 4
-    . layoutHintsWithPlacement (0.5, 0.5)
-    )
-    layouts
+myLayoutHook = tiled ||| simplestFloat ||| Full
  where
-  smartSpacing x = spacingRaw True (Border x x x x) True (Border x x x x) True
-  layouts = tiled ||| simplestFloat ||| Full
-  tiled   = mouseResizableTile { masterFrac = 11 / 20, fracIncrement = 1 / 20 }
+  tiled =
+    ( windowSwitcherDecorationWithButtons shrinkText adwaitaTheme
+      . draggingVisualizer
+      . avoidStruts
+      -- See xmonad/xmonad-contrib#280 for smartBorders bug with
+      -- multi-head/fullscreen setups.
+      . smartBorders
+      . spacingRaw True (Border 4 4 4 4) True (Border 4 4 4 4) True
+      . layoutHintsWithPlacement (0.5, 0.5)
+      )
+      mouseResizableTile { masterFrac = 11 / 20, fracIncrement = 1 / 20 }
 
 myKeys isWorkman conf@(XConfig { XMonad.modMask = modMask }) =
   M.fromList
