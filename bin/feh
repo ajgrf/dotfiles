@@ -1,0 +1,30 @@
+#!/bin/sh
+
+# This script intercepts calls to feh by xmonad's WallpaperSetter module,
+# to cooperate with MATE managing the desktop background and icons.
+
+main() {
+	if test "$*" = "--no-xinerama --bg-tile --no-fehbg -"; then
+		write_curbg
+	else
+		feh "$@"
+	fi
+}
+
+write_curbg() {
+	. "${XDG_CONFIG_HOME:-$HOME/.config}/user-dirs.dirs"
+	cat >"${XDG_PICTURES_DIR:-$HOME/Pictures}/backgrounds/curbg.jpg"
+}
+
+feh() (
+	IFS=:
+	for p in $PATH; do
+		if test "$p" = "${0%/*}"; then
+			continue
+		elif test -x "$p/feh"; then
+			exec "$p/feh" "$@"
+		fi
+	done
+)
+
+main "$@"

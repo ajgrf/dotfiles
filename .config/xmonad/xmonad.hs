@@ -17,6 +17,13 @@ import           XMonad.Hooks.ManageDocks       ( avoidStruts )
 import           XMonad.Hooks.Place             ( placeHook
                                                 , smart
                                                 )
+import           XMonad.Hooks.WallpaperSetter   ( defWallpaperConf
+                                                , wallpaperBaseDir
+                                                , wallpaperSetter
+                                                , wallpapers
+                                                , Wallpaper(WallpaperFix)
+                                                , WallpaperList(WallpaperList)
+                                                )
 import           XMonad.Layout.Decoration
 import           XMonad.Layout.DraggingVisualizer
                                                 ( draggingVisualizer )
@@ -57,6 +64,12 @@ main = do
     , keys               = myKeys (isJust workmanEnv) <+> keys mateConfig
     , borderWidth        = 1
     , startupHook        = startupHook mateConfig >> addEWMHFullscreen
+    , logHook            =
+      wallpaperSetter defWallpaperConf
+        { wallpaperBaseDir = "/home/ajgrf/pics/backgrounds"
+        , wallpapers       =
+          WallpaperList [ ([i], WallpaperFix (i : ".jpg")) | i <- ['1' .. '9'] ]
+        }
     }
 
 myLayoutHook = tiled ||| simplestFloat ||| Full
