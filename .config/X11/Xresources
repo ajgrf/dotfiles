@@ -65,6 +65,7 @@ URxvt*url-launcher:      plumb
 URxvt*urgentOnBell:      true
 
 !! XTerm settings
+XTerm*bellIsUrgent:      true
 XTerm*boldColors:        false
 XTerm*dynamicColors:     true
 XTerm*eightBitInput:     false
