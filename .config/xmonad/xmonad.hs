@@ -1,3 +1,5 @@
+{-# OPTIONS_GHC -Werror -Wunused-imports #-}
+
 import           Control.Monad                  ( when
                                                 , join
                                                 )
@@ -5,9 +7,6 @@ import           Data.Maybe                     ( isJust
                                                 , maybeToList
                                                 )
 import           System.Environment             ( lookupEnv )
-import           System.Exit                    ( exitWith
-                                                , ExitCode(ExitSuccess)
-                                                )
 import           XMonad
 import           XMonad.Actions.Warp            ( banishScreen
                                                 , Corner(LowerRight)
