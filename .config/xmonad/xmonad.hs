@@ -15,9 +15,8 @@ import           XMonad.Actions.Warp            ( banishScreen
 import           XMonad.Config.Mate             ( mateConfig )
 import           XMonad.Hooks.EwmhDesktops      ( fullscreenEventHook )
 import           XMonad.Hooks.ManageDocks       ( avoidStruts )
-import           XMonad.Hooks.Place             ( inBounds
-                                                , placeHook
-                                                , underMouse
+import           XMonad.Hooks.Place             ( placeHook
+                                                , smart
                                                 )
 import           XMonad.Layout.Decoration
 import           XMonad.Layout.DraggingVisualizer
@@ -54,8 +53,7 @@ main = do
     , focusedBorderColor = activeBorderColor adwaitaTheme
     , terminal           = "xterm"
     , layoutHook         = myLayoutHook
-    , manageHook         = placeHook (inBounds (underMouse (0, 0)))
-                             <+> manageHook mateConfig
+    , manageHook = placeHook (smart (0.5, 0.5)) <+> manageHook mateConfig
     , handleEventHook    = fullscreenEventHook <+> hintsEventHook
     , keys               = myKeys (isJust workmanEnv) <+> keys mateConfig
     , borderWidth        = 1
