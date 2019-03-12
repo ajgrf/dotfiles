@@ -22,7 +22,9 @@ import           XMonad.Hooks.Place             ( inBounds
 import           XMonad.Layout.Decoration
 import           XMonad.Layout.DraggingVisualizer
                                                 ( draggingVisualizer )
-import           XMonad.Layout.LayoutHints      ( layoutHintsWithPlacement )
+import           XMonad.Layout.LayoutHints      ( hintsEventHook
+                                                , layoutHintsWithPlacement
+                                                )
 import           XMonad.Layout.NoBorders        ( smartBorders )
 import           XMonad.Layout.MouseResizableTile
                                                 ( mouseResizableTile
@@ -54,7 +56,7 @@ main = do
     , layoutHook         = myLayoutHook
     , manageHook         = placeHook (inBounds (underMouse (0, 0)))
                              <+> manageHook mateConfig
-    , handleEventHook    = fullscreenEventHook
+    , handleEventHook    = fullscreenEventHook <+> hintsEventHook
     , keys               = myKeys (isJust workmanEnv) <+> keys mateConfig
     , borderWidth        = 1
     , startupHook        = startupHook mateConfig >> addEWMHFullscreen
