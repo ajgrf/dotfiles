@@ -123,7 +123,7 @@ adwaitaTheme = Theme
   , inactiveTextColor   = "#929595"
   , urgentTextColor     = "#4a90d9"
   , fontName            = "xft:Cantarell:bold:size=11"
-  , decoWidth           = 7680
+  , decoWidth           = 400
   , decoHeight          = 35
   , windowTitleAddons   = [("×", AlignRightOffset 10)]
   , windowTitleIcons    = []
