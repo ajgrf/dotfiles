@@ -3,66 +3,37 @@
 import           Control.Monad                  ( when
                                                 , join
                                                 )
-import           Data.Map                       ( union )
+import           Data.Map                       ( fromList
+                                                , union
+                                                )
 import           Data.Maybe                     ( isJust
                                                 , maybeToList
                                                 )
 import           System.Environment             ( lookupEnv )
 import           XMonad
 import           XMonad.Actions.Plane
-import           XMonad.Actions.Warp            ( banishScreen
-                                                , Corner(LowerRight)
-                                                )
-import           XMonad.Config.Mate             ( mateConfig )
-import           XMonad.Hooks.EwmhDesktops      ( fullscreenEventHook )
-import           XMonad.Hooks.ManageDocks       ( avoidStruts )
-import           XMonad.Hooks.Place             ( placeHook
-                                                , smart
-                                                )
+import           XMonad.Actions.Warp
+import           XMonad.Config.Mate
+import           XMonad.Hooks.EwmhDesktops
+import           XMonad.Hooks.ManageDocks
+import           XMonad.Hooks.Place
 import           XMonad.Hooks.PositionStoreHooks
-                                                ( positionStoreManageHook
-                                                , positionStoreEventHook
-                                                )
-import           XMonad.Hooks.WallpaperSetter   ( defWallpaperConf
-                                                , wallpaperBaseDir
-                                                , wallpaperSetter
-                                                , wallpapers
-                                                , Wallpaper(WallpaperFix)
-                                                , WallpaperList(WallpaperList)
-                                                )
-import           XMonad.Layout.BorderResize     ( borderResize )
-import           XMonad.Layout.ButtonDecoration ( buttonDeco )
+import           XMonad.Hooks.WallpaperSetter
+import           XMonad.Layout.BorderResize
+import           XMonad.Layout.ButtonDecoration
 import           XMonad.Layout.Decoration
 import           XMonad.Layout.DraggingVisualizer
-                                                ( draggingVisualizer )
-import           XMonad.Layout.LayoutHints      ( hintsEventHook
-                                                , layoutHints
-                                                , layoutHintsWithPlacement
-                                                )
-import           XMonad.Layout.NoBorders        ( smartBorders )
+import           XMonad.Layout.LayoutHints
+import           XMonad.Layout.NoBorders
 import           XMonad.Layout.MouseResizableTile
-                                                ( mouseResizableTile
-                                                , masterFrac
-                                                , fracIncrement
-                                                , MRTMessage
-                                                  ( ExpandSlave
-                                                  , ShrinkSlave
-                                                  )
-                                                )
 import           XMonad.Layout.PositionStoreFloat
-                                                ( positionStoreFloat )
-import           XMonad.Prompt
-import           XMonad.Prompt.FuzzyMatch       ( fuzzyMatch )
-import           XMonad.Prompt.Shell            ( shellPrompt )
-import           XMonad.Layout.Spacing          ( spacingRaw
-                                                , Border(Border)
-                                                )
+import           XMonad.Layout.Spacing
 import           XMonad.Layout.WindowSwitcherDecoration
-                                                ( windowSwitcherDecorationWithButtons
-                                                )
-import qualified Data.Map                      as M
+import           XMonad.Prompt
+import           XMonad.Prompt.FuzzyMatch
+import           XMonad.Prompt.Shell
 import qualified XMonad.StackSet               as W
-import           XMonad.Util.Font               ( Align(AlignRightOffset) )
+import           XMonad.Util.Font
 
 main = do
   workmanEnv <- lookupEnv "WORKMAN"
@@ -105,8 +76,8 @@ myLayoutHook = (avoidStruts . smartBorders) (tiled ||| float ||| Full)
       mouseResizableTile { masterFrac = 11 / 20, fracIncrement = 1 / 20 }
 
 myKeys isWorkman conf@(XConfig { XMonad.modMask = modMask }) =
-  union (planeKeys (controlMask .|. mod1Mask) (Lines 3) Linear) $
-  M.fromList
+  union (planeKeys (controlMask .|. mod1Mask) (Lines 3) Linear)
+    $  fromList
     $  [ ((modMask .|. shiftMask, xK_h), sendMessage ShrinkSlave)
        , ((modMask .|. shiftMask, xK_l), sendMessage ExpandSlave)
        , ((modMask, xK_slash)          , banishScreen LowerRight)
