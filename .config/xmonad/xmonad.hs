@@ -71,6 +71,7 @@ main = do
     , layoutHook         = myLayoutHook
     , manageHook         = placeHook (smart (0.5, 0.5))
                            <+> positionStoreManageHook (Just adwaitaTheme)
+                           <+> doF avoidMaster
                            <+> manageHook mateConfig
     , handleEventHook    = fullscreenEventHook
                            <+> hintsEventHook
@@ -154,6 +155,13 @@ adwaitaXPConfig = def { fgColor           = "#2e3436"
                       , height            = 27
                       , searchPredicate   = fuzzyMatch
                       }
+
+-- Avoid the master window, but otherwise manage new windows normally.
+-- https://git.joeyh.name/index.cgi/joey/home-plus.git/tree/.xmonad/xmonad.hs.general
+avoidMaster :: W.StackSet i l a s sd -> W.StackSet i l a s sd
+avoidMaster = W.modify' $ \c -> case c of
+  W.Stack t [] (r : rs) -> W.Stack t [r] rs
+  _                     -> c
 
 -- Advertise fullscreen support in startupHook.
 -- https://github.com/xmonad/xmonad-contrib/issues/183#issuecomment-307407822
