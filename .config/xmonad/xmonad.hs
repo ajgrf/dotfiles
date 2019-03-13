@@ -49,6 +49,9 @@ import           XMonad.Layout.MouseResizableTile
                                                 )
 import           XMonad.Layout.PositionStoreFloat
                                                 ( positionStoreFloat )
+import           XMonad.Prompt
+import           XMonad.Prompt.FuzzyMatch       ( fuzzyMatch )
+import           XMonad.Prompt.Shell            ( shellPrompt )
 import           XMonad.Layout.Spacing          ( spacingRaw
                                                 , Border(Border)
                                                 )
@@ -102,6 +105,7 @@ myKeys isWorkman conf@(XConfig { XMonad.modMask = modMask }) =
     $  [ ((modMask .|. shiftMask, xK_h), sendMessage ShrinkSlave)
        , ((modMask .|. shiftMask, xK_l), sendMessage ExpandSlave)
        , ((modMask, xK_slash)          , banishScreen LowerRight)
+       , ((modMask, xK_p)              , shellPrompt adwaitaXPConfig)
        ]
     ++ if isWorkman then workmanKeys else []
  where
@@ -139,6 +143,17 @@ adwaitaTheme = Theme
   , windowTitleAddons   = [("×", AlignRightOffset 10)]
   , windowTitleIcons    = []
   }
+
+adwaitaXPConfig = def { fgColor           = "#2e3436"
+                      , bgColor           = "#f6f5f4"
+                      , fgHLight          = "#f6f5f4"
+                      , bgHLight          = "#4a90d9"
+                      , font              = "xft:Cantarell:size=11"
+                      , promptBorderWidth = 0
+                      , position          = Bottom
+                      , height            = 27
+                      , searchPredicate   = fuzzyMatch
+                      }
 
 -- Advertise fullscreen support in startupHook.
 -- https://github.com/xmonad/xmonad-contrib/issues/183#issuecomment-307407822
