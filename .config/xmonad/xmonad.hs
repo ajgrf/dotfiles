@@ -1,4 +1,4 @@
-{-# OPTIONS_GHC -Werror -Wunused-imports #-}
+{-# OPTIONS_GHC -Werror=unused-imports #-}
 
 import           Control.Monad                  ( when
                                                 , join
@@ -58,7 +58,6 @@ import           XMonad.Layout.WindowSwitcherDecoration
 import qualified Data.Map                      as M
 import qualified XMonad.StackSet               as W
 import           XMonad.Util.Font               ( Align(AlignRightOffset) )
-
 
 main = do
   workmanEnv <- lookupEnv "WORKMAN"
