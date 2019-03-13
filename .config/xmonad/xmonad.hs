@@ -108,6 +108,8 @@ myKeys isWorkman conf@(XConfig { XMonad.modMask = modMask }) =
        , ((modMask .|. shiftMask, xK_l), sendMessage ExpandSlave)
        , ((modMask, xK_slash)          , banishScreen LowerRight)
        , ((modMask, xK_p)              , shellPrompt adwaitaXPConfig)
+       , ((mod1Mask, xK_F2)            , shellPrompt adwaitaXPConfig)
+       , ((mod1Mask, xK_F4)            , kill)
        ]
     ++ if isWorkman then workmanKeys else []
  where
