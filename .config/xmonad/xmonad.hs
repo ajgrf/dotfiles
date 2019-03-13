@@ -76,6 +76,7 @@ main = do
     , handleEventHook    = fullscreenEventHook
                            <+> hintsEventHook
                            <+> positionStoreEventHook
+    , modMask            = mod1Mask
     , keys               = myKeys (isJust workmanEnv) <+> keys mateConfig
     , borderWidth        = 1
     , startupHook        = startupHook mateConfig >> addEWMHFullscreen
