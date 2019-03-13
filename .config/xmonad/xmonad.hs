@@ -84,17 +84,15 @@ main = do
         }
     }
 
-myLayoutHook = tiled ||| float ||| Full
+-- See xmonad/xmonad-contrib#280 for smartBorders bug with
+-- multi-head/fullscreen setups.
+myLayoutHook = (avoidStruts . smartBorders) (tiled ||| float ||| Full)
  where
   float = (buttonDeco shrinkText adwaitaTheme . borderResize . layoutHints)
     positionStoreFloat
   tiled =
     ( windowSwitcherDecorationWithButtons shrinkText adwaitaTheme
       . draggingVisualizer
-      . avoidStruts
-      -- See xmonad/xmonad-contrib#280 for smartBorders bug with
-      -- multi-head/fullscreen setups.
-      . smartBorders
       . spacingRaw True (Border 2 2 2 2) True (Border 2 2 2 2) True
       . layoutHintsWithPlacement (0.5, 0.5)
       )
