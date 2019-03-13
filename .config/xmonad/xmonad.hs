@@ -126,21 +126,6 @@ adwaitaTheme = Theme
 adwaitaThemeWithButtons =
   adwaitaTheme { windowTitleAddons = [("×", AlignRightOffset 10)] }
 
-adwaitaDarkTheme = adwaitaTheme
-  { activeColor         = "#2d2d2d"
-  , inactiveColor       = "#353535"
-  , urgentColor         = "#15539e"
-  , activeBorderColor   = "#070707"
-  , inactiveBorderColor = "#1c1c1c"
-  , urgentBorderColor   = "#030c17"
-  , activeTextColor     = "#eeeeec"
-  , inactiveTextColor   = "#929291"
-  , urgentTextColor     = "#ffffff"
-  }
-
-adwaitaDarkThemeWithButtons =
-  adwaitaDarkTheme { windowTitleAddons = [("×", AlignRightOffset 10)] }
-
 adwaitaXPConfig = def { fgColor           = "#2e3436"
                       , bgColor           = "#f6f5f4"
                       , fgHLight          = "#f6f5f4"
