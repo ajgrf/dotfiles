@@ -109,13 +109,13 @@ myKeys isWorkman conf@(XConfig { XMonad.modMask = modMask }) =
 adwaitaTheme = Theme
   { activeColor         = "#dfdcd8"
   , inactiveColor       = "#f6f5f4"
-  , urgentColor         = "#f6f5f4"
+  , urgentColor         = "#3584e4"
   , activeBorderColor   = "#bfb8b1"
   , inactiveBorderColor = "#cdc7c2"
-  , urgentBorderColor   = "#4a90d9"
+  , urgentBorderColor   = "#1658a7"
   , activeTextColor     = "#2e3436"
   , inactiveTextColor   = "#929595"
-  , urgentTextColor     = "#4a90d9"
+  , urgentTextColor     = "#ffffff"
   , fontName            = "xft:Cantarell:bold:size=11"
   , decoWidth           = 400
   , decoHeight          = 35
@@ -129,7 +129,7 @@ adwaitaThemeWithButtons =
 adwaitaXPConfig = def { fgColor           = "#2e3436"
                       , bgColor           = "#f6f5f4"
                       , fgHLight          = "#f6f5f4"
-                      , bgHLight          = "#4a90d9"
+                      , bgHLight          = "#3584e4"
                       , font              = "xft:Cantarell:size=11"
                       , promptBorderWidth = 0
                       , position          = Bottom
