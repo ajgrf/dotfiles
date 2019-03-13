@@ -3,11 +3,13 @@
 import           Control.Monad                  ( when
                                                 , join
                                                 )
+import           Data.Map                       ( union )
 import           Data.Maybe                     ( isJust
                                                 , maybeToList
                                                 )
 import           System.Environment             ( lookupEnv )
 import           XMonad
+import           XMonad.Actions.Plane
 import           XMonad.Actions.Warp            ( banishScreen
                                                 , Corner(LowerRight)
                                                 )
@@ -103,6 +105,7 @@ myLayoutHook = (avoidStruts . smartBorders) (tiled ||| float ||| Full)
       mouseResizableTile { masterFrac = 11 / 20, fracIncrement = 1 / 20 }
 
 myKeys isWorkman conf@(XConfig { XMonad.modMask = modMask }) =
+  union (planeKeys (controlMask .|. mod1Mask) (Lines 3) Linear) $
   M.fromList
     $  [ ((modMask .|. shiftMask, xK_h), sendMessage ShrinkSlave)
        , ((modMask .|. shiftMask, xK_l), sendMessage ExpandSlave)
