@@ -18,6 +18,7 @@ import           XMonad.Hooks.EwmhDesktops
 import           XMonad.Hooks.ManageDocks
 import           XMonad.Hooks.Place
 import           XMonad.Hooks.PositionStoreHooks
+import           XMonad.Hooks.UrgencyHook
 import           XMonad.Hooks.WallpaperSetter
 import           XMonad.Layout.BorderResize
 import           XMonad.Layout.ButtonDecoration
@@ -37,7 +38,7 @@ import           XMonad.Util.Font
 
 main = do
   workmanEnv <- lookupEnv "WORKMAN"
-  xmonad $ mateConfig
+  xmonad $ withMyUrgencyHook mateConfig
     { normalBorderColor  = inactiveBorderColor adwaitaTheme
     , focusedBorderColor = activeBorderColor adwaitaTheme
     , terminal           = "xterm"
@@ -105,6 +106,10 @@ myKeys isWorkman conf@(XConfig { XMonad.modMask = modMask }) =
          | (key, sc) <- zip [xK_d, xK_r, xK_w] [0 ..]
          , (f  , m ) <- [(W.view, 0), (W.shift, shiftMask)]
          ]
+
+withMyUrgencyHook = withUrgencyHookC
+  (borderUrgencyHook (urgentBorderColor adwaitaTheme))
+  urgencyConfig { suppressWhen = Focused }
 
 adwaitaTheme = Theme
   { activeColor         = "#dfdcd8"
