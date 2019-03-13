@@ -65,10 +65,11 @@ main = do
 -- multi-head/fullscreen setups.
 myLayoutHook = (avoidStruts . smartBorders) (tiled ||| float ||| Full)
  where
-  float = (buttonDeco shrinkText adwaitaTheme . borderResize . layoutHints)
-    positionStoreFloat
+  float =
+    (buttonDeco shrinkText adwaitaThemeWithButtons . borderResize . layoutHints)
+      positionStoreFloat
   tiled =
-    ( windowSwitcherDecorationWithButtons shrinkText adwaitaTheme
+    ( windowSwitcherDecorationWithButtons shrinkText adwaitaThemeWithButtons
       . draggingVisualizer
       . spacingRaw True (Border 2 2 2 2) True (Border 2 2 2 2) True
       . layoutHintsWithPlacement (0.5, 0.5)
@@ -118,9 +119,12 @@ adwaitaTheme = Theme
   , fontName            = "xft:Cantarell:bold:size=11"
   , decoWidth           = 400
   , decoHeight          = 35
-  , windowTitleAddons   = [("×", AlignRightOffset 10)]
+  , windowTitleAddons   = []
   , windowTitleIcons    = []
   }
+
+adwaitaThemeWithButtons =
+  adwaitaTheme { windowTitleAddons = [("×", AlignRightOffset 10)] }
 
 adwaitaXPConfig = def { fgColor           = "#2e3436"
                       , bgColor           = "#f6f5f4"
