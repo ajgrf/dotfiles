@@ -28,6 +28,7 @@ import           XMonad.Layout.ButtonDecoration
 import           XMonad.Layout.Decoration
 import           XMonad.Layout.DraggingVisualizer
 import           XMonad.Layout.LayoutHints
+import           XMonad.Layout.Maximize
 import           XMonad.Layout.Minimize
 import           XMonad.Layout.MouseResizableTile
 import           XMonad.Layout.NoBorders
@@ -76,11 +77,16 @@ myLayoutHook = (avoidStruts . smartBorders . boringWindows . minimize)
   (tiled ||| float ||| Full)
  where
   float =
-    (buttonDeco shrinkText adwaitaThemeWithButtons . borderResize . layoutHints)
+    ( buttonDeco shrinkText adwaitaThemeWithButtons
+      . maximizeWithPadding 0
+      . borderResize
+      . layoutHints
+      )
       positionStoreFloat
   tiled =
     ( windowSwitcherDecorationWithButtons shrinkText adwaitaThemeWithButtons
       . draggingVisualizer
+      . maximizeWithPadding 0
       . spacingRaw True (Border 2 2 2 2) True (Border 2 2 2 2) True
       . layoutHintsWithPlacement (0.5, 0.5)
       )
@@ -100,6 +106,7 @@ myKeys isWorkman conf@(XConfig { XMonad.modMask = modMask }) =
        , ( (modMask .|. shiftMask, xK_m)
          , withLastMinimized maximizeWindowAndFocus
          )
+       , ((mod4Mask, xK_Up), withFocused (sendMessage . maximizeRestore))
        , ((modMask, xK_slash), banishScreen LowerRight)
        , ((modMask, xK_p)    , shellPrompt adwaitaXPConfig)
        , ((mod1Mask, xK_F2)  , shellPrompt adwaitaXPConfig)
@@ -148,6 +155,7 @@ adwaitaTheme = Theme
 
 adwaitaThemeWithButtons = adwaitaTheme
   { windowTitleAddons = [ ("_" , AlignRightOffset 48)
+                        , ("[]", AlignRightOffset 25)
                         , ("×" , AlignRightOffset 10)
                         ]
   }
