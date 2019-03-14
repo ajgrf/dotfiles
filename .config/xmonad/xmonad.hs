@@ -14,6 +14,7 @@ import           XMonad
 import           XMonad.Actions.Minimize
 import           XMonad.Actions.Plane
 import           XMonad.Actions.Warp
+import           XMonad.Actions.WithAll
 import           XMonad.Config.Mate
 import           XMonad.Hooks.EwmhDesktops
 import           XMonad.Hooks.ManageDocks
@@ -102,7 +103,9 @@ myKeys isWorkman conf@(XConfig { XMonad.modMask = modMask }) =
        , ((modMask .|. shiftMask, xK_h)  , sendMessage ShrinkSlave)
        , ((modMask .|. shiftMask, xK_l)  , sendMessage ExpandSlave)
        , ((modMask, xK_m)                , withFocused minimizeWindow)
-       , ((mod4Mask, xK_m)               , withFocused minimizeWindow)
+       , ((mod4Mask, xK_d)               , withAll minimizeWindow)
+       , ((mod4Mask, xK_m)               , withAll minimizeWindow)
+       , ((mod4Mask .|. shiftMask, xK_m) , withAll maximizeWindow)
        , ( (modMask .|. shiftMask, xK_m)
          , withLastMinimized maximizeWindowAndFocus
          )
