@@ -11,6 +11,7 @@ import           Data.Maybe                     ( isJust
                                                 )
 import           System.Environment             ( lookupEnv )
 import           XMonad
+import           XMonad.Actions.GroupNavigation
 import           XMonad.Actions.Minimize
 import           XMonad.Actions.Plane
 import           XMonad.Actions.Warp
@@ -96,16 +97,14 @@ myLayoutHook = (avoidStruts . smartBorders . boringWindows . minimize)
 myKeys isWorkman conf@(XConfig { XMonad.modMask = modMask }) =
   union (planeKeys (controlMask .|. mod1Mask) (Lines 3) Linear)
     $  fromList
-    $  [ ((modMask, xK_Tab)              , focusDown)
-       , ((modMask .|. shiftMask, xK_Tab), focusUp)
-       , ((modMask, xK_j)                , focusDown)
-       , ((modMask, xK_k)                , focusUp)
-       , ((modMask .|. shiftMask, xK_h)  , sendMessage ShrinkSlave)
-       , ((modMask .|. shiftMask, xK_l)  , sendMessage ExpandSlave)
-       , ((modMask, xK_m)                , withFocused minimizeWindow)
-       , ((mod4Mask, xK_d)               , withAll minimizeWindow)
-       , ((mod4Mask, xK_m)               , withAll minimizeWindow)
-       , ((mod4Mask .|. shiftMask, xK_m) , withAll maximizeWindow)
+    $  [ ((modMask, xK_j)               , focusDown)
+       , ((modMask, xK_k)               , focusUp)
+       , ((modMask .|. shiftMask, xK_h) , sendMessage ShrinkSlave)
+       , ((modMask .|. shiftMask, xK_l) , sendMessage ExpandSlave)
+       , ((modMask, xK_m)               , withFocused minimizeWindow)
+       , ((mod4Mask, xK_d)              , withAll minimizeWindow)
+       , ((mod4Mask, xK_m)              , withAll minimizeWindow)
+       , ((mod4Mask .|. shiftMask, xK_m), withAll maximizeWindow)
        , ( (modMask .|. shiftMask, xK_m)
          , withLastMinimized maximizeWindowAndFocus
          )
@@ -114,6 +113,12 @@ myKeys isWorkman conf@(XConfig { XMonad.modMask = modMask }) =
        , ((modMask, xK_p)    , shellPrompt adwaitaXPConfig)
        , ((mod1Mask, xK_F2)  , shellPrompt adwaitaXPConfig)
        , ((mod1Mask, xK_F4)  , kill)
+       , ( (modMask, xK_Tab)
+         , nextMatch Forward (return True) <+> withFocused maximizeWindow
+         )
+       , ( (modMask .|. shiftMask, xK_Tab)
+         , nextMatch Backward (return True) <+> withFocused maximizeWindow
+         )
        ]
     ++ if isWorkman then workmanKeys else []
  where
