@@ -1,3 +1,4 @@
+{-# LANGUAGE FlexibleInstances, MultiParamTypeClasses #-}
 {-# OPTIONS_GHC -Werror=unused-imports #-}
 
 import           Control.Monad                  ( when
@@ -33,6 +34,7 @@ import           XMonad.Layout.LayoutHints
 import           XMonad.Layout.Maximize
 import           XMonad.Layout.Minimize
 import           XMonad.Layout.MouseResizableTile
+import           XMonad.Layout.MultiToggle
 import           XMonad.Layout.NoBorders
 import           XMonad.Layout.PositionStoreFloat
 import           XMonad.Layout.Spacing
@@ -79,8 +81,11 @@ myWorkspaces = ["1", "2", "3", "4", "5", "6", "7", "8", "9"]
 
 -- See xmonad/xmonad-contrib#280 for smartBorders bug with
 -- multi-head/fullscreen setups.
-myLayoutHook = (avoidStruts . smartBorders . boringWindows . minimize)
-  (tiled ||| float ||| Full)
+myLayoutHook
+  = (avoidStruts . smartBorders . boringWindows . minimize . mkToggle
+      (single HIDE)
+    )
+    (tiled ||| float ||| Full)
  where
   float =
     ( buttonDeco shrinkText adwaitaThemeWithButtons
@@ -106,7 +111,7 @@ myKeys isWorkman conf@(XConfig { XMonad.modMask = modMask }) =
        , ((modMask .|. shiftMask, xK_h) , sendMessage ShrinkSlave)
        , ((modMask .|. shiftMask, xK_l) , sendMessage ExpandSlave)
        , ((modMask, xK_m)               , withFocused minimizeWindow)
-       , ((mod4Mask, xK_d)              , withAll minimizeWindow)
+       , ((mod4Mask, xK_d)              , sendMessage $ Toggle HIDE)
        , ((mod4Mask, xK_m)              , withAll minimizeWindow)
        , ((mod4Mask .|. shiftMask, xK_m), withAll maximizeWindow)
        , ( (modMask .|. shiftMask, xK_m)
@@ -227,6 +232,19 @@ avoidMaster :: W.StackSet i l a s sd -> W.StackSet i l a s sd
 avoidMaster = W.modify' $ \c -> case c of
   W.Stack t [] (r : rs) -> W.Stack t [r] rs
   _                     -> c
+
+-- Implement "show desktop" feature by toggling an empty layout
+-- https://superuser.com/a/1082273
+
+data EmptyLayout a = EmptyLayout deriving (Show, Read)
+
+instance LayoutClass EmptyLayout a where
+    doLayout a b _ = emptyLayout a b
+    description _ = "Empty Layout"
+
+data HIDE = HIDE deriving (Read, Show, Eq, Typeable)
+instance Transformer HIDE Window where
+    transform _ x k = k (EmptyLayout) (\(EmptyLayout) -> x)
 
 -- Advertise fullscreen support in startupHook.
 -- https://github.com/xmonad/xmonad-contrib/issues/183#issuecomment-307407822
