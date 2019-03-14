@@ -59,6 +59,7 @@ main = do
                            <+> hintsEventHook
                            <+> positionStoreEventHook
                            <+> handleEventHook mateConfig
+    , workspaces         = ["1", "2", "3", "4", "5", "6", "7", "8", "9"]
     , modMask            = mod1Mask
     , keys               = myKeys (isJust workmanEnv) <+> keys mateConfig
     , borderWidth        = 1
