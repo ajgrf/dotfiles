@@ -59,20 +59,22 @@ main = do
                            <+> hintsEventHook
                            <+> positionStoreEventHook
                            <+> handleEventHook mateConfig
-    , workspaces         = ["1", "2", "3", "4", "5", "6", "7", "8", "9"]
+    , workspaces         = myWorkspaces
     , modMask            = mod1Mask
     , keys               = myKeys (isJust workmanEnv) <+> keys mateConfig
     , borderWidth        = 1
     , startupHook        = startupHook mateConfig >> addEWMHFullscreen
-    , logHook            =
-      wallpaperSetter defWallpaperConf
-          { wallpaperBaseDir = "/home/ajgrf/pics/backgrounds"
-          , wallpapers       =
-            WallpaperList
-              [ ([i], WallpaperFix (i : ".jpg")) | i <- ['1' .. '9'] ]
-          }
-        <+> logHook mateConfig
+    , logHook            = wallpaperSetter defWallpaperConf
+                               { wallpaperBaseDir = "/home/ajgrf/pics/backgrounds"
+                               , wallpapers = WallpaperList
+                                                [ (ws, WallpaperFix (show i ++ ".jpg"))
+                                                | (i, ws) <- zip [1 ..] myWorkspaces
+                                                ]
+                               }
+                             <+> logHook mateConfig
     }
+
+myWorkspaces = ["1", "2", "3", "4", "5", "6", "7", "8", "9"]
 
 -- See xmonad/xmonad-contrib#280 for smartBorders bug with
 -- multi-head/fullscreen setups.
