@@ -25,8 +25,8 @@ import           XMonad.Layout.ButtonDecoration
 import           XMonad.Layout.Decoration
 import           XMonad.Layout.DraggingVisualizer
 import           XMonad.Layout.LayoutHints
-import           XMonad.Layout.NoBorders
 import           XMonad.Layout.MouseResizableTile
+import           XMonad.Layout.NoBorders
 import           XMonad.Layout.PositionStoreFloat
 import           XMonad.Layout.Spacing
 import           XMonad.Layout.WindowSwitcherDecoration
