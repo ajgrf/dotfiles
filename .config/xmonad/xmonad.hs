@@ -50,16 +50,19 @@ main = do
     , handleEventHook    = fullscreenEventHook
                            <+> hintsEventHook
                            <+> positionStoreEventHook
+                           <+> handleEventHook mateConfig
     , modMask            = mod1Mask
     , keys               = myKeys (isJust workmanEnv) <+> keys mateConfig
     , borderWidth        = 1
     , startupHook        = startupHook mateConfig >> addEWMHFullscreen
     , logHook            =
       wallpaperSetter defWallpaperConf
-        { wallpaperBaseDir = "/home/ajgrf/pics/backgrounds"
-        , wallpapers       =
-          WallpaperList [ ([i], WallpaperFix (i : ".jpg")) | i <- ['1' .. '9'] ]
-        }
+          { wallpaperBaseDir = "/home/ajgrf/pics/backgrounds"
+          , wallpapers       =
+            WallpaperList
+              [ ([i], WallpaperFix (i : ".jpg")) | i <- ['1' .. '9'] ]
+          }
+        <+> logHook mateConfig
     }
 
 -- See xmonad/xmonad-contrib#280 for smartBorders bug with
