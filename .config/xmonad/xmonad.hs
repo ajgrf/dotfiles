@@ -50,7 +50,8 @@ main = do
     , focusedBorderColor = activeBorderColor adwaitaTheme
     , terminal           = "xterm"
     , layoutHook         = myLayoutHook
-    , manageHook         = placeHook (smart (0.5, 0.5))
+    , manageHook         = myWindowRules
+                           <+> placeHook (smart (0.5, 0.5))
                            <+> positionStoreManageHook (Just adwaitaTheme)
                            <+> doF avoidMaster
                            <+> manageHook mateConfig
@@ -142,6 +143,8 @@ myKeys isWorkman conf@(XConfig { XMonad.modMask = modMask }) =
          | (key, sc) <- zip [xK_d, xK_r, xK_w] [0 ..]
          , (f  , m ) <- [(W.view, 0), (W.shift, shiftMask)]
          ]
+
+myWindowRules = composeAll []
 
 withMyUrgencyHook = withUrgencyHookC
   (borderUrgencyHook (urgentBorderColor adwaitaTheme))
