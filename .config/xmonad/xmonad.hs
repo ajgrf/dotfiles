@@ -39,7 +39,7 @@ import           XMonad.Prompt
 import           XMonad.Prompt.FuzzyMatch
 import           XMonad.Prompt.Shell
 import qualified XMonad.StackSet               as W
-import           XMonad.Util.Font
+import           XMonad.Util.Image
 
 main = do
   workmanEnv <- lookupEnv "WORKMAN"
@@ -154,11 +154,47 @@ adwaitaTheme = Theme
   }
 
 adwaitaThemeWithButtons = adwaitaTheme
-  { windowTitleAddons = [ ("_" , AlignRightOffset 48)
-                        , ("[]", AlignRightOffset 25)
-                        , ("×" , AlignRightOffset 10)
-                        ]
+  { windowTitleIcons = [ (minimizeIcon, CenterRight 48)
+                       , (maximizeIcon, CenterRight 29)
+                       , (closeIcon   , CenterRight 10)
+                       ]
   }
+
+minimizeIcon = map
+  (map ((==) 1))
+  [ [0, 0, 0, 0, 0, 0, 0, 0]
+  , [0, 0, 0, 0, 0, 0, 0, 0]
+  , [0, 0, 0, 0, 0, 0, 0, 0]
+  , [0, 0, 0, 0, 0, 0, 0, 0]
+  , [0, 0, 0, 0, 0, 0, 0, 0]
+  , [0, 0, 0, 0, 0, 0, 0, 0]
+  , [1, 1, 1, 1, 1, 1, 1, 1]
+  , [1, 1, 1, 1, 1, 1, 1, 1]
+  ]
+
+maximizeIcon = map
+  (map ((==) 1))
+  [ [1, 1, 1, 1, 1, 1, 1, 1]
+  , [1, 1, 1, 1, 1, 1, 1, 1]
+  , [1, 1, 0, 0, 0, 0, 1, 1]
+  , [1, 1, 0, 0, 0, 0, 1, 1]
+  , [1, 1, 0, 0, 0, 0, 1, 1]
+  , [1, 1, 0, 0, 0, 0, 1, 1]
+  , [1, 1, 1, 1, 1, 1, 1, 1]
+  , [1, 1, 1, 1, 1, 1, 1, 1]
+  ]
+
+closeIcon = map
+  (map ((==) 1))
+  [ [1, 1, 0, 0, 0, 0, 1, 1]
+  , [1, 1, 1, 0, 0, 1, 1, 1]
+  , [0, 1, 1, 1, 1, 1, 1, 0]
+  , [0, 0, 1, 1, 1, 1, 0, 0]
+  , [0, 0, 1, 1, 1, 1, 0, 0]
+  , [0, 1, 1, 1, 1, 1, 1, 0]
+  , [1, 1, 1, 0, 0, 1, 1, 1]
+  , [1, 1, 0, 0, 0, 0, 1, 1]
+  ]
 
 adwaitaXPConfig = def { fgColor           = "#2e3436"
                       , bgColor           = "#f6f5f4"
