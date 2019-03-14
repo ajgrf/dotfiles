@@ -11,20 +11,24 @@ import           Data.Maybe                     ( isJust
                                                 )
 import           System.Environment             ( lookupEnv )
 import           XMonad
+import           XMonad.Actions.Minimize
 import           XMonad.Actions.Plane
 import           XMonad.Actions.Warp
 import           XMonad.Config.Mate
 import           XMonad.Hooks.EwmhDesktops
 import           XMonad.Hooks.ManageDocks
+import           XMonad.Hooks.Minimize
 import           XMonad.Hooks.Place
 import           XMonad.Hooks.PositionStoreHooks
 import           XMonad.Hooks.UrgencyHook
 import           XMonad.Hooks.WallpaperSetter
 import           XMonad.Layout.BorderResize
+import           XMonad.Layout.BoringWindows
 import           XMonad.Layout.ButtonDecoration
 import           XMonad.Layout.Decoration
 import           XMonad.Layout.DraggingVisualizer
 import           XMonad.Layout.LayoutHints
+import           XMonad.Layout.Minimize
 import           XMonad.Layout.MouseResizableTile
 import           XMonad.Layout.NoBorders
 import           XMonad.Layout.PositionStoreFloat
@@ -48,6 +52,7 @@ main = do
                            <+> doF avoidMaster
                            <+> manageHook mateConfig
     , handleEventHook    = fullscreenEventHook
+                           <+> minimizeEventHook
                            <+> hintsEventHook
                            <+> positionStoreEventHook
                            <+> handleEventHook mateConfig
@@ -67,7 +72,8 @@ main = do
 
 -- See xmonad/xmonad-contrib#280 for smartBorders bug with
 -- multi-head/fullscreen setups.
-myLayoutHook = (avoidStruts . smartBorders) (tiled ||| float ||| Full)
+myLayoutHook = (avoidStruts . smartBorders . boringWindows . minimize)
+  (tiled ||| float ||| Full)
  where
   float =
     (buttonDeco shrinkText adwaitaThemeWithButtons . borderResize . layoutHints)
@@ -83,19 +89,28 @@ myLayoutHook = (avoidStruts . smartBorders) (tiled ||| float ||| Full)
 myKeys isWorkman conf@(XConfig { XMonad.modMask = modMask }) =
   union (planeKeys (controlMask .|. mod1Mask) (Lines 3) Linear)
     $  fromList
-    $  [ ((modMask .|. shiftMask, xK_h), sendMessage ShrinkSlave)
-       , ((modMask .|. shiftMask, xK_l), sendMessage ExpandSlave)
-       , ((modMask, xK_slash)          , banishScreen LowerRight)
-       , ((modMask, xK_p)              , shellPrompt adwaitaXPConfig)
-       , ((mod1Mask, xK_F2)            , shellPrompt adwaitaXPConfig)
-       , ((mod1Mask, xK_F4)            , kill)
+    $  [ ((modMask, xK_Tab)              , focusDown)
+       , ((modMask .|. shiftMask, xK_Tab), focusUp)
+       , ((modMask, xK_j)                , focusDown)
+       , ((modMask, xK_k)                , focusUp)
+       , ((modMask .|. shiftMask, xK_h)  , sendMessage ShrinkSlave)
+       , ((modMask .|. shiftMask, xK_l)  , sendMessage ExpandSlave)
+       , ((modMask, xK_m)                , withFocused minimizeWindow)
+       , ((mod4Mask, xK_m)               , withFocused minimizeWindow)
+       , ( (modMask .|. shiftMask, xK_m)
+         , withLastMinimized maximizeWindowAndFocus
+         )
+       , ((modMask, xK_slash), banishScreen LowerRight)
+       , ((modMask, xK_p)    , shellPrompt adwaitaXPConfig)
+       , ((mod1Mask, xK_F2)  , shellPrompt adwaitaXPConfig)
+       , ((mod1Mask, xK_F4)  , kill)
        ]
     ++ if isWorkman then workmanKeys else []
  where
   workmanKeys =
     [ ((modMask, xK_k)              , refresh)
-      , ((modMask, xK_n)              , windows W.focusDown)
-      , ((modMask, xK_e)              , windows W.focusUp)
+      , ((modMask, xK_n)              , focusDown)
+      , ((modMask, xK_e)              , focusUp)
       , ((modMask .|. shiftMask, xK_n), windows W.swapDown)
       , ((modMask .|. shiftMask, xK_e), windows W.swapUp)
       , ((modMask, xK_y)              , sendMessage Shrink)
@@ -131,8 +146,11 @@ adwaitaTheme = Theme
   , windowTitleIcons    = []
   }
 
-adwaitaThemeWithButtons =
-  adwaitaTheme { windowTitleAddons = [("×", AlignRightOffset 10)] }
+adwaitaThemeWithButtons = adwaitaTheme
+  { windowTitleAddons = [ ("_" , AlignRightOffset 48)
+                        , ("×" , AlignRightOffset 10)
+                        ]
+  }
 
 adwaitaXPConfig = def { fgColor           = "#2e3436"
                       , bgColor           = "#f6f5f4"
