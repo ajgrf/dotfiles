@@ -19,13 +19,3 @@ natural-scroll=true
 [org/mate/caja/desktop]
 home-icon-visible=false
 volumes-visible=false
-
-[org/mate/panel/menubar]
-show-applications=false
-show-icon=false
-show-desktop=false
-
-[com/solus-project/brisk-menu]
-label-visible=false
-rollover-activate=true
-search-position='bottom'
