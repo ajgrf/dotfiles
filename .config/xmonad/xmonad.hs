@@ -41,6 +41,7 @@ import           XMonad.Layout.Spacing
 import           XMonad.Layout.WindowSwitcherDecoration
 import           XMonad.Prompt
 import           XMonad.Prompt.FuzzyMatch
+import           XMonad.Prompt.Man
 import           XMonad.Prompt.Shell
 import qualified XMonad.StackSet               as W
 import           XMonad.Util.Image
@@ -120,6 +121,7 @@ myKeys isWorkman conf@(XConfig { XMonad.modMask = modMask }) =
        , ((mod4Mask, xK_Up), withFocused (sendMessage . maximizeRestore))
        , ((modMask, xK_slash), banishScreen LowerRight)
        , ((modMask, xK_p)    , shellPrompt adwaitaXPConfig)
+       , ((modMask, xK_F1)   , manPrompt adwaitaXPConfig)
        , ((mod1Mask, xK_F2)  , shellPrompt adwaitaXPConfig)
        , ((mod1Mask, xK_F4)  , kill)
        , ( (modMask, xK_Tab)
