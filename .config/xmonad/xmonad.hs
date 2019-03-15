@@ -25,6 +25,7 @@ import           XMonad.Hooks.ManageDocks
 import           XMonad.Hooks.Minimize
 import           XMonad.Hooks.Place
 import           XMonad.Hooks.PositionStoreHooks
+import           XMonad.Hooks.ScreenCorners
 import           XMonad.Hooks.UrgencyHook
 import           XMonad.Hooks.WallpaperSetter
 import           XMonad.Layout.BorderResize
@@ -68,12 +69,15 @@ main = do
                            <+> minimizeEventHook
                            <+> hintsEventHook
                            <+> positionStoreEventHook
+                           <+> screenCornerEventHook
                            <+> handleEventHook mateConfig
     , workspaces         = myWorkspaces
     , modMask            = mod1Mask
     , keys               = myKeys (isJust workmanEnv) <+> keys mateConfig
     , borderWidth        = 1
-    , startupHook        = startupHook mateConfig >> addEWMHFullscreen
+    , startupHook        = addScreenCorner SCUpperLeft (sendMessage NextLayout)
+                           <+> startupHook mateConfig
+                           >>  addEWMHFullscreen
     , logHook            = wallpaperSetter defWallpaperConf
                                { wallpaperBaseDir = "/home/ajgrf/pics/backgrounds"
                                , wallpapers = WallpaperList
@@ -89,8 +93,13 @@ myWorkspaces = ["1", "2", "3", "4", "5", "6", "7", "8", "9"]
 -- See xmonad/xmonad-contrib#280 for smartBorders bug with
 -- multi-head/fullscreen setups.
 myLayoutHook =
-  (showWName . avoidStruts . smartBorders . boringWindows . minimize . mkToggle
-      (single HIDE)
+  ( showWName
+    . avoidStruts
+    . smartBorders
+    . boringWindows
+    . minimize
+    . screenCornerLayoutHook
+    . mkToggle (single HIDE)
     )
     mouseFriendly
  where
