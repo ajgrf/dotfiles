@@ -92,7 +92,7 @@ myLayoutHook =
   (showWName . avoidStruts . smartBorders . boringWindows . minimize . mkToggle
       (single HIDE)
     )
-    (tiled ||| float ||| Full)
+    mouseFriendly
  where
   float =
     ( buttonDeco shrinkText adwaitaThemeWithButtons
@@ -101,7 +101,7 @@ myLayoutHook =
       . layoutHints
       )
       positionStoreFloat
-  tiled =
+  mouseTiled =
     ( windowSwitcherDecorationWithButtons shrinkText adwaitaThemeWithButtons
       . draggingVisualizer
       . maximizeWithPadding 0
@@ -109,7 +109,8 @@ myLayoutHook =
       . layoutHintsWithPlacement (0.5, 0.5)
       )
       mouseResizableTile { masterFrac = 11 / 20, fracIncrement = 1 / 20 }
-  showWName = showWName' SWNC
+  mouseFriendly = float ||| mouseTiled
+  showWName     = showWName' SWNC
     { swn_font    = "xft:Cantarell:bold:size=11"
     , swn_bgcolor = "#353535"
     , swn_color   = "#eeeeec"
