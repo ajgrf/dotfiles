@@ -42,6 +42,7 @@ import           XMonad.Layout.WindowSwitcherDecoration
 import           XMonad.Prompt
 import           XMonad.Prompt.FuzzyMatch
 import           XMonad.Prompt.Man
+import           XMonad.Prompt.Pass
 import           XMonad.Prompt.Shell
 import qualified XMonad.StackSet               as W
 import           XMonad.Util.Image
@@ -121,6 +122,7 @@ myKeys isWorkman conf@(XConfig { XMonad.modMask = modMask }) =
        , ((mod4Mask, xK_Up), withFocused (sendMessage . maximizeRestore))
        , ((modMask, xK_slash), banishScreen LowerRight)
        , ((modMask, xK_p)    , shellPrompt adwaitaXPConfig)
+       , ((modMask, xK_v)    , passTypePrompt adwaitaXPConfig)
        , ((modMask, xK_F1)   , manPrompt adwaitaXPConfig)
        , ((mod1Mask, xK_F2)  , shellPrompt adwaitaXPConfig)
        , ((mod1Mask, xK_F4)  , kill)
@@ -217,16 +219,16 @@ closeIcon = map
   , [1, 1, 0, 0, 0, 0, 1, 1]
   ]
 
-adwaitaXPConfig = def { fgColor           = "#eeeeec"
-                      , bgColor           = "#353535"
-                      , fgHLight          = "#ffffff"
-                      , bgHLight          = "#15539e"
-                      , borderColor       = "#1c1c1c"
-                      , font              = "xft:Cantarell:size=11"
-                      , position          = CenteredAt 0.15 0.3
-                      , height            = 27
-                      , maxComplRows      = Just 15
-                      , searchPredicate   = fuzzyMatch
+adwaitaXPConfig = def { fgColor         = "#eeeeec"
+                      , bgColor         = "#353535"
+                      , fgHLight        = "#ffffff"
+                      , bgHLight        = "#15539e"
+                      , borderColor     = "#1c1c1c"
+                      , font            = "xft:Cantarell:size=11"
+                      , position        = CenteredAt 0.15 0.3
+                      , height          = 27
+                      , maxComplRows    = Just 15
+                      , searchPredicate = fuzzyMatch
                       }
 
 -- Avoid the master window, but otherwise manage new windows normally.
