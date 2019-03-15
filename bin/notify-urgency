@@ -1,0 +1,3 @@
+#!/bin/sh
+title=$(xdotool getwindowname "$1")
+notify-send "'$title' requires your attention!" "(Hit Alt+0 to go there.)"

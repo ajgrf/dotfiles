@@ -142,6 +142,7 @@ myKeys isWorkman conf@(XConfig { XMonad.modMask = modMask }) =
        , ( (modMask .|. shiftMask, xK_Tab)
          , nextMatch Backward (return True) <+> withFocused maximizeWindow
          )
+       , ((modMask, xK_0)                              , focusUrgent)
        , ((modMask .|. shiftMask, xK_0)                , killAllOtherCopies)
        , ((modMask .|. shiftMask .|. controlMask, xK_0), windows copyToAll)
        ]
@@ -171,7 +172,9 @@ myKeys isWorkman conf@(XConfig { XMonad.modMask = modMask }) =
 myWindowRules = composeAll []
 
 withMyUrgencyHook = withUrgencyHookC
-  (borderUrgencyHook (urgentBorderColor adwaitaTheme))
+  (   borderUrgencyHook (urgentBorderColor adwaitaTheme)
+  <+> spawnUrgencyHook "notify-urgency "
+  )
   urgencyConfig { suppressWhen = Focused }
 
 adwaitaTheme = Theme
