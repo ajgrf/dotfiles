@@ -44,6 +44,7 @@ import           XMonad.Prompt.FuzzyMatch
 import           XMonad.Prompt.Man
 import           XMonad.Prompt.Pass
 import           XMonad.Prompt.Shell
+import           XMonad.Prompt.Window
 import qualified XMonad.StackSet               as W
 import           XMonad.Util.Image
 
@@ -123,6 +124,7 @@ myKeys isWorkman conf@(XConfig { XMonad.modMask = modMask }) =
        , ((modMask, xK_slash), banishScreen LowerRight)
        , ((modMask, xK_p)    , shellPrompt adwaitaXPConfig)
        , ((modMask, xK_v)    , passTypePrompt adwaitaXPConfig)
+       , ((modMask, xK_g), windowPrompt adwaitaXPConfig Goto allWindows)
        , ((modMask, xK_F1)   , manPrompt adwaitaXPConfig)
        , ((mod1Mask, xK_F2)  , shellPrompt adwaitaXPConfig)
        , ((mod1Mask, xK_F4)  , kill)
