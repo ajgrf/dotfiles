@@ -136,6 +136,8 @@ myKeys isWorkman conf@(XConfig { XMonad.modMask = modMask }) =
        , ((modMask, xK_F1)             , manPrompt adwaitaXPConfig)
        , ((mod1Mask, xK_F2)            , shellPrompt adwaitaXPConfig)
        , ((mod1Mask, xK_F4)            , kill)
+       , ((0, xK_F9)                   , planeMove (Lines 3) Linear ToLeft)
+       , ((0, xK_F10)                  , planeMove (Lines 3) Linear ToRight)
        , ( (modMask, xK_Tab)
          , nextMatch Forward (return True) <+> withFocused maximizeWindow
          )
