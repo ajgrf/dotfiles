@@ -39,6 +39,7 @@ import           XMonad.Layout.Minimize
 import           XMonad.Layout.MouseResizableTile
 import           XMonad.Layout.MultiToggle
 import           XMonad.Layout.NoBorders
+import           XMonad.Layout.PerWorkspace
 import           XMonad.Layout.PositionStoreFloat
 import           XMonad.Layout.ShowWName
 import           XMonad.Layout.Spacing
@@ -88,7 +89,7 @@ main = do
                              <+> logHook mateConfig
     }
 
-myWorkspaces = ["1", "2", "3", "4", "5", "6", "7", "8", "9"]
+myWorkspaces = ["1", "2", "3", "4", "5", "6", "7:vm", "8", "9"]
 
 -- See xmonad/xmonad-contrib#280 for smartBorders bug with
 -- multi-head/fullscreen setups.
@@ -101,8 +102,9 @@ myLayoutHook =
     . screenCornerLayoutHook
     . mkToggle (single HIDE)
     )
-    mouseFriendly
+    layouts
  where
+  layouts = onWorkspace "7:vm" Full mouseFriendly
   float =
     ( buttonDeco shrinkText adwaitaThemeWithButtons
       . maximizeWithPadding 0
@@ -189,7 +191,7 @@ myKeys isWorkman conf@(XConfig { XMonad.modMask = modMask }) =
          , (f  , m ) <- [(W.view, 0), (W.shift, shiftMask)]
          ]
 
-myWindowRules = composeAll []
+myWindowRules = composeAll [className =? "Gnome-boxes" --> doShift "7:vm"]
 
 withMyUrgencyHook = withUrgencyHookC
   (   borderUrgencyHook (urgentBorderColor adwaitaTheme)
