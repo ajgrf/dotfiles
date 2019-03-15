@@ -37,6 +37,7 @@ import           XMonad.Layout.MouseResizableTile
 import           XMonad.Layout.MultiToggle
 import           XMonad.Layout.NoBorders
 import           XMonad.Layout.PositionStoreFloat
+import           XMonad.Layout.ShowWName
 import           XMonad.Layout.Spacing
 import           XMonad.Layout.WindowSwitcherDecoration
 import           XMonad.Prompt
@@ -84,8 +85,8 @@ myWorkspaces = ["1", "2", "3", "4", "5", "6", "7", "8", "9"]
 
 -- See xmonad/xmonad-contrib#280 for smartBorders bug with
 -- multi-head/fullscreen setups.
-myLayoutHook
-  = (avoidStruts . smartBorders . boringWindows . minimize . mkToggle
+myLayoutHook =
+  (showWName . avoidStruts . smartBorders . boringWindows . minimize . mkToggle
       (single HIDE)
     )
     (tiled ||| float ||| Full)
@@ -105,6 +106,12 @@ myLayoutHook
       . layoutHintsWithPlacement (0.5, 0.5)
       )
       mouseResizableTile { masterFrac = 11 / 20, fracIncrement = 1 / 20 }
+  showWName = showWName' SWNC
+    { swn_font    = "xft:Cantarell:bold:size=11"
+    , swn_bgcolor = "#353535"
+    , swn_color   = "#eeeeec"
+    , swn_fade    = 1
+    }
 
 myKeys isWorkman conf@(XConfig { XMonad.modMask = modMask }) =
   union (planeKeys (controlMask .|. mod1Mask) (Lines 3) Linear)
