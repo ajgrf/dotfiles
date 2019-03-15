@@ -12,6 +12,7 @@ import           Data.Maybe                     ( isJust
                                                 )
 import           System.Environment             ( lookupEnv )
 import           XMonad
+import           XMonad.Actions.CopyWindow
 import           XMonad.Actions.GroupNavigation
 import           XMonad.Actions.Minimize
 import           XMonad.Actions.Plane
@@ -141,6 +142,11 @@ myKeys isWorkman conf@(XConfig { XMonad.modMask = modMask }) =
        , ( (modMask .|. shiftMask, xK_Tab)
          , nextMatch Backward (return True) <+> withFocused maximizeWindow
          )
+       , ((modMask .|. shiftMask, xK_0)                , killAllOtherCopies)
+       , ((modMask .|. shiftMask .|. controlMask, xK_0), windows copyToAll)
+       ]
+    ++ [ ((modMask .|. shiftMask .|. controlMask, k), windows $ copy i)
+       | (i, k) <- zip (workspaces conf) [xK_1 ..]
        ]
     ++ if isWorkman then workmanKeys else []
  where
