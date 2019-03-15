@@ -17,6 +17,7 @@ import           XMonad.Actions.GroupNavigation
 import           XMonad.Actions.Minimize
 import           XMonad.Actions.Plane
 import           XMonad.Actions.Warp
+import           XMonad.Actions.WindowGo
 import           XMonad.Actions.WithAll
 import           XMonad.Config.Mate
 import           XMonad.Hooks.EwmhDesktops
@@ -49,6 +50,7 @@ import           XMonad.Prompt.Shell
 import           XMonad.Prompt.Window
 import qualified XMonad.StackSet               as W
 import           XMonad.Util.Image
+import           XMonad.Util.Run
 
 main = do
   workmanEnv <- lookupEnv "WORKMAN"
@@ -129,15 +131,21 @@ myKeys isWorkman conf@(XConfig { XMonad.modMask = modMask }) =
          , withLastMinimized maximizeWindowAndFocus
          )
        , ((mod4Mask, xK_Up), withFocused (sendMessage . maximizeRestore))
-       , ((modMask, xK_slash)          , banishScreen LowerRight)
-       , ((modMask, xK_p)              , shellPrompt adwaitaXPConfig)
+       , ((modMask, xK_slash), banishScreen LowerRight)
+       , ((modMask, xK_p), shellPrompt adwaitaXPConfig)
        , ((modMask .|. shiftMask, xK_p), passTypePrompt adwaitaXPConfig)
        , ((modMask, xK_g), windowPrompt adwaitaXPConfig Goto allWindows)
-       , ((modMask, xK_F1)             , manPrompt adwaitaXPConfig)
-       , ((mod1Mask, xK_F2)            , shellPrompt adwaitaXPConfig)
-       , ((mod1Mask, xK_F4)            , kill)
-       , ((0, xK_F9)                   , planeMove (Lines 3) Linear ToLeft)
-       , ((0, xK_F10)                  , planeMove (Lines 3) Linear ToRight)
+       , ((modMask, xK_F1), manPrompt adwaitaXPConfig)
+       , ((mod1Mask, xK_F2), shellPrompt adwaitaXPConfig)
+       , ((mod1Mask, xK_F4), kill)
+       , ((0, xK_F5), runOrRaiseNext "firefox" (className =? "Firefox-esr"))
+       , ((0, xK_F6), runOrRaiseNext "emacs" (className =? "Emacs"))
+       , ((0, xK_F7), spawn $ terminal conf)
+       , ( (0, xK_F8)
+         , raiseMaybe (runInTerm "-name ncmpc" "ncmpc") (appName =? "ncmpc")
+         )
+       , ((0, xK_F9) , planeMove (Lines 3) Linear ToLeft)
+       , ((0, xK_F10), planeMove (Lines 3) Linear ToRight)
        , ( (modMask, xK_Tab)
          , nextMatch Forward (return True) <+> withFocused maximizeWindow
          )
