@@ -215,14 +215,15 @@ closeIcon = map
   , [1, 1, 0, 0, 0, 0, 1, 1]
   ]
 
-adwaitaXPConfig = def { fgColor           = "#2e3436"
-                      , bgColor           = "#f6f5f4"
-                      , fgHLight          = "#f6f5f4"
-                      , bgHLight          = "#3584e4"
+adwaitaXPConfig = def { fgColor           = "#eeeeec"
+                      , bgColor           = "#353535"
+                      , fgHLight          = "#ffffff"
+                      , bgHLight          = "#15539e"
+                      , borderColor       = "#1c1c1c"
                       , font              = "xft:Cantarell:size=11"
-                      , promptBorderWidth = 0
-                      , position          = Bottom
+                      , position          = CenteredAt 0.15 0.3
                       , height            = 27
+                      , maxComplRows      = Just 15
                       , searchPredicate   = fuzzyMatch
                       }
 
