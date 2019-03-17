@@ -57,6 +57,7 @@ import           XMonad.Prompt.Window
 import qualified XMonad.StackSet               as W
 import           XMonad.Util.Image
 import           XMonad.Util.Run
+import           XMonad.Util.Scratchpad
 
 main = do
   workmanEnv <- lookupEnv "WORKMAN"
@@ -66,6 +67,7 @@ main = do
     , terminal           = "xterm"
     , layoutHook         = myLayoutHook
     , manageHook         = myWindowRules
+                           <+> scratchpadManageHook (W.RationalRect 0.25 0.85 0.5 0.15)
                            <+> placeHook (smart (0.5, 0.5))
                            <+> positionStoreManageHook (Just adwaitaTheme)
                            <+> doF avoidMaster
@@ -93,7 +95,7 @@ main = do
                              <+> logHook mateConfig
     }
 
-myWorkspaces = ["1", "2", "3", "4", "5", "6", "7:vm", "8", "9"]
+myWorkspaces = ["1", "2", "3", "4", "5", "6", "7:vm", "8", "NSP"]
 
 -- See xmonad/xmonad-contrib#280 for smartBorders bug with
 -- multi-head/fullscreen setups.
@@ -165,7 +167,7 @@ myKeys isWorkman conf@(XConfig { XMonad.modMask = modMask }) =
        , ((mod1Mask, xK_F4), kill)
        , ((0, xK_F5), runOrRaiseNext "firefox" (className =? "Firefox-esr"))
        , ((0, xK_F6), runOrRaiseNext "emacs" (className =? "Emacs"))
-       , ((0, xK_F7), spawn $ terminal conf)
+       , ((0, xK_F7), scratchpadSpawnAction conf)
        , ( (0, xK_F8)
          , raiseMaybe (runInTerm "-name ncmpc" "ncmpc") (appName =? "ncmpc")
          )
