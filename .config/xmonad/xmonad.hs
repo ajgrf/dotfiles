@@ -4,6 +4,7 @@
 import           Control.Monad                  ( when
                                                 , join
                                                 )
+import           Data.List                      ( isSuffixOf )
 import           Data.Map                       ( fromList
                                                 , union
                                                 )
@@ -20,6 +21,7 @@ import           XMonad.Actions.Warp
 import           XMonad.Actions.WindowGo
 import           XMonad.Actions.WithAll
 import           XMonad.Config.Mate
+import           XMonad.Hooks.DynamicProperty
 import           XMonad.Hooks.EwmhDesktops
 import           XMonad.Hooks.ManageDocks
 import           XMonad.Hooks.Minimize
@@ -77,6 +79,7 @@ main = do
                            <+> hintsEventHook
                            <+> positionStoreEventHook
                            <+> screenCornerEventHook
+                           <+> dynamicTitle myDynamicRules
                            <+> handleEventHook mateConfig
     , workspaces         = myWorkspaces
     , modMask            = mod1Mask
@@ -241,7 +244,22 @@ mergeDown = do
     (Just (W.Stack c _ (o : _))) -> sendMessage $ Migrate c o
     _                            -> return ()
 
-myWindowRules = composeAll [className =? "Gnome-boxes" --> doShift "7:VM"]
+myWindowRules = composeAll
+  [ className =? "Org.gnome.Maps" --> doFloat
+  , appName =? "ncmpc" --> doShift "4:Media"
+  , className =? "mpv" --> doShift "4:Media"
+  , className =? "Gnome-mpv" --> (doShift "4:Media" <+> doFloat)
+  , className =? "Sol" --> doShift "6:Games"
+  , className =? "Gnome-mines" --> (doShift "6:Games" <+> doFloat)
+  , className =? "Gnome-mahjongg" --> (doShift "6:Games" <+> doFloat)
+  , className =? "Gnome-sudoku" --> (doShift "6:Games" <+> doFloat)
+  , className =? "Gnome-boxes" --> doShift "7:VM"
+  , className =? "Mate-system-log" --> doShift "8:Logs"
+  , className =? "Mate-system-monitor" --> doShift "8:Logs"
+  ]
+
+myDynamicRules =
+  composeAll [isSuffixOf " (Private Browsing)" <$> title --> doShift "NSP"]
 
 withMyUrgencyHook = withUrgencyHookC
   (   borderUrgencyHook (urgentBorderColor adwaitaTheme)
