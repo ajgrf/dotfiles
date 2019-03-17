@@ -170,8 +170,8 @@ myKeys isWorkman conf@(XConfig { XMonad.modMask = modMask }) =
        , ((modMask, xK_k)                              , focusUp)
        , ((modMask .|. controlMask, xK_j)              , onGroup W.focusDown')
        , ((modMask .|. controlMask, xK_k)              , onGroup W.focusUp')
-       , ((modMask .|. shiftMask .|. controlMask, xK_j), mergeDown)
-       , ((modMask .|. shiftMask .|. controlMask, xK_k), mergeUp)
+       , ((modMask .|. shiftMask .|. controlMask, xK_j), mergeMove focusDown)
+       , ((modMask .|. shiftMask .|. controlMask, xK_k), mergeMove focusUp)
        , ((modMask, xK_u), withFocused (sendMessage . UnMerge))
        , ((modMask .|. shiftMask, xK_h), sendMessage ShrinkSlave)
        , ((modMask .|. shiftMask, xK_l), sendMessage ExpandSlave)
@@ -223,8 +223,8 @@ myKeys isWorkman conf@(XConfig { XMonad.modMask = modMask }) =
       , ((modMask .|. shiftMask, xK_e)                , windows W.swapUp)
       , ((modMask .|. controlMask, xK_n)              , onGroup W.focusDown')
       , ((modMask .|. controlMask, xK_e)              , onGroup W.focusUp')
-      , ((modMask .|. shiftMask .|. controlMask, xK_n), mergeDown)
-      , ((modMask .|. shiftMask .|. controlMask, xK_e), mergeUp)
+      , ((modMask .|. shiftMask .|. controlMask, xK_n), mergeMove focusDown)
+      , ((modMask .|. shiftMask .|. controlMask, xK_e), mergeMove focusUp)
       , ((modMask, xK_y)                              , sendMessage Shrink)
       , ((modMask, xK_o)                              , sendMessage Expand)
       , ( (modMask .|. shiftMask, xK_y)
@@ -241,19 +241,21 @@ myKeys isWorkman conf@(XConfig { XMonad.modMask = modMask }) =
          , (f  , m ) <- [(W.view, 0), (W.shift, shiftMask)]
          ]
 
-mergeUp :: X ()
-mergeUp = do
-  XState { windowset = ws } <- get
-  case (W.stack . W.workspace . W.current $ ws) of
-    (Just (W.Stack c (o : _) _)) -> sendMessage $ Migrate c o
-    _                            -> return ()
-
-mergeDown :: X ()
-mergeDown = do
-  XState { windowset = ws } <- get
-  case (W.stack . W.workspace . W.current $ ws) of
-    (Just (W.Stack c _ (o : _))) -> sendMessage $ Migrate c o
-    _                            -> return ()
+mergeMove :: X () -> X ()
+mergeMove moveFocus = do
+  current <- getFocused
+  moveFocus
+  other <- getFocused
+  case (current, other) of
+    (Just c, Just o) -> sendMessage (Migrate c o) >> focus c
+    _                -> return ()
+ where
+  getFocused = do
+    XState { windowset = ws } <- get
+    let stack = W.stack . W.workspace . W.current $ ws
+    case stack of
+      (Just (W.Stack focused _ _)) -> return (Just focused)
+      _                            -> return Nothing
 
 myWindowRules = composeAll
   [ className =? "Org.gnome.Maps" --> doFloat
