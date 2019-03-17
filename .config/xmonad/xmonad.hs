@@ -95,7 +95,17 @@ main = do
                              <+> logHook mateConfig
     }
 
-myWorkspaces = ["1", "2", "3", "4", "5", "6", "7:vm", "8", "NSP"]
+myWorkspaces =
+  [ "1:Main"
+  , "2:Alt"
+  , "3:Comm"
+  , "4:Media"
+  , "5:Misc"
+  , "6:Games"
+  , "7:VM"
+  , "8:Logs"
+  , "NSP"
+  ]
 
 -- See xmonad/xmonad-contrib#280 for smartBorders bug with
 -- multi-head/fullscreen setups.
@@ -110,7 +120,8 @@ myLayoutHook =
     )
     layouts
  where
-  layouts  = onWorkspace "7:vm" Full $ onWorkspace "1" tabTiled $ mouseFriendly
+  layouts =
+    onWorkspace "1:Main" tabTiled $ onWorkspace "7:VM" Full $ mouseFriendly
   tabTiled = (withTabs . smartSpacing 2 . layoutHintsWithPlacement (0.5, 0.5))
     (ResizableTall 1 0.05 0.55 [])
   withTabs = addTabsAlways shrinkText adwaitaTheme . subLayout [] Simplest
@@ -230,7 +241,7 @@ mergeDown = do
     (Just (W.Stack c _ (o : _))) -> sendMessage $ Migrate c o
     _                            -> return ()
 
-myWindowRules = composeAll [className =? "Gnome-boxes" --> doShift "7:vm"]
+myWindowRules = composeAll [className =? "Gnome-boxes" --> doShift "7:VM"]
 
 withMyUrgencyHook = withUrgencyHookC
   (   borderUrgencyHook (urgentBorderColor adwaitaTheme)
