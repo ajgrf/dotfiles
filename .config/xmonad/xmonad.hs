@@ -39,6 +39,7 @@ import           XMonad.Layout.LayoutHints
 import           XMonad.Layout.Maximize
 import           XMonad.Layout.Minimize
 import           XMonad.Layout.MouseResizableTile
+import           XMonad.Layout.MultiDishes
 import           XMonad.Layout.MultiToggle
 import           XMonad.Layout.NoBorders
 import           XMonad.Layout.PerWorkspace
@@ -124,10 +125,20 @@ myLayoutHook =
     layouts
  where
   layouts =
-    onWorkspace "1:Main" tabTiled $ onWorkspace "7:VM" Full $ mouseFriendly
+    ( onWorkspace "1:Main" tabTiled
+      . onWorkspace "7:VM"   Full
+      . onWorkspace "8:Logs" dishes
+      )
+      mouseFriendly
   tabTiled = (withTabs . smartSpacing 2 . layoutHintsWithPlacement (0.5, 0.5))
     (ResizableTall 1 0.05 0.55 [])
   withTabs = addTabsAlways shrinkText adwaitaTheme . subLayout [] Simplest
+  dishes =
+    ( buttonDeco shrinkText adwaitaThemeWithButtons
+      . maximizeWithPadding 0
+      . smartSpacing 2
+      )
+      (MultiDishes 1 2 (1 / 5))
   float =
     ( buttonDeco shrinkText adwaitaThemeWithButtons
       . maximizeWithPadding 0
