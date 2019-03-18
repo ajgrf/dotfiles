@@ -1,0 +1,23 @@
+#!/bin/sh
+
+# This script intercepts calls to convert by xmonad's WallpaperSetter module,
+# to preserve the aspect ratio of images.
+
+main() {
+	args=$(echo "$*" | sed -e 's/\([0-9]\+x[0-9]\+\)! )/\1^ -gravity center -extent \1 +gravity )/g')
+	convert $args
+}
+
+convert() (
+	IFS=:
+	for p in $PATH; do
+		if test "$p" = "${0%/*}"; then
+			continue
+		elif test -x "$p/convert"; then
+			"$p/convert" "$@"
+			return
+		fi
+	done
+)
+
+main "$@"
