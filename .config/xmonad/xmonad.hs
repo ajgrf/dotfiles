@@ -16,6 +16,7 @@ import           XMonad
 import           XMonad.Actions.CopyWindow
 import           XMonad.Actions.GroupNavigation
 import           XMonad.Actions.Minimize
+import           XMonad.Actions.PhysicalScreens
 import           XMonad.Actions.Plane
 import           XMonad.Actions.Warp
 import           XMonad.Actions.WindowGo
@@ -213,6 +214,10 @@ myKeys isWorkman conf@(XConfig { XMonad.modMask = modMask }) =
     ++ [ ((modMask .|. shiftMask .|. controlMask, k), windows $ copy i)
        | (i, k) <- zip (workspaces conf) [xK_1 ..]
        ]
+    ++ [ ((m .|. modMask, key), f horizontalScreenOrderer sc)
+       | (key, sc) <- zip [xK_w, xK_e, xK_r] [0 ..]
+       , (f  , m ) <- [(viewScreen, 0), (sendToScreen, shiftMask)]
+       ]
     ++ if isWorkman then workmanKeys else []
  where
   workmanKeys =
@@ -234,11 +239,9 @@ myKeys isWorkman conf@(XConfig { XMonad.modMask = modMask }) =
         , sendMessage ExpandSlave >> sendMessage MirrorShrink
         )
       ]
-      ++ [ ( (m .|. modMask, key)
-           , screenWorkspace sc >>= flip whenJust (windows . f)
-           )
+      ++ [ ((m .|. modMask, key), f horizontalScreenOrderer sc)
          | (key, sc) <- zip [xK_d, xK_r, xK_w] [0 ..]
-         , (f  , m ) <- [(W.view, 0), (W.shift, shiftMask)]
+         , (f  , m ) <- [(viewScreen, 0), (sendToScreen, shiftMask)]
          ]
 
 mergeMove :: X () -> X ()
