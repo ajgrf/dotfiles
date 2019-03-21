@@ -468,6 +468,7 @@ Show a popup with completions for partially-entered keybindings.
 
 #+BEGIN_SRC emacs-lisp
   (use-package which-key
+    :pin melpa-stable
     :diminish
     :config (which-key-mode 1))
 #+END_SRC
