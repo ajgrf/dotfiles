@@ -1037,15 +1037,15 @@ https://github.com/magit/magit/issues/2939
 ** Go
 
 #+BEGIN_SRC emacs-lisp
-    (use-package go-mode
-      :mode "\\.go\\'"
-      :config
-      (setq gofmt-command "goimports")
-      (add-hook 'before-save-hook 'gofmt-before-save)
-      (when evil-workman
-        (evil-define-key 'normal go-mode-map
-          "E" 'godef-describe
-          "K" 'evil-search-previous)))
+  (use-package go-mode
+    :mode "\\.go\\'"
+    :config
+    (setq gofmt-command "goimports")
+    (add-hook 'before-save-hook 'gofmt-before-save)
+    (when evil-workman
+      (evil-define-key 'normal go-mode-map
+        "E" 'godef-describe
+        "K" 'evil-search-previous)))
 #+END_SRC
 
 ** Lisp-like
