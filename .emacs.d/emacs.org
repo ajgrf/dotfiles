@@ -673,7 +673,7 @@ keybindings.
 
 #+BEGIN_SRC emacs-lisp
   (use-package flyspell
-    :hook (text-mode . flyspell-mode)
+    :hook ((org-mode markdown-mode) . flyspell-mode)
     :general
     (tyrant-def
       "ts"  'flyspell-mode
