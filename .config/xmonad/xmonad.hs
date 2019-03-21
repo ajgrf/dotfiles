@@ -199,7 +199,7 @@ myKeys isWorkman conf@(XConfig { XMonad.modMask = modMask }) =
          )
        , ((0, xK_F5), planeMove (Lines 3) Linear ToLeft)
        , ((0, xK_F6), planeMove (Lines 3) Linear ToRight)
-       , ((0, xK_F7), onGroup W.focusUp')
+       , ((0, xK_F7), mergeMove focusUp)
        , ((0, xK_F8), onGroup W.focusDown')
        , ( (modMask, xK_Tab)
          , nextMatch Forward (return True) <+> withFocused maximizeWindow
