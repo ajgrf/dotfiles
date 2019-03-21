@@ -680,6 +680,18 @@ keybindings.
       "tS"  'flyspell-prog-mode))
 #+END_SRC
 
+** Colors
+
+Rainbow mode sets the background of color names to display their color.
+
+#+BEGIN_SRC emacs-lisp
+  (use-package rainbow-mode
+    :general
+    (tyrant-def
+      "tC"  '(:ignore t :which-key "colors")
+      "tCc" 'rainbow-mode))
+#+END_SRC
+
 * Org Mode
 
 #+BEGIN_SRC emacs-lisp
