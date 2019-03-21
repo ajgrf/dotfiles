@@ -1048,6 +1048,13 @@ https://github.com/magit/magit/issues/2939
         "K" 'evil-search-previous)))
 #+END_SRC
 
+** Haskell
+
+#+BEGIN_SRC emacs-lisp
+  (use-package haskell-mode
+    :mode "\\.hs\\'")
+#+END_SRC
+
 ** Lisp-like
 *** Scheme
 
