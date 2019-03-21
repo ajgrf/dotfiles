@@ -14,7 +14,7 @@ import           Data.Maybe                     ( isJust
 import           System.Environment             ( lookupEnv )
 import           XMonad
 import           XMonad.Actions.CopyWindow
-import           XMonad.Actions.GroupNavigation
+import           XMonad.Actions.CycleWS
 import           XMonad.Actions.Minimize
 import           XMonad.Actions.PhysicalScreens
 import           XMonad.Actions.Plane
@@ -31,6 +31,7 @@ import           XMonad.Hooks.PositionStoreHooks
 import           XMonad.Hooks.ScreenCorners
 import           XMonad.Hooks.UrgencyHook
 import           XMonad.Hooks.WallpaperSetter
+import           XMonad.Hooks.WorkspaceHistory
 import           XMonad.Layout.BorderResize
 import           XMonad.Layout.BoringWindows
 import           XMonad.Layout.ButtonDecoration
@@ -90,14 +91,15 @@ main = do
     , startupHook        = addScreenCorner SCUpperLeft (sendMessage NextLayout)
                            <+> startupHook mateConfig
                            >>  addEWMHFullscreen
-    , logHook            = wallpaperSetter defWallpaperConf
-                               { wallpaperBaseDir = "/home/ajgrf/pics/backgrounds"
-                               , wallpapers = WallpaperList
-                                                [ (ws, WallpaperFix (show i ++ ".jpg"))
-                                                | (i, ws) <- zip [1 ..] myWorkspaces
-                                                ]
-                               }
-                             <+> logHook mateConfig
+    , logHook            = workspaceHistoryHook
+                           <+> wallpaperSetter defWallpaperConf
+                                 { wallpaperBaseDir = "/home/ajgrf/pics/backgrounds"
+                                 , wallpapers = WallpaperList
+                                                  [ (ws, WallpaperFix (show i ++ ".jpg"))
+                                                  | (i, ws) <- zip [1 ..] myWorkspaces
+                                                  ]
+                                 }
+                           <+> logHook mateConfig
     }
 
 myWorkspaces =
@@ -197,18 +199,13 @@ myKeys isWorkman conf@(XConfig { XMonad.modMask = modMask }) =
        , ( (0, xK_F4)
          , raiseMaybe (runInTerm "-name ncmpc" "ncmpc") (appName =? "ncmpc")
          )
-       , ((0, xK_F5), planeMove (Lines 3) Linear ToLeft)
-       , ((0, xK_F6), planeMove (Lines 3) Linear ToRight)
-       , ((0, xK_F7), mergeMove focusUp)
-       , ((0, xK_F8), onGroup W.focusDown')
-       , ( (modMask, xK_Tab)
-         , nextMatch Forward (return True) <+> withFocused maximizeWindow
-         )
-       , ( (modMask .|. shiftMask, xK_Tab)
-         , nextMatch Backward (return True) <+> withFocused maximizeWindow
-         )
-       , ((modMask, xK_0)                              , focusUrgent)
-       , ((modMask .|. shiftMask, xK_0)                , killAllOtherCopies)
+       , ((0, xK_F5)                   , planeMove (Lines 3) Linear ToLeft)
+       , ((0, xK_F6)                   , planeMove (Lines 3) Linear ToRight)
+       , ((0, xK_F7)                   , mergeMove focusUp)
+       , ((0, xK_F8)                   , onGroup W.focusDown')
+       , ((modMask, xK_Tab)            , toggleWS)
+       , ((modMask, xK_0)              , focusUrgent)
+       , ((modMask .|. shiftMask, xK_0), killAllOtherCopies)
        , ((modMask .|. shiftMask .|. controlMask, xK_0), windows copyToAll)
        ]
     ++ [ ((modMask .|. shiftMask .|. controlMask, k), windows $ copy i)
