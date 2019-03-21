@@ -594,7 +594,12 @@ Spacemacs-like leader keys.
      "Ts"  'load-theme
      "Tt"  'tool-bar-mode
 
-     "w"   '(evil-window-map :which-key "window")))
+     "w"   '(evil-window-map :which-key "window"))
+
+    (general-define-key
+     :keymaps 'evil-window-map
+     "d" 'evil-window-delete
+     "F" 'make-frame))
 #+END_SRC
 
 Restart Emacs.
