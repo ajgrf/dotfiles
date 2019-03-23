@@ -695,6 +695,10 @@ Rainbow mode sets the background of color names to display their color.
     :config
     (setq org-agenda-files '("~/org/")
           org-default-notes-file (concat org-directory "/capture.org")
+          org-outline-path-complete-in-steps nil
+          org-refile-allow-creating-parent-nodes 'confirm
+          org-refile-targets '((org-agenda-files :maxlevel . 3))
+          org-refile-use-outline-path 'file
           org-startup-folded 'showall
           org-startup-with-inline-images t
           org-todo-keywords '((sequence "TODO" "WAITING" "NEXT" "DONE"))))
