@@ -683,8 +683,22 @@ Rainbow mode sets the background of color names to display their color.
       "ol"  'org-store-link
       "oo"  'org-agenda)
     (tyrant-def org-mode-map
-      "m," 'org-edit-special
-      "mn" 'org-toggle-narrow-to-subtree)
+      "m,"  'org-ctrl-c-ctrl-c
+      "m'"  'org-edit-special
+      "m:"  'org-set-tags-command
+      "m."  'org-time-stamp
+      "mC"  'org-clone-subtree-with-time-shift
+      "md"  'org-deadline
+      "me"  'org-export-dispatch
+      "ml"  'org-insert-link
+      "mn"  'org-toggle-narrow-to-subtree
+      "mR"  'org-refile
+      "ms"  'org-schedule
+      "mt"  'org-todo
+      "mT"  '(:ignore t :which-key "toggles")
+      "mTi" 'org-toggle-inline-images
+      "mTl" 'org-toggle-link-display
+      "mTo" 'org-toggle-ordered-property)
     (tyrant-def
       :definer 'minor-mode
       :keymaps 'org-src-mode
@@ -693,15 +707,23 @@ Rainbow mode sets the background of color names to display their color.
       "mk" 'org-edit-src-abort
       "ma" 'org-edit-src-abort)
     :config
+    (setq holiday-bahai-holidays nil
+          holiday-hebrew-holidays nil
+          holiday-islamic-holidays nil
+          holiday-oriental-holidays nil
+          holiday-other-holidays '((holiday-fixed 5 5 "Cinco de Mayo")))
     (setq org-agenda-files '("~/org/")
+          org-agenda-todo-ignore-scheduled t
           org-default-notes-file (concat org-directory "/capture.org")
+          org-log-done 'time
           org-outline-path-complete-in-steps nil
           org-refile-allow-creating-parent-nodes 'confirm
           org-refile-targets '((org-agenda-files :maxlevel . 3))
           org-refile-use-outline-path 'file
+          org-return-follows-link t
           org-startup-folded 'showall
           org-startup-with-inline-images t
-          org-todo-keywords '((sequence "TODO" "WAITING" "NEXT" "DONE"))))
+          org-todo-keywords '((sequence "TODO(t)" "WAITING(w)" "DONE(d)"))))
 
   (use-package org-bullets
     :commands org-bullets-mode
@@ -721,6 +743,7 @@ Rainbow mode sets the background of color names to display their color.
       "[[" 'outline-previous-visible-heading
       "^"  'evil-first-non-blank)
     (evil-define-key '(normal visual) evil-org-mode-map
+      (kbd "RET")       'evil-org-return
       (kbd "<backtab>") 'org-shifttab)
     (workman-translate-keys 'org-mode
                             'evil-org-mode-map
