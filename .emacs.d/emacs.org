@@ -881,7 +881,7 @@ Add some aliases.
     (setq elfeed-db-directory "~/.local/share/elfeed"
           elfeed-enclosure-default-dir "~/tmp/"
           elfeed-search-filter "@1-month-ago +unread "
-          rmh-elfeed-org-files (list (concat org-directory "/feeds.org")))
+          rmh-elfeed-org-files (list (concat org-directory "/links.org")))
     (add-hook 'elfeed-new-entry-hook
               (elfeed-make-tagger :feed-title "LWN\\.net"
                                   :entry-title '("Kernel prepatch"
