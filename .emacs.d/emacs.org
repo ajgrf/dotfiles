@@ -753,6 +753,35 @@ Rainbow mode sets the background of color names to display their color.
     (workman-translate-keys 'org-mode 'org-agenda-mode-map))
 #+END_SRC
 
+** Reminders
+
+Set up desktop notifications for org agenda items.
+
+#+BEGIN_SRC emacs-lisp
+  (use-package appt
+    :ensure nil
+    :config
+    (defun alert-appt-display (minutes-until _time msg)
+      (require 'notifications)
+      (notifications-notify
+       :app-icon (concat user-emacs-directory "Org-mode-unicorn.svg")
+       :title (concat minutes-until " Minute Reminder")
+       :body msg))
+
+    (setq appt-time-msg-list nil)  ;; clear existing appt list
+    (setq appt-display-format 'window
+          appt-display-interval 30
+          appt-display-mode-line nil
+          appt-disp-window-function #'alert-appt-display
+          appt-message-warning-time 60)
+    (appt-activate 1)
+    (org-agenda-to-appt)
+    (run-at-time "24:01" 3600 'org-agenda-to-appt)
+    (add-hook 'org-agenda-finalize-hook 'org-agenda-to-appt))
+#+END_SRC
+
+https://joonro.github.io/blog/posts/toast-notifications-org-mode-windows.html
+
 * Tools
 
 ** Shell
