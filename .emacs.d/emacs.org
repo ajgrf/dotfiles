@@ -722,11 +722,11 @@ Rainbow mode sets the background of color names to display their color.
           holiday-islamic-holidays nil
           holiday-oriental-holidays nil
           holiday-other-holidays '((holiday-fixed 5 5 "Cinco de Mayo")))
-    (setq org-agenda-files '("~/org/planner.org" "~/org/training.org")
+    (setq org-agenda-files '("~/org/plan.org" "~/org/training.org")
           org-agenda-span 'day
           org-agenda-todo-ignore-scheduled t
           org-capture-templates '(("t" "Task" entry
-                                   (file+headline "~/org/planner.org" "Tasks")
+                                   (file+headline "~/org/plan.org" "Tasks")
                                    "* TODO %?\n %i\n  %a"))
           org-default-notes-file "~/org/inbox.org"
           org-image-actual-width nil
