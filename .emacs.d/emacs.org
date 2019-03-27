@@ -687,6 +687,7 @@ Rainbow mode sets the background of color names to display their color.
       "m'"  'org-edit-special
       "m:"  'org-set-tags-command
       "m."  'org-time-stamp
+      "ma"  'org-attach
       "mA"  'org-archive-subtree
       "mC"  'org-clone-subtree-with-time-shift
       "md"  'org-deadline
@@ -708,6 +709,7 @@ Rainbow mode sets the background of color names to display their color.
       "mk" 'org-edit-src-abort
       "ma" 'org-edit-src-abort)
     :config
+    (add-to-list 'org-modules 'org-attach)
     (setq holiday-bahai-holidays nil
           holiday-hebrew-holidays nil
           holiday-islamic-holidays nil
@@ -717,6 +719,7 @@ Rainbow mode sets the background of color names to display their color.
           org-agenda-todo-ignore-scheduled t
           org-default-notes-file (concat org-directory "/capture.org")
           org-image-actual-width nil
+          org-link-abbrev-alist '(("attach" . org-attach-expand-link))
           org-log-done 'time
           org-outline-path-complete-in-steps nil
           org-refile-allow-creating-parent-nodes 'confirm
