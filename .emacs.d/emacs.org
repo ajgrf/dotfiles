@@ -709,21 +709,23 @@ Rainbow mode sets the background of color names to display their color.
       "mk" 'org-edit-src-abort
       "ma" 'org-edit-src-abort)
     :config
+    (defun my/get-org-files ()
+      (directory-files org-directory t "\.org$"))
     (add-to-list 'org-modules 'org-attach)
     (setq holiday-bahai-holidays nil
           holiday-hebrew-holidays nil
           holiday-islamic-holidays nil
           holiday-oriental-holidays nil
           holiday-other-holidays '((holiday-fixed 5 5 "Cinco de Mayo")))
-    (setq org-agenda-files '("~/org/")
+    (setq org-agenda-files '("~/org/planner.org" "~/org/training.org")
           org-agenda-todo-ignore-scheduled t
-          org-default-notes-file (concat org-directory "/capture.org")
+          org-default-notes-file "~/org/inbox.org"
           org-image-actual-width nil
           org-link-abbrev-alist '(("attach" . org-attach-expand-link))
           org-log-done 'time
           org-outline-path-complete-in-steps nil
           org-refile-allow-creating-parent-nodes 'confirm
-          org-refile-targets '((org-agenda-files :maxlevel . 3))
+          org-refile-targets '((my/get-org-files :maxlevel . 3))
           org-refile-use-outline-path 'file
           org-return-follows-link t
           org-startup-folded 'showall
