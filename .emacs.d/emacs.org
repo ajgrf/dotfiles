@@ -678,7 +678,7 @@ Rainbow mode sets the background of color names to display their color.
     :general
     (tyrant-def
       "o"   '(:ignore t :which-key "org")
-      "oa"  'org-agenda-list
+      "oa"  'org-agenda-default
       "oc"  'org-capture
       "ol"  'org-store-link
       "oo"  'org-agenda)
@@ -709,6 +709,9 @@ Rainbow mode sets the background of color names to display their color.
       "mk" 'org-edit-src-abort
       "ma" 'org-edit-src-abort)
     :config
+    (defun org-agenda-default ()
+      (interactive)
+      (org-agenda nil "n"))
     (defun my/get-org-files ()
       (directory-files org-directory t "\.org$"))
     (add-to-list 'org-modules 'org-attach)
@@ -718,6 +721,7 @@ Rainbow mode sets the background of color names to display their color.
           holiday-oriental-holidays nil
           holiday-other-holidays '((holiday-fixed 5 5 "Cinco de Mayo")))
     (setq org-agenda-files '("~/org/planner.org" "~/org/training.org")
+          org-agenda-span 'day
           org-agenda-todo-ignore-scheduled t
           org-capture-templates '(("t" "Task" entry
                                    (file+headline "~/org/planner.org" "Tasks")
