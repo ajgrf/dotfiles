@@ -719,6 +719,9 @@ Rainbow mode sets the background of color names to display their color.
           holiday-other-holidays '((holiday-fixed 5 5 "Cinco de Mayo")))
     (setq org-agenda-files '("~/org/planner.org" "~/org/training.org")
           org-agenda-todo-ignore-scheduled t
+          org-capture-templates '(("t" "Task" entry
+                                   (file+headline "~/org/planner.org" "Tasks")
+                                   "* TODO %?\n %i\n  %a"))
           org-default-notes-file "~/org/inbox.org"
           org-image-actual-width nil
           org-link-abbrev-alist '(("attach" . org-attach-expand-link))
