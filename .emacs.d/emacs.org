@@ -965,6 +965,26 @@ Add some aliases.
     :general (tyrant-def "ap" 'pass))
 #+END_SRC
 
+** Slack
+
+#+BEGIN_SRC emacs-lisp
+  (use-package slack
+    :general
+    (tyrant-def
+      "aSs" 'slack-start
+      "aSc" 'slack-channel-select
+      "aSg" 'slack-group-select)
+    :config
+    (setq slack-buffer-emojify t
+          slack-prefer-current-team t)
+    (require 'password-store)
+    (slack-register-team
+     :name "intellectuallp"
+     :default t
+     :token (password-store-get "personal/slack.com/intellectuallp_token"))
+    (slack-start))
+#+END_SRC
+
 * Version Control
 
 Magit is the best porcelain for git.
