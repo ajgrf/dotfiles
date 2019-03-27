@@ -687,6 +687,7 @@ Rainbow mode sets the background of color names to display their color.
       "m'"  'org-edit-special
       "m:"  'org-set-tags-command
       "m."  'org-time-stamp
+      "mA"  'org-archive-subtree
       "mC"  'org-clone-subtree-with-time-shift
       "md"  'org-deadline
       "me"  'org-export-dispatch
