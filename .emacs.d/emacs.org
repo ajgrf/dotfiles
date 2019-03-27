@@ -716,6 +716,7 @@ Rainbow mode sets the background of color names to display their color.
     (defun my/get-org-files ()
       (directory-files org-directory t "\.org$"))
     (add-to-list 'org-modules 'org-attach)
+    (add-to-list 'org-modules 'org-depend)
     (add-to-list 'org-modules 'org-habit)
     (setq holiday-bahai-holidays nil
           holiday-hebrew-holidays nil
