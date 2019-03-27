@@ -694,6 +694,7 @@ Rainbow mode sets the background of color names to display their color.
       "me"  'org-export-dispatch
       "ml"  'org-insert-link
       "mn"  'org-toggle-narrow-to-subtree
+      "mp"  'org-set-property
       "mR"  'org-refile
       "ms"  'org-schedule
       "mt"  'org-todo
