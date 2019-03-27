@@ -716,6 +716,7 @@ Rainbow mode sets the background of color names to display their color.
     (setq org-agenda-files '("~/org/")
           org-agenda-todo-ignore-scheduled t
           org-default-notes-file (concat org-directory "/capture.org")
+          org-image-actual-width nil
           org-log-done 'time
           org-outline-path-complete-in-steps nil
           org-refile-allow-creating-parent-nodes 'confirm
