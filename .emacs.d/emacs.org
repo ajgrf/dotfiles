@@ -716,6 +716,7 @@ Rainbow mode sets the background of color names to display their color.
     (defun my/get-org-files ()
       (directory-files org-directory t "\.org$"))
     (add-to-list 'org-modules 'org-attach)
+    (add-to-list 'org-modules 'org-habit)
     (setq holiday-bahai-holidays nil
           holiday-hebrew-holidays nil
           holiday-islamic-holidays nil
@@ -730,7 +731,6 @@ Rainbow mode sets the background of color names to display their color.
           org-default-notes-file "~/org/inbox.org"
           org-image-actual-width nil
           org-link-abbrev-alist '(("attach" . org-attach-expand-link))
-          org-log-done 'time
           org-outline-path-complete-in-steps nil
           org-refile-allow-creating-parent-nodes 'confirm
           org-refile-targets '((my/get-org-files :maxlevel . 3))
@@ -738,7 +738,7 @@ Rainbow mode sets the background of color names to display their color.
           org-return-follows-link t
           org-startup-folded 'showall
           org-startup-with-inline-images t
-          org-todo-keywords '((sequence "TODO(t)" "WAITING(w)" "DONE(d)"))))
+          org-todo-keywords '((sequence "TODO(t)" "WAITING(w)" "DONE(d!)"))))
 
   (use-package org-bullets
     :commands org-bullets-mode
