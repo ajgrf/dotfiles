@@ -326,6 +326,11 @@ Evil is an extensible vi layer for Emacs.
     (setq evil-want-keybinding nil
           evil-want-C-u-scroll t)
     :config
+    (defun backward-kill-line (arg)
+      (interactive "p")
+      (kill-line (- 1 arg)))
+    (evil-define-key 'insert 'global
+      (kbd "C-u") 'backward-kill-line)
     (setq evil-mode-line-format nil)
     (evil-mode 1))
 #+END_SRC
