@@ -1,3 +1,6 @@
+" -*- mode:vimrc; -*-
+" vim: set filetype=vim:
+
 bind n scrollline 10
 bind e scrollline -10
 bind y scrollpx -50

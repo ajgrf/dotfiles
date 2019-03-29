@@ -1,3 +1,6 @@
+" -*- mode:vimrc; -*-
+" vim: set filetype=vim:
+
 " turn off persistent tridactyl settings to make it more dotfile-like
 " (commented out due to #1197 until I upgrade to tridactyl 1.14.7+)
 "sanitise tridactyllocal tridactylsync
