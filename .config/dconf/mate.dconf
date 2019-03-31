@@ -8,6 +8,7 @@ gnome-compat-startup=['smproxy']
 options=['caps\tcaps:ctrl_modifier', 'lv3\tlv3:ralt_alt', 'Compose key\tcompose:menu']
 
 [org/mate/desktop/background]
+background-face=false
 color-shading-type='solid'
 picture-filename='/home/ajgrf/pics/backgrounds/curbg.jpg'
 picture-options='spanned'
