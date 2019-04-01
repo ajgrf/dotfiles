@@ -280,6 +280,42 @@ Use a blinking bar-style cursor in insert mode.
   (add-hook 'evil-insert-state-exit-hook  (lambda () (blink-cursor-mode 0)))
 #+END_SRC
 
+*** Mode Line
+
+I abuse some implementation details of =smart-mode-line= to put the
+cursor position information on the right like vim.
+
+#+BEGIN_SRC emacs-lisp
+  (use-package smart-mode-line
+    :config
+    (setq sml/mode-width 'right
+          sml/pre-modes-separator "  "
+          sml/theme nil)
+    ;; Override this function to get better spacing once we rearrange.
+    (defun sml/fill-for-buffer-identification () "  ")
+    (column-number-mode) ;; Show column number next to the line number.
+    (sml/setup)
+    ;; Rearrange mode-line to put position and line number on the right.
+    (setq-default
+     mode-line-format
+     '("%e"
+       mode-line-mule-info
+       mode-line-client
+       mode-line-modified
+       mode-line-remote
+       "  "
+       mode-line-frame-identification
+       mode-line-buffer-identification
+       sml/pos-id-separator
+       (vc-mode vc-mode)
+       sml/pre-modes-separator
+       mode-line-modes
+       mode-line-misc-info
+       mode-line-front-space
+       mode-line-position
+       mode-line-end-spaces)))
+#+END_SRC
+
 * Editing
 
 ** Whitespace
