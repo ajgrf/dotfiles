@@ -318,6 +318,15 @@ cursor position information on the right like vim.
        mode-line-end-spaces)))
 #+END_SRC
 
+**** Hide Mode Lighters
+
+Most of my =diminish= invocations are within =use-package=
+declarations, but these modes are hidden the hard way.
+
+#+BEGIN_SRC emacs-lisp
+  (eval-after-load "eldoc" '(diminish 'eldoc-mode))
+#+END_SRC
+
 * Editing
 
 ** Whitespace
@@ -325,7 +334,7 @@ cursor position information on the right like vim.
 #+BEGIN_SRC emacs-lisp
   (use-package whitespace
     :ensure nil
-    :diminish global-whitespace-mode
+    :diminish (whitespace-mode global-whitespace-mode)
     :config
     (setq whitespace-line-column 79
           whitespace-style '(face lines-tail trailing))
@@ -696,6 +705,7 @@ keybindings.
 
 #+BEGIN_SRC emacs-lisp
   (use-package flyspell
+    :diminish
     :hook ((org-mode markdown-mode) . flyspell-mode)
     :general
     (tyrant-def
@@ -709,6 +719,7 @@ Rainbow mode sets the background of color names to display their color.
 
 #+BEGIN_SRC emacs-lisp
   (use-package rainbow-mode
+    :diminish
     :general
     (tyrant-def
       "tC"  '(:ignore t :which-key "colors")
@@ -719,7 +730,6 @@ Rainbow mode sets the background of color names to display their color.
 
 #+BEGIN_SRC emacs-lisp
   (use-package org
-    :diminish org-indent-mode
     :hook (org-mode . org-indent-mode)
     :general
     (tyrant-def
@@ -794,6 +804,11 @@ Rainbow mode sets the background of color names to display their color.
           org-startup-folded 'showall
           org-startup-with-inline-images t
           org-todo-keywords '((sequence "TODO(t)" "WAITING(w)" "DONE(d!)"))))
+
+  (use-package org-indent
+    :ensure nil
+    :diminish
+    :commands org-indent-mode)
 
   (use-package org-bullets
     :commands org-bullets-mode
