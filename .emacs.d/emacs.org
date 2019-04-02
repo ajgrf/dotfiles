@@ -323,10 +323,13 @@ cursor position information on the right like vim.
 ** Whitespace
 
 #+BEGIN_SRC emacs-lisp
-  (setq whitespace-line-column 79
-        whitespace-style '(face lines-tail trailing))
-  (global-whitespace-mode 1)
-  (diminish 'global-whitespace-mode)
+  (use-package whitespace
+    :ensure nil
+    :diminish global-whitespace-mode
+    :config
+    (setq whitespace-line-column 79
+          whitespace-style '(face lines-tail trailing))
+    (global-whitespace-mode 1))
 #+END_SRC
 
 Don't indent with tabs by default.
