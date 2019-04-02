@@ -291,6 +291,8 @@ cursor position information on the right like vim.
     (setq sml/mode-width 'right
           sml/pre-modes-separator "  "
           sml/theme nil)
+    (add-to-list 'sml/replacer-regexp-list '("^/vcsh:dotfiles:" ":Dot:") t)
+    (add-to-list 'sml/replacer-regexp-list `(,(getenv "HOME") "~") t)
     ;; Override this function to get better spacing once we rearrange.
     (defun sml/fill-for-buffer-identification () "  ")
     (column-number-mode) ;; Show column number next to the line number.
