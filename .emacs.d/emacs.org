@@ -727,7 +727,8 @@ Rainbow mode sets the background of color names to display their color.
       "oa"  'org-agenda-default
       "oc"  'org-capture
       "ol"  'org-store-link
-      "oo"  'org-agenda)
+      "oo"  'org-agenda
+      "fp"  'find-plan-file)
     (tyrant-def org-mode-map
       "m,"  'org-ctrl-c-ctrl-c
       "m'"  'org-edit-special
@@ -761,6 +762,9 @@ Rainbow mode sets the background of color names to display their color.
       (org-agenda nil "n"))
     (defun my/get-org-files ()
       (directory-files org-directory t "\.org$"))
+    (defun find-plan-file ()
+      (interactive)
+      (find-file-existing "~/org/plan.org"))
     (add-to-list 'org-modules 'org-attach)
     (add-to-list 'org-modules 'org-depend)
     (add-to-list 'org-modules 'org-habit)
