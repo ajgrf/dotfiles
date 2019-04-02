@@ -20,12 +20,16 @@ From doom-emacs and John Wiegley.
 
   (defvar file-name-handler-alist-old file-name-handler-alist)
 
-  (setq file-name-handler-alist nil
-        gc-cons-threshold 402653184
-        gc-cons-percentage 0.6
-        load-prefer-newer t
-        package-enable-at-startup nil
-        package--init-file-ensured t)
+  ;; Only run this code once, even when reloading the file.
+  (defvar pre-init-p t)
+  (when pre-init-p
+    (setq file-name-handler-alist nil
+          pre-init-p nil
+          gc-cons-threshold 402653184
+          gc-cons-percentage 0.6
+          load-prefer-newer t
+          package-enable-at-startup nil
+          package--init-file-ensured t))
 
   (add-hook 'after-init-hook
             `(lambda ()
