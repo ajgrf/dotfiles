@@ -845,6 +845,7 @@ Set up desktop notifications for org agenda items.
 #+BEGIN_SRC emacs-lisp
   (use-package appt
     :ensure nil
+    :defer 5
     :config
     (defun alert-appt-display (minutes-until _time msg)
       (require 'notifications)
