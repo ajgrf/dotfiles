@@ -702,6 +702,18 @@ Use ivy for generic input completion.
     :after yasnippet)
 #+END_SRC
 
+** Smartparens
+
+Insert and delete parentheses and other pairs more intelligently.
+
+#+BEGIN_SRC emacs-lisp
+  (use-package smartparens
+    :diminish
+    :config
+    (require 'smartparens-config)
+    (smartparens-global-mode))
+#+END_SRC
+
 ** Spell Check
 
 Activate spell checker automatically in text mode, or manually with
