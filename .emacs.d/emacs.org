@@ -1094,6 +1094,13 @@ search engine.
           mu4e-get-mail-command "mbsync -c ~/.config/isync/mbsyncrc -a"))
 #+END_SRC
 
+Support links to mu4e messages from Org.
+
+#+BEGIN_SRC emacs-lisp
+  (use-package org-mu4e
+    :ensure nil)
+#+END_SRC
+
 Show email threads in a unified conversation view.
 
 #+BEGIN_SRC emacs-lisp
