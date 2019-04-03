@@ -648,7 +648,8 @@ Restart Emacs.
     (defun reload-and-restart-emacs ()
       "Reload Emacs configuration and restart Emacs."
       (interactive)
-      (reload-emacs-config)
+      (require 'org)
+      (org-babel-tangle-file "/vcsh:dotfiles:~/.emacs.d/emacs.org")
       ;; (setq restart-emacs-restore-frames t)
       (restart-emacs)))
 #+END_SRC
