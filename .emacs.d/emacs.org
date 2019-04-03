@@ -754,6 +754,8 @@ Rainbow mode sets the background of color names to display their color.
       "oc"  'org-capture
       "ol"  'org-store-link
       "oo"  'org-agenda
+      "oO"  'org-clock-out
+      "oq"  'org-clock-cancel
       "fp"  'find-plan-file)
     (tyrant-def org-mode-map
       "m,"  'org-ctrl-c-ctrl-c
@@ -765,9 +767,12 @@ Rainbow mode sets the background of color names to display their color.
       "mC"  'org-clone-subtree-with-time-shift
       "md"  'org-deadline
       "me"  'org-export-dispatch
+      "mI"  'org-clock-in
       "ml"  'org-insert-link
       "mn"  'org-toggle-narrow-to-subtree
+      "mO"  'org-clock-out
       "mp"  'org-set-property
+      "mq"  'org-clock-cancel
       "mR"  'org-refile
       "ms"  'org-schedule
       "mt"  'org-todo
