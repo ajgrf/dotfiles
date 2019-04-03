@@ -1072,6 +1072,37 @@ Add some aliases.
     :general (tyrant-def "ap" 'pass))
 #+END_SRC
 
+** Email Client
+
+=mu4e= is an email client for Emacs based on the =mu= (maildir-utils)
+search engine.
+
+#+BEGIN_SRC emacs-lisp
+  (use-package mu4e
+    :ensure nil
+    :commands (mu4e mu4e~headers-jump-to-maildir)
+    :general
+    (defun mu4e-inbox ()
+      (interactive)
+      (mu4e~headers-jump-to-maildir "/Inbox"))
+    (tyrant-def "am" 'mu4e-inbox)
+    :config
+    (setq mu4e-maildir       "~/mail"
+          mu4e-sent-folder   "/Sent Items"
+          mu4e-drafts-folder "/Drafts"
+          mu4e-trash-folder  "/Trash"
+          mu4e-get-mail-command "mbsync -c ~/.config/isync/mbsyncrc -a"))
+#+END_SRC
+
+Show email threads in a unified conversation view.
+
+#+BEGIN_SRC emacs-lisp
+  (use-package mu4e-conversation
+    :after mu4e
+    :config
+    (global-mu4e-conversation-mode))
+#+END_SRC
+
 ** Slack
 
 #+BEGIN_SRC emacs-lisp
