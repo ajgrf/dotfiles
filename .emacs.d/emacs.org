@@ -773,6 +773,7 @@ Rainbow mode sets the background of color names to display their color.
       "m."  'org-time-stamp
       "ma"  'org-attach
       "mA"  'org-archive-subtree
+      "mB"  '(:keymap org-babel-map :which-key "babel")
       "mC"  'org-clone-subtree-with-time-shift
       "md"  'org-deadline
       "me"  'org-export-dispatch
