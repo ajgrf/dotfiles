@@ -610,6 +610,8 @@ Spacemacs-like leader keys.
      "q"   '(:ignore t :which-key "quit")
      "qq"  'save-buffers-kill-terminal
 
+     "s"   '(:ignore t :which-key "search")
+
      "t"   '(:ignore t :which-key "toggles")
      "tF"  'auto-fill-mode
      "th"  '(:ignore t :which-key "highlight")
@@ -683,6 +685,10 @@ Use ivy for generic input completion.
   (use-package counsel
     :diminish
     :after ivy
+    :general
+    (tyrant-def
+      "ss" 'swiper
+      "sr" 'counsel-rg)
     :config (counsel-mode))
 #+END_SRC
 
