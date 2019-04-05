@@ -93,6 +93,7 @@ Check for package updates every 7 days.
 
 #+BEGIN_SRC emacs-lisp
   (use-package auto-package-update
+    :disabled
     :config
     (setq auto-package-update-delete-old-versions t
           auto-package-update-hide-results t)
