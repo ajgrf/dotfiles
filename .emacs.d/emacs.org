@@ -510,18 +510,6 @@ Extend % to jump between matching tags or code branches.
     (global-evil-matchit-mode 1))
 #+END_SRC
 
-*** TODO Multiple Cursors
-
-Edit text with multiple cursors. Disabled for now until I figure out bindings.
-
-#+BEGIN_SRC emacs-lisp
-  (use-package evil-mc
-    :disabled
-    :after evil
-    :config
-    (global-evil-mc-mode 1))
-#+END_SRC
-
 ** Keybinding Popup
 
 Show a popup with completions for partially-entered keybindings.
@@ -655,6 +643,49 @@ Restart Emacs.
       (org-babel-tangle-file "/vcsh:dotfiles:~/.emacs.d/emacs.org")
       ;; (setq restart-emacs-restore-frames t)
       (restart-emacs)))
+#+END_SRC
+
+** Multiple Cursors
+
+Edit text with multiple cursors.
+
+#+BEGIN_SRC emacs-lisp
+  (use-package evil-mc
+    :diminish
+    :general
+    (general-define-key
+     :states '(normal visual)
+     "gcm" 'evil-mc-make-all-cursors
+     "gcu" 'evil-mc-undo-last-added-cursor
+     "gcq" 'evil-mc-undo-all-cursors
+     "gcs" 'evil-mc-pause-cursors
+     "gcr" 'evil-mc-resume-cursors
+     "gcf" 'evil-mc-make-and-goto-first-cursor
+     "gcl" 'evil-mc-make-and-goto-last-cursor
+     "gch" 'evil-mc-make-cursor-here
+     "M-p" 'evil-mc-make-and-goto-prev-cursor
+     "gcP" 'evil-mc-skip-and-goto-prev-cursor
+     "C-t" 'evil-mc-skip-and-goto-next-match
+     "C-p" 'evil-mc-make-and-goto-prev-match
+     "gcp" 'evil-mc-skip-and-goto-prev-match
+     ;; workman vim bindings
+     "gcn" 'evil-mc-make-cursor-move-next-line
+     "gce" 'evil-mc-make-cursor-move-prev-line
+     "M-k" 'evil-mc-make-and-goto-next-cursor
+     "gcK" 'evil-mc-skip-and-goto-next-cursor
+     "C-k" 'evil-mc-make-and-goto-next-match
+     "gck" 'evil-mc-skip-and-goto-next-match
+     "C-n" 'evil-mc-make-cursor-move-next-line
+     "C-e" 'evil-mc-make-cursor-move-prev-line
+     "C-x" 'evil-mc-skip-and-goto-next-match)
+    (general-define-key
+     :states 'normal
+     "<escape>" 'evil-mc-undo-all-cursors)
+    (general-define-key
+     "C-<down-mouse-1>" nil
+     "C-<mouse-1>" 'evil-mc-toggle-cursor-on-click)
+    :config
+    (global-evil-mc-mode 1))
 #+END_SRC
 
 ** Completion
