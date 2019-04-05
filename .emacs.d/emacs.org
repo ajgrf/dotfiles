@@ -687,6 +687,7 @@ Use ivy for generic input completion.
     :after ivy
     :general
     (tyrant-def
+      "sa" 'counsel-ag
       "ss" 'swiper
       "sr" 'counsel-rg)
     :config (counsel-mode))
