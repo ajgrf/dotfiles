@@ -1139,6 +1139,30 @@ Show email threads in a unified conversation view.
     (slack-start))
 #+END_SRC
 
+* Projects
+
+The =projectile= package provides useful project-centric commands.
+
+#+BEGIN_SRC emacs-lisp
+  (use-package projectile
+    :diminish
+    :defer t)
+#+END_SRC
+
+The =counsel-projectile= package enhances =projectile= with =ivy= completion.
+
+#+BEGIN_SRC emacs-lisp
+  (use-package counsel-projectile
+    :defer t
+    :general
+    (tyrant-def
+      "p"  '(:keymap projectile-command-map
+             :package counsel-projectile
+             :which-key "projects"))
+    :config
+    (counsel-projectile-mode))
+#+END_SRC
+
 * Version Control
 
 Magit is the best porcelain for git.
