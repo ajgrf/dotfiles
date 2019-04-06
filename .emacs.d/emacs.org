@@ -668,6 +668,7 @@ Edit text with multiple cursors.
      "C-t" 'evil-mc-skip-and-goto-next-match
      "C-p" 'evil-mc-make-and-goto-prev-match
      "gcp" 'evil-mc-skip-and-goto-prev-match
+     "C-x" 'evil-mc-skip-and-goto-next-match
      ;; workman vim bindings
      "gcn" 'evil-mc-make-cursor-move-next-line
      "gce" 'evil-mc-make-cursor-move-prev-line
@@ -676,8 +677,11 @@ Edit text with multiple cursors.
      "C-k" 'evil-mc-make-and-goto-next-match
      "gck" 'evil-mc-skip-and-goto-next-match
      "C-n" 'evil-mc-make-cursor-move-next-line
-     "C-e" 'evil-mc-make-cursor-move-prev-line
-     "C-x" 'evil-mc-skip-and-goto-next-match)
+     "C-e" 'evil-mc-make-cursor-move-prev-line)
+    (general-define-key
+     :states 'visual
+     "gci" 'evil-mc-make-cursor-in-visual-selection-beg
+     "gca" 'evil-mc-make-cursor-in-visual-selection-end)
     (general-define-key
      :states 'normal
      "<escape>" 'evil-mc-undo-all-cursors)
