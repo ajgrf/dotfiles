@@ -713,7 +713,7 @@ Edit text with multiple cursors.
 #+BEGIN_SRC emacs-lisp
   (use-package company
     :diminish
-    :hook (prog-mode . company-mode))
+    :hook ((prog-mode ledger-mode) . company-mode))
 #+END_SRC
 
 *** Incremental Completion
