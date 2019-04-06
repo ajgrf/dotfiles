@@ -510,6 +510,20 @@ Extend % to jump between matching tags or code branches.
     (global-evil-matchit-mode 1))
 #+END_SRC
 
+*** Commentary
+
+Easily comment stuff out.
+
+#+BEGIN_SRC emacs-lisp
+  (use-package evil-commentary
+    :diminish
+    :config
+    (workman-translate-keys 'evil-commentary-mode
+                            'evil-commentary-mode-map
+                            'normal)
+    (evil-commentary-mode))
+#+END_SRC
+
 ** Keybinding Popup
 
 Show a popup with completions for partially-entered keybindings.
