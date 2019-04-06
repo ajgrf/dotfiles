@@ -655,33 +655,33 @@ Edit text with multiple cursors.
     :general
     (general-define-key
      :states '(normal visual)
-     "gcm" 'evil-mc-make-all-cursors
-     "gcu" 'evil-mc-undo-last-added-cursor
-     "gcq" 'evil-mc-undo-all-cursors
-     "gcs" 'evil-mc-pause-cursors
-     "gcr" 'evil-mc-resume-cursors
-     "gcf" 'evil-mc-make-and-goto-first-cursor
-     "gcl" 'evil-mc-make-and-goto-last-cursor
-     "gch" 'evil-mc-make-cursor-here
+     "gsm" 'evil-mc-make-all-cursors
+     "gsu" 'evil-mc-undo-last-added-cursor
+     "gsq" 'evil-mc-undo-all-cursors
+     "gss" 'evil-mc-pause-cursors
+     "gsr" 'evil-mc-resume-cursors
+     "gsf" 'evil-mc-make-and-goto-first-cursor
+     "gsl" 'evil-mc-make-and-goto-last-cursor
+     "gsh" 'evil-mc-make-cursor-here
      "M-p" 'evil-mc-make-and-goto-prev-cursor
-     "gcP" 'evil-mc-skip-and-goto-prev-cursor
+     "gsP" 'evil-mc-skip-and-goto-prev-cursor
      "C-t" 'evil-mc-skip-and-goto-next-match
      "C-p" 'evil-mc-make-and-goto-prev-match
-     "gcp" 'evil-mc-skip-and-goto-prev-match
+     "gsp" 'evil-mc-skip-and-goto-prev-match
      "C-x" 'evil-mc-skip-and-goto-next-match
      ;; workman vim bindings
-     "gcn" 'evil-mc-make-cursor-move-next-line
-     "gce" 'evil-mc-make-cursor-move-prev-line
+     "gsn" 'evil-mc-make-cursor-move-next-line
+     "gse" 'evil-mc-make-cursor-move-prev-line
      "M-k" 'evil-mc-make-and-goto-next-cursor
-     "gcK" 'evil-mc-skip-and-goto-next-cursor
+     "gsK" 'evil-mc-skip-and-goto-next-cursor
      "C-k" 'evil-mc-make-and-goto-next-match
-     "gck" 'evil-mc-skip-and-goto-next-match
+     "gsk" 'evil-mc-skip-and-goto-next-match
      "C-n" 'evil-mc-make-cursor-move-next-line
      "C-e" 'evil-mc-make-cursor-move-prev-line)
     (general-define-key
      :states 'visual
-     "gci" 'evil-mc-make-cursor-in-visual-selection-beg
-     "gca" 'evil-mc-make-cursor-in-visual-selection-end)
+     "gsi" 'evil-mc-make-cursor-in-visual-selection-beg
+     "gsa" 'evil-mc-make-cursor-in-visual-selection-end)
     (general-define-key
      :states 'normal
      "<escape>" 'evil-mc-undo-all-cursors)
