@@ -1386,7 +1386,7 @@ hovering over things.
 
 #+BEGIN_SRC emacs-lisp
   (use-package go-eldoc
-    :hook (go-mode go-eldoc-setup))
+    :hook (go-mode . go-eldoc-setup))
 #+END_SRC
 
 ** Haskell
