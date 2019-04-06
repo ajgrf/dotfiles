@@ -352,6 +352,12 @@ Don't indent with tabs by default.
   (setq-default indent-tabs-mode nil)
 #+END_SRC
 
+Sentences end with a single space.
+
+#+BEGIN_SRC emacs-lisp
+  (setq sentence-end-double-space nil)
+#+END_SRC
+
 Load style settings from =.editorconfig=
 
 #+BEGIN_SRC emacs-lisp
