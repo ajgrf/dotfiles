@@ -868,11 +868,11 @@ Rainbow mode sets the background of color names to display their color.
           org-agenda-todo-ignore-scheduled t
           org-capture-templates
           '(("t" "Task" entry (file+headline "~/org/plan.org" "Tasks")
-             "* TODO %?\n %i\n  %a")
+             "* TODO %?\n %i\n  %a\n")
             ("a" "Appointment" entry (file+headline "~/org/plan.org" "Calendar")
-             "* %?\n %i\n  %a")
+             "* %?\n %i\n  %a\n")
             ("f" "FOCUS Task" entry (file+headline "~/org/plan.org" "FOCUS")
-             "* TODO %?\n %i\n  %a"))
+             "* TODO %?\n %i\n  %a\n"))
           org-default-notes-file "~/org/inbox.org"
           org-image-actual-width nil
           org-link-abbrev-alist '(("attach" . org-attach-expand-link))
