@@ -1299,6 +1299,38 @@ https://github.com/magit/magit/issues/2939
                    (tramp-remote-shell-args ("-c")))))
 #+END_SRC
 
+* Programming
+
+** Syntax Checking
+
+Check syntax and other errors on the fly.
+
+#+BEGIN_SRC emacs-lisp
+  (use-package flycheck
+    :hook (after-init . global-flycheck-mode)
+    :general
+    (tyrant-def
+      "e"  '(:ignore t :which-key "errors")
+      "ec" 'flycheck-clear
+      "ee" 'flycheck-explain-error-at-point
+      "eh" 'flycheck-describe-checker
+      "eL" 'goto-flycheck-error-list
+      "el" 'flycheck-error-list
+      "en" 'flycheck-next-error
+      "ep" 'flycheck-previous-error
+      "eS" 'flycheck-set-checker-executable
+      "es" 'flycheck-select-checker
+      "ev" 'flycheck-verify-checker)
+    (general-define-key
+     :states '(normal visual)
+     "[e"  'flycheck-previous-error
+     "]e"  'flycheck-next-error
+     "[l"  'flycheck-previous-error
+     "]l"  'flycheck-next-error)
+    :config
+    (setq flycheck-mode-line-prefix "!"))
+#+END_SRC
+
 * Languages
 
 ** Markdown
