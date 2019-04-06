@@ -1367,6 +1367,8 @@ Check syntax and other errors on the fly.
 ** C
 ** Go
 
+Support for the Go programming language.
+
 #+BEGIN_SRC emacs-lisp
   (use-package go-mode
     :mode "\\.go\\'"
@@ -1377,6 +1379,14 @@ Check syntax and other errors on the fly.
       (evil-define-key 'normal go-mode-map
         "E" 'godef-describe
         "K" 'evil-search-previous)))
+#+END_SRC
+
+Show function signatures and other information in the echo area when
+hovering over things.
+
+#+BEGIN_SRC emacs-lisp
+  (use-package go-eldoc
+    :hook (go-mode go-eldoc-setup))
 #+END_SRC
 
 ** Haskell
