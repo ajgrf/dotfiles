@@ -1315,7 +1315,7 @@ Check syntax and other errors on the fly.
       "ee" 'flycheck-explain-error-at-point
       "eh" 'flycheck-describe-checker
       "eL" 'goto-flycheck-error-list
-      "el" 'flycheck-error-list
+      "el" 'flycheck-list-errors
       "en" 'flycheck-next-error
       "ep" 'flycheck-previous-error
       "eS" 'flycheck-set-checker-executable
