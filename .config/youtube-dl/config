@@ -26,5 +26,8 @@
 --sub-format vtt/srt/best
 --convert-subs vtt
 
+# Display progress in console titlebar
+--console-title
+
 # run post-processing hook
 --exec '${XDG_CONFIG_HOME:-$HOME/.config}/youtube-dl/postcmd.sh {}'
