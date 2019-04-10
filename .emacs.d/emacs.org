@@ -1322,6 +1322,7 @@ Check syntax and other errors on the fly.
       "es" 'flycheck-select-checker
       "ev" 'flycheck-verify-checker)
     (general-define-key
+     :keymaps 'flycheck-mode-map
      :states '(normal visual)
      "[e"  'flycheck-previous-error
      "]e"  'flycheck-next-error
