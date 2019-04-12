@@ -564,6 +564,12 @@ Spacemacs-like leader keys.
       (org-babel-tangle-file "/vcsh:dotfiles:~/.emacs.d/emacs.org")
       (load-file user-init-file))
 
+    (defun text-scale-reset ()
+      "Disable text-scale-mode, returning text to normal size."
+      (interactive)
+      (text-scale-mode 0))
+
+
     (general-create-definer tyrant-def
       :states '(normal visual insert motion emacs)
       :keymaps 'override
@@ -641,7 +647,13 @@ Spacemacs-like leader keys.
      "Ts"  'load-theme
      "Tt"  'tool-bar-mode
 
-     "w"   '(evil-window-map :which-key "window"))
+     "w"   '(evil-window-map :which-key "window")
+
+     "z"   '(:ignore t :which-key "zoom")
+     "zz"  'text-scale-adjust
+     "zi"  'text-scale-increase
+     "zo"  'text-scale-decrease
+     "z0"  'text-scale-reset)
 
     (general-define-key
      :keymaps 'evil-window-map
