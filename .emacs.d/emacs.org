@@ -1030,8 +1030,8 @@ Add some aliases.
      "gk"  'ledger-navigate-prev-xact-or-directive
      "M-j" 'ledger-navigate-next-xact-or-directive
      "M-k" 'ledger-navigate-prev-xact-or-directive
-     "["   'ledger-navigate-prev-xact-or-directive
-     "]"   'ledger-navigate-next-xact-or-directive
+     "[["  'ledger-navigate-prev-xact-or-directive
+     "]]"  'ledger-navigate-next-xact-or-directive
      "("   'ledger-navigate-beginning-of-xact
      ")"   'ledger-navigate-end-of-xact
      "="   (general-key-dispatch 'evil-indent
