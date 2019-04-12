@@ -1343,7 +1343,9 @@ Check syntax and other errors on the fly.
      "[l"  'flycheck-previous-error
      "]l"  'flycheck-next-error)
     :config
-    (setq flycheck-mode-line-prefix "!"))
+    (setq flycheck-mode-line-prefix "!")
+    (add-hook 'org-src-mode-hook
+              (lambda () (flycheck-mode 0))))
 #+END_SRC
 
 * Languages
