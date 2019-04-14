@@ -1428,6 +1428,20 @@ hovering over things.
 #+END_SRC
 
 ** sh
+
+Configure shell script indentation style to match =shfmt=.
+
+#+BEGIN_SRC emacs-lisp
+  (setq sh-indent-after-continuation 'always
+        sh-indent-for-case-alt '+
+        sh-indent-for-case-label 0)
+  (defvaralias 'sh-basic-offset 'tab-width)
+  (add-hook 'sh-mode-hook
+            (lambda ()
+              (setq indent-tabs-mode t
+                    tab-width 4)))
+#+END_SRC
+
 ** Vimscript
 
 #+BEGIN_SRC emacs-lisp
