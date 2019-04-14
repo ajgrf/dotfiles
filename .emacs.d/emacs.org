@@ -57,6 +57,12 @@ Don't litter the filesystem with backup or auto-save files.
         `((".*" ,(concat user-emacs-directory "auto-save/") t)))
 #+END_SRC
 
+Save minibuffer history.
+
+#+BEGIN_SRC emacs-lisp
+  (savehist-mode 1)
+#+END_SRC
+
 *** Package Management
 
 **** Specify Package Repositories
