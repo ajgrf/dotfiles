@@ -1392,6 +1392,8 @@ Support for the Go programming language.
     :config
     (setq gofmt-command "goimports")
     (add-hook 'before-save-hook 'gofmt-before-save)
+    (add-hook 'go-mode-hook
+              (lambda () (setq tab-width 4)))
     (when evil-workman
       (evil-define-key 'normal go-mode-map
         "E" 'godef-describe
