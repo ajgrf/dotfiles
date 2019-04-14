@@ -1,4 +1,4 @@
-if test -z "$ENV"; then
+if ! test -f "$ENV"; then
 	test -f "$HOME/.profile" && . "$HOME/.profile"
 fi
 . "${ENV:-$HOME/.shinit}"
