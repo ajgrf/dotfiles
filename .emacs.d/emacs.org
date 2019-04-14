@@ -1390,7 +1390,8 @@ Support for the Go programming language.
   (use-package go-mode
     :mode "\\.go\\'"
     :config
-    (setq gofmt-command "goimports")
+    (when (executable-find "goimports")
+      (setq gofmt-command "goimports"))
     (add-hook 'before-save-hook 'gofmt-before-save)
     (add-hook 'go-mode-hook
               (lambda () (setq tab-width 4)))
