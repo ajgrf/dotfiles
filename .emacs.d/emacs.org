@@ -1083,6 +1083,17 @@ Set up inferior shell, for running a shell in an Emacs buffer.
     <<apt-progress-bars>>)
 #+END_SRC
 
+**** Bash Completion
+
+Bash completion is disabled for now. It requires configuration on the
+shell side too, and I'm not 100% sure I like it anyway.
+
+#+BEGIN_SRC emacs-lisp
+  (use-package bash-completion
+    :disabled
+    :hook (shell-mode . bash-completion-setup))
+#+END_SRC
+
 **** Apt Progress Bars
 
 Show =apt= progress bars in the minibuffer.
