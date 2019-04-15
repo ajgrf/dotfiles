@@ -4,8 +4,6 @@ fi
 . "${ENV:-$HOME/.shinit}"
 
 shopt -s histappend
-HISTFILE="${XDG_DATA_HOME:-$HOME/.local/share}/bash_history"
-HISTFILESIZE=20000
 HISTCONTROL=ignoreboth
 
 # update LINES and COLUMNS after each command

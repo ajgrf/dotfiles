@@ -1,6 +1,3 @@
-CDPATH=":$HOME:$HOME/src"
-HISTSIZE=10000
-
 export GPG_TTY=$(tty)
 
 alias ls='LC_COLLATE=C ls -A -1'
