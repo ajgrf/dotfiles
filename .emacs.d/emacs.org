@@ -1048,7 +1048,37 @@ Set up inferior shell, for running a shell in an Emacs buffer.
               (lambda ()
                 (dolist (c '(?_ ?- ?.))
                   (modify-syntax-entry c "w"))
-                (modify-syntax-entry ?/ "-"))))
+                (modify-syntax-entry ?/ "-")))
+
+    ;;; Kill buffer when the shell exits.
+    ;; https://emacs.stackexchange.com/a/48307
+
+    (defun add-process-sentinel (sentinel &optional process)
+      "Add SENTINEL to PROCESS.
+  PROCESS defaults to the process of the current buffer.
+  Use this function with care.
+  If there is already a process sentinel SENTINEL is used as after-advice.
+  That can fail if the process sentinel is reset by some other function."
+      (unless process
+        (setq process (get-buffer-process (current-buffer))))
+      (let ((old (process-sentinel process)))
+        (cond
+         ((symbolp old)
+          (advice-add old :after sentinel))
+         ((null old)
+          (set-process-sentinel process sentinel))
+         (t (warn "Cannot set sentinel %S for process %S." sentinel process)))))
+
+    (defun kill-shell-buffer-on-exit ()
+      "Custom `shell-mode' behaviours."
+      ;; Kill the buffer when the shell process exits.
+      (add-process-sentinel
+       (lambda (process signal)
+         (and (memq (process-status process) '(exit signal))
+              (buffer-live-p (process-buffer process))
+              (evil-delete-buffer (process-buffer process))))))
+
+    (add-hook 'shell-mode-hook 'kill-shell-buffer-on-exit))
 #+END_SRC
 
 ** Emacs Shell
