@@ -981,6 +981,32 @@ https://joonro.github.io/blog/posts/toast-notifications-org-mode-windows.html
 
 * Tools
 
+** Inferior Interpreters
+
+Comint mode runs interpreters in a buffer, adding common functionality
+for line editing, history, keybindings, etc.
+
+#+BEGIN_SRC emacs-lisp
+  (use-package comint
+    :ensure nil
+    :general
+    (tyrant-def comint-mode-map
+      "m," 'comint-get-next-from-history
+      "m." 'comint-insert-previous-argument
+      "ml" 'comint-dynamic-list-input-ring)
+    (general-define-key
+     :keymaps 'comint-mode-map
+     :states 'insert
+     "SPC"     'comint-magic-space
+     "C-a"     'move-beginning-of-line
+     "C-e"     'move-end-of-line
+     "C-k"     'kill-line
+     "<prior>" 'comint-previous-matching-input-from-input
+     "<next>"  'comint-next-matching-input-from-input)
+    :config
+    (setq comint-completion-addsuffix '("/" . " ")))
+#+END_SRC
+
 ** Shell
 
 #+BEGIN_SRC emacs-lisp
