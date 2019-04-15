@@ -586,6 +586,10 @@ Spacemacs-like leader keys.
       :states '(normal visual)
       "," (general-simulate-key "SPC m"))
 
+    (general-define-key
+      :states 'insert
+      "C-," (general-simulate-key "C-SPC m"))
+
     (tyrant-def
      "a"   '(:ignore t :which-key "app")
      "ac"  'calc
