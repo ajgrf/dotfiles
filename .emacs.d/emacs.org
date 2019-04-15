@@ -1391,6 +1391,15 @@ Check syntax and other errors on the fly.
 #+END_SRC
 
 ** C
+
+Default to sane indent rules for C.
+
+#+BEGIN_SRC emacs-lisp
+  (setq c-default-style "linux")
+  (add-hook 'c-mode-hook
+            (lambda () (setq indent-tabs-mode t)))
+#+END_SRC
+
 ** Go
 
 Support for the Go programming language.
