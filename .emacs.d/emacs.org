@@ -1014,11 +1014,41 @@ Set up inferior shell, for running a shell in an Emacs buffer.
 #+BEGIN_SRC emacs-lisp
   (use-package shell
     :ensure nil
+    :general
+    (general-define-key
+     :keymaps 'shell-mode-map
+     :states 'insert
+     "C-w" 'backward-delete-word)
     :config
+
     ;; Recognize the password prompt from my doas alias.
     (setq comint-password-prompt-regexp
           (concat comint-password-prompt-regexp
-                  "\\|^doas (.*@.*) password: \\'")))
+                  "\\|^doas (.*@.*) password: \\'"))
+
+    ;;; Make C-w behave like bash:
+
+    ;; https://www.emacswiki.org/emacs/BackwardDeleteWord
+    (defun delete-word (arg)
+      "Delete characters forward until encountering the end of a word.
+  With argument, do this that many times."
+      (interactive "p")
+      (if (use-region-p)
+          (delete-region (region-beginning) (region-end))
+        (delete-region (point) (progn (forward-word arg) (point)))))
+
+    (defun backward-delete-word (arg)
+      "Delete characters backward until encountering the end of a word.
+  With argument, do this that many times."
+      (interactive "p")
+      (delete-word (- arg)))
+
+    ;; Redefine a few word characters.
+    (add-hook 'shell-mode-hook
+              (lambda ()
+                (dolist (c '(?_ ?- ?.))
+                  (modify-syntax-entry c "w"))
+                (modify-syntax-entry ?/ "-"))))
 #+END_SRC
 
 ** Emacs Shell
