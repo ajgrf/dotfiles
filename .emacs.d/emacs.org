@@ -1011,7 +1011,7 @@ for line editing, history, keybindings, etc.
 
 Set up inferior shell, for running a shell in an Emacs buffer.
 
-#+BEGIN_SRC emacs-lisp
+#+BEGIN_SRC emacs-lisp :noweb yes
   (use-package shell
     :ensure nil
     :general
@@ -1078,8 +1078,42 @@ Set up inferior shell, for running a shell in an Emacs buffer.
               (buffer-live-p (process-buffer process))
               (evil-delete-buffer (process-buffer process))))))
 
-    (add-hook 'shell-mode-hook 'kill-shell-buffer-on-exit))
+    (add-hook 'shell-mode-hook 'kill-shell-buffer-on-exit)
+
+    <<apt-progress-bars>>)
 #+END_SRC
+
+**** Apt Progress Bars
+
+Show =apt= progress bars in the minibuffer.
+
+#+NAME: apt-progress-bars
+#+BEGIN_SRC emacs-lisp
+  (advice-add 'ansi-color-apply-on-region :before 'ora-ansi-color-apply-on-region)
+
+  (defun ora-ansi-color-apply-on-region (begin end)
+    "Fix progress bars for e.g. apt(8).
+  Display progress in the mode line instead."
+    (let ((end-marker (copy-marker end))
+          mb)
+      (save-excursion
+        (goto-char (copy-marker begin))
+        (while (re-search-forward "\0337" end-marker t)
+          (setq mb (match-beginning 0))
+          (when (re-search-forward "\0338" end-marker t)
+            (let ((progress (buffer-substring-no-properties
+                             (+ mb 2) (- (point) 2))))
+              (delete-region mb (point))
+              (ora-apt-progress-message progress)))))))
+
+  (defun ora-apt-progress-message (progress)
+    (message
+     (replace-regexp-in-string
+      "%" "%%"
+      (ansi-color-apply progress))))
+#+END_SRC
+
+https://oremacs.com/2019/03/24/shell-apt/
 
 ** Emacs Shell
 
