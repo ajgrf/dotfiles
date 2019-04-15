@@ -1007,12 +1007,18 @@ for line editing, history, keybindings, etc.
     (setq comint-completion-addsuffix '("/" . " ")))
 #+END_SRC
 
-** Shell
+*** Shell
+
+Set up inferior shell, for running a shell in an Emacs buffer.
 
 #+BEGIN_SRC emacs-lisp
-  (setq comint-password-prompt-regexp
-        (concat comint-password-prompt-regexp
-                "\\|^doas (.*@.*) password: \\'"))
+  (use-package shell
+    :ensure nil
+    :config
+    ;; Recognize the password prompt from my doas alias.
+    (setq comint-password-prompt-regexp
+          (concat comint-password-prompt-regexp
+                  "\\|^doas (.*@.*) password: \\'")))
 #+END_SRC
 
 ** Emacs Shell
