@@ -15,7 +15,7 @@ prompt() {
 	dir="${dir/#$HOME\//\~/}"; dir="${dir%/}"
 	test "$UID" -eq 0 && S='#'
 
-        if type git >/dev/null 2>&1; then
+	if type git >/dev/null 2>&1; then
 		branch=$(git symbolic-ref --short HEAD 2>/dev/null)
 	fi
 

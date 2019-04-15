@@ -54,7 +54,7 @@ prompt() {
 	test "$e" -eq 0 && e=""
 	test "${USER_ID:=$(id -u)}" -eq 0 && S='#'
 
-        if type git >/dev/null 2>&1; then
+	if type git >/dev/null 2>&1; then
 		branch=$(git symbolic-ref --short HEAD 2>/dev/null)
 	fi
 
