@@ -752,6 +752,15 @@ Use ivy for generic input completion.
   (use-package ivy
     :diminish
     :hook (after-init . ivy-mode)
+    :general
+    (general-define-key
+     :keymaps 'ivy-minibuffer-map
+     "C-u"     'backward-kill-line
+     "C-w"     'evil-delete-backward-word
+     "C-b"     'ivy-scroll-down-command
+     "C-f"     'ivy-scroll-up-command
+     "<prior>" 'ivy-previous-history-element
+     "<next>"  'ivy-next-history-element)
     :config
     (setq ivy-use-virtual-buffers t
           ivy-count-format "(%d/%d) "
