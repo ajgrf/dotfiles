@@ -41,6 +41,10 @@ export VCSH_GITIGNORE=none
 export VIMINIT='if has("eval") | let $MYVIMRC="$XDG_CONFIG_HOME/vim/init.vim" | source $MYVIMRC | endif'
 export WEECHAT_HOME="$XDG_DATA_HOME/weechat"
 
+if test -e "$HOME/.profile.local"; then
+	. "$HOME/.profile.local"
+fi
+
 if test "$WORKMAN"; then
 	export LESSKEY="$XDG_CONFIG_HOME/less/workman.less"
 	ln -sf workman.keys "$XDG_CONFIG_HOME/ncmpc/keys"
