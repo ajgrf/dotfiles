@@ -1006,12 +1006,14 @@ for line editing, history, keybindings, etc.
     (general-define-key
      :keymaps 'comint-mode-map
      :states 'insert
-     "SPC"     'comint-magic-space
-     "C-a"     'move-beginning-of-line
-     "C-e"     'move-end-of-line
-     "C-k"     'kill-line
-     "<prior>" 'comint-previous-matching-input-from-input
-     "<next>"  'comint-next-matching-input-from-input)
+     "SPC"       'comint-magic-space
+     "C-a"       'move-beginning-of-line
+     "C-e"       'move-end-of-line
+     "C-k"       'kill-line
+     "<prior>"   'comint-previous-matching-input-from-input
+     "<next>"    'comint-next-matching-input-from-input
+     "S-<prior>" 'scroll-down-command
+     "S-<next>"  'scroll-up-command)
     :config
     (setq comint-completion-addsuffix '("/" . " ")))
 #+END_SRC
