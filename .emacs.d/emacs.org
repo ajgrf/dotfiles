@@ -1606,7 +1606,7 @@ Configure shell script indentation style to match =shfmt=.
   (use-package sh-mode
     :ensure nil
     :mode ("\\.shinit\\'" . sh-mode)
-    :config
+    :init
     (setq sh-indent-after-continuation 'always
           sh-indent-for-case-alt '+
           sh-indent-for-case-label 0)
