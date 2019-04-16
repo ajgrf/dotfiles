@@ -50,7 +50,7 @@ ppwd() {
 }
 
 prompt() {
-	local e=$?  title="" env="" S='$'
+	local e=$? env="" S='$'
 	test "$e" -eq 0 && e=""
 	test "${USER_ID:=$(id -u)}" -eq 0 && S='#'
 
