@@ -1,0 +1,4 @@
+alias date *date $*
+alias edit find-file $1
+alias l ls $*
+alias mpc *mpc $*

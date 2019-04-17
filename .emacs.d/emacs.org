@@ -1139,25 +1139,25 @@ https://oremacs.com/2019/03/24/shell-apt/
 
 ** Emacs Shell
 
-TUI commands must be listed here so they can open in a terminal emulator.
-
-#+BEGIN_SRC emacs-lisp :tangle ~/.emacs.d/eshell/login
-  (add-to-list 'eshell-visual-commands "ncmpc") >/dev/null
-#+END_SRC
-
-Close terminal emulator when the command exits.
+A shell written entirely in elisp.
 
 #+BEGIN_SRC emacs-lisp
-  (setq eshell-destroy-buffer-when-process-dies t)
-#+END_SRC
-
-Add some aliases.
-
-#+BEGIN_SRC emacs-lisp :tangle ~/.emacs.d/eshell/alias
-  alias date *date $*
-  alias edit find-file $1
-  alias l ls $*
-  alias mpc *mpc $*
+  (use-package eshell
+    :ensure nil
+    :commands eshell
+    :config
+    ;; Open in new window
+    (add-to-list 'display-buffer-alist
+                 '("\\`\\*e?shell" display-buffer-pop-up-window))
+    (setq eshell-banner-message ""
+          eshell-destroy-buffer-when-process-dies t)
+    (setq eshell-prompt-function
+          (lambda ()
+            (concat
+             (when (not (= 0 eshell-last-command-status))
+               (concat (number-to-string eshell-last-command-status) "|"))
+             (abbreviate-file-name (eshell/pwd))
+             (if (= (user-uid) 0) "# " "$ ")))))
 #+END_SRC
 
 ** Ledger
