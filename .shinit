@@ -60,6 +60,7 @@ prompt() {
 		env="${branch:+($branch)}"
 	fi
 	env="${env}${VCSH_REPO_NAME:+[$VCSH_REPO_NAME]}"
+	env="${env}${GUIX_ENVIRONMENT:+[env]}"
 
 	echo -n "${e:+$e|}${USER}@${HOSTNAME%%.*}:$(ppwd 28)${env:+ $env}$S "
 }
