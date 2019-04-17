@@ -4,7 +4,7 @@ windowmanager='xmonad'
 [org/mate/desktop/session]
 gnome-compat-startup=['smproxy']
 
-[org/mate/desktop/peripherals/kbd]
+[org/mate/desktop/peripherals/keyboard/kbd]
 options=['caps\tcaps:ctrl_modifier', 'lv3\tlv3:ralt_alt', 'Compose key\tcompose:menu']
 
 [org/mate/desktop/background]
