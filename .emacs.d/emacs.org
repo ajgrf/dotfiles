@@ -1110,7 +1110,7 @@ shell side too, and I'm not 100% sure I like it anyway.
 Show =apt= progress bars in the minibuffer.
 
 #+NAME: apt-progress-bars
-#+BEGIN_SRC emacs-lisp
+#+BEGIN_SRC emacs-lisp :tangle no
   (advice-add 'ansi-color-apply-on-region :before 'ora-ansi-color-apply-on-region)
 
   (defun ora-ansi-color-apply-on-region (begin end)
