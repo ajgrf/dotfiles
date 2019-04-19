@@ -1377,7 +1377,9 @@ The =projectile= package provides useful project-centric commands.
 #+BEGIN_SRC emacs-lisp
   (use-package projectile
     :diminish
-    :defer t)
+    :defer t
+    :config
+    (setq counsel-projectile-switch-project-action 'dired))
 #+END_SRC
 
 The =counsel-projectile= package enhances =projectile= with =ivy= completion.
