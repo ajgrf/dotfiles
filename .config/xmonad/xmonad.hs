@@ -46,12 +46,8 @@ import           XMonad.Layout.MultiToggle
 import           XMonad.Layout.NoBorders
 import           XMonad.Layout.PerWorkspace
 import           XMonad.Layout.PositionStoreFloat
-import           XMonad.Layout.ResizableTile
 import           XMonad.Layout.ShowWName
-import           XMonad.Layout.Simplest
 import           XMonad.Layout.Spacing
-import           XMonad.Layout.SubLayouts
-import           XMonad.Layout.Tabbed
 import           XMonad.Layout.WindowSwitcherDecoration
 import           XMonad.Prompt
 import           XMonad.Prompt.FuzzyMatch
@@ -128,14 +124,11 @@ myLayoutHook =
     layouts
  where
   layouts =
-    ( onWorkspace "1:Main" tabTiled
+    ( onWorkspace "1:Main" (mouseTiled ||| float)
       . onWorkspace "7:VM"   Full
       . onWorkspace "8:Logs" dishes
       )
       mouseFriendly
-  tabTiled = (withTabs . smartSpacing 2 . layoutHintsWithPlacement (0.5, 0.5))
-    (ResizableTall 1 0.05 0.55 [])
-  withTabs = addTabsAlways shrinkText adwaitaTheme . subLayout [] Simplest
   dishes =
     ( buttonDeco shrinkText adwaitaThemeWithButtons
       . maximizeWithPadding 0
@@ -169,19 +162,14 @@ myLayoutHook =
 myKeys isWorkman conf@(XConfig { XMonad.modMask = modMask }) =
   union (planeKeys (controlMask .|. mod1Mask) (Lines 3) Linear)
     $  fromList
-    $  [ ((modMask, xK_j)                              , focusDown)
-       , ((modMask, xK_k)                              , focusUp)
-       , ((modMask .|. controlMask, xK_j)              , onGroup W.focusDown')
-       , ((modMask .|. controlMask, xK_k)              , onGroup W.focusUp')
-       , ((modMask .|. shiftMask .|. controlMask, xK_j), mergeMove focusDown)
-       , ((modMask .|. shiftMask .|. controlMask, xK_k), mergeMove focusUp)
-       , ((modMask, xK_u), withFocused (sendMessage . UnMerge))
-       , ((modMask .|. shiftMask, xK_h), sendMessage ShrinkSlave)
-       , ((modMask .|. shiftMask, xK_l), sendMessage ExpandSlave)
-       , ((modMask, xK_m), withFocused minimizeWindow)
-       , ((mod4Mask, xK_d), sendMessage $ Toggle HIDE)
-       , ((mod4Mask, xK_m)                             , withAll minimizeWindow)
-       , ((mod4Mask .|. shiftMask, xK_m)               , withAll maximizeWindow)
+    $  [ ((modMask, xK_j)               , focusDown)
+       , ((modMask, xK_k)               , focusUp)
+       , ((modMask .|. shiftMask, xK_h) , sendMessage ShrinkSlave)
+       , ((modMask .|. shiftMask, xK_l) , sendMessage ExpandSlave)
+       , ((modMask, xK_m)               , withFocused minimizeWindow)
+       , ((mod4Mask, xK_d)              , sendMessage $ Toggle HIDE)
+       , ((mod4Mask, xK_m)              , withAll minimizeWindow)
+       , ((mod4Mask .|. shiftMask, xK_m), withAll maximizeWindow)
        , ( (modMask .|. shiftMask, xK_m)
          , withLastMinimized maximizeWindowAndFocus
          )
@@ -201,8 +189,6 @@ myKeys isWorkman conf@(XConfig { XMonad.modMask = modMask }) =
          )
        , ((0, xK_F5)                   , planeMove (Lines 3) Linear ToLeft)
        , ((0, xK_F6)                   , planeMove (Lines 3) Linear ToRight)
-       , ((0, xK_F7)                   , mergeMove focusUp)
-       , ((0, xK_F8)                   , onGroup W.focusDown')
        , ((modMask, xK_Tab)            , toggleWS)
        , ((modMask, xK_0)              , focusUrgent)
        , ((modMask .|. shiftMask, xK_0), killAllOtherCopies)
@@ -218,44 +204,20 @@ myKeys isWorkman conf@(XConfig { XMonad.modMask = modMask }) =
     ++ if isWorkman then workmanKeys else []
  where
   workmanKeys =
-    [ ((modMask, xK_k)                              , refresh)
-      , ((modMask, xK_n)                              , focusDown)
-      , ((modMask, xK_e)                              , focusUp)
-      , ((modMask .|. shiftMask, xK_n)                , windows W.swapDown)
-      , ((modMask .|. shiftMask, xK_e)                , windows W.swapUp)
-      , ((modMask .|. controlMask, xK_n)              , onGroup W.focusDown')
-      , ((modMask .|. controlMask, xK_e)              , onGroup W.focusUp')
-      , ((modMask .|. shiftMask .|. controlMask, xK_n), mergeMove focusDown)
-      , ((modMask .|. shiftMask .|. controlMask, xK_e), mergeMove focusUp)
-      , ((modMask, xK_y)                              , sendMessage Shrink)
-      , ((modMask, xK_o)                              , sendMessage Expand)
-      , ( (modMask .|. shiftMask, xK_y)
-        , sendMessage ShrinkSlave >> sendMessage MirrorExpand
-        )
-      , ( (modMask .|. shiftMask, xK_o)
-        , sendMessage ExpandSlave >> sendMessage MirrorShrink
-        )
+    [ ((modMask, xK_k)              , refresh)
+      , ((modMask, xK_n)              , focusDown)
+      , ((modMask, xK_e)              , focusUp)
+      , ((modMask .|. shiftMask, xK_n), windows W.swapDown)
+      , ((modMask .|. shiftMask, xK_e), windows W.swapUp)
+      , ((modMask, xK_y)              , sendMessage Shrink)
+      , ((modMask, xK_o)              , sendMessage Expand)
+      , ((modMask .|. shiftMask, xK_y), sendMessage ShrinkSlave)
+      , ((modMask .|. shiftMask, xK_o), sendMessage ExpandSlave)
       ]
       ++ [ ((m .|. modMask, key), f horizontalScreenOrderer sc)
          | (key, sc) <- zip [xK_d, xK_r, xK_w] [0 ..]
          , (f  , m ) <- [(viewScreen, 0), (sendToScreen, shiftMask)]
          ]
-
-mergeMove :: X () -> X ()
-mergeMove moveFocus = do
-  current <- getFocused
-  moveFocus
-  other <- getFocused
-  case (current, other) of
-    (Just c, Just o) -> sendMessage (Migrate c o) >> focus c
-    _                -> return ()
- where
-  getFocused = do
-    XState { windowset = ws } <- get
-    let stack = W.stack . W.workspace . W.current $ ws
-    case stack of
-      (Just (W.Stack focused _ _)) -> return (Just focused)
-      _                            -> return Nothing
 
 myWindowRules = composeAll
   [ className =? "Org.gnome.Maps" --> doFloat
