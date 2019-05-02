@@ -20,10 +20,6 @@ bind yv composite get_current_url | exclaim_quiet mpv
 " conditionally set bindings for workman keyboard layout
 jsb if(tri.native.getenv('WORKMAN')){tri.excmds.source('~/.config/tridactyl/workman.tri')}
 
-" slim down the browser interface
-guiset_quiet navbar autohide
-guiset_quiet tabs always
-
 " narrow hints by typing link text, select with hint digits
 set hintfiltermode vimperator
 set hintchars 1234567890
@@ -41,7 +37,6 @@ setpref browser.download.useDownloadDir false
 " prevent new tabs from stealing wm focus
 setpref browser.tabs.loadDivertedInBackground true
 setpref browser.urlbar.trimURLs false
-setpref media.eme.enabled false
 setpref browser.search.defaultenginename DuckDuckGo
 setpref browser.search.suggest.enabled false
 setpref signon.rememberSignons false
