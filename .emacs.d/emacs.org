@@ -806,7 +806,9 @@ Use ivy for generic input completion.
       "is"  'yas-insert-snippet
       "iS"  '(:ignore t :which-key "snippet")
       "iSv" 'yas-visit-snippet-file
-      "iSn" 'yas-new-snippet))
+      "iSn" 'yas-new-snippet)
+    :config
+    (yas/initialize))
 
   (use-package yasnippet-snippets
     :after yasnippet)
