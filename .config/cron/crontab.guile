@@ -1,0 +1,8 @@
+;; Take hourly backups.
+(job '(next-minute '(5))
+     "xterm -name backup -title backup -e sh -c 'backup || bell; sleep 120'"
+     "backup")
+
+;; Empty Trash items older than 30 days.
+(job '(next-hour (range 0 24 8))
+     "trash-empty 30")
