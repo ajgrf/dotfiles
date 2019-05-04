@@ -231,6 +231,7 @@ myWindowRules = composeAll
   , className =? "Gnome-boxes" --> doShift "7:VM"
   , className =? "Mate-system-log" --> doShift "8:Logs"
   , className =? "Mate-system-monitor" --> doShift "8:Logs"
+  , appName =? "backup" --> doShift "8:Logs"
   ]
 
 myDynamicRules =
