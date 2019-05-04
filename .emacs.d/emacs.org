@@ -477,7 +477,8 @@ Fix my movement keys in modes that don't translate quite right.
          ":" (lookup-key evil-motion-state-map ":")
          ,@bindings)))
   (add-hook 'Info-mode-hook
-            (lambda () (evil-add-yneo-bindings Info-mode-map 'normal)))
+            (lambda () (evil-add-yneo-bindings Info-mode-map 'normal
+                         "k" 'evil-search-next)))
 #+END_SRC
 
 Set up the translation in evil-collection's config.
