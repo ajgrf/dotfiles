@@ -1,0 +1,14 @@
+(specifications->manifest
+ '("guile"
+   "glibc-utf8-locales"
+   "icecat"
+   "mcron"
+   "nss-certs"
+   "recutils"
+   "shepherd"
+   "ungoogled-chromium"
+   "youtube-dl"
+   "zathura"
+   "zathura-djvu"
+   "zathura-pdf-mupdf"
+   "zathura-ps"))
