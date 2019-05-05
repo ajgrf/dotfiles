@@ -1,0 +1,38 @@
+# cache dirs
+${XDG_CACHE_HOME}
+
+# trash can
+${XDG_DATA_HOME}/Trash
+
+# vm images
+${XDG_DATA_HOME}/gnome-boxes/images
+${XDG_DATA_HOME}/virt
+
+# downloads in progress
+*.part
+
+# large tmp files
+${XDG_DOWNLOAD_DIR}/**/*.iso
+${XDG_DOWNLOAD_DIR}/**/*.fs
+${XDG_DOWNLOAD_DIR}/**/*.mp3
+${XDG_DOWNLOAD_DIR}/**/*.mkv
+${XDG_DOWNLOAD_DIR}/**/*.mp4
+${XDG_DOWNLOAD_DIR}/**/*.m4v
+${XDG_DOWNLOAD_DIR}/**/*.webm
+${XDG_DOWNLOAD_DIR}/**/*.jpg
+${XDG_DOWNLOAD_DIR}/**/*.png
+${XDG_DOWNLOAD_DIR}/**/*.aax
+
+# torrents
+${XDG_DOWNLOAD_DIR}/torrents
+
+# object files & package manager dirs
+${HOME}/pkg
+${HOME}/src/guix/**/*.go
+${HOME}/.cabal
+${HOME}/.cargo
+${HOME}/.ghc
+${HOME}/.local/stow
+${HOME}/.multirust
+${XDG_DATA_HOME}/stack
+${HOME}/.steam
