@@ -181,7 +181,7 @@ myKeys isWorkman conf@(XConfig { XMonad.modMask = modMask }) =
        , ((modMask, xK_F1), manPrompt adwaitaXPConfig)
        , ((mod1Mask, xK_F2), shellPrompt adwaitaXPConfig)
        , ((mod1Mask, xK_F4), kill)
-       , ((0, xK_F1), runOrRaiseNext "firefox" (className =? "Firefox-esr"))
+       , ((0, xK_F1), runOrRaiseNext "icecat" (className =? "IceCat"))
        , ((0, xK_F2), runOrRaiseNext "emacs" (className =? "Emacs"))
        , ((0, xK_F3), scratchpadSpawnAction conf)
        , ( (0, xK_F4)
