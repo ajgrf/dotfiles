@@ -1,6 +1,5 @@
-# Important Shell Variables
+# Shell Variables
 export ENV="$HOME/.shinit"
-export PATH="$HOME/bin:$HOME/.local/bin:$PATH"
 export CDPATH=":$HOME:$HOME/src"
 export HISTSIZE=20000
 export HOSTNAME="${HOSTNAME:-$(hostname)}"
@@ -53,10 +52,17 @@ if test "${gnupg_SSH_AUTH_SOCK_by:-0}" -ne $$; then
 	export SSH_AUTH_SOCK="$(gpgconf --list-dirs agent-ssh-socket)"
 fi
 
+# Configure Nix package manager
+if test -e "$HOME/.nix-profile/etc/profile.d/nix.sh"; then
+	. "$HOME/.nix-profile/etc/profile.d/nix.sh"
+	export TERMINFO_DIRS="$HOME/.nix-profile/share/terminfo${TERMINFO_DIRS:+:}$TERMINFO_DIRS"
+	export XDG_DATA_DIRS="$HOME/.nix-profile/share${XDG_DATA_DIRS:+:}$XDG_DATA_DIRS"
+fi
+
 # Configure Guix package manager
 GUIX_PROFILE="$XDG_CONFIG_HOME/guix/current"
-if test -x "$GUIX_PROFILE/bin/guix"; then
-	export PATH="$GUIX_PROFILE/bin:$PATH"
+if test -r "$GUIX_PROFILE/etc/profile" && ! test -d /run/current-system; then
+	. "$GUIX_PROFILE/etc/profile"
 	export INFOPATH="$GUIX_PROFILE/share/info:$INFOPATH"
 fi
 
@@ -78,12 +84,8 @@ else
 	unset GUIX_PROFILE
 fi
 
-# Configure Nix package manager
-if test -e "$HOME/.nix-profile/etc/profile.d/nix.sh"; then
-	. "$HOME/.nix-profile/etc/profile.d/nix.sh"
-	export TERMINFO_DIRS="$HOME/.nix-profile/share/terminfo${TERMINFO_DIRS:+:}$TERMINFO_DIRS"
-	export XDG_DATA_DIRS="$HOME/.nix-profile/share${XDG_DATA_DIRS:+:}$XDG_DATA_DIRS"
-fi
+# Put my scripts and executables at the front of $PATH
+export PATH="$HOME/bin:$HOME/.local/bin:$PATH"
 
 # Load site-local profile
 if test -e "$HOME/.profile.local"; then
