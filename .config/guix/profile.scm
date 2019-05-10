@@ -4,6 +4,7 @@
    "icecat"
    "mcron"
    "nss-certs"
+   "pinentry"
    "recutils"
    "shepherd"
    "ungoogled-chromium"
