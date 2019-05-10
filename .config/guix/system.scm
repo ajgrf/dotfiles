@@ -1,6 +1,8 @@
 (use-modules (gnu))
 (use-service-modules desktop networking ssh xorg)
 
+(load "simple-firewall.scm")
+
 (operating-system
   (locale "en_US.utf8")
   (timezone "America/Chicago")
@@ -67,4 +69,7 @@
           (set-xorg-configuration
            (xorg-configuration
             (keyboard-layout keyboard-layout)))
+          (service iptables-service-type
+                   (simple-firewall #:open-tcp-ports '(8376 29254)
+                                    #:open-udp-ports '(1900)))
           %desktop-services)))
