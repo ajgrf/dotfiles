@@ -1,0 +1,70 @@
+(use-modules (gnu))
+(use-service-modules desktop networking ssh xorg)
+
+(operating-system
+  (locale "en_US.utf8")
+  (timezone "America/Chicago")
+  (keyboard-layout
+   (keyboard-layout "us" "workman"))
+  (bootloader
+   (bootloader-configuration
+    (bootloader grub-bootloader)
+    (target "/dev/sda")
+    (timeout 2)
+    (keyboard-layout keyboard-layout)
+    (menu-entries
+     (list (menu-entry
+            (label "Debian 10 (buster)")
+            (device "debboot")
+            (linux "(hd0,gpt3)/vmlinuz-4.19.0-4-amd64")
+            (linux-arguments
+             '("root=UUID=227c5e05-6dff-4802-9537-688e20892cf6"
+               "ro" "quiet" "splash"))
+            (initrd "(hd0,gpt3)/initrd.img-4.19.0-4-amd64"))
+           (menu-entry
+            (label "PureOS")
+            (device "pureosboot")
+            (linux "(hd0,gpt5)/vmlinuz-4.19.0-4-amd64")
+            (linux-arguments
+             '("root=UUID=b315dea0-efc1-48ea-9bb4-f1c3aa7e2ce5"
+               "ro" "quiet" "splash"))
+            (initrd "(hd0,gpt5)/initrd.img-4.19.0-4-amd64"))))))
+  (mapped-devices
+   (list (mapped-device
+          (source (uuid "5abba48a-e3e2-4114-8dfc-d97f2a5ba9ac"))
+          (target "home")
+          (type luks-device-mapping))))
+  (file-systems
+   (cons* (file-system
+            (mount-point "/")
+            (device
+             (uuid "1f1bdd00-3aa2-476f-8b5d-4a8200737eb9"
+                   'ext4))
+            (type "ext4"))
+          (file-system
+            (mount-point "/home")
+            (device "/dev/mapper/home")
+            (type "ext4"))
+          %base-file-systems))
+  (host-name "tenzin")
+  (users (cons* (user-account
+                 (name "ajgrf")
+                 (comment "Alex Griffin")
+                 (group "ajgrf")
+                 (home-directory "/home/ajgrf")
+                 (supplementary-groups
+                  '("wheel" "netdev" "audio" "video")))
+                %base-user-accounts))
+  (groups (cons* (user-group
+                  (name "ajgrf")
+                  (id 1000))
+                 %base-groups))
+  (packages
+   (cons* (specification->package "nss-certs")
+          %base-packages))
+  (services
+   (cons* (service gnome-desktop-service-type)
+          (set-xorg-configuration
+           (xorg-configuration
+            (keyboard-layout keyboard-layout)))
+          %desktop-services)))
