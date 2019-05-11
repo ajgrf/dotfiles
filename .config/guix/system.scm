@@ -1,5 +1,6 @@
-(use-modules (gnu))
-(use-service-modules desktop networking ssh xorg)
+(use-modules (gnu)
+             (gnu packages linux))
+(use-service-modules desktop networking shepherd ssh xorg)
 
 (load "simple-firewall.scm")
 
@@ -72,4 +73,16 @@
           (service iptables-service-type
                    (simple-firewall #:open-tcp-ports '(8376 29254)
                                     #:open-udp-ports '(1900)))
+          (service
+           (shepherd-service-type
+            'fix-librem-kbd
+            (lambda _
+              (shepherd-service
+               (documentation "Fix backslash/pipe key on Librem laptops.")
+               (provision '(fix-librem-kbd))
+               (respawn? #f)
+               (start #~(lambda _
+                          (zero? (system* #$(file-append kbd "/bin/setkeycodes")
+                                          "56" "43"))))))
+            #f))
           %desktop-services)))
