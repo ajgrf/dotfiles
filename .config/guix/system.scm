@@ -1,6 +1,6 @@
 (use-modules (gnu)
              (gnu packages linux))
-(use-service-modules desktop networking shepherd ssh xorg)
+(use-service-modules desktop networking pm shepherd ssh xorg)
 
 (load "simple-firewall.scm")
 
@@ -70,6 +70,11 @@
           (set-xorg-configuration
            (xorg-configuration
             (keyboard-layout keyboard-layout)))
+          (service tlp-service-type
+                   (tlp-configuration
+                    (cpu-scaling-governor-on-ac '("performance"))
+                    (cpu-scaling-governor-on-bat '("powersave"))
+                    (usb-autosuspend? #f)))
           (service iptables-service-type
                    (simple-firewall #:open-tcp-ports '(8376 29254)
                                     #:open-udp-ports '(1900)))
