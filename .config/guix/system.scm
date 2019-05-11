@@ -1,10 +1,12 @@
 (use-modules (gnu)
-             (gnu packages linux))
+             (gnu packages linux)
+             (nonfree packages linux))
 (use-service-modules desktop networking pm shepherd ssh xorg)
-
 (load "simple-firewall.scm")
 
 (operating-system
+  (kernel linux)
+  (firmware (list linux-firmware))
   (locale "en_US.utf8")
   (timezone "America/Chicago")
   (keyboard-layout
@@ -56,7 +58,7 @@
                  (group "ajgrf")
                  (home-directory "/home/ajgrf")
                  (supplementary-groups
-                  '("wheel" "netdev" "audio" "video")))
+                  '("wheel" "netdev" "audio" "video" "lp")))
                 %base-user-accounts))
   (groups (cons* (user-group
                   (name "ajgrf")
@@ -75,6 +77,7 @@
                     (cpu-scaling-governor-on-ac '("performance"))
                     (cpu-scaling-governor-on-bat '("powersave"))
                     (usb-autosuspend? #f)))
+          (bluetooth-service)
           (service iptables-service-type
                    (simple-firewall #:open-tcp-ports '(8376 29254)
                                     #:open-udp-ports '(1900)))
