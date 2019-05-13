@@ -3,6 +3,7 @@ export ENV="$HOME/.shinit"
 export CDPATH=":$HOME:$HOME/src"
 export HISTSIZE=20000
 export HOSTNAME="${HOSTNAME:-$(hostname)}"
+export USER="${USER:-$(id -un)}"
 
 # Preferred Programs
 export BROWSER="plumb"
