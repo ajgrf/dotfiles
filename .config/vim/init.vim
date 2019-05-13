@@ -29,9 +29,9 @@ if v:progname !=# 'vi'
   " syntax highlighting settings
   syntax on
   if $TERM ==# 'linux'
-    colorscheme sprinkles
+    silent! colorscheme sprinkles
   else
-    colorscheme parchment
+    silent! colorscheme parchment
     set cursorline
   endif
 
