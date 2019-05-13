@@ -47,9 +47,11 @@ export VIMINIT='if has("eval") | let $MYVIMRC="$XDG_CONFIG_HOME/vim/init.vim" | 
 export WEECHAT_HOME="$XDG_DATA_HOME/weechat"
 
 # Set up GnuPG Agent
-unset SSH_AGENT_PID
-if test "${gnupg_SSH_AUTH_SOCK_by:-0}" -ne $$; then
-	export SSH_AUTH_SOCK="$(gpgconf --list-dirs agent-ssh-socket)"
+if type gpgconf >/dev/null 2>&1; then
+	unset SSH_AGENT_PID
+	if test "${gnupg_SSH_AUTH_SOCK_by:-0}" -ne $$; then
+		export SSH_AUTH_SOCK="$(gpgconf --list-dirs agent-ssh-socket)"
+	fi
 fi
 
 # Configure Nix package manager
