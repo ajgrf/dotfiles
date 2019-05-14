@@ -1,5 +1,6 @@
 (use-modules (gnu)
              (gnu packages linux)
+             (gnu packages xorg)
              (nonfree packages linux))
 (use-service-modules desktop networking pm shepherd ssh xorg)
 (load "simple-firewall.scm")
@@ -71,7 +72,10 @@
    (cons* (service gnome-desktop-service-type)
           (set-xorg-configuration
            (xorg-configuration
-            (keyboard-layout keyboard-layout)))
+            (keyboard-layout keyboard-layout)
+            (modules (filter (lambda (mod)
+                               (not (eq? mod xf86-input-synaptics)))
+                             %default-xorg-modules))))
           (service tlp-service-type
                    (tlp-configuration
                     (cpu-scaling-governor-on-ac '("performance"))
