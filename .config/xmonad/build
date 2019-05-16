@@ -1,0 +1,24 @@
+#!/bin/sh
+
+bin="$1"
+
+build_with() {
+	exec "$@" \
+		--make xmonad.hs \
+		-i \
+		-ilib \
+		-fforce-recomp \
+		-main-is main \
+		-v0 \
+		-o "$bin"
+}
+
+is_installed() {
+	type "$1" >/dev/null 2>&1
+}
+
+if is_installed guix; then
+	build_with guix environment xmonad --ad-hoc ghc-xmonad-contrib -- ghc
+elif is_installed ghc; then
+	build_with ghc
+fi
