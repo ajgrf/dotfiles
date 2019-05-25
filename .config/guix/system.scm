@@ -7,7 +7,8 @@
 
 (operating-system
   (kernel linux)
-  (firmware (list linux-firmware))
+  (firmware (cons* ath3k-firmware
+                   %base-firmware))
   (locale "en_US.utf8")
   (timezone "America/Chicago")
   (keyboard-layout
