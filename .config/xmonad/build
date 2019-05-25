@@ -17,8 +17,14 @@ is_installed() {
 	type "$1" >/dev/null 2>&1
 }
 
-if is_installed guix; then
-	build_with guix environment xmonad --ad-hoc ghc-xmonad-contrib -- ghc
-elif is_installed ghc; then
-	build_with ghc
+build() {
+	if is_installed guix; then
+		build_with guix environment xmonad --ad-hoc ghc-xmonad-contrib -- ghc
+	elif is_installed ghc; then
+		build_with ghc
+	fi
+}
+
+if test xmonad.hs -nt "$bin"; then
+	build
 fi
