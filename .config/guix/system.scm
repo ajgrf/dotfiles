@@ -12,7 +12,9 @@
   (locale "en_US.utf8")
   (timezone "America/Chicago")
   (keyboard-layout
-   (keyboard-layout "us" "workman"))
+   (keyboard-layout "us" "workman"
+                    #:options '("caps:ctrl_modifier" "lv3:ralt_alt"
+                                "compose:menu" "shift:both_capslock_cancel")))
   (bootloader
    (bootloader-configuration
     (bootloader grub-bootloader)
