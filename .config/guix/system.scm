@@ -2,7 +2,7 @@
              (gnu packages linux)
              (gnu packages xorg)
              (nonfree packages linux))
-(use-service-modules cups desktop networking pm shepherd ssh xorg)
+(use-service-modules cups desktop networking pm security-token shepherd ssh xorg)
 (load "simple-firewall.scm")
 
 (operating-system
@@ -79,6 +79,7 @@
                                (not (eq? mod xf86-input-synaptics)))
                              %default-xorg-modules))))
           (service cups-service-type)
+          (service pcscd-service-type)
           (service tlp-service-type
                    (tlp-configuration
                     (cpu-scaling-governor-on-ac '("performance"))
