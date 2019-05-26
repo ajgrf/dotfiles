@@ -1,7 +1,7 @@
 (use-modules (gnu)
              (gnu packages linux)
              (gnu packages xorg)
-             (nonfree packages linux))
+             (nongnu packages linux))
 (use-service-modules cups desktop networking pm security-token shepherd ssh xorg)
 (load "simple-firewall.scm")
 
