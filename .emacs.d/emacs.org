@@ -1,7 +1,7 @@
 #+TITLE: My Emacs Configuration
 #+AUTHOR: Alex Griffin
 #+STARTUP: content
-#+PROPERTY: header-args :tangle ~/.emacs.d/init.el
+#+PROPERTY: header-args :tangle ~/.emacs.d/emacs.el
 
 * General
 
