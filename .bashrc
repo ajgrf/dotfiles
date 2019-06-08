@@ -18,7 +18,7 @@ ppwd() {
 
 	if test "${#dir}" -gt "$n"; then
 		n=$(( n - 3 ))
-		dir="...${dir:(-25)}"
+		dir="...${dir:(-$n)}"
 	fi
 
 	echo "$dir"
