@@ -779,9 +779,9 @@ Use ivy for generic input completion.
     :after ivy
     :general
     (tyrant-def
-      "sa" 'counsel-ag
-      "ss" 'swiper
-      "sr" 'counsel-rg)
+      "so" 'swiper
+      "sr" 'counsel-rg
+      "ss" 'counsel-ag)
     :config (counsel-mode))
 #+END_SRC
 
