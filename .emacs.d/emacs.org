@@ -1424,8 +1424,8 @@ Magit is the best porcelain for git.
     (tyrant-def
       "g"  '(:ignore t :which-key "git")
       "gc" 'magit-clone
-      "gf" 'magit-file-popup
-      "gm" 'magit-dispatch-popup
+      "gf" 'magit-file-dispatch
+      "gm" 'magit-dispatch
       "gs" 'magit-status))
 
   (use-package evil-magit
@@ -1441,7 +1441,7 @@ Magit is the best porcelain for git.
         "e"    'evil-previous-visual-line
         "j"    nil
         "jj"   'evil-yank-line
-        "jr"   'magit-show-refs-popup
+        "jr"   'magit-show-refs
         "js"   'magit-copy-section-value
         "jb"   'magit-copy-buffer-revision
         "y"    nil
