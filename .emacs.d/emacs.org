@@ -1245,7 +1245,6 @@ A shell written entirely in elisp.
                             'normal)
     :config
     (setq ledger-init-file-name ".ledgerrc"
-          ledger-clear-whole-transactions t
           ledger-post-amount-alignment-column 52
           ledger-reconcile-buffer-line-format "%(date)s  %-30(payee)s %-25(account)s %10(amount)s\n"
           ledger-reconcile-buffer-account-max-chars 25
