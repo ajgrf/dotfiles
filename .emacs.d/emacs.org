@@ -84,13 +84,22 @@ Every other package will be managed by use-package.
   (eval-when-compile
     (require 'package)
     (package-initialize)
-    (unless (package-installed-p 'use-package)
+    (unless (locate-library "use-package")
       (package-refresh-contents)
       (package-install 'use-package))
     (require 'use-package)
-    (setq use-package-always-ensure t)
     (use-package diminish))
   (require 'bind-key)
+#+END_SRC
+
+Don't load a package if it's not installed.
+
+#+BEGIN_SRC emacs-lisp
+  (add-to-list 'use-package-defaults
+               '(:when
+                 (lambda (package &rest _)
+                   `(locate-library (symbol-name ',package)))
+                 t))
 #+END_SRC
 
 **** Automatic updates
@@ -345,7 +354,6 @@ declarations, but these modes are hidden the hard way.
 
 #+BEGIN_SRC emacs-lisp
   (use-package whitespace
-    :ensure nil
     :diminish (whitespace-mode global-whitespace-mode)
     :config
     (setq whitespace-line-column 79
@@ -544,7 +552,6 @@ Show a popup with completions for partially-entered keybindings.
 
 #+BEGIN_SRC emacs-lisp
   (use-package which-key
-    :pin melpa-stable
     :diminish
     :config (which-key-mode 1))
 #+END_SRC
@@ -943,7 +950,6 @@ Rainbow mode sets the background of color names to display their color.
           org-todo-keywords '((sequence "TODO(t)" "WAITING(w)" "DONE(d!)"))))
 
   (use-package org-indent
-    :ensure nil
     :diminish
     :commands org-indent-mode)
 
@@ -981,7 +987,6 @@ Set up desktop notifications for org agenda items.
 
 #+BEGIN_SRC emacs-lisp
   (use-package appt
-    :ensure nil
     :defer 5
     :config
     (defun alert-appt-display (minutes-until _time msg)
@@ -1014,7 +1019,6 @@ for line editing, history, keybindings, etc.
 
 #+BEGIN_SRC emacs-lisp
   (use-package comint
-    :ensure nil
     :general
     (tyrant-def comint-mode-map
       "m," 'comint-get-next-from-history
@@ -1041,7 +1045,6 @@ Set up inferior shell, for running a shell in an Emacs buffer.
 
 #+BEGIN_SRC emacs-lisp :noweb yes
   (use-package shell
-    :ensure nil
     :general
     (tyrant-def
       "asi" 'shell)
@@ -1162,7 +1165,6 @@ A shell written entirely in elisp.
 
 #+BEGIN_SRC emacs-lisp
   (use-package eshell
-    :ensure nil
     :commands eshell
     :general
     (tyrant-def
@@ -1334,7 +1336,6 @@ search engine.
 
 #+BEGIN_SRC emacs-lisp
   (use-package mu4e
-    :ensure nil
     :commands (mu4e mu4e~headers-jump-to-maildir)
     :general
     (defun mu4e-inbox ()
@@ -1353,7 +1354,6 @@ Support links to mu4e messages from Org.
 
 #+BEGIN_SRC emacs-lisp
   (use-package org-mu4e
-    :ensure nil
     :config
     (setq org-mu4e-link-query-in-headers-mode t))
 #+END_SRC
@@ -1419,7 +1419,6 @@ Magit is the best porcelain for git.
 
 #+BEGIN_SRC emacs-lisp
   (use-package magit
-    :pin melpa-stable
     :diminish auto-revert-mode
     :general
     (tyrant-def
@@ -1430,7 +1429,6 @@ Magit is the best porcelain for git.
       "gs" 'magit-status))
 
   (use-package evil-magit
-    :pin melpa-stable
     :after (evil evil-collection magit)
     :config
     (when evil-workman
@@ -1649,7 +1647,6 @@ Configure shell script indentation style to match =shfmt=.
 
 #+BEGIN_SRC emacs-lisp
   (use-package sh-mode
-    :ensure nil
     :mode ("\\.shinit\\'" . sh-mode)
     :init
     (setq sh-indent-after-continuation 'always
