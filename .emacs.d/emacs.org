@@ -1354,6 +1354,7 @@ Support links to mu4e messages from Org.
 
 #+BEGIN_SRC emacs-lisp
   (use-package org-mu4e
+    :after mu4e
     :config
     (setq org-mu4e-link-query-in-headers-mode t))
 #+END_SRC
@@ -1363,6 +1364,8 @@ Show email threads in a unified conversation view.
 #+BEGIN_SRC emacs-lisp
   (use-package mu4e-conversation
     :after mu4e
+    :init
+    (defalias 'copy-seq 'cl-copy-seq)
     :config
     (global-mu4e-conversation-mode))
 #+END_SRC
