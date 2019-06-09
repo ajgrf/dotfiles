@@ -1649,7 +1649,7 @@ Open files with =.guile= file extension in =scheme-mode=.
 Configure shell script indentation style to match =shfmt=.
 
 #+BEGIN_SRC emacs-lisp
-  (use-package sh-mode
+  (use-package sh-script
     :mode ("\\.shinit\\'" . sh-mode)
     :init
     (setq sh-indent-after-continuation 'always
