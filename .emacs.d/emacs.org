@@ -599,8 +599,6 @@ Spacemacs-like leader keys.
      "ak"  'list-packages
      "aP"  'proced
      "as"  '(:ignore t :which-key "shell")
-     "asi" 'shell
-     "ase" 'eshell
      "ast" 'ansi-term
      "au"  'undo-tree-visualize
 
@@ -1045,6 +1043,8 @@ Set up inferior shell, for running a shell in an Emacs buffer.
   (use-package shell
     :ensure nil
     :general
+    (tyrant-def
+      "asi" 'shell)
     (general-define-key
      :keymaps 'shell-mode-map
      :states 'insert
@@ -1164,6 +1164,9 @@ A shell written entirely in elisp.
   (use-package eshell
     :ensure nil
     :commands eshell
+    :general
+    (tyrant-def
+      "ase" 'eshell)
     :config
     ;; Open in new window
     (add-to-list 'display-buffer-alist
