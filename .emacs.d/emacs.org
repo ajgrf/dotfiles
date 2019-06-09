@@ -250,20 +250,6 @@ Give a brighter background to real files compared to other buffers.
   (set-face-font 'variable-pitch    "Noto Sans 11")
 #+END_SRC
 
-**** Proportional Fonts
-
-Use a mix of proportional fonts and fixed-width fonts where
-appropriate. This applies to any mode based on text-mode, including
-org and markdown.
-
-#+BEGIN_SRC emacs-lisp
-  (use-package mixed-pitch
-    :diminish
-    :commands mixed-pitch-mode
-    :if window-system
-    :hook (text-mode . mixed-pitch-mode))
-#+END_SRC
-
 *** Cursor
 
 Highlight the line that the cursor is currently on.
@@ -661,7 +647,6 @@ Spacemacs-like leader keys.
      "thu" 'unhighlight-regexp
      "thU" 'hi-lock-mode
      "tl"  'toggle-truncate-lines
-     "tm"  'mixed-pitch-mode
      "tn"  'display-line-numbers-mode
      "tw"  'whitespace-mode
 
@@ -843,6 +828,22 @@ keybindings.
     (tyrant-def
       "ts"  'flyspell-mode
       "tS"  'flyspell-prog-mode))
+#+END_SRC
+
+** Proportional Fonts
+
+Use a mix of proportional fonts and fixed-width fonts where
+appropriate. This applies to any mode based on text-mode, including
+org and markdown.
+
+#+BEGIN_SRC emacs-lisp
+  (use-package mixed-pitch
+    :diminish
+    :general
+    (tyrant-def "tm" 'mixed-pitch-mode)
+    :commands mixed-pitch-mode
+    :if window-system
+    :hook (org-mode . mixed-pitch-mode))
 #+END_SRC
 
 ** Colors
@@ -1260,12 +1261,7 @@ A shell written entirely in elisp.
         (delete-file ledger-init-file-name)))
     (advice-add 'ledger-reconcile :before #'ledger-use-real-transactions)
     (advice-add 'ledger-reconcile-quit :after #'ledger-use-all-transactions)
-    (advice-add 'ledger-reconcile-finish :after #'ledger-use-all-transactions)
-
-    (add-hook 'ledger-mode-hook
-              (lambda () (mixed-pitch-mode 0)))
-    (add-hook 'ledger-reconcile-mode-hook
-              (lambda () (mixed-pitch-mode 0))))
+    (advice-add 'ledger-reconcile-finish :after #'ledger-use-all-transactions))
 #+END_SRC
 
 ** File Management
