@@ -98,6 +98,7 @@
    "reptyr"
    "restic"
    "rsync"
+   "shellcheck"
    "shepherd"
    "stow"
    "syncthing"
