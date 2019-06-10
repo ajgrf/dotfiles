@@ -470,9 +470,6 @@ Fix my movement keys in modes that don't translate quite right.
          "o" (lookup-key evil-motion-state-map "o")
          ":" (lookup-key evil-motion-state-map ":")
          ,@bindings)))
-  (add-hook 'Info-mode-hook
-            (lambda () (evil-add-yneo-bindings Info-mode-map 'normal
-                         "k" 'evil-search-next)))
 #+END_SRC
 
 Set up the translation in evil-collection's config.
@@ -1281,6 +1278,29 @@ A shell written entirely in elisp.
   (setq image-dired-external-viewermage nil)
   (add-to-list 'directory-abbrev-alist
     '("^/egnyte" . "/davs:focusengineering.egnyte.com:/webdav/Shared"))
+#+END_SRC
+
+** Documentation
+
+Configure the built-in Info documentation reader.
+
+#+BEGIN_SRC emacs-lisp
+  (use-package info
+    :config
+    (evil-add-yneo-bindings Info-mode-map 'normal
+      "k" 'evil-search-next
+      "?" 'evil-search-backward))
+#+END_SRC
+
+Enhance the built-in Emacs help with much more contextual information
+
+#+BEGIN_SRC emacs-lisp
+  (use-package helpful
+    :general
+    (general-define-key
+     [remap describe-function] #'helpful-callable
+     [remap describe-variable] #'helpful-variable
+     [remap describe-key] #'helpful-key))
 #+END_SRC
 
 ** Feed Aggregator
