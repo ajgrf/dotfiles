@@ -56,6 +56,40 @@ subalias() {
 	fi
 }
 
+# Guix subaliases
+subalias guix_env='guix environment "$@"'
+subalias guix_try='guix environment --ad-hoc "$@"'
+subalias guix_manifest='guix package --manifest="$HOME/.config/guix/profile.scm"'
+subalias guix_reconfigure='doas guix system reconfigure "$HOME/.config/guix/system.scm"'
+subalias guix_profile='guix package "$@"'
+subalias guix_show='guix package --show="$1"'
+subalias guix_search='guix package -s "$@" | recfmt "{{name}} {{version}} - {{synopsis}}
+" | sort | uniq'
+subalias guix_clean='git -C "$HOME/src/guix" clean -fdx -e .dir-locals-2.el -e .ignore && git checkout po/'
+guix_make() {
+	cd "$HOME/src/guix"
+	if test -f "$HOME/src/guix/Makefile"; then
+		guix environment guix -- make -C "$HOME/src/guix"
+	else
+		guix environment guix -- bash -c '
+			cd "$HOME/src/guix"
+			./bootstrap &&
+			./configure --localstatedir=/var --sysconfdir=/etc &&
+			make &&
+			git checkout po/'
+	fi
+}
+guix_ls() {
+	local dir
+	for dir in $(guix build "$1"); do
+		echo
+		echo "$dir:"
+		(cd "$dir" && find -empty -o ! -type d) |
+			sed -e '/^\\.$/d' -e 's/^\.\/\?//' |
+			sort
+	done | sed 1d
+}
+
 # pretty print working directory
 ppwd() {
 	local dir="${PWD}/" n="${1:-255}"
