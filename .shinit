@@ -57,7 +57,7 @@ subalias() {
 }
 
 # apt subaliases
-for action in install reinstall remove purge autoremove update upgrade full-upgrade edit-sources; do
+for action in install reinstall remove purge autoremove update upgrade; do
 	subalias apt_${action}='doas apt '"${action}"' "$@"'
 done
 
