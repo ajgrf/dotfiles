@@ -56,6 +56,11 @@ subalias() {
 	fi
 }
 
+# apt subaliases
+for action in install reinstall remove purge autoremove update upgrade full-upgrade edit-sources; do
+	subalias apt_${action}='doas apt '"${action}"' "$@"'
+done
+
 # Guix subaliases
 subalias guix_env='guix environment "$@"'
 subalias guix_try='guix environment --ad-hoc "$@"'
