@@ -28,3 +28,12 @@ case "$TERM" in
 xterm*|rxvt*|st*|screen*|tmux*)
 	PS1="\[\e]0;\u@\h: \w\a\]$PS1"
 esac
+
+# enable programmable completion
+if test -f /usr/share/bash-completion/bash_completion; then
+	. /usr/share/bash-completion/bash_completion;
+elif test -f /etc/bash_completion; then
+	 . /etc/bash_completion
+elif test -f /run/current-system/profile/etc/profile.d/bash_completion.sh; then
+	. /run/current-system/profile/etc/profile.d/bash_completion.sh
+fi
