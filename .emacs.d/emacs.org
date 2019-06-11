@@ -1120,8 +1120,9 @@ shell side too, and I'm not 100% sure I like it anyway.
 
 #+BEGIN_SRC emacs-lisp
   (use-package bash-completion
-    :disabled
-    :hook (shell-mode . bash-completion-setup))
+    :commands bash-completion-dynamic-complete
+    :init (add-hook 'shell-dynamic-complete-functions
+                    'bash-completion-dynamic-complete))
 #+END_SRC
 
 **** Apt Progress Bars
