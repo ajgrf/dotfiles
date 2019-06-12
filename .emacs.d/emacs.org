@@ -1130,7 +1130,8 @@ shell side too, and I'm not 100% sure I like it anyway.
 
 #+BEGIN_SRC emacs-lisp
   (use-package bash-completion
-    :commands bash-completion-dynamic-complete
+    :commands (bash-completion-dynamic-complete
+               bash-completion-dynamic-complete-nocomint)
     :init (add-hook 'shell-dynamic-complete-functions
                     'bash-completion-dynamic-complete))
 #+END_SRC
@@ -1689,7 +1690,15 @@ Configure shell script indentation style to match =shfmt=.
     (add-hook 'sh-mode-hook
               (lambda ()
                 (setq indent-tabs-mode t
-                      tab-width 4))))
+                      tab-width 4)))
+    :config
+    (defun sh-bash-completion ()
+      (interactive)
+      (bash-completion-dynamic-complete-nocomint
+       (save-excursion (sh-beginning-of-command) (point))
+       (point)))
+    (add-to-list 'sh-dynamic-complete-functions
+                 'sh-bash-completion))
 #+END_SRC
 
 ** Vimscript
