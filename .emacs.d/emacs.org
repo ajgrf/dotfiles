@@ -744,7 +744,7 @@ Edit text with multiple cursors.
 #+BEGIN_SRC emacs-lisp
   (use-package company
     :diminish
-    :hook ((prog-mode ledger-mode) . company-mode))
+    :hook ((prog-mode ledger-mode shell-mode) . company-mode))
 #+END_SRC
 
 *** Incremental Completion
@@ -1048,6 +1048,7 @@ Set up inferior shell, for running a shell in an Emacs buffer.
     (general-define-key
      :keymaps 'shell-mode-map
      :states 'insert
+     "TAB" 'company-complete
      "C-w" 'backward-delete-word)
     :config
 
