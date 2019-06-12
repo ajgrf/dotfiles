@@ -11,6 +11,7 @@ export EDITOR="emacs -nw"
 
 # Miscellaneous Configuration
 export LESS="--ignore-case --no-init --quit-if-one-screen --RAW-CONTROL-CHARS "
+export LS_COLORS="bd=35:cd=35:di=1;34:ex=1;32:fi=0:ln=1;36:mi=3;31:or=3;31:pi=35:so=35:*.bak=33:*~=33:*#=33"
 export MANPAGER=less
 export NO_COLOR=1
 export VCSH_GITIGNORE=none

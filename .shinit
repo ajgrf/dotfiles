@@ -137,11 +137,17 @@ case "$TERM" in
 xterm*|rxvt*|st*|screen*|tmux*)
 	printf '\e]0;%s\a' "${USER}@${HOSTNAME%%.*} ($0)"
 	;;
-dumb)
+esac
+
+if test "$INSIDE_EMACS"; then
+	# Enable color
+	alias ls='LC_COLLATE=C ls --color=auto -A -1'
+	alias lc='LC_COLLATE=C command ls --color=auto -A'
+	alias l='lc'
+	# Disable pagers
 	export PAGER=cat
 	export MANPAGER=cat
-	;;
-esac
+fi
 
 if test "$PWD" != "$HOME"; then
 	echo "${PWD}:"
