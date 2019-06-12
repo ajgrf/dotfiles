@@ -137,6 +137,10 @@ case "$TERM" in
 xterm*|rxvt*|st*|screen*|tmux*)
 	printf '\e]0;%s\a' "${USER}@${HOSTNAME%%.*} ($0)"
 	;;
+dumb)
+	export PAGER=cat
+	export MANPAGER=cat
+	;;
 esac
 
 if test "$PWD" != "$HOME"; then
