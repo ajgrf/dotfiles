@@ -744,7 +744,16 @@ Edit text with multiple cursors.
 #+BEGIN_SRC emacs-lisp
   (use-package company
     :diminish
-    :hook ((prog-mode ledger-mode shell-mode) . company-mode))
+    :general
+    (general-define-key
+     :keymaps 'company-active-map
+     "C-w" 'company-delete-backward-word)
+    :hook ((prog-mode ledger-mode shell-mode) . company-mode)
+    :config
+    (defun company-delete-backward-word ()
+      (interactive)
+      (company-abort)
+      (evil-delete-backward-word)))
 #+END_SRC
 
 *** Incremental Completion
