@@ -748,8 +748,11 @@ Edit text with multiple cursors.
     (general-define-key
      :keymaps 'company-active-map
      "C-w" 'company-delete-backward-word)
-    :hook ((prog-mode ledger-mode shell-mode) . company-mode)
+    :hook (after-init . global-company-mode)
     :config
+    ;; tab key indents and completes
+    (setq tab-always-indent 'complete)
+    (advice-add 'completion-at-point :override 'company-complete)
     (defun company-delete-backward-word ()
       (interactive)
       (company-abort)
