@@ -26,7 +26,6 @@ alias mbsync='mbsync -c "$XDG_CONFIG_HOME/isync/mbsyncrc"'
 alias tmux='tmux -f $XDG_CONFIG_HOME/tmux/tmux.conf'
 
 mkcd() { mkdir -p -- "$@" && cd -- "$1"; }
-mq() { mpv --no-terminal --force-window -- "$@" & }
 
 # subalias is like alias for subcommands
 subalias() {
