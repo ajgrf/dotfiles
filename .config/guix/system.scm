@@ -1,4 +1,5 @@
 (use-modules (gnu)
+             (gnu packages cups)
              (gnu packages linux)
              (gnu packages xorg)
              (nongnu packages linux))
@@ -80,7 +81,10 @@
             (modules (filter (lambda (mod)
                                (not (eq? mod xf86-input-synaptics)))
                              %default-xorg-modules))))
-          (service cups-service-type)
+          (service cups-service-type
+                   (cups-configuration
+                    (web-interface? #t)
+                    (extensions (list hplip-minimal))))
           (service pcscd-service-type)
           (service tlp-service-type
                    (tlp-configuration
