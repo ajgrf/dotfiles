@@ -157,10 +157,8 @@ Disambiguate buffer names by adding its file path to the name when needed.
 Set default window geometry.
 
 #+BEGIN_SRC emacs-lisp
-  (if (display-graphic-p)
-      (setq default-frame-alist
-            '((width . 80)
-              (height . 43))))
+  (setq default-frame-alist '((width . 80)
+                              (height . 43)))
 #+END_SRC
 
 Scroll one line at a time.
@@ -252,11 +250,16 @@ Give a brighter background to real files compared to other buffers.
 
 *** Fonts
 
+Set fonts, both now and when creating new frames (for ~emacsclient~).
+
 #+BEGIN_SRC emacs-lisp
-  (set-face-font 'default           "Go Mono 11")
-  (set-face-font 'fixed-pitch       "Noto Mono 11")
-  (set-face-font 'fixed-pitch-serif "Go Mono 11")
-  (set-face-font 'variable-pitch    "Noto Sans 11")
+  (defun my-set-fonts (&optional frame)
+    (set-face-font 'default           "Go Mono 11"   frame)
+    (set-face-font 'fixed-pitch       "Noto Mono 11" frame)
+    (set-face-font 'fixed-pitch-serif "Go Mono 11"   frame)
+    (set-face-font 'variable-pitch    "Noto Sans 11" frame))
+  (my-set-fonts)
+  (add-hook 'after-make-frame-functions 'my-set-fonts)
 #+END_SRC
 
 *** Cursor
@@ -856,7 +859,6 @@ org and markdown.
     :general
     (tyrant-def "tm" 'mixed-pitch-mode)
     :commands mixed-pitch-mode
-    :if window-system
     :hook (org-mode . mixed-pitch-mode))
 #+END_SRC
 
