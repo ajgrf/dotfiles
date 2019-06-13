@@ -14,6 +14,7 @@
    "emacs-diminish"
    "emacs-editorconfig"
    "emacs-elfeed"
+   "emacs-elfeed-org"
    "emacs-evil"
    "emacs-evil-collection"
    "emacs-evil-commentary"
@@ -32,6 +33,7 @@
    "emacs-ledger-mode"
    "emacs-magit"
    "emacs-markdown-mode"
+   "emacs-mixed-pitch"
    "emacs-mu4e-conversation"
    "emacs-nov-el"
    "emacs-org"
@@ -39,6 +41,7 @@
    "emacs-pass"
    "emacs-projectile"
    "emacs-rainbow-mode"
+   "emacs-restart-emacs"
    "emacs-slack"
    "emacs-smart-mode-line"
    "emacs-smartparens"
@@ -48,13 +51,6 @@
    "emacs-ws-butler"
    "emacs-yasnippet"
    "emacs-yasnippet-snippets"
-   ;; missing emacs packages:
-   ;;   elfeed-org
-   ;;   evil-mc
-   ;;   go-eldoc
-   ;;   mixed-pitch
-   ;;   restart-emacs
-   ;;   solaire-mode
    "feh"
    "ffmpeg"
    "file"
