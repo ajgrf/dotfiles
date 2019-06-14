@@ -31,7 +31,8 @@
  (make <service>
    #:provides '(pulseaudio-dlna)
    #:start (make-forkexec-constructor
-            '("pulseaudio-dlna" "--port" "8376" "--msearch-port" "29254"))
+            '("pulseaudio-dlna" "--encoder-backend" "ffmpeg"
+              "--port" "8376" "--msearch-port" "29254"))
    #:stop (make-kill-destructor))
 
  (make <service>
