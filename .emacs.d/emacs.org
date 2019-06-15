@@ -732,19 +732,24 @@ Edit text with multiple cursors.
 #+BEGIN_SRC emacs-lisp
   (use-package company
     :diminish
-    :general
-    (general-define-key
-     :keymaps 'company-active-map
-     "C-w" 'company-delete-backward-word)
     :hook (after-init . global-company-mode)
     :config
     ;; tab key indents and completes
     (setq tab-always-indent 'complete)
     (advice-add 'completion-at-point :override 'company-complete)
+    (defun company-backward-kill-line (arg)
+      (interactive "p")
+      (company-abort)
+      (kill-line (- 1 arg)))
     (defun company-delete-backward-word ()
       (interactive)
       (company-abort)
-      (evil-delete-backward-word)))
+      (evil-delete-backward-word))
+    ;; For some reason binding C-u doesn't work in the :general keyword.
+    (general-define-key
+     :keymaps 'company-active-map
+     "C-u" 'company-backward-kill-line
+     "C-w" 'company-delete-backward-word))
 #+END_SRC
 
 *** Incremental Completion
