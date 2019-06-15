@@ -1051,6 +1051,9 @@ Set up inferior shell, for running a shell in an Emacs buffer.
      "C-w" 'backward-delete-word)
     :config
 
+    ;; Use Emacs as editor.
+    (add-hook 'shell-mode-hook 'with-editor-export-editor)
+
     ;; Recognize the password prompt from my doas alias.
     (setq comint-password-prompt-regexp
           (concat comint-password-prompt-regexp
