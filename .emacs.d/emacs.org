@@ -102,19 +102,6 @@ Don't load a package if it's not installed.
                  t))
 #+END_SRC
 
-**** Automatic updates
-
-Check for package updates every 7 days.
-
-#+BEGIN_SRC emacs-lisp
-  (use-package auto-package-update
-    :disabled
-    :config
-    (setq auto-package-update-delete-old-versions t
-          auto-package-update-hide-results t)
-    (auto-package-update-maybe))
-#+END_SRC
-
 ** Interface Elements
 
 Emacs' interface is a little too busy for me by default.
