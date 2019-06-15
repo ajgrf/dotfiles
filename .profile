@@ -7,7 +7,7 @@ export USER="${USER:-$(id -un)}"
 
 # Preferred Programs
 export BROWSER="plumb"
-export EDITOR="emacs -nw"
+export EDITOR="emacsclient"
 
 # Miscellaneous Configuration
 export LESS="--ignore-case --no-init --quit-if-one-screen --RAW-CONTROL-CHARS "
