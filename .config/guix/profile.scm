@@ -1,4 +1,8 @@
-(specifications->manifest
+(use-modules (guix channels)
+             (guix inferior)
+             (srfi srfi-1))
+
+(define specs
  '("aisleriot"
    "aspell"
    "aspell-dict-en"
@@ -118,3 +122,14 @@
    "zathura-djvu"
    "zathura-pdf-mupdf"
    "zathura-ps"))
+
+(define inferior
+  (inferior-for-channels
+   (list (channel (name 'guix)
+                  (url "file:///home/ajgrf/src/guix")
+                  (branch "pulseaudio-dlna")))))
+
+(packages->manifest
+ (cons*
+  (first (lookup-inferior-packages inferior "pulseaudio-dlna"))
+  (map (compose list specification->package+output) specs)))
