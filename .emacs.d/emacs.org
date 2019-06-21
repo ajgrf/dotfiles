@@ -209,6 +209,12 @@ Use parchment, my own light theme inspired by Acme and Leuven.
   (use-package parchment-theme
     :load-path "~/src/parchment"
     :config
+    ;; Style HTML tags
+    (defun my-html-mode-faces ()
+      (face-remap-add-relative 'font-lock-function-name-face
+                               '(:foreground "#770077")))
+    (add-hook 'html-mode-hook 'my-html-mode-faces)
+
     (setq custom-safe-themes t
           parchment-want-modify-tty-colors t)
     (load-theme 'parchment t))
