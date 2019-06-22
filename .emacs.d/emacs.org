@@ -809,7 +809,7 @@ Insert and delete parentheses and other pairs more intelligently.
     :diminish
     :config
     (require 'smartparens-config)
-    (dolist (mode '(awk c c++ css go java js nix perl rust sh))
+    (dolist (mode '(awk c c++ css go java js mhtml nix perl rust sh))
       (sp-local-pair (intern (concat (symbol-name mode) "-mode")) "{" nil
                      :post-handlers '(:add ("||\n[i]" "RET"))))
     (smartparens-global-mode))
