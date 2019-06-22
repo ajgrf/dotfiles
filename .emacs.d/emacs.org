@@ -729,7 +729,6 @@ Edit text with multiple cursors.
     :config
     ;; tab key indents and completes
     (setq tab-always-indent 'complete)
-    (advice-add 'completion-at-point :override 'company-complete)
     (defun company-backward-kill-line (arg)
       (interactive "p")
       (company-abort)
