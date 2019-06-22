@@ -1049,7 +1049,7 @@ Set up inferior shell, for running a shell in an Emacs buffer.
     :config
 
     ;; Use Emacs as editor.
-    (when (daemonp)
+    (when (not (daemonp))
       (add-hook 'shell-mode-hook 'with-editor-export-editor))
 
     ;; Recognize the password prompt from my doas alias.
