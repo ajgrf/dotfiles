@@ -1300,10 +1300,10 @@ Enhance the built-in Emacs help with much more contextual information
 #+BEGIN_SRC emacs-lisp
   (use-package helpful
     :general
-    (general-define-key
-     [remap describe-function] #'helpful-callable
-     [remap describe-variable] #'helpful-variable
-     [remap describe-key] #'helpful-key))
+    (tyrant-def
+      "hf" 'helpful-callable
+      "hv" 'helpful-variable
+      "hk" 'helpful-key))
 #+END_SRC
 
 ** Feed Aggregator
