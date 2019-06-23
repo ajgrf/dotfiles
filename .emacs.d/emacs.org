@@ -1285,6 +1285,8 @@ A shell written entirely in elisp.
 
 ** Documentation
 
+*** Emacs
+
 Configure the built-in Info documentation reader.
 
 #+BEGIN_SRC emacs-lisp
@@ -1304,6 +1306,22 @@ Enhance the built-in Emacs help with much more contextual information
       "hf" 'helpful-callable
       "hv" 'helpful-variable
       "hk" 'helpful-key))
+#+END_SRC
+
+*** Dash
+
+Use Dash API documentation sets for offline docs.
+
+#+BEGIN_SRC emacs-lisp
+  (use-package counsel-dash
+    :commands (counsel-dash counsel-dash-install-docset)
+    :general
+    (tyrant-def
+      "hd" 'counsel-dash)
+    :init
+    (require 'helm-dash)
+    :config
+    (setq counsel-dash-common-docsets '("Bootstrap 3" "CSS" "HTML")))
 #+END_SRC
 
 ** Feed Aggregator

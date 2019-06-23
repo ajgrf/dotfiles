@@ -14,6 +14,7 @@
    "emacs"
    "emacs-bash-completion"
    "emacs-company"
+   "emacs-counsel-dash"
    "emacs-counsel-projectile"
    "emacs-diminish"
    "emacs-editorconfig"
