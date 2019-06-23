@@ -20,6 +20,7 @@
    "emacs-editorconfig"
    "emacs-elfeed"
    "emacs-elfeed-org"
+   "emacs-emmet-mode"
    "emacs-evil"
    "emacs-evil-collection"
    "emacs-evil-commentary"

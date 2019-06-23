@@ -1321,7 +1321,7 @@ Use Dash API documentation sets for offline docs.
     :init
     (require 'helm-dash)
     :config
-    (setq counsel-dash-common-docsets '("Bootstrap 3" "CSS" "HTML")))
+    (setq counsel-dash-common-docsets '("Bootstrap 3" "CSS" "Emmet" "HTML")))
 #+END_SRC
 
 ** Feed Aggregator
@@ -1644,6 +1644,20 @@ hovering over things.
 #+BEGIN_SRC emacs-lisp
   (use-package haskell-mode
     :mode "\\.hs\\'")
+#+END_SRC
+
+** HTML/CSS
+
+Emmet provides dynamic snippets for HTML and CSS files.
+
+#+BEGIN_SRC emacs-lisp
+  (use-package emmet-mode
+    :diminish
+    :hook (sgml-mode css-mode)
+    :config
+    (setq emmet-indentation 2
+          emmet-move-cursor-between-quotes t
+          emmet-preview-default nil))
 #+END_SRC
 
 ** Lisp-like
