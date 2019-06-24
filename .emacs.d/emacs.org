@@ -760,7 +760,8 @@ Use ivy for generic input completion.
      "C-b"     'ivy-scroll-down-command
      "C-f"     'ivy-scroll-up-command
      "<prior>" 'ivy-previous-history-element
-     "<next>"  'ivy-next-history-element)
+     "<next>"  'ivy-next-history-element
+     "<S-return>" 'ivy-immediate-done)
     :config
     (setq ivy-use-virtual-buffers t
           ivy-count-format "(%d/%d) "
