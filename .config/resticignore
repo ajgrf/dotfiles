@@ -33,6 +33,7 @@ ${HOME}/pkg
 ${HOME}/src/guix/**/*.go
 ${HOME}/.cabal
 ${HOME}/.cargo
+${HOME}/.docsets
 ${HOME}/.ghc
 ${HOME}/.local/stow
 ${HOME}/.multirust
