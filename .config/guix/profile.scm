@@ -54,6 +54,7 @@
    "emacs-slack"
    "emacs-smart-mode-line"
    "emacs-smartparens"
+   "emacs-solaire-mode"
    "emacs-use-package"
    "emacs-vimrc-mode"
    "emacs-which-key"

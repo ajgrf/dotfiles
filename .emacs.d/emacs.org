@@ -232,7 +232,6 @@ Give a brighter background to real files compared to other buffers.
 
 #+BEGIN_SRC emacs-lisp
   (use-package solaire-mode
-    :if window-system
     :hook
     ((change-major-mode after-revert ediff-prepare-buffer) . turn-on-solaire-mode)
     (minibuffer-setup . solaire-mode-in-minibuffer)
