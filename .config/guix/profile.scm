@@ -1,5 +1,8 @@
-(use-modules (guix channels)
+(use-modules (gnu packages emacs-xyz)
+             (guix channels)
+             (guix git-download)
              (guix inferior)
+             (guix packages)
              (srfi srfi-1))
 
 (define specs
@@ -131,7 +134,30 @@
                   (url "file:///home/ajgrf/src/guix")
                   (branch "pulseaudio-dlna")))))
 
+(define-public my-emacs-emms
+  (let ((commit "e70459caaadeb715116abb45ddf5e98921d46c14")
+        (revision "1"))
+    (package
+      (inherit emacs-emms)
+      (version (git-version "20190620" revision commit))
+      (source
+       (origin
+         (inherit (package-source emacs-emms))
+         (uri (string-append
+               "https://git.savannah.gnu.org/cgit/emms.git/snapshot/emms-"
+               commit ".tar.gz"))
+         (sha256
+          (base32
+           "0vxqwn1mvrqkvmm3ym5wvl5kffqf430c59mj4wq4z8ci7s62c100")))))))
+
+(define-public my-emacs-emms-mode-line-cycle
+  (package
+    (inherit emacs-emms-mode-line-cycle)
+    (propagated-inputs `(("emms" ,my-emacs-emms)))))
+
 (packages->manifest
  (cons*
+  my-emacs-emms
+  my-emacs-emms-mode-line-cycle
   (first (lookup-inferior-packages inferior "pulseaudio-dlna"))
   (map (compose list specification->package+output) specs)))

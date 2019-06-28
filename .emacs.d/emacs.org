@@ -1436,6 +1436,61 @@ Show email threads in a unified conversation view.
     (slack-start))
 #+END_SRC
 
+** Media Player
+
+EMMS is the Emacs Multimedia System. It plays multimedia files from
+Emacs using a variety of external players.
+
+#+BEGIN_SRC emacs-lisp
+  (use-package emms
+    :general
+    (tyrant-def
+      "aM"  '(:ignore t :which-key "music")
+      "aMm" 'emms
+      "aMM" 'emms
+      "aMP" 'emms-pause
+      "aM>" 'emms-next
+      "aM<" 'emms-previous
+      "aMs" 'emms-stop
+      "aMa" 'emms-browse-by-artist
+      "aMA" 'emms-browse-by-album
+      "aMb" 'emms-browse-by-genre
+      "aMg" 'emms-browse-by-genre
+      "aMy" 'emms-browse-by-year
+      "aMc" 'emms-browse-by-composer
+      "aMp" 'emms-browse-by-performer)
+    (tyrant-def emms-playlist-mode-map
+      "ma" 'emms-browse-by-artist
+      "mA" 'emms-browse-by-album
+      "mb" 'emms-browse-by-genre
+      "md" 'emms-add-directory-tree
+      "mf" 'emms-add-file
+      "mg" 'emms-browse-by-genre
+      "my" 'emms-browse-by-year
+      "mc" 'emms-browse-by-composer
+      "mp" 'emms-browse-by-performer)
+    :config
+    (require 'emms)
+    (require 'emms-info-libtag)
+    (emms-all)
+    (emms-history-load)
+    (setq emms-info-functions '(emms-info-libtag)
+          emms-mode-line-format "[%s]"
+          emms-mode-line-mode-line-function 'emms-mode-line-playlist-current
+          emms-player-list '(emms-player-mpv)
+          emms-playing-time-style 'downtime
+          emms-source-file-default-directory "~/music/"))
+#+END_SRC
+
+Display the EMMS mode-line as a ticker to save space.
+
+#+BEGIN_SRC emacs-lisp
+  (use-package emms-mode-line-cycle
+    :config
+    (emms-mode-line-cycle 1)
+    (setq emms-mode-line-cycle-max-width 24))
+#+END_SRC
+
 * Projects
 
 The =projectile= package provides useful project-centric commands.
