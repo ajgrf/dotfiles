@@ -795,6 +795,8 @@ Use ivy for generic input completion.
       "iSv" 'yas-visit-snippet-file
       "iSn" 'yas-new-snippet)
     :config
+    (add-to-list 'yas-snippet-dirs
+                 "~/.guix-profile/share/emacs/yasnippet-snippets" t)
     (yas/initialize))
 
   (use-package yasnippet-snippets
@@ -1740,7 +1742,7 @@ Geiser runs a scheme interpreter to interact with alongside source buffers.
     (with-eval-after-load 'geiser-guile
       (add-to-list 'geiser-guile-load-path "~/src/guix"))
     (with-eval-after-load 'yasnippet
-      (add-to-list 'yas-snippet-dirs "~/src/guix/etc/snippets")))
+      (add-to-list 'yas-snippet-dirs "~/src/guix/etc/snippets" t)))
 #+END_SRC
 
 Add some extra Guix-related functionality, both for interacting with
