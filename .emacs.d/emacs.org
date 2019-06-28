@@ -1323,7 +1323,11 @@ Use Dash API documentation sets for offline docs.
     :init
     (require 'helm-dash)
     :config
-    (setq counsel-dash-common-docsets '("Bootstrap 3" "CSS" "Emmet" "HTML")))
+    (setq counsel-dash-common-docsets
+          (mapcar #'file-name-base
+                  (directory-files counsel-dash-docsets-path
+                                   nil
+                                   "\\.docset$"))))
 #+END_SRC
 
 ** Feed Aggregator
