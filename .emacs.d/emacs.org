@@ -226,6 +226,21 @@ Highlight matching braces & parentheses.
   (show-paren-mode)
 #+END_SRC
 
+**** Solaire Mode
+
+Give a brighter background to real files compared to other buffers.
+
+#+BEGIN_SRC emacs-lisp
+  (use-package solaire-mode
+    :if window-system
+    :hook
+    ((change-major-mode after-revert ediff-prepare-buffer) . turn-on-solaire-mode)
+    (minibuffer-setup . solaire-mode-in-minibuffer)
+    :config
+    (solaire-global-mode +1)
+    (solaire-mode-swap-bg))
+#+END_SRC
+
 *** Fonts
 
 Set fonts, both now and when creating new frames (for ~emacsclient~).
