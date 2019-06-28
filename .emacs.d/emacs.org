@@ -618,6 +618,7 @@ Spacemacs-like leader keys.
 
      "q"   '(:ignore t :which-key "quit")
      "qq"  'save-buffers-kill-terminal
+     "qQ"  'save-buffers-kill-emacs
 
      "s"   '(:ignore t :which-key "search")
 
