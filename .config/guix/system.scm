@@ -22,23 +22,16 @@
     (target "/dev/sda")
     (timeout 2)
     (keyboard-layout keyboard-layout)
+    (default-entry 1)
     (menu-entries
      (list (menu-entry
-            (label "Debian 10 (buster)")
-            (device "debboot")
-            (linux "(hd0,gpt3)/vmlinuz-4.19.0-5-amd64")
+            (label "Ubuntu 18.04 LTS (bionic)")
+            (device "ububoot")
+            (linux "(hd0,gpt3)/vmlinuz-4.18.0-25-generic")
             (linux-arguments
-             '("root=UUID=227c5e05-6dff-4802-9537-688e20892cf6"
+             '("root=UUID=aefc4d76-2428-476f-b9df-d5c1a9e6a150"
                "ro" "quiet" "splash"))
-            (initrd "(hd0,gpt3)/initrd.img-4.19.0-5-amd64"))
-           (menu-entry
-            (label "PureOS")
-            (device "pureosboot")
-            (linux "(hd0,gpt5)/vmlinuz-4.19.0-5-amd64")
-            (linux-arguments
-             '("root=UUID=b315dea0-efc1-48ea-9bb4-f1c3aa7e2ce5"
-               "ro" "quiet" "splash"))
-            (initrd "(hd0,gpt5)/initrd.img-4.19.0-5-amd64"))))))
+            (initrd "(hd0,gpt3)/initrd.img-4.18.0-25-generic"))))))
   (mapped-devices
    (list (mapped-device
           (source (uuid "5abba48a-e3e2-4114-8dfc-d97f2a5ba9ac"))
