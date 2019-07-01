@@ -30,6 +30,7 @@ ${XDG_DOWNLOAD_DIR}/torrents
 *.a
 *.o
 ${HOME}/pkg
+${HOME}/snap
 ${HOME}/src/guix/**/*.go
 ${HOME}/.cabal
 ${HOME}/.cargo
