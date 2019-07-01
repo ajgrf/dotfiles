@@ -87,8 +87,7 @@ Every other package will be managed by use-package.
     (unless (locate-library "use-package")
       (package-refresh-contents)
       (package-install 'use-package))
-    (require 'use-package)
-    (use-package diminish))
+    (require 'use-package))
   (require 'bind-key)
 #+END_SRC
 
@@ -346,10 +345,14 @@ cursor position information on the right like vim.
 **** Hide Mode Lighters
 
 Most of my =diminish= invocations are within =use-package=
-declarations, but these modes are hidden the hard way.
+declarations, but some modes are hidden the hard way.
 
 #+BEGIN_SRC emacs-lisp
-  (eval-after-load "eldoc" '(diminish 'eldoc-mode))
+  (use-package diminish
+    :ensure t
+    :config
+    (eval-after-load "eldoc"
+      '(diminish 'eldoc-mode)))
 #+END_SRC
 
 * Editing
