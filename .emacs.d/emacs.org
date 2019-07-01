@@ -296,7 +296,7 @@ Set fonts, both now and when creating new frames (for ~emacsclient~).
     (set-face-font 'default           "Go Mono 11"   frame)
     (set-face-font 'fixed-pitch       "Noto Mono 11" frame)
     (set-face-font 'fixed-pitch-serif "Go Mono 11"   frame)
-    (set-face-font 'variable-pitch    "Noto Sans 11" frame))
+    (set-face-font 'variable-pitch    "Noto Sans"    frame))
   (my-set-fonts)
   (add-hook 'after-make-frame-functions 'my-set-fonts)
 #+END_SRC
