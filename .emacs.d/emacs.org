@@ -102,6 +102,15 @@ Don't load a package if it's not installed.
                  t))
 #+END_SRC
 
+Don't ensure packages that already installed through another package manager.
+
+#+BEGIN_SRC emacs-lisp
+  (defun my-use-package-ensure (name args state &optional no-refresh)
+    (unless (locate-library (symbol-name name))
+      (use-package-ensure-elpa name args state no-refresh)))
+  (setq use-package-ensure-function 'my-use-package-ensure)
+#+END_SRC
+
 ** Interface Elements
 
 Emacs' interface is a little too busy for me by default.
