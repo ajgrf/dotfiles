@@ -1417,6 +1417,35 @@ Use Dash API documentation sets for offline docs.
                                    "\\.docset$"))))
 #+END_SRC
 
+** REST Client
+
+restclient.el is an interactive tool for exploring HTTP REST endpoints.
+
+#+BEGIN_SRC emacs-lisp
+  (use-package restclient
+    :defer t
+    :general
+    (tyrant-def restclient-mode-map
+      "m," 'restclient-http-send-current
+      "mC" 'restclient-copy-curl-command
+      "mN" 'restclient-narrow-to-current
+      "mw" 'widen)
+    (general-define-key
+     :keymaps 'restclient-mode-map
+     :states '(normal visual)
+     "[[" 'restclient-jump-prev
+     "]]" 'restclient-jump-next))
+#+END_SRC
+
+Provide completion of HTTP methods and headers.
+
+#+BEGIN_SRC emacs-lisp
+  (use-package company-restclient
+    :after restclient
+    :config
+    (add-to-list 'company-backends 'company-restclient))
+#+END_SRC
+
 ** Feed Aggregator
 
 #+BEGIN_SRC emacs-lisp
