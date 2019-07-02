@@ -1686,7 +1686,14 @@ https://github.com/magit/magit/issues/2939
                    (tramp-login-program "vcsh")
                    (tramp-login-args (("enter") ("%h")))
                    (tramp-remote-shell "/bin/sh")
-                   (tramp-remote-shell-args ("-c")))))
+                   (tramp-remote-shell-args ("-c"))))
+
+    ;; Don't open shells in vcsh
+    (defun call-without-vcsh (fun &rest r)
+      (let ((default-directory (replace-regexp-in-string "/vcsh:dotfiles:" ""
+                                                         default-directory)))
+        (apply fun r)))
+    (advice-add 'shell :around 'call-without-vcsh))
 #+END_SRC
 
 * Programming
