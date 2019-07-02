@@ -1680,6 +1680,9 @@ https://github.com/magit/magit/issues/2939
 #+BEGIN_SRC emacs-lisp
   (use-package tramp
     :defer t
+    :general
+    (tyrant-def
+      "fd" 'find-dotfile)
     :config
     (add-to-list 'tramp-methods
                  '("vcsh"
@@ -1687,6 +1690,11 @@ https://github.com/magit/magit/issues/2939
                    (tramp-login-args (("enter") ("%h")))
                    (tramp-remote-shell "/bin/sh")
                    (tramp-remote-shell-args ("-c"))))
+
+    (defun find-dotfile ()
+      (interactive)
+      (let ((default-directory (concat "/vcsh:dotfiles:" (getenv "HOME") "/")))
+        (call-interactively 'find-file)))
 
     ;; Don't open shells in vcsh
     (defun call-without-vcsh (fun &rest r)
