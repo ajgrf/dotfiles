@@ -22,7 +22,6 @@
     (target "/dev/sda")
     (timeout 2)
     (keyboard-layout keyboard-layout)
-    (default-entry 1)
     (menu-entries
      (list (menu-entry
             (label "Ubuntu 18.04 LTS (bionic)")
