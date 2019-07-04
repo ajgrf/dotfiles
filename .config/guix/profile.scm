@@ -99,6 +99,7 @@
    "password-store"
    "pinentry"
    "poppler"
+   "pulseaudio-dlna"
    "rclone"
    "recutils"
    "redshift"
@@ -129,12 +130,6 @@
    "zathura-pdf-mupdf"
    "zathura-ps"))
 
-(define inferior
-  (inferior-for-channels
-   (list (channel (name 'guix)
-                  (url "file:///home/ajgrf/src/guix")
-                  (branch "pulseaudio-dlna")))))
-
 (define-public my-emacs-emms
   (let ((commit "e70459caaadeb715116abb45ddf5e98921d46c14")
         (revision "1"))
@@ -160,5 +155,4 @@
  (cons*
   my-emacs-emms
   my-emacs-emms-mode-line-cycle
-  (first (lookup-inferior-packages inferior "pulseaudio-dlna"))
   (map (compose list specification->package+output) specs)))
