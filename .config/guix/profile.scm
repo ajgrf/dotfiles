@@ -61,6 +61,7 @@
    "emacs-ws-butler"
    "emacs-yasnippet"
    "emacs-yasnippet-snippets"
+   "entr"
    "feh"
    "ffmpeg"
    "file"
