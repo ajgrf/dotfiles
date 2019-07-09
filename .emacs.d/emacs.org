@@ -898,6 +898,21 @@ Focus follows mouse.
   (setq mouse-autoselect-window t)
 #+END_SRC
 
+** Winner Mode
+
+Undo and redo window operations
+
+#+BEGIN_SRC emacs-lisp
+  (use-package winner
+    :general
+    (general-define-key
+     :keymaps 'evil-window-map
+     "u"   'winner-undo
+     "C-r" 'winner-redo)
+    :config
+    (winner-mode 1))
+#+END_SRC
+
 ** Workspaces
 
 Multiple workspaces/tabs.
