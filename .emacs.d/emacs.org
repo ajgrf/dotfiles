@@ -672,12 +672,7 @@ Spacemacs-like leader keys.
      "zz"  'text-scale-adjust
      "zi"  'text-scale-increase
      "zo"  'text-scale-decrease
-     "z0"  'text-scale-reset)
-
-    (general-define-key
-     :keymaps 'evil-window-map
-     "d" 'evil-window-delete
-     "F" 'make-frame))
+     "z0"  'text-scale-reset))
 #+END_SRC
 
 Restart Emacs.
@@ -896,6 +891,15 @@ Focus follows mouse.
 
 #+BEGIN_SRC emacs-lisp
   (setq mouse-autoselect-window t)
+#+END_SRC
+
+Add a few window-related evil bindings.
+
+#+BEGIN_SRC emacs-lisp
+  (general-define-key
+   :keymaps 'evil-window-map
+   "d" 'evil-window-delete
+   "F" 'make-frame)
 #+END_SRC
 
 ** Winner Mode
