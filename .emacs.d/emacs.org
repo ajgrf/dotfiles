@@ -233,7 +233,11 @@ Give a brighter background to real files compared to other buffers.
     (minibuffer-setup . solaire-mode-in-minibuffer)
     :config
     (solaire-global-mode +1)
-    (solaire-mode-swap-bg))
+    (solaire-mode-swap-bg)
+    ;; Automatically swap solaire backgrounds when loading themes.
+    (defun my-solaire-mode-swap-bg (&rest _rest)
+      (solaire-mode-swap-bg))
+    (advice-add 'load-theme :after #'my-solaire-mode-swap-bg))
 #+END_SRC
 
 *** Fonts
