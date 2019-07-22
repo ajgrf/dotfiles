@@ -410,6 +410,14 @@ Evil is an extensible vi layer for Emacs.
       (kill-line (- 1 arg)))
     (evil-define-key 'insert 'global
       (kbd "C-u") 'backward-kill-line)
+
+    ;; Add textobj for entire buffer.
+    (evil-define-text-object evil-entire-entire-buffer (count &optional beg end type)
+      "Select entire buffer"
+      (evil-range (point-min) (point-max)))
+    (define-key evil-inner-text-objects-map "e" 'evil-entire-entire-buffer)
+    (define-key evil-outer-text-objects-map "e" 'evil-entire-entire-buffer)
+
     (setq evil-mode-line-format nil)
     (evil-mode 1))
 #+END_SRC
