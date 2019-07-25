@@ -36,6 +36,7 @@ ${HOME}/.cabal
 ${HOME}/.cargo
 ${HOME}/.docsets
 ${HOME}/.ghc
+${HOME}/.npm
 ${HOME}/.local/stow
 ${HOME}/.multirust
 ${XDG_DATA_HOME}/stack
