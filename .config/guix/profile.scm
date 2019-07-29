@@ -6,8 +6,7 @@
              (srfi srfi-1))
 
 (define specs
- '("aisleriot"
-   "aspell"
+ '("aspell"
    "aspell-dict-en"
    "brightnessctl"
    "curl"
@@ -70,8 +69,6 @@
    "ghc-xmonad-contrib"
    "git"
    "glibc-utf8-locales"
-   "gnome-mines"
-   "gnome-sudoku"
    "gnome-tweaks"
    "gnupg"
    "gst-plugins-bad"
