@@ -69,7 +69,7 @@ subalias guix_profile='guix package "$@"'
 subalias guix_show='guix package --show="$1"'
 subalias guix_search='guix package -s "$@" | recfmt "{{name}} {{version}} - {{synopsis}}
 " | sort | uniq'
-subalias guix_clean='git -C "$HOME/src/guix" clean -fdx -e .dir-locals-2.el -e .ignore && git checkout po/'
+subalias guix_clean='git -C "$HOME/src/guix" clean -fdx -e .dir-locals-2.el -e .ignore && git -C "$HOME/src/guix" checkout po/'
 guix_make() {
 	cd "$HOME/src/guix"
 	if test -f "$HOME/src/guix/Makefile"; then
