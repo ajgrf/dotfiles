@@ -1,6 +1,18 @@
 " -*- mode:vimrc; -*-
 " vim: set filetype=vim:
 
+unbind j
+unbind k
+unbind h
+unbind H
+unbind yy
+unbind ys
+unbind yc
+unbind ym
+unbind yt
+unbind yd
+unbind yv
+
 bind n scrollline 10
 bind e scrollline -10
 bind y scrollpx -50
@@ -16,15 +28,3 @@ bind jm clipboard yankmd
 bind jt clipboard title
 bind jd composite get_current_url | ytdl
 bind jv composite get_current_url | exclaim_quiet mpv
-
-unbind j
-unbind k
-unbind h
-unbind H
-unbind yy
-unbind ys
-unbind yc
-unbind ym
-unbind yt
-unbind yd
-unbind yv
