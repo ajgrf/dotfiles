@@ -57,6 +57,7 @@
    "emacs-solaire-mode"
    "emacs-use-package"
    "emacs-vimrc-mode"
+   "emacs-web-mode"
    "emacs-which-key"
    "emacs-ws-butler"
    "emacs-yasnippet"

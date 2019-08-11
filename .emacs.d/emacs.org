@@ -1983,11 +1983,21 @@ Emmet provides dynamic snippets for HTML and CSS files.
   (use-package emmet-mode
     :ensure t
     :diminish
-    :hook (sgml-mode css-mode)
+    :hook (sgml-mode web-mode css-mode)
     :config
     (setq emmet-indentation 2
           emmet-move-cursor-between-quotes t
           emmet-preview-default nil))
+#+END_SRC
+
+
+#+BEGIN_SRC emacs-lisp
+  (use-package web-mode
+    :ensure t
+    :mode ("\\.ejs\\'")
+    :config
+    (setq web-mode-code-indent-offset 2
+          web-mode-markup-indent-offset 2))
 #+END_SRC
 
 ** JavaScript
