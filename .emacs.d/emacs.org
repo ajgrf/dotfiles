@@ -1552,6 +1552,8 @@ improves upon the built-in DocView.
     (general-define-key
      :keymaps 'pdf-view-mode-map
      :states 'normal
+     "j"     'evil-collection-pdf-view-next-line-or-next-page
+     "k"     'evil-collection-pdf-view-previous-line-or-previous-page
      "J"     'pdf-view-next-page
      "K"     'pdf-view-previous-page
      "<tab>" 'pdf-outline)
