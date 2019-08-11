@@ -1531,6 +1531,70 @@ Provide completion of HTTP methods and headers.
                                   :remove 'unread)))
 #+END_SRC
 
+** PDF Tools
+
+PDF Tools is a full-featured PDF viewer embedded within Emacs which
+improves upon the built-in DocView.
+
+#+BEGIN_SRC emacs-lisp :noweb yes
+  (use-package pdf-tools
+    :diminish pdf-view-midnight-minor-mode
+    :magic ("%PDF" . pdf-view-mode)
+    :hook ((pdf-view-mode . pdf-view-auto-slice-minor-mode)
+           (pdf-view-mode . pdf-view-midnight-minor-mode))
+    :general
+    (general-define-key
+     :keymaps 'pdf-view-mode-map
+     :states 'normal
+     "J"     'pdf-view-next-page
+     "K"     'pdf-view-previous-page
+     "<tab>" 'pdf-outline)
+    (tyrant-def pdf-view-mode-map
+      "mtm" 'pdf-view-midnight-minor-mode)
+    :config
+    (setq pdf-view-midnight-colors '("#000000" . "#ffffea"))
+    (workman-translate-keys 'pdf-view-mode
+                            'pdf-view-mode-map
+                            'normal)
+    <<pdf-restore-page>>
+    (pdf-tools-install))
+#+END_SRC
+
+Automatically open PDFs to the last-viewed page.
+
+#+NAME: pdf-restore-page
+#+BEGIN_SRC emacs-lisp :tangle no
+  ;; workaround for pdf-tools not reopening to last-viewed page of the pdf:
+  ;; https://github.com/politza/pdf-tools/issues/18#issuecomment-269515117
+  (defun brds/pdf-set-last-viewed-bookmark ()
+    (interactive)
+    (when (eq major-mode 'pdf-view-mode)
+      (bookmark-set (brds/pdf-generate-bookmark-name))))
+
+  (defun brds/pdf-jump-last-viewed-bookmark ()
+    (bookmark-set "fake") ; this is new
+    (when
+        (brds/pdf-has-last-viewed-bookmark)
+      (bookmark-jump (brds/pdf-generate-bookmark-name))))
+
+  (defun brds/pdf-has-last-viewed-bookmark ()
+    (assoc
+     (brds/pdf-generate-bookmark-name) bookmark-alist))
+
+  (defun brds/pdf-generate-bookmark-name ()
+    (concat "PDF-LAST-VIEWED: " (buffer-file-name)))
+
+  (defun brds/pdf-set-all-last-viewed-bookmarks ()
+    (dolist (buf (buffer-list))
+      (with-current-buffer buf
+        (brds/pdf-set-last-viewed-bookmark))))
+
+  (add-hook 'kill-buffer-hook 'brds/pdf-set-last-viewed-bookmark)
+  (add-hook 'pdf-view-mode-hook 'brds/pdf-jump-last-viewed-bookmark)
+  (unless noninteractive  ; as `save-place-mode' does
+    (add-hook 'kill-emacs-hook #'brds/pdf-set-all-last-viewed-bookmarks))
+#+END_SRC
+
 ** Epub Reader
 
 #+BEGIN_SRC emacs-lisp

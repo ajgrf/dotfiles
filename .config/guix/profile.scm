@@ -47,6 +47,7 @@
    "emacs-org"
    "emacs-org-bullets"
    "emacs-pass"
+   "emacs-pdf-tools"
    "emacs-projectile"
    "emacs-rainbow-mode"
    "emacs-restart-emacs"
