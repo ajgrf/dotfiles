@@ -123,11 +123,7 @@
    "xmonad"
    "xrdb"
    "xterm"
-   "youtube-dl"
-   "zathura"
-   "zathura-djvu"
-   "zathura-pdf-mupdf"
-   "zathura-ps"))
+   "youtube-dl"))
 
 (define-public my-emacs-emms
   (let ((commit "e70459caaadeb715116abb45ddf5e98921d46c14")

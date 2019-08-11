@@ -76,7 +76,6 @@ with import <nixpkgs> {};
         w3m
         xclip
         xdotool
-        zathura
       ];
     };
 

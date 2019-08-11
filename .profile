@@ -100,9 +100,6 @@ fi
 if test "$WORKMAN"; then
 	export LESSKEY="$XDG_CONFIG_HOME/less/workman.less"
 	ln -sf workman.keys "$XDG_CONFIG_HOME/ncmpc/keys"
-	ln -sf workman.zathurarc "$XDG_CONFIG_HOME/zathura/zathurarc"
 else
 	rm -f "$XDG_CONFIG_HOME/ncmpc/keys"
-	ln -sf general.zathurarc "$XDG_CONFIG_HOME/zathura/zathurarc"
 fi
-

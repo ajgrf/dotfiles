@@ -1413,7 +1413,6 @@ A shell written entirely in elisp.
   (setq dired-dwim-target t)
   (setq dired-guess-shell-alist-user
         '(("\\.info\\.json$" "ytdl")
-          ("\\.pdf$" "zathura")
           ("\\.(avi|mkv|mp4|webm)$" "mpv -fs")
           ("\\.(flac|m4a|mp3|ogg|opus)$" "mpv")
           ("\\.jpg$" "feh --cycle-once -dFZD-10 *")))
