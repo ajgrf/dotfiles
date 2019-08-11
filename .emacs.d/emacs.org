@@ -1990,6 +1990,23 @@ Emmet provides dynamic snippets for HTML and CSS files.
           emmet-preview-default nil))
 #+END_SRC
 
+** JavaScript
+
+#+BEGIN_SRC emacs-lisp :tangle no
+  (use-package js2-mode
+    :mode "\\.js\\'")
+#+END_SRC
+
+#+BEGIN_SRC emacs-lisp
+  (use-package prettier-js
+    :ensure t
+    :diminish
+    :hook (js-mode . prettier-js-mode)
+    :config
+    (setq js-indent-level 2
+          prettier-js-show-errors 'echo))
+#+END_SRC
+
 ** Lisp-like
 *** Scheme
 
