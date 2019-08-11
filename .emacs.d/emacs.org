@@ -868,9 +868,16 @@ Insert and delete parentheses and other pairs more intelligently.
     :diminish
     :config
     (require 'smartparens-config)
-    (dolist (mode '(awk c c++ css go java js mhtml nix perl rust sh))
-      (sp-local-pair (intern (concat (symbol-name mode) "-mode")) "{" nil
-                     :post-handlers '(:add ("||\n[i]" "RET"))))
+
+    ;; Expand curly brace blocks.
+    (sp-with-modes '(awk-mode c-mode c++-mode css-mode go-mode java-mode js-mode
+                     mhtml-mode nix-mode perl-mode rust-mode sh-mode)
+      (sp-local-pair "{" nil :post-handlers '(:add ("||\n[i]" "RET"))))
+
+    ;; Disable <> and {} pairs in web-mode.
+    (eval-after-load 'smartparens-html
+      '(sp-local-pair 'web-mode "<" nil :actions nil))
+
     (smartparens-global-mode))
 #+END_SRC
 
