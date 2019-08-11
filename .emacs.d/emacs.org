@@ -1599,7 +1599,18 @@ Automatically open PDFs to the last-viewed page.
 
 #+BEGIN_SRC emacs-lisp
   (use-package nov
-    :mode ("\\.epub\\'" . nov-mode))
+    :mode ("\\.epub\\'" . nov-mode)
+    :general
+    (general-define-key
+     :keymaps 'nov-mode-map
+     :states 'normal
+     "J" 'nov-next-document
+     "K" 'nov-previous-document)
+    :config
+    (setq nov-text-width 79)
+    (workman-translate-keys 'nov-mode
+                            'nov-mode-map
+                            'normal))
 #+END_SRC
 
 ** Password Manager
