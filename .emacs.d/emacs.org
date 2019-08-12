@@ -781,6 +781,7 @@ Edit text with multiple cursors.
     :diminish
     :hook (after-init . global-company-mode)
     :config
+    (setq company-global-modes '(not eshell-mode))
     ;; tab key indents and completes
     (setq tab-always-indent 'complete)
     (defun company-backward-kill-line (arg)
@@ -1260,8 +1261,7 @@ Set up inferior shell, for running a shell in an Emacs buffer.
 
 **** Bash Completion
 
-Bash completion is disabled for now. It requires configuration on the
-shell side too, and I'm not 100% sure I like it anyway.
+Enable Bash completion in ~shell-mode~ and shell scripts.
 
 #+BEGIN_SRC emacs-lisp
   (use-package bash-completion
@@ -1333,6 +1333,7 @@ A shell written entirely in elisp.
       (general-define-key
        :keymaps 'eshell-mode-map
        :states 'insert
+       "<tab>"     'my-eshell-complete
        "C-a"       'eshell-bol
        "C-d"       'eshell-send-eof-to-process
        "C-e"       'move-end-of-line
@@ -1346,7 +1347,22 @@ A shell written entirely in elisp.
        "S-<prior>" 'scroll-down-command
        "S-<next>"  'scroll-up-command))
     (add-hook 'eshell-first-time-mode-hook
-              'my-eshell-setup-keys))
+              'my-eshell-setup-keys)
+
+    (defun my-eshell-complete ()
+      "Wrap pcomplete completions for the standard completion UI."
+      (interactive)
+      (pcomplete-std-complete))
+
+    ;; Enable Bash completion in Eshell.
+    (defun eshell-bash-completion ()
+      (let ((bash-completion-nospace t))
+        (while (pcomplete-here
+                (nth 2 (bash-completion-dynamic-complete-nocomint
+                        (save-excursion (eshell-bol) (point))
+                        (point)))))))
+    (when (require 'bash-completion nil t)
+      (setq eshell-default-completion-function 'eshell-bash-completion)))
 #+END_SRC
 
 ** Ledger
