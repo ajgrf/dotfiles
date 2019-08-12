@@ -184,9 +184,6 @@ myKeys isWorkman conf@(XConfig { XMonad.modMask = modMask }) =
        , ((0, xK_F1), runOrRaiseNext "icecat" (className =? "IceCat"))
        , ((0, xK_F2), runOrRaiseNext "emacs" (className =? "Emacs"))
        , ((0, xK_F3), scratchpadSpawnAction conf)
-       , ( (0, xK_F4)
-         , raiseMaybe (runInTerm "-name ncmpc" "ncmpc") (appName =? "ncmpc")
-         )
        , ((0, xK_F5)                   , planeMove (Lines 3) Linear ToLeft)
        , ((0, xK_F6)                   , planeMove (Lines 3) Linear ToRight)
        , ((modMask, xK_Tab)            , toggleWS)
@@ -221,7 +218,6 @@ myKeys isWorkman conf@(XConfig { XMonad.modMask = modMask }) =
 
 myWindowRules = composeAll
   [ className =? "Org.gnome.Maps" --> doFloat
-  , appName =? "ncmpc" --> doShift "4:Media"
   , className =? "mpv" --> doShift "4:Media"
   , className =? "Gnome-mpv" --> (doShift "4:Media" <+> doFloat)
   , className =? "Sol" --> doShift "6:Games"

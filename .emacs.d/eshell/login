@@ -1,1 +1,0 @@
-(add-to-list 'eshell-visual-commands "ncmpc") >/dev/null

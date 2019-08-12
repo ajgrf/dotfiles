@@ -91,7 +91,6 @@
    "msmtp"
    "mu"
    "mutt"
-   "ncmpc"
    "neovim"
    "nss-certs"
    "openssh"

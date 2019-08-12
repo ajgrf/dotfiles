@@ -58,7 +58,6 @@ with import <nixpkgs> {};
         mpv
         msmtp
         mutt
-        ncmpc
         pamix
         pamixer
         pandoc

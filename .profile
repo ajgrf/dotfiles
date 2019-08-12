@@ -99,7 +99,4 @@ fi
 # Configure Workman bindings if the WORKMAN variable is set
 if test "$WORKMAN"; then
 	export LESSKEY="$XDG_CONFIG_HOME/less/workman.less"
-	ln -sf workman.keys "$XDG_CONFIG_HOME/ncmpc/keys"
-else
-	rm -f "$XDG_CONFIG_HOME/ncmpc/keys"
 fi
