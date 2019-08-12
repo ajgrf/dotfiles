@@ -1329,13 +1329,25 @@ A shell written entirely in elisp.
              (if (= (user-uid) 0) "# " "$ "))))
     (setq eshell-prompt-regexp "^[^#$\n]*[#$] ")
 
+    (defun my-eshell-ctrl-d ()
+      "Send EOF or exit Eshell, like Ctrl-D in terminal emulators."
+      (interactive)
+      ;; Send EOF if a process is running.
+      (cond (eshell-process-list
+             (eshell-send-eof-to-process))
+            ;; Otherwise exit eshell if current input is empty.
+            ((save-excursion
+               (eshell-bol)
+               (= (point) (point-at-eol)))
+             (evil-delete-buffer (current-buffer)))))
+
     (defun my-eshell-setup-keys ()
       (general-define-key
        :keymaps 'eshell-mode-map
        :states 'insert
        "<tab>"     'my-eshell-complete
        "C-a"       'eshell-bol
-       "C-d"       'eshell-send-eof-to-process
+       "C-d"       'my-eshell-ctrl-d
        "C-e"       'move-end-of-line
        "C-k"       'kill-line
        "C-l"       'eshell/clear
