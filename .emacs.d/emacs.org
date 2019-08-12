@@ -1312,18 +1312,20 @@ https://oremacs.com/2019/03/24/shell-apt/
 #+BEGIN_SRC emacs-lisp
   (general-define-key
    :states 'normal
-   "gy" 'my-ytdl-url)
+   "gy" 'ytdl-url)
 
-  (defun my-ytdl-url (&optional url)
-    "Run 'youtube-dl' over the URL.  If URL is nil, use URL at point."
-    (interactive)
-    (let* ((url (or url (thing-at-point-url-at-point)))
-           (new-buffer
-            (apply 'make-comint-in-buffer "youtube-dl" nil
-                   "ytdl" nil (list url)))
-           (ytdl-proc (get-buffer-process new-buffer)))
-      (set-process-sentinel ytdl-proc 'my-kill-buffer-sentinel)
+  (defun run-command-in-buffer (name args)
+    (let* ((new-buffer
+            (apply 'make-comint-in-buffer name nil name nil args))
+           (proc (get-buffer-process new-buffer)))
+      (set-process-sentinel proc 'my-kill-buffer-sentinel)
       (switch-to-buffer-other-window new-buffer)))
+
+  (defun ytdl-url (&optional url)
+    "Run 'ytdl' over the URL.  If URL is nil, use URL at point."
+    (interactive)
+    (let ((url (or url (thing-at-point-url-at-point))))
+      (run-command-in-buffer "ytdl" (list url))))
 #+END_SRC
 
 ** Emacs Shell
