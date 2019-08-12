@@ -645,6 +645,7 @@ Spacemacs-like leader keys.
      "b"   '(:ignore t :which-key "buffer")
      "bb"  'ivy-switch-buffer
      "bd"  'evil-delete-buffer
+     "bD"  'kill-current-buffer
      "bl"  'evil-switch-to-windows-last-buffer
      "bR"  'rename-current-buffer-file
      "bw"  'read-only-mode
