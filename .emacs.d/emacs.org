@@ -1465,6 +1465,7 @@ A shell written entirely in elisp.
 ** File Management
 
 #+BEGIN_SRC emacs-lisp
+  (setq delete-by-moving-to-trash t)
   (setq dired-dwim-target t)
   (setq dired-guess-shell-alist-user
         '(("\\.info\\.json$" "ytdl")
