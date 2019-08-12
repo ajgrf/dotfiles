@@ -1151,7 +1151,7 @@ https://joonro.github.io/blog/posts/toast-notifications-org-mode-windows.html
 
 * Tools
 
-** Inferior Interpreters
+** Inferior Processes
 
 Comint mode runs interpreters in a buffer, adding common functionality
 for line editing, history, keybindings, etc.
@@ -1304,6 +1304,29 @@ Show =apt= progress bars in the minibuffer.
 #+END_SRC
 
 https://oremacs.com/2019/03/24/shell-apt/
+
+*** youtube-dl
+
+#+BEGIN_SRC emacs-lisp
+  (general-define-key
+   :states 'normal
+   "gy" 'my-ytdl-url)
+
+  (defun my-ytdl-url (&optional url)
+    "Run 'youtube-dl' over the URL.  If URL is nil, use URL at point."
+    (interactive)
+    (let* ((url (or url (thing-at-point-url-at-point)))
+           (new-buffer
+            (apply 'make-comint-in-buffer "youtube-dl" nil
+                   "ytdl" nil (list url)))
+           (ytdl-proc (get-buffer-process new-buffer)))
+      (set-process-sentinel ytdl-proc
+                            (lambda (process signal)
+                              (and (memq (process-status process) '(exit signal))
+                                   (buffer-live-p (process-buffer process))
+                                   (evil-delete-buffer (process-buffer process)))))
+      (switch-to-buffer-other-window new-buffer)))
+#+END_SRC
 
 ** Emacs Shell
 
