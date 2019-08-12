@@ -1326,7 +1326,27 @@ A shell written entirely in elisp.
              (when (not (= 0 eshell-last-command-status))
                (concat (number-to-string eshell-last-command-status) "|"))
              (abbreviate-file-name (eshell/pwd))
-             (if (= (user-uid) 0) "# " "$ ")))))
+             (if (= (user-uid) 0) "# " "$ "))))
+    (setq eshell-prompt-regexp "^[^#$\n]*[#$] ")
+
+    (defun my-eshell-setup-keys ()
+      (general-define-key
+       :keymaps 'eshell-mode-map
+       :states 'insert
+       "C-a"       'eshell-bol
+       "C-d"       'eshell-send-eof-to-process
+       "C-e"       'move-end-of-line
+       "C-k"       'kill-line
+       "C-l"       'eshell/clear
+       "C-u"       'eshell-kill-input
+       "<up>"      'eshell-previous-input
+       "<down>"    'eshell-next-input
+       "<prior>"   'eshell-previous-matching-input-from-input
+       "<next>"    'eshell-next-matching-input-from-input
+       "S-<prior>" 'scroll-down-command
+       "S-<next>"  'scroll-up-command))
+    (add-hook 'eshell-first-time-mode-hook
+              'my-eshell-setup-keys))
 #+END_SRC
 
 ** Ledger
