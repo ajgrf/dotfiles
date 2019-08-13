@@ -85,8 +85,6 @@
    "libreoffice"
    "mcron"
    "moreutils"
-   "mpd"
-   "mpd-mpc"
    "mpv"
    "msmtp"
    "mu"

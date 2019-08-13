@@ -21,12 +21,6 @@
             '("mcron"))
    #:stop (make-kill-destructor))
 
- (make <service>
-   #:provides '(mpd)
-   #:start (make-forkexec-constructor
-            '("mpd" "--no-daemon"))
-   #:stop (make-kill-destructor))
-
  ;; Make sure to open ports 8376/tcp, 29254/udp, and 1900/udp
  (make <service>
    #:provides '(pulseaudio-dlna)

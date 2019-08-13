@@ -52,9 +52,6 @@ with import <nixpkgs> {};
         ledger
         libreoffice
         moreutils
-        mpc_cli
-        mpd
-        mpdris2
         mpv
         msmtp
         mutt
