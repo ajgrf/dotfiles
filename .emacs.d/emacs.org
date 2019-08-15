@@ -1006,6 +1006,18 @@ Multiple workspaces/tabs.
     (eyebrowse-mode t))
 #+END_SRC
 
+** Dynamic Window Management
+
+Edwin is my =dwm=-like dynamic window manager for Emacs.
+
+#+BEGIN_SRC emacs-lisp
+  (use-package edwin
+    :load-path "~/src/edwin"
+    :config
+    (workman-translate-keys nil 'edwin-mode-map)
+    (edwin-mode 1))
+#+END_SRC
+
 * Org Mode
 
 #+BEGIN_SRC emacs-lisp
