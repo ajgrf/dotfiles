@@ -449,7 +449,11 @@ Define the keys to translate.
             (mapcar #'upcase workman-base-translations)
             (mapcar (lambda (c) (kbd (concat "C-" c)))
                     workman-base-translations)
+            (mapcar (lambda (c) (kbd (concat "C-S-" c)))
+                    workman-base-translations)
             (mapcar (lambda (c) (kbd (concat "M-" c)))
+                    workman-base-translations)
+            (mapcar (lambda (c) (kbd (concat "M-" (upcase c))))
                     workman-base-translations))
     "Evil keys to translate for the Workman keyboard layout.")
 
