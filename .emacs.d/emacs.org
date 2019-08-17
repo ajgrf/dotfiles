@@ -666,6 +666,7 @@ Spacemacs-like leader keys.
      "fe"  '(:ignore t :which-key "emacs")
      "fed" 'find-emacs-config
      "feR" 'reload-emacs-config
+     "fl"  'find-library
 
      "h"   '(:ignore t :which-key "help")
      "ha"  'apropos-command
