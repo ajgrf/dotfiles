@@ -1019,6 +1019,7 @@ Edwin is my =dwm=-like dynamic window manager for Emacs.
 
 #+BEGIN_SRC emacs-lisp
   (use-package edwin
+    :diminish
     :load-path "~/src/edwin"
     :config
     (workman-translate-keys nil 'edwin-mode-map)
