@@ -1016,15 +1016,17 @@ Multiple workspaces/tabs.
 
 ** Dynamic Window Management
 
-Edwin is my =dwm=-like dynamic window manager for Emacs.
+Edwina is my =dwm=-like dynamic window manager for Emacs.
 
 #+BEGIN_SRC emacs-lisp
-  (use-package edwin
+  (use-package edwina
     :diminish
-    :load-path "~/src/edwin"
+    :load-path "~/src/edwina"
     :config
-    (workman-translate-keys nil 'edwin-mode-map)
-    (edwin-mode 1))
+    (setq display-buffer-base-action '(display-buffer-below-selected))
+    (edwina-setup-dwm-keys)
+    (workman-translate-keys nil 'edwina-mode-map)
+    (edwina-mode 1))
 #+END_SRC
 
 * Org Mode
@@ -1366,7 +1368,7 @@ A shell written entirely in elisp.
     :config
     ;; Open in new window
     (add-to-list 'display-buffer-alist
-                 '("\\`\\*e?shell" display-buffer-pop-up-window))
+                 '("\\`\\*e?shell" display-buffer-below-selected))
     (setq eshell-banner-message ""
           eshell-destroy-buffer-when-process-dies t)
     (setq eshell-prompt-function
