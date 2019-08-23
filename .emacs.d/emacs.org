@@ -1430,6 +1430,8 @@ A shell written entirely in elisp.
 
 ** Ledger
 
+Ledger is a powerful, double-entry accounting system.
+
 #+BEGIN_SRC emacs-lisp
   (use-package ledger-mode
     :ensure t
@@ -1458,8 +1460,6 @@ A shell written entirely in elisp.
      :keymaps 'ledger-mode-map
      "gj"  'ledger-navigate-next-xact-or-directive
      "gk"  'ledger-navigate-prev-xact-or-directive
-     "M-j" 'ledger-navigate-next-xact-or-directive
-     "M-k" 'ledger-navigate-prev-xact-or-directive
      "[["  'ledger-navigate-prev-xact-or-directive
      "]]"  'ledger-navigate-next-xact-or-directive
      "("   'ledger-navigate-beginning-of-xact
@@ -1511,6 +1511,13 @@ A shell written entirely in elisp.
     (advice-add 'ledger-reconcile :before #'ledger-use-real-transactions)
     (advice-add 'ledger-reconcile-quit :after #'ledger-use-all-transactions)
     (advice-add 'ledger-reconcile-finish :after #'ledger-use-all-transactions))
+#+END_SRC
+
+Show on-the-fly errors such as unbalanced transactions.
+
+#+BEGIN_SRC emacs-lisp
+  (use-package flycheck-ledger
+    :after ledger)
 #+END_SRC
 
 ** File Management
