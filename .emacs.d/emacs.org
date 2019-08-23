@@ -1020,10 +1020,10 @@ Edwina is my =dwm=-like dynamic window manager for Emacs.
 
 #+BEGIN_SRC emacs-lisp
   (use-package edwina
-    :diminish
     :load-path "~/src/edwina"
     :config
-    (setq display-buffer-base-action '(display-buffer-below-selected))
+    (setq display-buffer-base-action '(display-buffer-below-selected)
+          edwina-mode-line-format "")
     (edwina-setup-dwm-keys)
     (workman-translate-keys nil 'edwina-mode-map)
     (edwina-mode 1))
