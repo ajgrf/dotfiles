@@ -77,7 +77,6 @@
    "gst-plugins-ugly"
    "guile"
    "icecat"
-   "ikiwiki"
    "imagemagick"
    "isync"
    "ledger"
