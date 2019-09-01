@@ -1977,6 +1977,19 @@ Magit is the best porcelain for git.
         "h"    'git-rebase-edit)))
 #+END_SRC
 
+** Forge
+
+Integrate issues and pull requests from GitHub and GitLab.
+
+#+BEGIN_SRC emacs-lisp
+  (use-package forge
+    :after magit
+    :config
+    (setq forge-topic-list-limit -5))
+#+END_SRC
+
+** vcsh
+
 Add TRAMP method to integrate Magit with vcsh.
 https://github.com/magit/magit/issues/2939
 
