@@ -1846,6 +1846,7 @@ Emacs using a variety of external players.
       "mb" 'emms-browse-by-genre
       "md" 'emms-add-directory-tree
       "mf" 'emms-add-file
+      "mu" 'emms-add-url
       "mg" 'emms-browse-by-genre
       "my" 'emms-browse-by-year
       "mc" 'emms-browse-by-composer
