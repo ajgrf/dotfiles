@@ -28,6 +28,7 @@
    "emacs-evil-commentary"
    "emacs-evil-magit"
    "emacs-evil-matchit"
+   "emacs-evil-smartparens"
    "emacs-evil-org"
    "emacs-evil-surround"
    "emacs-flycheck"

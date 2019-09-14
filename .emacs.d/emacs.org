@@ -880,6 +880,13 @@ Insert and delete parentheses and other pairs more intelligently.
   (use-package smartparens
     :ensure t
     :diminish
+    :hook ((emacs-lisp-mode lisp-mode scheme-mode) . turn-on-smartparens-strict-mode)
+    :general
+    (general-define-key
+     :keymaps '(emacs-lisp-mode-map lisp-mode-map scheme-mode-map)
+     :states 'normal
+     "<" 'sp-forward-barf-sexp
+     ">" 'sp-forward-slurp-sexp)
     :config
     (require 'smartparens-config)
 
@@ -893,6 +900,19 @@ Insert and delete parentheses and other pairs more intelligently.
       '(sp-local-pair 'web-mode "<" nil :actions nil))
 
     (smartparens-global-mode))
+#+END_SRC
+
+Integrate Smartparens with Evil.
+
+#+BEGIN_SRC emacs-lisp
+  (use-package evil-smartparens
+    :ensure t
+    :diminish
+    :hook (smartparens-enabled . evil-smartparens-mode)
+    :config
+    (defun ajgrf/fix-evil-sp-bindings ()
+      (workman-translate-keys nil 'evil-smartparens-mode-map 'normal))
+    (advice-add 'evil-sp--add-bindings :after #'ajgrf/fix-evil-sp-bindings))
 #+END_SRC
 
 ** Spell Check
