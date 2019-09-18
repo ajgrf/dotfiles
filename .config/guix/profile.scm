@@ -38,6 +38,7 @@
    "emacs-guix"
    "emacs-haskell-mode"
    "emacs-helpful"
+   "emacs-htmlize"
    "emacs-ivy"
    "emacs-ledger-mode"
    "emacs-magit"
