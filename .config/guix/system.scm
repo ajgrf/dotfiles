@@ -26,11 +26,11 @@
      (list (menu-entry
             (label "Ubuntu 18.04 LTS (bionic)")
             (device "ububoot")
-            (linux "(hd0,gpt3)/vmlinuz-5.0.0-25-generic")
+            (linux "(hd0,gpt3)/vmlinuz-5.0.0-29-generic")
             (linux-arguments
              '("root=UUID=aefc4d76-2428-476f-b9df-d5c1a9e6a150"
                "ro" "quiet" "splash"))
-            (initrd "(hd0,gpt3)/initrd.img-5.0.0-25-generic"))))))
+            (initrd "(hd0,gpt3)/initrd.img-5.0.0-29-generic"))))))
   (mapped-devices
    (list (mapped-device
           (source (uuid "5abba48a-e3e2-4114-8dfc-d97f2a5ba9ac"))
