@@ -96,6 +96,7 @@
    "neovim"
    "next"
    "nss-certs"
+   "openjdk"
    "openssh"
    "pass-otp"
    "password-store"
