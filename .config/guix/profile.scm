@@ -15,6 +15,8 @@
    "ed"
    "emacs"
    "emacs-bash-completion"
+   "emacs-cider"
+   "emacs-clojure-mode"
    "emacs-company"
    "emacs-counsel-dash"
    "emacs-counsel-projectile"

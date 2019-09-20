@@ -886,15 +886,40 @@ Insert and delete parentheses and other pairs more intelligently.
   (use-package smartparens
     :ensure t
     :diminish
-    :hook ((emacs-lisp-mode lisp-mode scheme-mode) . turn-on-smartparens-strict-mode)
+    :hook ((clojure-mode emacs-lisp-mode lisp-mode scheme-mode) . turn-on-smartparens-strict-mode)
     :general
     (general-define-key
-     :keymaps '(emacs-lisp-mode-map lisp-mode-map scheme-mode-map)
+     :keymaps '(clojure-mode-map
+                emacs-lisp-mode-map
+                lisp-mode-map
+                scheme-mode-map)
      :states 'normal
-     "<" 'sp-forward-barf-sexp
-     ">" 'sp-forward-slurp-sexp)
+     "M-J" 'sp-join-sexp
+     "M-s" 'sp-splice-sexp
+     "M-S" 'sp-split-sexp
+     "("   'sp-backward-sexp
+     ")"   'sp-next-sexp
+     "[["  'sp-backward-sexp
+     "]]"  'sp-next-sexp
+     "{"   'evil-backward-section-begin
+     "}"   'evil-forward-section-begin
+     "<"   'sp-forward-barf-sexp
+     ">"   'sp-forward-slurp-sexp)
+    (general-define-key
+     :keymaps '(clojure-mode-map
+                emacs-lisp-mode-map
+                lisp-mode-map
+                scheme-mode-map)
+     :states 'insert
+     "M-t" 'ajgrf/sp-reverse-transpose-sexp)
     :config
     (require 'smartparens-config)
+
+    (defun ajgrf/sp-reverse-transpose-sexp (&optional arg)
+      "Transpose the previous two S-expressions."
+      (interactive "p")
+      (sp-transpose-sexp (- (max 1 arg)))
+      (sp-forward-sexp))
 
     ;; Expand curly brace blocks.
     (sp-with-modes '(awk-mode c-mode c++-mode css-mode go-mode java-mode js-mode
@@ -2206,6 +2231,38 @@ Emmet provides dynamic snippets for HTML and CSS files.
 #+END_SRC
 
 ** Lisp-like
+*** Clojure
+
+#+BEGIN_SRC emacs-lisp
+  (use-package clojure-mode)
+
+  (use-package cider
+    :general
+    (tyrant-def clojure-mode-map
+      "msi" 'cider-jack-in)
+    (tyrant-def cider-mode-map
+      "mha" 'cider-apropos
+      "meb" 'cider-load-buffer
+      "msn" 'cider-repl-set-ns
+      "msq" 'cider-quit)
+    (general-define-key
+     :keymaps 'cider-repl-mode-map
+     :states 'insert
+     "C-a"       'move-beginning-of-line
+     "C-e"       'move-end-of-line
+     "C-k"       'kill-line
+     "<up>"      'cider-repl-backward-input
+     "<down>"    'cider-repl-forward-input
+     "<prior>"   'cider-repl-backward-input
+     "<next>"    'cider-repl-forward-input
+     "S-<prior>" 'scroll-down-command
+     "S-<next>"  'scroll-up-command)
+    :config
+    (evil-add-yneo-bindings 'cider-mode-map 'normal
+      "E" 'cider-doc)
+    (add-hook 'cider-mode-hook 'eldoc-mode))
+#+END_SRC
+
 *** Scheme
 
 Geiser runs a scheme interpreter to interact with alongside source buffers.
