@@ -66,7 +66,6 @@
           %base-packages))
   (services
    (cons* (service gnome-desktop-service-type)
-          (service mate-desktop-service-type)
           (set-xorg-configuration
            (xorg-configuration
             (keyboard-layout keyboard-layout)
