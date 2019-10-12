@@ -27,13 +27,13 @@ set_laptop_backlight() {
 }
 
 set_external_backlight() {
-	reload_ddcci && sudo brightnessctl -q -d ddcci1 set "${1}%"
+	reload_ddcci && sudo brightnessctl -q -d ddcci2 set "${1}%"
 }
 
 # Reload DDC/CI kernel module if necessary
 reload_ddcci() {
 	test "$(xrandr -q | grep -c ' connected')" -eq 2 || return 1
-	if ! brightnessctl -l -m | grep -q '^ddcci1,'; then
+	if ! brightnessctl -l -m | grep -q '^ddcci2,'; then
 		sudo modprobe -r ddcci
 		sudo modprobe ddcci
 		sleep 1
