@@ -1,2 +1,2 @@
 #!/bin/sh
-sed 's/\x1B\[[0-9;]*[JKmsu]//g'
+sed -u 's/\x1B\[[0-9;]*[JKmsu]//g'
