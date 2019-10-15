@@ -76,6 +76,15 @@ Use TLS for ELPA, and add MELPA as an additional repository.
           ("melpa-stable" . "https://stable.melpa.org/packages/")))
 #+END_SRC
 
+**** Fix "Failed to download 'gnu' archive."
+
+See https://debbugs.gnu.org/34341
+
+#+BEGIN_SRC emacs-lisp
+  (unless (version<= emacs-version "26.3")
+    (setq gnutls-algorithm-priority "NORMAL:-VERS-TLS1.3"))
+#+END_SRC
+
 **** Bootstrap use-package
 
 Every other package will be managed by use-package.
