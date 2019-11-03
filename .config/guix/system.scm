@@ -87,6 +87,7 @@
           (service iptables-service-type
                    (simple-firewall #:open-tcp-ports '(8376 29254)
                                     #:open-udp-ports '(1900)))
+          ;; Not needed once eudev is updated to 3.2.9:
           (service
            (shepherd-service-type
             'fix-librem-kbd
@@ -100,6 +101,13 @@
                                           "56" "43"))))))
             #f))
           (modify-services %desktop-services
+            ;; (gdm-service-type
+            ;;  config =>
+            ;;  (gdm-configuration
+            ;;   (inherit config)
+            ;;   (auto-login? #t)
+            ;;   (default-user "ajgrf")
+            ;;   (debug? #t)))
             (udev-service-type
              config =>
              (udev-configuration
