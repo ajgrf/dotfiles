@@ -1,5 +1,6 @@
 (use-modules (gnu)
              (gnu packages cups)
+             (gnu packages haskell-apps)
              (gnu packages linux)
              (gnu packages xorg)
              (nongnu packages linux))
@@ -55,7 +56,7 @@
                  (group "ajgrf")
                  (home-directory "/home/ajgrf")
                  (supplementary-groups
-                  '("wheel" "netdev" "audio" "video" "lp")))
+                  '("wheel" "netdev" "audio" "video" "lp" "input")))
                 %base-user-accounts))
   (groups (cons* (user-group
                   (name "ajgrf")
@@ -98,4 +99,10 @@
                           (zero? (system* #$(file-append kbd "/bin/setkeycodes")
                                           "56" "43"))))))
             #f))
-          %desktop-services)))
+          (modify-services %desktop-services
+            (udev-service-type
+             config =>
+             (udev-configuration
+              (inherit config)
+              (rules (cons kmonad
+                           (udev-configuration-rules config)))))))))

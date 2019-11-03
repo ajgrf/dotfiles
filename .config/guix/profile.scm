@@ -79,6 +79,7 @@
    "icecat"
    "imagemagick"
    "isync"
+   "kmonad"
    "ledger"
    "libnotify"
    "libreoffice"
