@@ -1,11 +1,41 @@
 (use-modules (gnu)
              (gnu packages cups)
+             (gnu packages gnome)
              (gnu packages haskell-apps)
              (gnu packages linux)
              (gnu packages xorg)
-             (nongnu packages linux))
+             (guix packages)
+             (guix utils)
+             (nongnu packages linux)
+             (ice-9 match))
 (use-service-modules cups desktop networking pm security-token shepherd ssh xorg)
 (load "simple-firewall.scm")
+
+
+;; Disable SSH Agent functionality of GNOME Keyring in favor of GPG Agent
+;; https://guix.gnu.org/blog/2018/customize-guixsd-use-stock-ssh-agent-everywhere/
+
+(define gnome-keyring-sans-ssh-agent
+  (package
+    (inherit gnome-keyring)
+    (name "gnome-keyring-sans-ssh-agent")
+    (arguments
+     (substitute-keyword-arguments
+         (package-arguments gnome-keyring)
+       ((#:configure-flags flags)
+        `(cons "--disable-ssh-agent" ,flags))))))
+
+(define gnome-sans-ssh-agent
+  (package
+    (inherit gnome)
+    (name "gnome-sans-ssh-agent")
+    (propagated-inputs
+     (map (match-lambda
+            ((name package)
+             (if (equal? name "gnome-keyring")
+                 (list name gnome-keyring-sans-ssh-agent)
+                 (list name package))))
+          (package-propagated-inputs gnome)))))
 
 (operating-system
   (kernel linux)
@@ -66,7 +96,9 @@
    (cons* (specification->package "nss-certs")
           %base-packages))
   (services
-   (cons* (service gnome-desktop-service-type)
+   (cons* (service gnome-desktop-service-type
+                   (gnome-desktop-configuration
+                    (gnome-package gnome-sans-ssh-agent)))
           (set-xorg-configuration
            (xorg-configuration
             (keyboard-layout keyboard-layout)
