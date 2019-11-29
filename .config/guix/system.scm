@@ -57,11 +57,11 @@
      (list (menu-entry
             (label "Debian 10 (buster)")
             (device "debboot")
-            (linux "(hd0,gpt3)/vmlinuz-5.2.0-0.bpo.3-amd64")
+            (linux "(hd0,gpt3)/vmlinuz-5.3.0-0.bpo.2-amd64")
             (linux-arguments
              '("root=UUID=e0856f22-b7e9-40e7-abd9-75f2f3c11337"
                "ro" "quiet" "splash"))
-            (initrd "(hd0,gpt3)/initrd.img-5.2.0-0.bpo.3-amd64"))))))
+            (initrd "(hd0,gpt3)/initrd.img-5.3.0-0.bpo.2-amd64"))))))
   (mapped-devices
    (list (mapped-device
           (source (uuid "5abba48a-e3e2-4114-8dfc-d97f2a5ba9ac"))
