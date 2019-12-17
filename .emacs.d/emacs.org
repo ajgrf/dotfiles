@@ -1589,6 +1589,7 @@ Show on-the-fly errors such as unbalanced transactions.
 #+BEGIN_SRC emacs-lisp
   (setq delete-by-moving-to-trash t)
   (setq dired-dwim-target t)
+  (setq dired-listing-switches "-alh")
   (setq dired-guess-shell-alist-user
         '(("\\.info\\.json$" "ytdl")
           ("\\.(avi|mkv|mp4|webm)$" "mpv -fs")
