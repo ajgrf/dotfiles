@@ -50,4 +50,4 @@
    #:actions (make-actions
               (open (lambda (_) (system* "syncthing" "-browser-only"))))))
 
-(for-each start '(emacs gpg-agent kmonad mcron redshift syncthing))
+(for-each start '(emacs gpg-agent mcron redshift syncthing))
