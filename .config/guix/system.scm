@@ -8,7 +8,7 @@
              (guix utils)
              (nongnu packages linux)
              (ice-9 match))
-(use-service-modules cups desktop networking pm security-token shepherd ssh xorg)
+(use-service-modules cups desktop networking pm security-token shepherd ssh virtualization xorg)
 (load "simple-firewall.scm")
 
 
@@ -86,7 +86,7 @@
                  (group "ajgrf")
                  (home-directory "/home/ajgrf")
                  (supplementary-groups
-                  '("wheel" "netdev" "audio" "video" "lp" "input")))
+                  '("wheel" "netdev" "audio" "video" "lp" "input" "libvirt")))
                 %base-user-accounts))
   (groups (cons* (user-group
                   (name "ajgrf")
@@ -119,6 +119,10 @@
           (service iptables-service-type
                    (simple-firewall #:open-tcp-ports '(8376 29254)
                                     #:open-udp-ports '(1900)))
+          (service libvirt-service-type
+                   (libvirt-configuration
+                    (unix-sock-group "libvirt")))
+          (service virtlog-service-type)
           ;; Not needed once eudev is updated to 3.2.9:
           (service
            (shepherd-service-type
