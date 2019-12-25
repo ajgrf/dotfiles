@@ -1158,6 +1158,7 @@ Edwina is my =dwm=-like dynamic window manager for Emacs.
           holiday-other-holidays '((holiday-fixed 5 5 "Cinco de Mayo")))
     (setq org-agenda-files '("~/org/plan.org" "~/org/training.org")
           org-agenda-span 'day
+          org-agenda-timegrid-use-ampm t
           org-agenda-todo-ignore-scheduled t
           org-capture-templates
           '(("t" "Task" entry (file+headline "~/org/plan.org" "Tasks")
