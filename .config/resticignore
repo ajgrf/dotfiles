@@ -40,5 +40,6 @@ ${HOME}/.lein
 ${HOME}/.local/stow
 ${HOME}/.multirust
 ${HOME}/.npm
-${XDG_DATA_HOME}/stack
 ${HOME}/.steam
+${HOME}/docs/Games
+${XDG_DATA_HOME}/stack
