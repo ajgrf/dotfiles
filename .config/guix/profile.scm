@@ -48,6 +48,7 @@
    "emacs-nov-el"
    "emacs-org"
    "emacs-org-bullets"
+   "emacs-org-contrib"
    "emacs-pass"
    "emacs-pdf-tools"
    "emacs-projectile"
