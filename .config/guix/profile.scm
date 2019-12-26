@@ -30,6 +30,7 @@
    "emacs-evil-org"
    "emacs-evil-surround"
    "emacs-flycheck"
+   "emacs-forge"
    "emacs-geiser"
    "emacs-general"
    "emacs-go-mode"
