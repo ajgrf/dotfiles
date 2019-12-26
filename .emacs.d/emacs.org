@@ -1796,10 +1796,20 @@ Automatically open PDFs to the last-viewed page.
 
 ** Password Manager
 
+Emacs interface to [[https://www.passwordstore.org/][pass]].
+
 #+BEGIN_SRC emacs-lisp
   (use-package pass
     :ensure t
     :general (tyrant-def "ap" 'pass))
+#+END_SRC
+
+Use pass to store secrets.
+
+#+BEGIN_SRC emacs-lisp
+  (use-package auth-source-pass
+    :config
+    (auth-source-pass-enable))
 #+END_SRC
 
 ** Email Client

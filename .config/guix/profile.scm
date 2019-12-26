@@ -7,6 +7,7 @@
    "dconf-editor"
    "ed"
    "emacs"
+   "emacs-auth-source-pass"
    "emacs-bash-completion"
    "emacs-cider"
    "emacs-clojure-mode"
