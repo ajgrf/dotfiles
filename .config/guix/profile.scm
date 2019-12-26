@@ -2,6 +2,7 @@
  '("aspell"
    "aspell-dict-en"
    "brightnessctl"
+   "celluloid"
    "curl"
    "dconf"
    "dconf-editor"
