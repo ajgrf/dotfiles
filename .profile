@@ -20,8 +20,6 @@ export VCSH_GITIGNORE=none
 # Paths
 export GOBIN="$HOME/.local/bin"
 export LEDGER_FILE="$HOME/docs/Finance/all.ledger"
-export STEWPKGS="$HOME/src/stewpkgs"
-export TERMINFO_DIRS="$HOME/.local/share/terminfo"
 
 # XDG Base Directories
 
@@ -42,12 +40,10 @@ export HISTFILE="${XDG_DATA_HOME:-$HOME/.local/share}/sh_history"
 export ICEAUTHORITY="$XDG_CACHE_HOME/ICEauthority"
 export INPUTRC="$XDG_CONFIG_HOME/readline/inputrc"
 export LESSHISTFILE="$XDG_CACHE_HOME/less/history"
-export MBLAZE="$XDG_CONFIG_HOME/mblaze"
 export MU_HOME="$XDG_DATA_HOME/mu"
 export PASSWORD_STORE_DIR="$XDG_DATA_HOME/password-store"
 export STACK_ROOT="$XDG_DATA_HOME/stack"
 export VIMINIT='if has("eval") | let $MYVIMRC="$XDG_CONFIG_HOME/vim/init.vim" | source $MYVIMRC | endif'
-export WEECHAT_HOME="$XDG_DATA_HOME/weechat"
 
 # Set up GnuPG Agent
 if type gpgconf >/dev/null 2>&1; then
@@ -79,9 +75,6 @@ if test -r "$GUIX_PROFILE/etc/profile" && ! test -d /run/current-system; then
 	# Enable SSL support for Guix packages
 	export SSL_CERT_DIR="$GUIX_PROFILE/etc/ssl/certs"
 	export SSL_CERT_FILE="$GUIX_PROFILE/etc/ssl/certs/ca-certificates.crt"
-	export GIT_SSL_CAINFO="$SSL_CERT_FILE"
-
-	export INFOPATH="$GUIX_PROFILE/share/info:$INFOPATH"
 
 	. "$GUIX_PROFILE/etc/profile"
 	export GUIX_PROFILE
