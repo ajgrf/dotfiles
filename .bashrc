@@ -37,3 +37,6 @@ elif test -f /etc/bash_completion; then
 elif test -f /run/current-system/profile/etc/profile.d/bash_completion.sh; then
 	. /run/current-system/profile/etc/profile.d/bash_completion.sh
 fi
+
+# load direnv hook
+eval "$(direnv hook bash)"

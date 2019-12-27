@@ -2133,6 +2133,18 @@ Check syntax and other errors on the fly.
               (lambda () (flycheck-mode 0))))
 #+END_SRC
 
+** direnv
+
+Read direnv's =.envrc= files to load and unload environment variables depending
+on the current directory.
+
+#+BEGIN_SRC emacs-lisp
+  (use-package direnv
+    :config
+    (setq direnv-always-show-summary nil)
+    (direnv-mode))
+#+END_SRC
+
 * Languages
 
 ** Markdown
