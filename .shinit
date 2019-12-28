@@ -64,7 +64,6 @@ done
 subalias guix_env='guix environment "$@"'
 subalias guix_try='guix environment --ad-hoc "$@"'
 subalias guix_reconfigure='doas guix system reconfigure "$XDG_CONFIG_HOME/guix/system-$HOSTNAME.scm"'
-subalias guix_profile='guix package "$@"'
 subalias guix_show='guix package --show="$1"'
 subalias guix_search='guix package -s "$@" | recfmt "{{name}} {{version}} - {{synopsis}}
 " | sort | uniq'
@@ -101,6 +100,11 @@ guix_ls() {
 			sort
 	done | sed 1d
 }
+for p in "$GUIX_EXTRA_PROFILES/"*; do
+	p="${p##*/}"
+	subalias guix_"$p"='guix package --profile="'"$GUIX_EXTRA_PROFILES/$p/$p"'" "$@"'
+done
+unset p
 
 # pretty print working directory
 ppwd() {
