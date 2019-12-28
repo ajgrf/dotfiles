@@ -2084,6 +2084,9 @@ https://github.com/magit/magit/issues/2939
                    (tramp-remote-shell "/bin/sh")
                    (tramp-remote-shell-args ("-c"))))
 
+    ;; Get TRAMP $PATH from "remote" profile
+    (add-to-list 'tramp-remote-path 'tramp-own-remote-path)
+
     (defun find-dotfile ()
       (interactive)
       (let ((default-directory (concat "/vcsh:dotfiles:" (getenv "HOME") "/")))
