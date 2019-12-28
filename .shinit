@@ -63,13 +63,21 @@ done
 # Guix subaliases
 subalias guix_env='guix environment "$@"'
 subalias guix_try='guix environment --ad-hoc "$@"'
-subalias guix_manifest='guix package --manifest="$HOME/.config/guix/profile.scm"'
-subalias guix_reconfigure='doas guix system reconfigure "$HOME/.config/guix/system.scm"'
+subalias guix_reconfigure='doas guix system reconfigure "$XDG_CONFIG_HOME/guix/system-$HOSTNAME.scm"'
 subalias guix_profile='guix package "$@"'
 subalias guix_show='guix package --show="$1"'
 subalias guix_search='guix package -s "$@" | recfmt "{{name}} {{version}} - {{synopsis}}
 " | sort | uniq'
 subalias guix_clean='git -C "$HOME/src/guix" clean -fdx -e .dir-locals-2.el -e .ignore && git -C "$HOME/src/guix" checkout po/'
+guix_manifest() {
+	local manifest profile
+	manifest="${XDG_CONFIG_HOME:-$HOME/.config}/guix/profile${1:+-$1}.scm"
+	profile="$GUIX_EXTRA_PROFILES/${1:-profile}/${1:-profile}"
+	if test -r "$manifest"; then
+		test "$profile" && mkdir -p "${profile%/*}"
+		guix package --profile="$profile" --manifest="$manifest"
+	fi
+}
 guix_make() {
 	cd "$HOME/src/guix"
 	if test -f "$HOME/src/guix/Makefile"; then

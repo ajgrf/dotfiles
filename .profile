@@ -61,24 +61,33 @@ if test -e "$HOME/.nix-profile/etc/profile.d/nix.sh"; then
 fi
 
 # Configure Guix package manager
-GUIX_PROFILE="$XDG_CONFIG_HOME/guix/current"
-if test -r "$GUIX_PROFILE/etc/profile" && ! test -d /run/current-system; then
-	. "$GUIX_PROFILE/etc/profile"
-	export INFOPATH="$GUIX_PROFILE/share/info:$INFOPATH"
-fi
+export GUIX_EXTRA_PROFILES="$HOME/.local/guix"
 
-GUIX_PROFILE="$HOME/.guix-profile"
-if test -r "$GUIX_PROFILE/etc/profile" && ! test -d /run/current-system; then
-	# Use Guix locale files for Guix packages
+guix_activate() {
+	GUIX_PROFILE="$1"
+	if test -r "$GUIX_PROFILE/etc/profile"; then
+		. "$GUIX_PROFILE/etc/profile"
+		export MANPATH="$GUIX_PROFILE/share/man${MANPATH:+:}$MANPATH"
+		export XDG_DATA_DIRS="$GUIX_PROFILE/share${XDG_DATA_DIRS:+:}$XDG_DATA_DIRS"
+	fi
+	unset GUIX_PROFILE
+}
+
+for p in "$GUIX_EXTRA_PROFILES/"*; do
+	guix_activate "$p/${p##*/}"
+done
+unset p
+
+# Extra setup for Guix on foreign distros
+if ! test -d /run/current-system; then
+	guix_activate "$HOME/.guix-profile"
+	guix_activate "$XDG_CONFIG_HOME/guix/current"
+
+	GUIX_PROFILE="$GUIX_EXTRA_PROFILES/profile/profile"
 	export GUIX_LOCPATH="$GUIX_PROFILE/lib/locale"
-
-	# Enable SSL support for Guix packages
+	export INFOPATH="$XDG_CONFIG_HOME/guix/current/share/info${INFOPATH:+:}$INFOPATH"
 	export SSL_CERT_DIR="$GUIX_PROFILE/etc/ssl/certs"
 	export SSL_CERT_FILE="$GUIX_PROFILE/etc/ssl/certs/ca-certificates.crt"
-
-	. "$GUIX_PROFILE/etc/profile"
-	export GUIX_PROFILE
-else
 	unset GUIX_PROFILE
 fi
 
