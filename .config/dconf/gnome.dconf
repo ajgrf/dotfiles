@@ -7,7 +7,9 @@
 xkb-options=['shift:both_capslock_cancel', 'caps:ctrl_modifier', 'lv3:ralt_alt', 'compose:menu']
 
 [org/gnome/desktop/peripherals/touchpad]
+natural-scroll=true
 tap-to-click=true
+two-finger-scrolling-enabled=true
 
 # GNOME Shell Settings
 
@@ -18,11 +20,22 @@ action-middle-click-titlebar='lower'
 [org/gnome/desktop/interface]
 clock-format='12h'
 clock-show-date=true
+clock-show-weekday=true
 [org/gtk/settings/file-chooser]
 clock-format='12h'
+sort-directories-first=true
+
+[org/gnome/nautilus/icon-view]
+default-zoom-level='standard'
 
 [org/gnome/desktop/background]
 picture-uri='file:///home/ajgrf/.local/share/rotatebg/curbg'
+
+[org/gnome/settings-daemon/plugins/power]
+sleep-inactive-ac-type='nothing'
+
+[org/gnome/desktop/session]
+idle-delay=uint32 600
 
 # Terminal Settings
 
