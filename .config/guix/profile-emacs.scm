@@ -1,4 +1,8 @@
-(specifications->manifest
+(use-modules (gnu packages emacs-xyz)
+             (guix git-download)
+             (guix packages))
+
+(define specs
  '("emacs"
    "emacs-auth-source-pass"
    "emacs-bash-completion"
@@ -8,7 +12,6 @@
    "emacs-counsel-dash"
    "emacs-counsel-projectile"
    "emacs-diminish"
-   "emacs-direnv"
    "emacs-editorconfig"
    "emacs-elfeed"
    "emacs-elfeed-org"
@@ -59,3 +62,25 @@
    "emacs-yasnippet"
    "emacs-yasnippet-snippets"
    "mu"))
+
+;; Needed to prevent eshell-path-env getting out-of-sync with $PATH (#55).
+(define-public my-emacs-direnv
+  (let ((commit "fd0b6bbd5e3eaf6aa48bccd4a1ff3048bfb2c69b")
+        (revision "1"))
+    (package
+      (inherit emacs-direnv)
+      (version (git-version "20191016" revision commit))
+      (source
+        (origin
+          (method git-fetch)
+          (uri (git-reference
+                (url "https://github.com/wbolster/emacs-direnv.git")
+                (commit commit)))
+          (file-name (git-file-name "emacs-direnv" version))
+          (sha256
+           (base32
+            "0py0if1wl61y6f55s4p8y11rjvrgx3yk2v5n1q2xl3gg7f4ra136")))))))
+
+(packages->manifest
+  (cons* my-emacs-direnv
+         (map (compose list specification->package+output) specs)))
