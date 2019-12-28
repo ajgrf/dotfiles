@@ -7,3 +7,11 @@ pass_get() {
 		pass "$1" | sed 1q
 	fi
 }
+
+use_guix() {
+	if test -e ./.guix-profile/etc/profile; then
+		. ./.guix-profile/etc/profile
+	else
+		eval "$(guix environment --root=./.guix-profile "$@" --search-paths)"
+	fi
+}
