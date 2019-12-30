@@ -17,6 +17,11 @@ two-finger-scrolling-enabled=true
 focus-mode='sloppy'
 action-middle-click-titlebar='lower'
 
+[org/gnome/mutter]
+dynamic-workspaces=true
+edge-tiling=true
+workspaces-only-on-primary=true
+
 [org/gnome/desktop/interface]
 clock-format='12h'
 clock-show-date=true
