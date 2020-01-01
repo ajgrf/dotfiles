@@ -13,7 +13,8 @@
   (inferior-for-channels channels))
 
 (define specs
-  '("beets"
+  '("abcde"
+    "beets"
     "ffmpeg"
     "imagemagick"))  ; for artresizer
 

@@ -21,6 +21,7 @@ alias nixos-rebuild='doas env NIXOS_CONFIG="$HOME/.nixpkgs/$HOSTNAME.nix" nixos-
 alias reportbug='reportbug --mode=standard --ui=text --mutt'
 
 # XDG Base Directories
+alias abcde='abcde -c "$XDG_CONFIG_HOME/abcde.conf"'
 alias mbsync='mbsync -c "$XDG_CONFIG_HOME/isync/mbsyncrc"'
 alias tmux='tmux -f $XDG_CONFIG_HOME/tmux/tmux.conf'
 
