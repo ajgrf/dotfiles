@@ -1,0 +1,37 @@
+directory: ~/music
+ui:
+    color: no
+original_date: yes
+sort_album: albumartist+ original_year+ album+
+art_filename: albumart
+max_filename_length: 140
+paths:
+    default: $albumartist_sort/$album%aunique{}/$track $title
+    singleton: Non-Album/$artist_sort/$title
+    albumtype:soundtrack: Soundtracks/$album%aunique{}/$track $title
+    comp: Compilations/$album%aunique{}/$track $title
+per_disc_numbering: no
+import:
+    move: yes
+    languages: []
+match:
+    preferred:
+        countries: ['US']
+        media: ['CD', 'Digital Media|File']
+        original_year: yes
+plugins: convert fetchart info lastgenre replaygain scrub zero
+replaygain:
+    backend: bs1770gain
+    overwrite: yes
+zero:
+    fields: images lyrics
+    update_database: true
+convert:
+    format: ogg
+    dest: ~/tmp/Portable Music
+    album_art_maxwidth: 1000
+    copy_album_art: yes
+    embed: no
+    max_bitrate: 160
+    formats:
+        mp3: ffmpeg -i $source -y -vn -aq 5 $dest
