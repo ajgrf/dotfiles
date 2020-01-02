@@ -68,7 +68,7 @@ subalias guix_reconfigure='doas guix system reconfigure "$XDG_CONFIG_HOME/guix/s
 subalias guix_show='guix package --show="$1"'
 subalias guix_search='guix package -s "$@" | recfmt "{{name}} {{version}} - {{synopsis}}
 " | sort | uniq'
-subalias guix_clean='git -C "$HOME/src/guix" clean -fdx -e .dir-locals-2.el -e .ignore && git -C "$HOME/src/guix" checkout po/'
+subalias guix_clean='git -C "$HOME/src/guix" clean -fdx -e .envrc -e .dir-locals-2.el -e .ignore && git -C "$HOME/src/guix" checkout po/'
 guix_manifest() {
 	local manifest profile
 	manifest="${XDG_CONFIG_HOME:-$HOME/.config}/guix/profile${1:+-$1}.scm"
