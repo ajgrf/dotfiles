@@ -93,8 +93,10 @@
                   (id 1000))
                  %base-groups))
   (packages
-   (cons* (specification->package "nss-certs")
-          %base-packages))
+   (append (map specification->package
+                '("nss-certs"
+                  "font-dejavu"))
+           %base-packages))
   (services
    (cons* (service gnome-desktop-service-type
                    (gnome-desktop-configuration
