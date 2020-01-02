@@ -4,8 +4,12 @@
 # to preserve the aspect ratio of images.
 
 main() {
-	args=$(echo "$*" | sed -e 's/\([0-9]\+x[0-9]\+\)! )/\1^ -gravity center -extent \1 +gravity )/g')
-	convert $args
+	if echo "$*" | grep -q '-scale [0-9]\+x[0-9]\+!'; then
+		args=$(echo "$*" | sed -e 's/\([0-9]\+x[0-9]\+\)! )/\1^ -gravity center -extent \1 +gravity )/g')
+		convert $args
+	else
+		convert "$@"
+	fi
 }
 
 convert() (
