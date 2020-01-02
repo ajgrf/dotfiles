@@ -16,15 +16,21 @@ write_curbg() {
 	cat >"${XDG_PICTURES_DIR:-$HOME/Pictures}/backgrounds/curbg.jpg"
 }
 
-feh() (
+# Make it appear as if this script were removed from $PATH, so that you can
+# call a command with the same name.
+remove_from_path() {
+	local IFS cmd exe
+	cmd="${0##*/}"
 	IFS=:
-	for p in $PATH; do
-		if test "$p" = "${0%/*}"; then
-			continue
-		elif test -x "$p/feh"; then
-			exec "$p/feh" "$@"
+	for dir in $PATH; do
+		exe="$dir/$cmd"
+		if test -x "$exe" -a "$exe" != "$0"; then
+			eval "$cmd"'() { "'"$exe"'" "$@"; }'
+			return
 		fi
 	done
-)
+	return 1
+}
 
+remove_from_path
 main "$@"
