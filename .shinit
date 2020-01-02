@@ -61,52 +61,6 @@ for action in install reinstall remove purge autoremove update upgrade; do
 	subalias apt_${action}='doas apt '"${action}"' "$@"'
 done
 
-# Guix subaliases
-subalias guix_env='guix environment "$@"'
-subalias guix_try='guix environment --ad-hoc "$@"'
-subalias guix_reconfigure='doas guix system reconfigure "$XDG_CONFIG_HOME/guix/system-$HOSTNAME.scm"'
-subalias guix_show='guix package --show="$1"'
-subalias guix_search='guix package -s "$@" | recfmt "{{name}} {{version}} - {{synopsis}}
-" | sort | uniq'
-subalias guix_clean='git -C "$HOME/src/guix" clean -fdx -e .envrc -e .dir-locals-2.el -e .ignore && git -C "$HOME/src/guix" checkout po/'
-guix_manifest() {
-	local manifest profile
-	manifest="${XDG_CONFIG_HOME:-$HOME/.config}/guix/profile${1:+-$1}.scm"
-	profile="$GUIX_EXTRA_PROFILES/${1:-profile}/${1:-profile}"
-	if test -r "$manifest"; then
-		test "$profile" && mkdir -p "${profile%/*}"
-		guix package --profile="$profile" --manifest="$manifest"
-	fi
-}
-guix_make() {
-	cd "$HOME/src/guix"
-	if test -f "$HOME/src/guix/Makefile"; then
-		guix environment guix -- make -C "$HOME/src/guix"
-	else
-		guix environment guix -- bash -c '
-			cd "$HOME/src/guix"
-			./bootstrap &&
-			./configure --localstatedir=/var --sysconfdir=/etc &&
-			make &&
-			git checkout po/'
-	fi
-}
-guix_ls() {
-	local dir
-	for dir in $(guix build "$1"); do
-		echo
-		echo "$dir:"
-		(cd "$dir" && find -empty -o ! -type d) |
-			sed -e '/^\\.$/d' -e 's/^\.\/\?//' |
-			sort
-	done | sed 1d
-}
-for p in "$GUIX_EXTRA_PROFILES/"*; do
-	p="${p##*/}"
-	subalias guix_"$p"='guix package --profile="'"$GUIX_EXTRA_PROFILES/$p/$p"'" "$@"'
-done
-unset p
-
 # pretty print working directory
 ppwd() {
 	local dir="${PWD}/" n="${1:-255}"

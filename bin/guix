@@ -1,0 +1,111 @@
+#!/bin/sh
+
+main() {
+	case "$1" in
+	clean)
+		git -C "$HOME/src/guix" clean -fdx \
+			-e .envrc -e .dir-locals-2.el -e .ignore &&
+			git -C "$HOME/src/guix" checkout po/
+		;;
+	ls)
+		shift
+		guix_ls "$@"
+		;;
+	make)
+		guix_make
+		;;
+	manifest)
+		shift
+		guix_manifest "$@"
+		;;
+	reconfigure)
+		sudo guix system reconfigure \
+			"${XDG_CONFIG_HOME:-$HOME/.config}/guix/system-$HOSTNAME.scm"
+		;;
+	search)
+		template='{{name}} {{version}} - {{synopsis}}
+'
+		shift
+		guix package -s "$@" | recfmt "$template" | sort | uniq
+		;;
+	shell|try)
+		shift
+		guix environment --ad-hoc "$@"
+		;;
+	show)
+		shift
+		for pkg; do
+			guix package --show="$pkg"
+		done
+		;;
+	*)
+		if test "$1" -a -e "$GUIX_EXTRA_PROFILES/$1/$1"; then
+			guix_profile "$@"
+		else
+			guix "$@"
+		fi
+		;;
+	esac
+}
+
+
+guix_ls() {
+	local dir
+	for dir in $(guix build "$1"); do
+		echo
+		echo "$dir:"
+		(cd "$dir" && find -empty -o ! -type d) |
+			sed -e '/^\\.$/d' -e 's/^\.\/\?//' |
+			sort
+	done | sed 1d
+}
+
+guix_manifest() {
+	local manifest profile
+	manifest="${XDG_CONFIG_HOME:-$HOME/.config}/guix/profile${1:+-$1}.scm"
+	profile="$GUIX_EXTRA_PROFILES/${1:-profile}/${1:-profile}"
+	if test -r "$manifest"; then
+		test "$profile" && mkdir -p "${profile%/*}"
+		guix package --profile="$profile" --manifest="$manifest"
+	fi
+}
+
+guix_make() {
+	cd "$HOME/src/guix"
+	if test -f "$HOME/src/guix/Makefile"; then
+		guix environment guix -- make -C "$HOME/src/guix"
+	else
+		guix environment guix -- bash -c '
+			cd "$HOME/src/guix"
+			./bootstrap &&
+			./configure --localstatedir=/var --sysconfdir=/etc &&
+			make &&
+			git checkout po/'
+	fi
+}
+
+guix_profile() {
+	local profile
+	profile="$1"
+	shift
+	guix package --profile="$GUIX_EXTRA_PROFILES/$profile/$profile" "$@"
+}
+
+# Make it appear as if this script were removed from $PATH, so that you can
+# call a command with the same name.
+remove_from_path() {
+	local IFS cmd exe
+	cmd="${0##*/}"
+	IFS=:
+	for dir in $PATH; do
+		exe="$dir/$cmd"
+		if test -x "$exe" -a "$exe" != "$0"; then
+			eval "$cmd"'() { "'"$exe"'" "$@"; }'
+			return
+		fi
+	done
+	return 1
+}
+
+remove_from_path
+main "$@"
