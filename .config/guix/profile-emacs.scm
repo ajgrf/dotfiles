@@ -59,6 +59,7 @@
    "emacs-web-mode"
    "emacs-which-key"
    "emacs-ws-butler"
+   "emacs-yaml-mode"
    "emacs-yasnippet"
    "emacs-yasnippet-snippets"
    "mu"))

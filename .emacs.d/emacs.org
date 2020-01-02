@@ -2372,3 +2372,10 @@ Configure shell script indentation style to match =shfmt=.
   (use-package vimrc-mode
     :mode "\\.vim\\(rc\\)?\\'")
 #+END_SRC
+
+** YAML
+
+#+BEGIN_SRC emacs-lisp
+  (use-package yaml-mode
+    :mode "\\.yml\\'")
+#+END_SRC
