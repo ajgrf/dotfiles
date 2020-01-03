@@ -1431,6 +1431,9 @@ A shell written entirely in elisp.
     (tyrant-def
       "ase" 'eshell)
     :config
+    ;; For eshell's sudo
+    (require 'em-tramp)
+
     ;; Open in new window
     (add-to-list 'display-buffer-alist
                  '("\\`\\*e?shell" display-buffer-below-selected))

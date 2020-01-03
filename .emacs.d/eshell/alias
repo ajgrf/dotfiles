@@ -11,3 +11,4 @@ alias ll ls -la $*
 alias lh ll -h $*
 alias mkcd mkdir $1 && cd $1
 alias rg rg --color never --no-heading $*
+alias sudo eshell/sudo $*
