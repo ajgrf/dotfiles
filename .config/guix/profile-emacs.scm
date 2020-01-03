@@ -31,6 +31,7 @@
    "emacs-geiser"
    "emacs-general"
    "emacs-go-mode"
+   "emacs-goto-chg"  ; for evil motions g; g, and the last-change-register .
    "emacs-guix"
    "emacs-haskell-mode"
    "emacs-helpful"
@@ -54,6 +55,7 @@
    "emacs-smart-mode-line"
    "emacs-smartparens"
    "emacs-solaire-mode"
+   "emacs-undo-tree"
    "emacs-use-package"
    "emacs-vimrc-mode"
    "emacs-web-mode"
