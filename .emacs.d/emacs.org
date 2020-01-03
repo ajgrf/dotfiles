@@ -1638,8 +1638,6 @@ Use Dash API documentation sets for offline docs.
     :general
     (tyrant-def
       "hd" 'counsel-dash)
-    :init
-    (require 'helm-dash)
     :config
     (setq counsel-dash-common-docsets
           (mapcar #'file-name-base
