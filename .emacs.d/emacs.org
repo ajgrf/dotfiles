@@ -1585,7 +1585,7 @@ Show on-the-fly errors such as unbalanced transactions.
 
 #+BEGIN_SRC emacs-lisp
   (use-package flycheck-ledger
-    :after ledger)
+    :after flycheck)
 #+END_SRC
 
 ** File Management
