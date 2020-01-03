@@ -955,7 +955,7 @@ Integrate Smartparens with Evil.
     :hook (smartparens-enabled . evil-smartparens-mode)
     :config
     (defun ajgrf/fix-evil-sp-bindings ()
-      (workman-translate-keys nil 'evil-smartparens-mode-map 'normal))
+      (workman-translate-keys nil 'evil-smartparens-mode-map '(normal visual)))
     (advice-add 'evil-sp--add-bindings :after #'ajgrf/fix-evil-sp-bindings))
 #+END_SRC
 
