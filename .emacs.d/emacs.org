@@ -1460,7 +1460,16 @@ A shell written entirely in elisp.
                (= (point) (point-at-eol)))
              (evil-delete-buffer (current-buffer)))))
 
+    (defun eshell-toggle-scroll-to-bottom-on-output ()
+      "Toggle `eshell-scroll-to-bottom-on-output'."
+      (interactive)
+      (setq eshell-scroll-to-bottom-on-output
+            (not eshell-scroll-to-bottom-on-output)))
+
     (defun my-eshell-setup-keys ()
+      (tyrant-def eshell-mode-map
+        "mt"  '(:ignore t :which-key "toggles")
+        "mts" 'eshell-toggle-scroll-to-bottom-on-output)
       (general-define-key
        :keymaps 'eshell-mode-map
        :states 'insert
