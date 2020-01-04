@@ -1570,6 +1570,9 @@ Ledger is a powerful, double-entry accounting system.
                                  report
                                  " --force-color -f %(ledger-file)"))))
 
+    ;; Don't reindent previous line when inserting newline
+    (add-hook 'ledger-mode-hook (lambda () (setq-local electric-indent-inhibit t)))
+
     ;; Only reconcile with real transactions
     (defun ledger-use-real-transactions (&rest ignore)
       (write-region "--real\n" nil ledger-init-file-name))
