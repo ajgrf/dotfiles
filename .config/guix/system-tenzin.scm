@@ -39,7 +39,7 @@
 
 (operating-system
   (kernel linux)
-  (firmware (cons* ath3k-firmware
+  (firmware (cons* atheros-firmware
                    %base-firmware))
   (locale "en_US.utf8")
   (timezone "America/Chicago")
