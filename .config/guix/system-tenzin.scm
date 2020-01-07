@@ -125,19 +125,6 @@
                    (libvirt-configuration
                     (unix-sock-group "libvirt")))
           (service virtlog-service-type)
-          ;; Not needed once eudev is updated to 3.2.9:
-          (service
-           (shepherd-service-type
-            'fix-librem-kbd
-            (lambda _
-              (shepherd-service
-               (documentation "Fix backslash/pipe key on Librem laptops.")
-               (provision '(fix-librem-kbd))
-               (respawn? #f)
-               (start #~(lambda _
-                          (zero? (system* #$(file-append kbd "/bin/setkeycodes")
-                                          "56" "43"))))))
-            #f))
           (modify-services %desktop-services
             ;; (gdm-service-type
             ;;  config =>
