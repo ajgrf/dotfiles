@@ -7,6 +7,7 @@
              (guix packages)
              (guix utils)
              (nongnu packages linux)
+             (nongnu system linux-initrd)
              (ice-9 match))
 (use-service-modules cups desktop networking pm security-token shepherd ssh virtualization xorg)
 (load "simple-firewall.scm")
@@ -39,6 +40,7 @@
 
 (operating-system
   (kernel linux)
+  (initrd microcode-initrd)
   (firmware (cons* atheros-firmware
                    %base-firmware))
   (locale "en_US.utf8")
