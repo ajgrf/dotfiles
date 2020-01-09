@@ -32,12 +32,6 @@ main() {
 		shift
 		guix environment --ad-hoc "$@"
 		;;
-	show)
-		shift
-		for pkg; do
-			guix package --show="$pkg"
-		done
-		;;
 	*)
 		if test "$1" -a -e "$GUIX_EXTRA_PROFILES/$1/$1"; then
 			guix_profile "$@"
