@@ -33,9 +33,6 @@ sort-directories-first=true
 [org/gnome/nautilus/icon-view]
 default-zoom-level='standard'
 
-[org/gnome/desktop/background]
-picture-uri='file:///home/ajgrf/.local/share/rotatebg/curbg'
-
 [org/gnome/settings-daemon/plugins/power]
 sleep-inactive-ac-type='nothing'
 
