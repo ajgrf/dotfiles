@@ -62,4 +62,8 @@
    "xdotool"
    "xrdb"
    "xterm"
-   "youtube-dl"))
+   "youtube-dl"
+   "zathura"
+   "zathura-djvu"
+   "zathura-ps"
+   "zathura-pdf-mupdf"))
