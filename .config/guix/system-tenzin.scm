@@ -1,7 +1,6 @@
 (use-modules (gnu)
              (gnu packages cups)
              (gnu packages gnome)
-             (gnu packages haskell-apps)
              (gnu packages linux)
              (gnu packages xorg)
              (guix packages)
@@ -130,17 +129,12 @@
                    (libvirt-configuration
                     (unix-sock-group "libvirt")))
           (service virtlog-service-type)
-          (modify-services %desktop-services
-            ;; (gdm-service-type
-            ;;  config =>
-            ;;  (gdm-configuration
-            ;;   (inherit config)
-            ;;   (auto-login? #t)
-            ;;   (default-user "ajgrf")
-            ;;   (debug? #t)))
-            (udev-service-type
-             config =>
-             (udev-configuration
-              (inherit config)
-              (rules (cons kmonad
-                           (udev-configuration-rules config)))))))))
+          ;; (modify-services %desktop-services
+          ;;   (gdm-service-type
+          ;;    config =>
+          ;;    (gdm-configuration
+          ;;     (inherit config)
+          ;;     (auto-login? #t)
+          ;;     (default-user "ajgrf")
+          ;;     (debug? #t))))
+          %desktop-services)))

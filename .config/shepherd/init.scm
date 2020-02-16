@@ -16,13 +16,6 @@
            "gpg-connect-agent killagent /bye"))
 
  (make <service>
-   #:provides '(kmonad)
-   #:start (make-forkexec-constructor
-            `("kmonad" ,(string-append (getenv "HOME")
-                                       "/.config/kmonad/librem13.kbd")))
-   #:stop (make-kill-destructor))
-
- (make <service>
    #:provides '(mcron cron)
    #:start (make-forkexec-constructor
             '("mcron"))
