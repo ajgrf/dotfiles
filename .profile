@@ -6,7 +6,6 @@ export HOSTNAME="${HOSTNAME:-$(hostname)}"
 export USER="${USER:-$(id -un)}"
 
 # Preferred Programs
-export BROWSER="plumb"
 export EDITOR="emacs -nw"
 
 # Miscellaneous Configuration

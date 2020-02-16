@@ -50,9 +50,7 @@ URxvt*keysym.C-S-0x43:   eval:selection_to_clipboard
 URxvt*keysym.C-S-0x56:   eval:paste_clipboard
 !URxvt*keysym.C-Tab:      \033[27;5;9~
 !URxvt*keysym.S-C-Tab:    \033[27;6;9~
-URxvt*matcher.button:    3
-URxvt*matcher.rend.0:    ^Blink
-URxvt*matcher.pattern.0: \\S+
+URxvt*matcher.button:    1
 URxvt*perl-ext:          matcher
 URxvt*saveLines:         10000
 URxvt*scrollBar:         false
@@ -61,7 +59,7 @@ URxvt*scrollWithBuffer:  true
 URxvt*scrollTtyOutput:   false
 URxvt*termname:          rxvt-unicode
 URxvt*title:             Terminal
-URxvt*url-launcher:      plumb
+URxvt*url-launcher:      xdg-open
 URxvt*urgentOnBell:      true
 
 !! XTerm settings
@@ -84,4 +82,4 @@ XTerm*charClass:         33-126:48
 	Ctrl Shift <Key>Tab: string(0x1b) string("[27;6;9~") \n\
 	Ctrl Shift <KeyPress> C: copy-selection(CLIPBOARD) \n\
 	Ctrl Shift <KeyPress> V: insert-selection(CLIPBOARD) \n\
-	<Btn3Down>: exec-formatted("plumb '%t'", PRIMARY) \n
+	<Btn3Down>: exec-formatted("xdg-open '%t'", PRIMARY) \n

@@ -113,9 +113,3 @@ if test "$INSIDE_EMACS"; then
 	export PAGER=cat
 	export MANPAGER=cat
 fi
-
-if test "$PWD" != "$HOME"; then
-	echo "${PWD}:"
-	l -a
-	echo
-fi
