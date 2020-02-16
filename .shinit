@@ -13,6 +13,7 @@ fi
 
 alias doch='eval doas $(fc -ln -1)'
 alias dot='vcsh dotfiles'
+alias emacs='emacs -nw'
 alias feh='feh -. -Z -B black -D -10'
 alias reset='reset -Q'
 alias rg='rg --color never --no-heading'
@@ -24,7 +25,6 @@ alias abcde='abcde -c "$XDG_CONFIG_HOME/abcde.conf"'
 alias mbsync='mbsync -c "$XDG_CONFIG_HOME/isync/mbsyncrc"'
 alias tmux='tmux -f $XDG_CONFIG_HOME/tmux/tmux.conf'
 
-emacs() { emacsclient -nw "$@" || emacs -nw "$@"; }
 mkcd() { mkdir -p -- "$@" && cd -- "$1"; }
 
 # subalias is like alias for subcommands
