@@ -1,6 +1,0 @@
-# -*- mode: snippet -*-
-# name: kernelupdate
-# --
-nongnu: linux@${1:$(replace-regexp-in-string "\.[0-9]+$" "" yas-text)}: Update to $1.
-
-* nongnu/packages/linux.scm (linux-${1:$(replace-regexp-in-string "\.[0-9]+$" "" yas-text)}): Update to $1.

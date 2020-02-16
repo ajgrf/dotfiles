@@ -7,7 +7,7 @@ export USER="${USER:-$(id -un)}"
 
 # Preferred Programs
 export BROWSER="plumb"
-export EDITOR="emacsclient"
+export EDITOR="emacs -nw"
 
 # Miscellaneous Configuration
 export DIRENV_LOG_FORMAT=
