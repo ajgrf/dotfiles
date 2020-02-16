@@ -32,7 +32,6 @@
    "moreutils"
    "mpv"
    "msmtp"
-   "mutt"
    "neovim"
    "nss-certs"
    "openssh"
