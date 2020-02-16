@@ -82,11 +82,6 @@ if v:progname !=# 'vi'
   autocmd BufNewFile,BufReadPost *.md set filetype=markdown
   autocmd FileType markdown setlocal spell linebreak
 
-  " use workman bindings if found
-  if $WORKMAN
-    source $XDG_CONFIG_HOME/vim/workman.vim
-  endif
-
   finish
 
 endif

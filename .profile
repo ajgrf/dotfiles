@@ -86,11 +86,6 @@ fi
 # Put my scripts and executables at the front of $PATH
 export PATH="$HOME/bin:$HOME/.local/bin:$PATH"
 
-# Load site-local profile
-if test -e "$HOME/.profile.local"; then
-	. "$HOME/.profile.local"
-fi
-
 # Set up GnuPG Agent
 if type gpgconf >/dev/null 2>&1; then
 	unset SSH_AGENT_PID
@@ -99,7 +94,7 @@ if type gpgconf >/dev/null 2>&1; then
 	fi
 fi
 
-# Configure Workman bindings if the WORKMAN variable is set
-if test "$WORKMAN"; then
-	export LESSKEY="$XDG_CONFIG_HOME/less/workman.less"
+# Load site-local profile
+if test -e "$HOME/.profile.local"; then
+	. "$HOME/.profile.local"
 fi

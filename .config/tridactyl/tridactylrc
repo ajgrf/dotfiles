@@ -17,9 +17,6 @@ bind ;d hint -W ytdl
 bind yd composite get_current_url | ytdl
 bind yv composite get_current_url | exclaim_quiet mpv
 
-" conditionally set bindings for workman keyboard layout
-jsb if(tri.native.getenv('WORKMAN')){tri.excmds.source('~/.config/tridactyl/workman.tri')}
-
 " narrow hints by typing link text, select with hint digits
 set hintfiltermode vimperator
 set hintchars 1234567890
