@@ -14,7 +14,6 @@
    "file"
    "font-go"
    "font-google-noto"
-   "ghc-xmonad-contrib"
    "git"
    "glibc-utf8-locales"
    "gnome-tweaks"
@@ -63,7 +62,6 @@
    "xclip"
    "xdg-utils"
    "xdotool"
-   "xmonad"
    "xrdb"
    "xterm"
    "youtube-dl"))
