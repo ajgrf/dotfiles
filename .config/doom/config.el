@@ -460,6 +460,12 @@
     (unless noninteractive  ; as `save-place-mode' does
       (add-hook 'kill-emacs-hook #'brds/pdf-set-all-last-viewed-bookmarks))))
 
+;;; :ui popup
+(when (featurep! :ui popup)
+  (set-popup-rules!
+    '(("^\\*Ledger Report" :size 25)
+      ("^\\*Guix" :size 0.35))))
+
 ;;; EMMS Emacs Multimedia System
 (let ((emms-print-metadata (executable-find "emms-print-metadata")))
   (when emms-print-metadata
