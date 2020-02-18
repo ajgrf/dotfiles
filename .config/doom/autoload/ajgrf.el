@@ -20,11 +20,12 @@
     (switch-to-buffer-other-window new-buffer)))
 
 ;;;###autoload
-(defun ajgrf/ytdl-url (&optional url)
-  "Run 'ytdl' over the URL.  If URL is nil, use URL at point."
+(defun ajgrf/youtube-dl-url (&optional url)
+  "Run 'youtube-dl' over the URL.  If URL is nil, use URL at point."
   (interactive)
-  (let ((url (or url (thing-at-point-url-at-point))))
-    (ajgrf/run-command-in-buffer "ytdl" (list url))))
+  (let ((url (or url (thing-at-point-url-at-point)))
+        (default-directory "~/tmp"))
+    (ajgrf/run-command-in-buffer "youtube-dl" (list url))))
 
 ;;;###autoload
 (defun ajgrf/get-org-files ()

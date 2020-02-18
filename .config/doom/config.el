@@ -63,7 +63,7 @@
 (map! :nvm ","   (general-simulate-key "SPC m")
       :ei  "C-," (general-simulate-key "C-SPC m")
 
-      :n   "gY"  #'ajgrf/ytdl-url
+      :n   "gY"  #'ajgrf/youtube-dl-url
 
       :leader
       (:prefix ("a" . "app")
@@ -101,7 +101,7 @@
       dired-listing-switches "-alh"
       image-dired-external-viewermage nil)
 (setq dired-guess-shell-alist-user
-      '(("\\.info\\.json$" "ytdl")
+      '(("\\.info\\.json$" "youtube-dl --load-info-json")
         ("\\.(avi|mkv|mp4|webm)$" "mpv -fs")
         ("\\.(flac|m4a|mp3|ogg|opus)$" "mpv")
         ("\\.jpg$" "feh --cycle-once -dFZD-10 *")))
