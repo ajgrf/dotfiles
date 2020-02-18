@@ -226,7 +226,6 @@
   (after! org
     (setq org-agenda-files '("~/org/plan.org" "~/org/training.org")
           org-agenda-span 'day
-          org-agenda-start-day nil
           org-agenda-timegrid-use-ampm t
           org-agenda-todo-ignore-scheduled t
           org-capture-templates

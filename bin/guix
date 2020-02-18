@@ -2,17 +2,9 @@
 
 main() {
 	case "$1" in
-	clean)
-		git -C "$HOME/src/guix" clean -fdx \
-			-e .envrc -e .dir-locals-2.el -e .ignore &&
-			git -C "$HOME/src/guix" checkout po/
-		;;
 	ls)
 		shift
 		guix_ls "$@"
-		;;
-	make)
-		guix_make
 		;;
 	manifest)
 		shift
@@ -61,20 +53,6 @@ guix_manifest() {
 	if test -r "$manifest"; then
 		test "$profile" && mkdir -p "${profile%/*}"
 		guix package --profile="$profile" --manifest="$manifest"
-	fi
-}
-
-guix_make() {
-	cd "$HOME/src/guix"
-	if test -f "$HOME/src/guix/Makefile"; then
-		guix environment guix -- make -C "$HOME/src/guix"
-	else
-		guix environment guix -- bash -c '
-			cd "$HOME/src/guix"
-			./bootstrap &&
-			./configure --localstatedir=/var --sysconfdir=/etc &&
-			make &&
-			git checkout po/'
 	fi
 }
 
