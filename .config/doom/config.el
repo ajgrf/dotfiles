@@ -186,7 +186,8 @@
 
 ;;; :lang ledger
 (when (featurep! :lang ledger)
-  (setq ledger-post-amount-alignment-column 52
+  (setq ledger-clear-whole-transactions nil
+        ledger-post-amount-alignment-column 52
         ledger-reconcile-buffer-line-format "%(date)s  %-30(payee)s %-25(account)s %10(amount)s\n"
         ledger-reconcile-buffer-account-max-chars 25
         ledger-reconcile-buffer-payee-max-chars 30)
