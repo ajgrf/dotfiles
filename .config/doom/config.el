@@ -462,9 +462,8 @@
 
 ;;; :ui popup
 (when (featurep! :ui popup)
-  (set-popup-rules!
-    '(("^\\*Ledger Report" :size 25)
-      ("^\\*Guix" :size 0.35))))
+  (set-popup-rule! "^\\*Ledger Report" :size 25)
+  (set-popup-rule! "^\\*Guix" :size 0.35))
 
 ;;; EMMS Emacs Multimedia System
 (let ((emms-print-metadata (executable-find "emms-print-metadata")))
