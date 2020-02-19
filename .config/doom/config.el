@@ -226,6 +226,7 @@
   (after! org
     (setq org-agenda-files '("~/org/plan.org" "~/org/training.org")
           org-agenda-span 'day
+          org-agenda-start-day nil
           org-agenda-timegrid-use-ampm t
           org-agenda-todo-ignore-scheduled t
           org-capture-templates
@@ -236,6 +237,7 @@
             ("f" "FOCUS Task" entry (file+headline "~/org/plan.org" "FOCUS")
              "* TODO %?\n %i\n  %a\n"))
           org-default-notes-file "~/org/inbox.org"
+          org-fontify-done-headline nil
           org-image-actual-width nil
           org-link-abbrev-alist '(("attach" . org-attach-expand-link))
           org-outline-path-complete-in-steps nil
