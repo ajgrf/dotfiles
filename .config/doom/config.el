@@ -40,9 +40,9 @@
 (setq frame-title-format "%b - GNU Emacs"
       icon-title-format frame-title-format)
 
-;; Set initial window geometry to 80x43 characters.
-(add-to-list 'default-frame-alist '(width . 80))
-(add-to-list 'default-frame-alist '(height . 43))
+;; Set initial window geometry to 90x50 characters.
+(add-to-list 'default-frame-alist '(width . 90))
+(add-to-list 'default-frame-alist '(height . 50))
 
 ;; List minor modes behind a menu in the mode-line.
 (use-package! minions
