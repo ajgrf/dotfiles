@@ -18,9 +18,10 @@ focus-mode='sloppy'
 action-middle-click-titlebar='lower'
 
 [org/gnome/mutter]
+attach-modal-dialogs=false
 dynamic-workspaces=true
-edge-tiling=true
-workspaces-only-on-primary=true
+edge-tiling=false
+workspaces-only-on-primary=false
 
 [org/gnome/desktop/interface]
 clock-format='12h'
