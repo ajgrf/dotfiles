@@ -32,6 +32,9 @@
         parchment-add-mode-hooks t
         parchment-want-modify-tty-colors t))
 
+;; Only use one level of colored delimiters, which for parchment is unstyled.
+(setq rainbow-delimiters-max-face-count 1)
+
 ;; This determines the style of line numbers in effect. If set to `nil', line
 ;; numbers are disabled. For relative line numbers, set this to `relative'.
 (setq display-line-numbers-type t)
