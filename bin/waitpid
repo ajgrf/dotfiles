@@ -1,7 +1,0 @@
-#!/bin/sh
-
-for pid; do
-	while kill -0 "$pid" 2>/dev/null; do
-		sleep 1
-	done
-done
