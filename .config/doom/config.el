@@ -275,6 +275,12 @@
   sh-indent-for-case-alt '+
   sh-indent-for-case-label 0)
 
+;;; :lang web
+(when (featurep! :lang web)
+  (setq web-mode-code-indent-offset 2
+        web-mode-markup-indent-offset 2)
+  (add-to-list 'auto-mode-alist '("\\.ejs\\'" . web-mode) t))
+
 ;;; vimscript
 (use-package! vimrc-mode
     :mode "\\.vim\\(rc\\)?\\'")
