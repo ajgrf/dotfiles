@@ -13,8 +13,6 @@ alias emacs='emacs -nw'
 alias feh='feh -. -Z -B black -D -10'
 alias reset='reset -Q'
 alias rg='rg --color never --no-heading'
-alias stack='stack --color never'
-alias reportbug='reportbug --mode=standard --ui=text'
 
 # XDG Base Directories
 alias abcde='abcde -c "$XDG_CONFIG_HOME/abcde.conf"'
