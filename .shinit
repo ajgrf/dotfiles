@@ -21,8 +21,6 @@ alias abcde='abcde -c "$XDG_CONFIG_HOME/abcde.conf"'
 alias mbsync='mbsync -c "$XDG_CONFIG_HOME/isync/mbsyncrc"'
 alias tmux='tmux -f $XDG_CONFIG_HOME/tmux/tmux.conf'
 
-mkcd() { mkdir -p -- "$@" && cd -- "$1"; }
-
 # subalias is like alias for subcommands
 subalias() {
 	local cmd body name
