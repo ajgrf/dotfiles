@@ -73,6 +73,8 @@
         :desc "Calculator"           "c"  #'calc
         (:when (fboundp 'guix-popup)
           :desc "Guix popup"         "g"  #'guix-popup)
+        (:when (fboundp 'debbugs-gnu)
+          :desc "Guix issues"        "G"  #'debbugs-gnu)
         (:when (featurep! :app rss)
           :desc "Feed Reader"        "f" #'elfeed)
         (:when (featurep! :email mu4e)
@@ -266,6 +268,12 @@
   (setq geiser-default-implementation 'guile)
   ;; Open files with .guile file extension in scheme-mode.
   (add-to-list 'auto-mode-alist '("\\.guile\\'" . scheme-mode) t))
+
+;; Show all Guix bugs and patches by default in debbugs.
+(setq debbugs-gnu-default-packages '("guix" "guix-patches")
+      debbugs-gnu-default-severities '("serious" "important" "normal"
+                                       "minor" "wishlist"))
+
 
 ;;; :lang sh
 (add-to-list 'auto-mode-alist '("\\.shinit\\'" . sh-mode) t)

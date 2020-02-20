@@ -54,6 +54,7 @@
 (package! minions :pin "c331c15161")    ; v0.3.3
 (package! vimrc-mode :pin "13bc150a87") ; November 2018
 (when (file-exists-p "/gnu/store")
+  (package! debbugs :pin "3ddda051f8")  ; 0.22
   (package! guix :pin "c2796e6886"))    ; v0.5.2
 (when (featurep! :email mu4e)
   (package! mu4e-conversation :pin "98110bb9c3")) ; June 2019
