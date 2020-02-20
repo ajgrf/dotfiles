@@ -31,6 +31,10 @@ clock-show-weekday=true
 clock-format='12h'
 sort-directories-first=true
 
+[org/gnome/settings-daemon/plugins/color]
+night-light-enabled=true
+night-light-schedule-automatic=true
+
 [org/gnome/nautilus/icon-view]
 default-zoom-level='standard'
 

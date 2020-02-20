@@ -30,12 +30,6 @@
    #:stop (make-kill-destructor))
 
  (make <service>
-   #:provides '(redshift)
-   #:start (make-forkexec-constructor
-            '("redshift"))
-   #:stop (make-kill-destructor))
-
- (make <service>
    #:provides '(syncthing)
    #:start (make-forkexec-constructor
             '("syncthing" "-no-browser"))
@@ -43,4 +37,4 @@
    #:actions (make-actions
               (open (lambda (_) (system* "syncthing" "-browser-only"))))))
 
-(for-each start '(gpg-agent mcron redshift syncthing))
+(for-each start '(gpg-agent mcron syncthing))
