@@ -1,8 +1,8 @@
 export GPG_TTY=$(tty)
 
-alias ls='LC_COLLATE=C ls -A -1'
-alias lc='LC_COLLATE=C command ls -A'
-alias l='lc -p'
+alias ls='LC_COLLATE=C ls --color=auto -A -1'
+alias lc='LC_COLLATE=C command ls --color=auto -A'
+alias l='lc'
 alias la='ls'
 alias ll='ls -la'
 alias lh='ll -h'
@@ -99,10 +99,6 @@ xterm*|rxvt*|st*|screen*|tmux*)
 esac
 
 if test "$INSIDE_EMACS"; then
-	# Enable color
-	alias ls='LC_COLLATE=C ls --color=auto -A -1'
-	alias lc='LC_COLLATE=C command ls --color=auto -A'
-	alias l='lc'
 	# Disable pagers
 	export PAGER=cat
 	export MANPAGER=cat
