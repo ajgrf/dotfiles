@@ -286,7 +286,7 @@
     (add-hook 'shell-mode-hook 'with-editor-export-editor))
 
   (setq comint-completion-addsuffix '("/" . " "))
-  ;; Recognize the password prompt from my doas alias.
+  ;; Recognize the password prompt from doas.
   (setq comint-password-prompt-regexp
         (concat comint-password-prompt-regexp
                 "\\|^doas (.*@.*) password: \\'"))
@@ -365,7 +365,6 @@
     (set-eshell-alias!
      "abcde" "abcde -c $XDG_CONFIG_HOME/abcde.conf"
      "date" "*date $*"
-     "doas" "sudo $*"
      "dot" "vcsh dotfiles $*"
      "edit" "find-file $1"
      "feh" "feh -. -Z -B black -D -10 $*"

@@ -7,11 +7,7 @@ alias la='ls'
 alias ll='ls -la'
 alias lh='ll -h'
 
-if ! type doas >/dev/null 2>&1; then
-	alias doas='sudo -p "doas (%u@%h) password: " --'
-fi
-
-alias doch='eval doas $(fc -ln -1)'
+alias doch='eval sudo $(fc -ln -1)'
 alias dot='vcsh dotfiles'
 alias emacs='emacs -nw'
 alias feh='feh -. -Z -B black -D -10'
@@ -57,7 +53,7 @@ subalias() {
 
 # apt subaliases
 for action in install reinstall remove purge autoremove update upgrade; do
-	subalias apt_${action}='doas apt '"${action}"' "$@"'
+	subalias apt_${action}='sudo apt '"${action}"' "$@"'
 done
 
 # pretty print working directory
