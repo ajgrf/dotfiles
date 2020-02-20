@@ -410,6 +410,9 @@
       (setq eshell-scroll-to-bottom-on-output
             (not eshell-scroll-to-bottom-on-output)))
 
+    (add-hook! eshell-mode
+      (setenv "INSIDE_EMACS" (format "%s,eshell" emacs-version)))
+
     (add-hook! 'eshell-first-time-mode-hook :append
       (map! :map eshell-mode-map
             :i "C-k"       #'kill-line
