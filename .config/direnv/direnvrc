@@ -9,9 +9,13 @@ pass_get() {
 }
 
 use_guix() {
-	if test -e ./.guix-profile/etc/profile; then
-		. ./.guix-profile/etc/profile
+	local cache_dir
+
+	cache_dir="$(direnv_layout_dir)/guix-profile"
+	if test -e "$cache_dir/etc/profile"; then
+		. "$cache_dir/etc/profile"
 	else
-		eval "$(guix environment --root=./.guix-profile "$@" --search-paths)"
+		mkdir "$(direnv_layout_dir)"
+		eval "$(guix environment --root="$cache_dir" "$@" --search-paths)"
 	fi
 }

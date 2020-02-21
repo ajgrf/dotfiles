@@ -1,4 +1,4 @@
 .dir-locals.el
 .dir-locals-2.el
+.direnv
 .envrc
-.guix-profile
