@@ -2,7 +2,6 @@
 " vim: set filetype=vim:
 
 " turn off persistent tridactyl settings to make it more dotfile-like
-" (commented out due to #1197 until I upgrade to tridactyl 1.14.7+)
 sanitise tridactyllocal tridactylsync
 
 source ~/.config/tridactyl/quickmarks.tri
@@ -12,7 +11,7 @@ bind --mode=ex <S-Backspace> text.kill_word
 
 " download/play web videos outside the browser
 " ;v is already bound by default
-alias ytdl exclaim_quiet xterm -e ytdl
+alias ytdl exclaim_quiet xterm -e youtube-dl
 bind ;d hint -W ytdl
 bind yd composite get_current_url | ytdl
 bind yv composite get_current_url | exclaim_quiet mpv
@@ -39,11 +38,9 @@ setpref browser.search.suggest.enabled false
 setpref signon.rememberSignons false
 setpref privacy.resistFingerprinting true
 
-" don't let sites steal focus from tridactyl
-autocmd DocLoad .* unfocus
+" " don't let sites steal focus from tridactyl
+setpref browser.autofocus false
+set allowautofocus false
 
 " redirect to old reddit design
 autocmd DocStart www.reddit.com js tri.excmds.urlmodify('-t', 'www', 'old')
-
-" always open Facebook in its own container
-autocontain facebook\.com Facebook
