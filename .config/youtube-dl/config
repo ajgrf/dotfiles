@@ -4,7 +4,7 @@
 --no-color
 
 # filename template
---output %(title)s.%(ext)s
+--output ~/tmp/%(title)s.%(ext)s
 
 # avoid special characters in filenames
 --restrict-filenames
