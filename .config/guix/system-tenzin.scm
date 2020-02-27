@@ -7,10 +7,10 @@
              (guix utils)
              (nongnu packages linux)
              (nongnu system linux-initrd)
-             (ice-9 match))
+             (ice-9 match)
+             (srfi srfi-1))             ; iota
 (use-service-modules cups desktop networking pm security-token shepherd ssh virtualization xorg)
 (load "simple-firewall.scm")
-
 
 ;; Disable SSH Agent functionality of GNOME Keyring in favor of GPG Agent
 ;; https://guix.gnu.org/blog/2018/customize-guixsd-use-stock-ssh-agent-everywhere/
@@ -99,7 +99,9 @@
   (packages
    (append (map specification->package
                 '("nss-certs"
-                  "font-dejavu"))
+                  "font-dejavu"
+                  "gnome-shell-extension-gsconnect"
+                  "gnome-shell-extension-paperwm"))
            %base-packages))
   (services
    (cons* (service gnome-desktop-service-type
@@ -123,8 +125,10 @@
                     (usb-autosuspend? #f)))
           (bluetooth-service)
           (service iptables-service-type
-                   (simple-firewall #:open-tcp-ports '(8376 29254)
-                                    #:open-udp-ports '(1900)))
+                   (simple-firewall #:open-tcp-ports (cons* 8376 29254
+                                                            (iota 51 1714))
+                                    #:open-udp-ports (cons* 1900
+                                                            (iota 51 1714))))
           (service libvirt-service-type
                    (libvirt-configuration
                     (unix-sock-group "libvirt")))
