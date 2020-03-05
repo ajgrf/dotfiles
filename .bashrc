@@ -39,4 +39,6 @@ elif test -f /run/current-system/profile/etc/profile.d/bash_completion.sh; then
 fi
 
 # load direnv hook
-eval "$(direnv hook bash)"
+if type direnv >/dev/null 2>&1; then
+	eval "$(direnv hook bash)"
+fi
