@@ -272,7 +272,9 @@
 ;; Show all Guix bugs and patches by default in debbugs.
 (setq debbugs-gnu-default-packages '("guix" "guix-patches")
       debbugs-gnu-default-severities '("serious" "important" "normal"
-                                       "minor" "wishlist"))
+                                       "minor" "wishlist")
+      ;; Use Guix from git checkout
+      guix-load-path "~/src/guix")
 
 
 ;;; :lang sh
