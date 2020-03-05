@@ -521,13 +521,13 @@
             "g" #'emms-browse-by-genre
             "y" #'emms-browse-by-year
             "c" #'emms-browse-by-composer
-            "p" #'emms-browse-by-performer))))
+            "p" #'emms-browse-by-performer))
 
-;; Display the EMMS mode-line as a ticker to save space.
-(use-package! emms-mode-line-cycle
-  :config
-  (setq emms-mode-line-cycle-max-width 24)
-  (emms-mode-line-cycle 1))
+    ;; Display the EMMS mode-line as a ticker to save space.
+    (use-package! emms-mode-line-cycle
+      :config
+      (setq emms-mode-line-cycle-max-width 24)
+      (emms-mode-line-cycle 1))))
 
 
 ;; Local Variables:
