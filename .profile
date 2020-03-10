@@ -42,6 +42,7 @@ export LESSHISTFILE="$XDG_CACHE_HOME/less/history"
 export MU_HOME="$XDG_DATA_HOME/mu"
 export PASSWORD_STORE_DIR="$XDG_DATA_HOME/password-store"
 export STACK_ROOT="$XDG_DATA_HOME/stack"
+export TERMINFO_DIRS="$XDG_DATA_HOME/terminfo"
 export VIMINIT='if has("eval") | let $MYVIMRC="$XDG_CONFIG_HOME/vim/init.vim" | source $MYVIMRC | endif'
 
 # Configure Nix package manager
