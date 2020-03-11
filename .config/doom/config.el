@@ -133,11 +133,11 @@
 
 ;;; :app rss
 (when (featurep! :app rss)
+  (setq elfeed-enclosure-default-dir "~/tmp/"
+        rmh-elfeed-org-files (list "links.org"))
+
   (after! elfeed
-    (setq elfeed-db-directory "~/.local/share/elfeed"
-          elfeed-enclosure-default-dir "~/tmp/"
-          elfeed-search-filter "@1-month-ago +unread "
-          rmh-elfeed-org-files (list (concat org-directory "/links.org"))))
+    (setq elfeed-search-filter "@1-month-ago +unread "))
 
   (map! :map elfeed-search-mode-map
         :n "gr" #'elfeed-search-update--force
