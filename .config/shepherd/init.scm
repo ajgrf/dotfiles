@@ -16,6 +16,12 @@
            "gpg-connect-agent killagent /bye"))
 
  (make <service>
+   #:provides '(spotifyd spotify)
+   #:start (make-forkexec-constructor
+            '("spotifyd" "--no-daemon"))
+   #:stop (make-kill-destructor))
+
+ (make <service>
    #:provides '(mcron cron)
    #:start (make-forkexec-constructor
             '("mcron"))
