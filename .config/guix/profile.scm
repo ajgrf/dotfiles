@@ -28,7 +28,6 @@
    "isync"
    "ledger"
    "libnotify"
-   "libreoffice"
    "lollypop"
    "mcron"
    "moreutils"
