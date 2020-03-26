@@ -358,6 +358,14 @@
       (modify-syntax-entry c "w"))
     (modify-syntax-entry ?/ "-"))
 
+  (defadvice! with-project-root (orig-fn &rest args)
+    "Open shells in project root when possible."
+    :around '(+shell/toggle +shell/here
+              +eshell/toggle +eshell/here)
+    (let ((default-directory (or (projectile-project-root)
+                                 default-directory)))
+      (apply orig-fn args)))
+
   ;; Show =apt= progress bars in the minibuffer.
   ;; https://oremacs.com/2019/03/24/shell-apt/
   (advice-add 'ansi-color-apply-on-region :before 'ora-ansi-color-apply-on-region)
