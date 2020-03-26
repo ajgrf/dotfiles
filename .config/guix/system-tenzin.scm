@@ -99,7 +99,7 @@
                  (group "ajgrf")
                  (home-directory "/home/ajgrf")
                  (supplementary-groups
-                  '("wheel" "netdev" "audio" "video" "lp" "input" "libvirt")))
+                  '("wheel" "netdev" "audio" "video" "lp" "libvirt")))
                 %base-user-accounts))
   (groups (cons* (user-group
                   (name "ajgrf")
