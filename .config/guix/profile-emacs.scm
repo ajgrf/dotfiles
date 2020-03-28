@@ -4,6 +4,8 @@
    "emacs-emms"
    "emacs-pdf-tools"
    "git"
+   "guile"
+   "guix"
    "ripgrep"
    "fd"
    "mu"))
