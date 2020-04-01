@@ -82,10 +82,11 @@ for p in "$GUIX_EXTRA_PROFILES/"*; do
 done
 unset p
 
+guix_activate "$XDG_CONFIG_HOME/guix/current"
+
 # Extra setup for Guix on foreign distros
 if ! test -d /run/current-system; then
 	guix_activate "$HOME/.guix-profile"
-	guix_activate "$XDG_CONFIG_HOME/guix/current"
 
 	GUIX_PROFILE="$GUIX_EXTRA_PROFILES/profile/profile"
 	export GUIX_LOCPATH="$GUIX_PROFILE/lib/locale"
