@@ -54,10 +54,10 @@
 (package! minions :pin "c331c15161")    ; v0.3.3
 (package! vimrc-mode :pin "13bc150a87") ; November 2018
 (when (file-exists-p "/gnu/store")
-  (package! debbugs :pin "3ddda051f8")  ; 0.22
+  (package! debbugs :pin "23fa83932b")  ; 0.22
   (package! guix :pin "c2796e6886"))    ; v0.5.2
 (when (featurep! :email mu4e)
   (package! mu4e-conversation :pin "98110bb9c3")) ; June 2019
 (when (executable-find "emms-print-metadata")
-  (package! emms :pin "b233fb85df")     ; 5.3
+  (package! emms :pin "a8075b52fa")     ; 5.3
   (package! emms-mode-line-cycle :pin "2c2f395e48")) ; 0.2.5
