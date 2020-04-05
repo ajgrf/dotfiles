@@ -9,7 +9,8 @@
              (nongnu system linux-initrd)
              (ice-9 match)
              (srfi srfi-1))             ; iota
-(use-service-modules cups desktop networking pm security-token shepherd ssh virtualization xorg)
+(use-service-modules cups desktop linux networking pm security-token ssh
+                     virtualization xorg)
 (load "simple-firewall.scm")
 
 ;; Disable SSH Agent functionality of GNOME Keyring in favor of GPG Agent
@@ -113,7 +114,9 @@
                   "gnome-shell-extension-paperwm"))
            %base-packages))
   (services
-   (cons* (service gnome-desktop-service-type
+   (cons* (service kernel-module-loader-service-type
+                   '("ddcci" "ddcci_backlight"))
+          (service gnome-desktop-service-type
                    (gnome-desktop-configuration
                     (gnome-package gnome-sans-ssh-agent)))
           (set-xorg-configuration
