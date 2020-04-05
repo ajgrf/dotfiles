@@ -48,11 +48,15 @@ export TERMINFO_DIRS="$XDG_DATA_HOME/terminfo"
 export VIMINIT='if has("eval") | let $MYVIMRC="$XDG_CONFIG_HOME/vim/init.vim" | source $MYVIMRC | endif'
 
 # Configure Nix package manager
-if test -e "$HOME/.nix-profile/etc/profile.d/nix.sh"; then
-	. "$HOME/.nix-profile/etc/profile.d/nix.sh"
-	export TERMINFO_DIRS="$HOME/.nix-profile/share/terminfo${TERMINFO_DIRS:+:}$TERMINFO_DIRS"
-	export XDG_DATA_DIRS="$HOME/.nix-profile/share${XDG_DATA_DIRS:+:}$XDG_DATA_DIRS"
-fi
+for p in "$HOME/.nix-profile" "" /run/current-system/profile; do
+	if test -e "$p/etc/profile.d/nix.sh"; then
+		. "$p/etc/profile.d/nix.sh"
+		export TERMINFO_DIRS="$HOME/.nix-profile/share/terminfo${TERMINFO_DIRS:+:}$TERMINFO_DIRS"
+		export XDG_DATA_DIRS="$HOME/.nix-profile/share${XDG_DATA_DIRS:+:}$XDG_DATA_DIRS"
+		break
+	fi
+done
+unset p
 
 # Configure Guix package manager
 export GUIX_EXTRA_PROFILES="$HOME/.local/guix"
