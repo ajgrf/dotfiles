@@ -236,6 +236,9 @@
 ;;; :lang org
 (setq org-directory "~/org/")
 (when (featurep! :lang org)
+  (map! :localleader
+        :map org-mode-map
+        :desc "Toggle link display" "L" #'org-toggle-link-display)
   (after! org
     (setq org-agenda-files '("~/org/plan.org" "~/org/training.org")
           org-agenda-span 'day
