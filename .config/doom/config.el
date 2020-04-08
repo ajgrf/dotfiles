@@ -297,7 +297,9 @@
 
 ;;; :lang web
 (when (featurep! :lang web)
-  (setq web-mode-code-indent-offset 2
+  (setq css-indent-offset 2
+        web-mode-code-indent-offset 2
+        web-mode-css-indent-offset 2
         web-mode-markup-indent-offset 2)
   (add-to-list 'auto-mode-alist '("\\.ejs\\'" . web-mode) t))
 
