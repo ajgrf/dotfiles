@@ -13,8 +13,9 @@
        (evil-delete-buffer (process-buffer process))))
 
 (defun ajgrf/run-command-in-buffer (name args)
-  (let* ((new-buffer
-          (apply 'make-comint-in-buffer name nil name nil args))
+  (let* ((buffer-name (generate-new-buffer-name (concat "*" name "*")))
+         (new-buffer
+          (apply 'make-comint-in-buffer name buffer-name name nil args))
          (proc (get-buffer-process new-buffer)))
     (set-process-sentinel proc #'ajgrf/kill-buffer-sentinel)
     (switch-to-buffer-other-window new-buffer)))
