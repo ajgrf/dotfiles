@@ -119,7 +119,7 @@
                    '("ddcci" "ddcci_backlight"))
           (service gnome-desktop-service-type
                    (gnome-desktop-configuration
-                    (gnome-package gnome-sans-ssh-agent)))
+                    (gnome gnome-sans-ssh-agent)))
           (set-xorg-configuration
            (xorg-configuration
             (keyboard-layout keyboard-layout)
