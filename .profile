@@ -6,7 +6,8 @@ export HOSTNAME="${HOSTNAME:-$(hostname)}"
 export USER="${USER:-$(id -un)}"
 
 # Preferred Programs
-export EDITOR="emacs -nw"
+export EDITOR="emacsclient"
+export ALTERNATE_EDITOR=""
 
 # Miscellaneous Configuration
 export DIRENV_LOG_FORMAT=

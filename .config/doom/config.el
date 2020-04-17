@@ -312,10 +312,6 @@
 
 ;;; :term shell
 (when (featurep! :term shell)
-  ;; Use Emacs as editor.
-  (when (not (daemonp))
-    (add-hook 'shell-mode-hook 'with-editor-export-editor))
-
   (setq comint-completion-addsuffix '("/" . " "))
   ;; Recognize the password prompt from doas.
   (setq comint-password-prompt-regexp
