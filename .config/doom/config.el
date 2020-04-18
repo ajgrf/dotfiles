@@ -164,6 +164,14 @@
 (setq ivy-magic-tilde nil
       counsel-projectile-switch-project-action 'dired)
 
+;;; :editor format
+(setq +format-on-save-enabled-modes
+      '(not emacs-lisp-mode  ; elisp's mechanisms are good enough
+            sql-mode         ; sqlformat is currently broken
+            tex-mode         ; latexindent is broken
+            latex-mode
+            ledger-mode))    ; sorting mangles my file
+
 ;;; :email mu4e
 (when (featurep! :email mu4e)
   (after! mu4e
