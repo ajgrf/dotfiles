@@ -38,17 +38,9 @@
                  (list name package))))
           (package-propagated-inputs gnome)))))
 
-(define (module-with-kernel kernel)
-  (lambda (module)
-    (package
-      (inherit module)
-      (arguments (ensure-keyword-arguments (package-arguments module)
-                                           `(#:linux ,kernel))))))
-
 (operating-system
   (kernel linux)
-  (kernel-loadable-modules (map (module-with-kernel linux)
-                                (list ddcci-driver-linux)))
+  (kernel-loadable-modules (list ddcci-driver-linux))
   (initrd microcode-initrd)
   (firmware (cons* atheros-firmware
                    %base-firmware))
