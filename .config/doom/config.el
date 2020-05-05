@@ -139,13 +139,6 @@
   (after! elfeed
     (setq elfeed-search-filter "@1-month-ago +unread "))
 
-  (map! :map elfeed-search-mode-map
-        :n "gr" #'elfeed-search-update--force
-        :n "gR" #'elfeed-search-fetch
-
-        :map elfeed-show-mode-map
-        :n "gr" #'elfeed-show-refresh)
-
   (add-hook! 'elfeed-new-entry-hook
     (elfeed-make-tagger :feed-title "LWN\\.net"
                         :entry-title '("Kernel prepatch"
