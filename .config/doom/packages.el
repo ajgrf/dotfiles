@@ -59,5 +59,5 @@
 (when (featurep! :email mu4e)
   (package! mu4e-conversation :pin "98110bb9c3")) ; June 2019
 (when (executable-find "emms-print-metadata")
-  (package! emms :pin "a8075b52fa")     ; 5.3
+  (package! emms :pin "f4924c2e77")     ; 5.4
   (package! emms-mode-line-cycle :pin "2c2f395e48")) ; 0.2.5
