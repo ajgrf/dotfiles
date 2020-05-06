@@ -195,7 +195,9 @@
   (add-to-list 'c-default-style '(c-mode . "linux")))
 
 ;;; :lang javascript
-(setq js-indent-level 2)
+(setq js-indent-level 2
+      json-reformat:indent-width 2
+      typescript-indent-level 2)
 
 ;;; :lang ledger
 (when (featurep! :lang ledger)
