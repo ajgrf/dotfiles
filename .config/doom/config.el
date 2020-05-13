@@ -108,6 +108,12 @@
 (setq delete-by-moving-to-trash t
       image-dired-external-viewermage nil)
 
+(add-hook! 'dired-mode-hook
+  (defun +dired-fix-rclone-listings ()
+    "Fix weird output with tramp-rclone."
+    (when (file-remote-p default-directory)
+      (setq-local dired-actual-switches "-ahl"))))
+
 (after! tramp
   ;; Add TRAMP method to integrate Magit with vcsh.
   ;; https://github.com/magit/magit/issues/2939
