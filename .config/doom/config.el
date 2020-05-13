@@ -106,17 +106,7 @@
 
 ;;; File Management
 (setq delete-by-moving-to-trash t
-      dired-dwim-target t
-      dired-listing-switches "-alh"
       image-dired-external-viewermage nil)
-(setq dired-guess-shell-alist-user
-      '(("\\.info\\.json$" "youtube-dl --load-info-json")
-        ("\\.(avi|mkv|mp4|webm)$" "mpv -fs")
-        ("\\.(flac|m4a|mp3|ogg|opus)$" "mpv")
-        ("\\.jpg$" "feh --cycle-once -dFZD-10 *")))
-
-(add-to-list 'directory-abbrev-alist
-             '("^/egnyte" . "/davs:focusengineering.egnyte.com:/webdav/Shared"))
 
 (after! tramp
   ;; Add TRAMP method to integrate Magit with vcsh.
