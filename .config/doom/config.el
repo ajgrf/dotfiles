@@ -455,43 +455,12 @@
     (pdf-view-midnight-minor-mode 1))
 
   (map! :map pdf-view-mode-map
-        :n "j" #'evil-collection-pdf-view-next-line-or-next-page
-        :n "k" #'evil-collection-pdf-view-previous-line-or-previous-page
         :n "J" #'pdf-view-next-page
         :n "K" #'pdf-view-previous-page
         :n "<tab>" #'pdf-outline
 
         :localleader
-        "t" #'pdf-view-midnight-minor-mode)
-
-  (after! pdf-tools
-    ;; workaround for pdf-tools not reopening to last-viewed page of the pdf:
-    ;; https://github.com/politza/pdf-tools/issues/18#issuecomment-532175227
-    (defun brds/pdf-set-last-viewed-bookmark ()
-      (interactive)
-      (when (eq major-mode 'pdf-view-mode)
-        (bookmark-set (brds/pdf-generate-bookmark-name))))
-
-    (defun brds/pdf-jump-last-viewed-bookmark ()
-      (when
-          (brds/pdf-has-last-viewed-bookmark)
-        (bookmark-jump (brds/pdf-generate-bookmark-name))))
-
-    (defun brds/pdf-has-last-viewed-bookmark ()
-      (member (brds/pdf-generate-bookmark-name) (bookmark-all-names)))
-
-    (defun brds/pdf-generate-bookmark-name ()
-      (concat "PDF-LAST-VIEWED: " (buffer-file-name)))
-
-    (defun brds/pdf-set-all-last-viewed-bookmarks ()
-      (dolist (buf (buffer-list))
-        (with-current-buffer buf
-          (brds/pdf-set-last-viewed-bookmark))))
-
-    (add-hook 'kill-buffer-hook 'brds/pdf-set-last-viewed-bookmark)
-    (add-hook 'pdf-view-mode-hook 'brds/pdf-jump-last-viewed-bookmark)
-    (unless noninteractive  ; as `save-place-mode' does
-      (add-hook 'kill-emacs-hook #'brds/pdf-set-all-last-viewed-bookmarks))))
+        "t" #'pdf-view-midnight-minor-mode))
 
 ;;; :ui popup
 (when (featurep! :ui popup)
