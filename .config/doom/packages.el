@@ -61,3 +61,6 @@
 (when (executable-find "emms-print-metadata")
   (package! emms :pin "f4924c2e77")     ; 5.4
   (package! emms-mode-line-cycle :pin "2c2f395e48")) ; 0.2.5
+(package! tramp
+  :recipe (:host nil :repo "https://git.savannah.gnu.org/git/tramp.git")
+  :pin "8f851af736")                    ; 2.4.3.4
