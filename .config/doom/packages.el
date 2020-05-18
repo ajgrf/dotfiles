@@ -64,3 +64,4 @@
 (package! tramp
   :recipe (:host nil :repo "https://git.savannah.gnu.org/git/tramp.git")
   :pin "8f851af736")                    ; 2.4.3.4
+(package! shrface :pin "c82447df5b")    ; 2.6
