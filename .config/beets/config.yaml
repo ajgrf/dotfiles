@@ -1,4 +1,4 @@
-directory: ~/music
+directory: ~/annex/Music
 ui:
     color: no
 original_date: yes
