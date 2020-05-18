@@ -1,46 +1,13 @@
-(register-services
+(use-modules (shepherd service)
+             ((ice-9 ftw) #:select (scandir)))
 
- (make <service>
-   #:provides '(emacs)
-   #:start (make-system-constructor
-            "emacs --daemon")
-   #:stop (make-system-destructor
-           "emacsclient --eval '(kill-emacs)'"))
+;; Load all the files in the directory 'init.d' with a suffix '.scm'.
+(for-each
+ (lambda (file)
+   (load (string-append "init.d/" file)))
+ (scandir (string-append (dirname (current-filename)) "/init.d")
+          (lambda (file)
+            (string-suffix? ".scm" file))))
 
- (make <service>
-   #:provides '(gpg-agent)
-   #:start (make-system-constructor
-            "gpg-agent --daemon --pinentry-program "
-            (getenv "GUIX_EXTRA_PROFILES") "/profile/profile/bin/pinentry-gtk-2")
-   #:stop (make-system-destructor
-           "gpg-connect-agent killagent /bye"))
-
- (make <service>
-   #:provides '(spotifyd spotify)
-   #:start (make-forkexec-constructor
-            '("spotifyd" "--no-daemon"))
-   #:stop (make-kill-destructor))
-
- (make <service>
-   #:provides '(mcron cron)
-   #:start (make-forkexec-constructor
-            '("mcron"))
-   #:stop (make-kill-destructor))
-
- ;; Make sure to open ports 8376/tcp, 29254/udp, and 1900/udp
- (make <service>
-   #:provides '(pulseaudio-dlna)
-   #:start (make-forkexec-constructor
-            '("pulseaudio-dlna" "--encoder-backend" "ffmpeg"
-              "--port" "8376" "--msearch-port" "29254"))
-   #:stop (make-kill-destructor))
-
- (make <service>
-   #:provides '(syncthing)
-   #:start (make-forkexec-constructor
-            '("syncthing" "-no-browser"))
-   #:stop (make-kill-destructor)
-   #:actions (make-actions
-              (open (lambda (_) (system* "syncthing" "-browser-only"))))))
-
-(for-each start '(gpg-agent mcron syncthing))
+;; Send shepherd into the background
+(action 'shepherd 'daemonize)
