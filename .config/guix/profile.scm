@@ -17,6 +17,7 @@
    "font-go"
    "font-google-noto"
    "git"
+   "git-annex"
    "glibc-utf8-locales"
    "gnome-tweaks"
    "gnupg"
