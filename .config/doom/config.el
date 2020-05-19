@@ -73,14 +73,14 @@
       :n   "gY"  #'ajgrf/youtube-dl-url
 
       :leader
-      (:prefix ("a" . "app")
+      (:prefix ("o" . "open")
         :desc "Calculator"           "c"  #'calc
         (:when (fboundp 'guix-popup)
           :desc "Guix popup"         "g"  #'guix-popup)
         (:when (fboundp 'debbugs-gnu)
           :desc "Guix issues"        "G"  #'debbugs-gnu)
         (:when (featurep! :app rss)
-          :desc "Feed Reader"        "f" #'elfeed)
+          :desc "Feed Reader"        "F" #'elfeed)
         (:when (featurep! :email mu4e)
           :desc "Email inbox"        "m" #'ajgrf/mu4e-inbox))
 
@@ -413,7 +413,7 @@
 (let ((emms-print-metadata (executable-find "emms-print-metadata")))
   (when emms-print-metadata
     (map! :leader
-          (:prefix ("a" . "app")
+          (:prefix ("o" . "open")
             :desc "Music player" "M" #'emms))
 
     (use-package! emms
