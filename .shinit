@@ -63,7 +63,7 @@ xterm*|rxvt*|st*|screen*|tmux*)
 	;;
 esac
 
-if test "$INSIDE_EMACS"; then
+if test "$INSIDE_EMACS" -a "$INSIDE_EMACS" != vterm; then
 	# Disable pagers
 	export PAGER=cat
 	export MANPAGER=cat
