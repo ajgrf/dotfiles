@@ -424,8 +424,14 @@
     (add-hook! eshell-mode
       (setenv "INSIDE_EMACS" (format "%s,eshell" emacs-version)))
 
+    (setq eshell-scroll-to-bottom-on-input nil)
+
     (add-hook! 'eshell-first-time-mode-hook :append
       (map! :map eshell-mode-map
+            :n "c"         #'evil-change
+            :n "C"         #'evil-change-line
+            :n "d"         #'evil-delete
+            :n "D"         #'evil-delete-line
             :i "C-k"       #'kill-line
             :i "C-l"       #'eshell/clear
             :i "<up>"      #'eshell-previous-input
@@ -437,7 +443,7 @@
 
             :localleader
             (:prefix ("t" . "toggle")
-              :desc "Scroll on output" "s" #'eshell-toggle-scroll-to-bottom-on-output)))))
+             :desc "Scroll on output" "s" #'eshell-toggle-scroll-to-bottom-on-output)))))
 
 ;;; :tools direnv
 (setq direnv-always-show-summary nil)
