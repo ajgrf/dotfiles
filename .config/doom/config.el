@@ -303,88 +303,6 @@
 (use-package! vimrc-mode
     :mode "\\.vim\\(rc\\)?\\'")
 
-;;; :term shell
-(when (featurep! :term shell)
-  (setq comint-completion-addsuffix '("/" . " "))
-  ;; Recognize the password prompt from doas.
-  (setq comint-password-prompt-regexp
-        (concat comint-password-prompt-regexp
-                "\\|^doas (.*@.*) password: \\'"))
-
-  (map! :map shell-mode-map
-        :i "C-w" #'backward-delete-word
-
-        :map comint-mode-map
-        :mode shell-mode
-        :i "SPC"       #'comint-magic-space
-        :i "C-k"       #'kill-line
-        :i "<prior>"   #'comint-previous-matching-input-from-input
-        :i "<next>"    #'comint-next-matching-input-from-input
-        :i "S-<prior>" #'scroll-down-command
-        :i "S-<next>"  #'scroll-up-command
-
-        :localleader
-        :mode shell-mode
-        :desc "Fetch next command"  "," #'comint-get-next-from-history
-        :desc "Insert previous arg" "." #'comint-insert-previous-argument
-        :desc "List recent inputs"  "l" #'comint-dynamic-list-input-ring)
-
-  ;; Make C-w behave like bash:
-
-  ;; https://www.emacswiki.org/emacs/BackwardDeleteWord
-  (defun delete-word (arg)
-    "Delete characters forward until encountering the end of a word.
-  With argument, do this that many times."
-    (interactive "p")
-    (if (use-region-p)
-        (delete-region (region-beginning) (region-end))
-      (delete-region (point) (progn (forward-word arg) (point)))))
-
-  (defun backward-delete-word (arg)
-    "Delete characters backward until encountering the end of a word.
-  With argument, do this that many times."
-    (interactive "p")
-    (delete-word (- arg)))
-
-  ;; Redefine a few word characters.
-  (add-hook! shell-mode
-    (dolist (c '(?_ ?- ?.))
-      (modify-syntax-entry c "w"))
-    (modify-syntax-entry ?/ "-"))
-
-  (defadvice! with-project-root (orig-fn &rest args)
-    "Open shells in project root when possible."
-    :around '(+shell/toggle +shell/here
-              +eshell/toggle +eshell/here)
-    (let ((default-directory (or (projectile-project-root)
-                                 default-directory)))
-      (apply orig-fn args)))
-
-  ;; Show =apt= progress bars in the minibuffer.
-  ;; https://oremacs.com/2019/03/24/shell-apt/
-  (advice-add 'ansi-color-apply-on-region :before 'ora-ansi-color-apply-on-region)
-
-  (defun ora-ansi-color-apply-on-region (begin end)
-    "Fix progress bars for e.g. apt(8).
-  Display progress in the mode line instead."
-    (let ((end-marker (copy-marker end))
-          mb)
-      (save-excursion
-        (goto-char (copy-marker begin))
-        (while (re-search-forward "\0337" end-marker t)
-          (setq mb (match-beginning 0))
-          (when (re-search-forward "\0338" end-marker t)
-            (let ((progress (buffer-substring-no-properties
-                             (+ mb 2) (- (point) 2))))
-              (delete-region mb (point))
-              (ora-apt-progress-message progress)))))))
-
-  (defun ora-apt-progress-message (progress)
-    (message
-     (replace-regexp-in-string
-      "%" "%%"
-      (ansi-color-apply progress)))))
-
 ;;; :term eshell
 (when (featurep! :term eshell)
   (after! eshell
@@ -444,6 +362,24 @@
             :localleader
             (:prefix ("t" . "toggle")
              :desc "Scroll on output" "s" #'eshell-toggle-scroll-to-bottom-on-output)))))
+
+(when (or (featurep! :term shell)
+          (featurep! :term eshell)
+          (featurep! :term vterm))
+  (defadvice! with-project-root (orig-fn &rest args)
+    "Open shells in project root when possible."
+    :around '(+shell/toggle +shell/here
+              +eshell/toggle +eshell/here
+              +vterm/toggle +vterm/here)
+    (let ((default-directory (or (projectile-project-root)
+                                 default-directory)))
+      (apply orig-fn args))))
+
+;;; :term vterm
+(when (featurep! :term vterm)
+  (map! :map vterm-mode-map
+        :n [remap evil-backward-section-begin] #'vterm-previous-prompt
+        :n [remap evil-forward-section-begin]  #'vterm-next-prompt))
 
 ;;; :tools direnv
 (setq direnv-always-show-summary nil)

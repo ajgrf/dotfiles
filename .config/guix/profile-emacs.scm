@@ -3,6 +3,7 @@
    "emacs-emacsql"
    "emacs-emms"
    "emacs-pdf-tools"
+   "emacs-vterm"
    "git"
    "guile"
    "guix"
