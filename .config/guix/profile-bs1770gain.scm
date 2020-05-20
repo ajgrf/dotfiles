@@ -12,12 +12,5 @@
 (define inferior
   (inferior-for-channels channels))
 
-(define specs
-  '("abcde"
-    "beets"
-    "ffmpeg"
-    "imagemagick"))  ; for artresizer
-
 (packages->manifest
- (cons* (first (lookup-inferior-packages inferior "bs1770gain"))
-        (map (compose list specification->package+output) specs)))
+ (lookup-inferior-packages inferior "bs1770gain"))
