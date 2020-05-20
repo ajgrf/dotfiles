@@ -93,7 +93,7 @@ guix_activate "$XDG_CONFIG_HOME/guix/current"
 if ! test -d /run/current-system; then
 	guix_activate "$HOME/.guix-profile"
 
-	GUIX_PROFILE="$GUIX_EXTRA_PROFILES/profile/profile"
+	GUIX_PROFILE="$HOME/.guix-profile"
 	export GUIX_LOCPATH="$GUIX_PROFILE/lib/locale"
 	export INFOPATH="$XDG_CONFIG_HOME/guix/current/share/info${INFOPATH:+:}$INFOPATH"
 	export SSL_CERT_DIR="$GUIX_PROFILE/etc/ssl/certs"
