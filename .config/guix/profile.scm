@@ -26,6 +26,8 @@
    "font-google-noto"
    "git"
    "git-annex"
+   "git-annex-remote-rclone"
+   "git-remote-gcrypt"
    "glibc-utf8-locales"
    "gnome-tweaks"
    "gnupg"
