@@ -20,7 +20,7 @@ export VCSH_GITIGNORE=none
 
 # Paths
 export GOBIN="$HOME/.local/bin"
-export LEDGER_FILE="$HOME/docs/Finance/all.ledger"
+export LEDGER_FILE="$HOME/src/finances/all.ledger"
 
 # XDG Base Directories
 
