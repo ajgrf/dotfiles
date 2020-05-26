@@ -9,7 +9,7 @@
              (nongnu system linux-initrd)
              (ice-9 match)
              (srfi srfi-1))             ; iota
-(use-service-modules cups desktop linux networking nix pm security-token ssh
+(use-service-modules cups desktop linux networking pm security-token ssh
                      virtualization xorg)
 (load "simple-firewall.scm")
 
@@ -101,8 +101,7 @@
                 '("nss-certs"
                   "font-dejavu"
                   "gnome-shell-extension-gsconnect"
-                  "gnome-shell-extension-paperwm"
-                  "nix"))
+                  "gnome-shell-extension-paperwm"))
            %base-packages))
   (services
    (cons* (service kernel-module-loader-service-type
@@ -136,7 +135,6 @@
                    (libvirt-configuration
                     (unix-sock-group "libvirt")))
           (service virtlog-service-type)
-          (service nix-service-type)
           ;; (modify-services %desktop-services
           ;;   (gdm-service-type
           ;;    config =>
