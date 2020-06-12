@@ -62,7 +62,7 @@
             (device "debboot")
             (linux "(hd0,gpt3)/vmlinuz-5.5.0-0.bpo.2-amd64")
             (linux-arguments
-             '("root=UUID=e0856f22-b7e9-40e7-abd9-75f2f3c11337"
+             '("root=UUID=4059d85b-9e23-44b0-8d14-21d8d248cb0c"
                "ro" "quiet" "splash"))
             (initrd "(hd0,gpt3)/initrd.img-5.5.0-0.bpo.2-amd64"))))
     (theme (grub-theme (gfxmode '("848x480x32"))))))
