@@ -45,4 +45,5 @@ ${HOME}/.local/stow
 ${HOME}/.multirust
 ${HOME}/.npm
 ${HOME}/.steam
+${HOME}/.var
 ${XDG_DATA_HOME}/stack
