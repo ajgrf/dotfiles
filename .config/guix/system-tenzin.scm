@@ -135,6 +135,10 @@
                    (libvirt-configuration
                     (unix-sock-group "libvirt")))
           (service virtlog-service-type)
+          (service qemu-binfmt-service-type
+                   (qemu-binfmt-configuration
+                    (guix-support? #t)
+                    (platforms (lookup-qemu-platforms "arm" "aarch64"))))
           ;; (modify-services %desktop-services
           ;;   (gdm-service-type
           ;;    config =>
