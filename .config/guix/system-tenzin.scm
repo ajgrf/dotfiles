@@ -60,11 +60,11 @@
      (list (menu-entry
             (label "Debian 10 (buster)")
             (device "debboot")
-            (linux "(hd0,gpt3)/vmlinuz-5.5.0-0.bpo.2-amd64")
+            (linux "(hd0,gpt3)/vmlinuz-5.6.0-0.bpo.2-amd64")
             (linux-arguments
              '("root=UUID=4059d85b-9e23-44b0-8d14-21d8d248cb0c"
                "ro" "quiet" "splash"))
-            (initrd "(hd0,gpt3)/initrd.img-5.5.0-0.bpo.2-amd64"))))
+            (initrd "(hd0,gpt3)/initrd.img-5.6.0-0.bpo.2-amd64"))))
     (theme (grub-theme (gfxmode '("848x480x32"))))))
   (mapped-devices
    (list (mapped-device
