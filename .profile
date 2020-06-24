@@ -74,17 +74,7 @@ guix_activate() {
 }
 
 for p in "$GUIX_EXTRA_PROFILES/"*; do
-	case "$p" in
-	# Skip these profiles on foreign distros
-	*chromium|*libreoffice)
-		if test -d /run/current-system; then
-			guix_activate "$p/${p##*/}"
-		fi
-		;;
-	*)
-		guix_activate "$p/${p##*/}"
-		;;
-	esac
+	guix_activate "$p/${p##*/}"
 done
 unset p
 
