@@ -99,6 +99,7 @@
   (packages
    (append (map specification->package
                 '("nss-certs"
+                  "flatpak"
                   "font-dejavu"
                   "gnome-shell-extension-gsconnect"
                   "gnome-shell-extension-paperwm"))

@@ -27,7 +27,7 @@ export LEDGER_FILE="$HOME/src/finances/all.ledger"
 export XDG_CACHE_HOME="$HOME/.cache"
 export XDG_CONFIG_HOME="$HOME/.config"
 export XDG_DATA_HOME="$HOME/.local/share"
-export XDG_DATA_DIRS="${XDG_DATA_DIRS:-/usr/local/share/:/usr/share/}"
+export XDG_DATA_DIRS="$XDG_DATA_HOME/flatpak/exports/share:/var/lib/flatpak/exports/share:${XDG_DATA_DIRS:-/usr/local/share:/usr/share}"
 if test -e "$XDG_CONFIG_HOME/user-dirs.dirs"; then
 	. "$XDG_CONFIG_HOME/user-dirs.dirs"
 fi
