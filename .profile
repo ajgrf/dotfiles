@@ -107,3 +107,8 @@ fi
 if test -e "$HOME/.profile.local"; then
 	. "$HOME/.profile.local"
 fi
+
+# Run systemd units in the same environment
+if type systemctl >/dev/null 2>&1; then
+	systemctl --user import-environment
+fi

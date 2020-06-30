@@ -18,8 +18,8 @@ backup() {
 	restic backup "$HOME" \
 		--exclude-file="$XDG_CONFIG_HOME/resticignore"
 	restic forget --host "$(hostname)" --path "$HOME" \
-		--keep-tag keep --keep-hourly  18 --keep-daily 14 \
-		--keep-weekly 8 --keep-monthly 18 --keep-yearly 2
+		--keep-tag keep --keep-daily 14 --keep-weekly 8 \
+		--keep-monthly 18 --keep-yearly 2
 }
 
 lsrepos() {

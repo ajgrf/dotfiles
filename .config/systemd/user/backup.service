@@ -1,0 +1,6 @@
+[Unit]
+Description=daily backup
+
+[Service]
+Type=oneshot
+ExecStart=/home/ajgrf/bin/backup
