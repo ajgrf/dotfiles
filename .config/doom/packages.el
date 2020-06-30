@@ -66,3 +66,4 @@
   :pin "8f851af736")                    ; 2.4.3.4
 (package! shrface :pin "c82447df5b")    ; 2.6
 (package! eshell-did-you-mean :disable t)
+(package! pdf-tools :recipe (:type built-in))

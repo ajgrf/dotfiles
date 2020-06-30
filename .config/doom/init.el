@@ -98,8 +98,7 @@
        (magit +forge)    ; a git porcelain for Emacs
        ;;make              ; run make tasks from Emacs
        (pass +auth)      ; password manager for nerds
-       (:cond ((executable-find "epdfinfo")
-               pdf))     ; pdf enhancements
+       pdf               ; pdf enhancements
        ;;prodigy           ; FIXME managing external services & code builders
        ;;rgb               ; creating color strings
        ;;terraform         ; infrastructure as code
@@ -140,7 +139,7 @@
        ;;lua               ; one-based indices? one-based indices
        markdown          ; writing docs for people to ignore
        ;;nim               ; python + lisp at the speed of c
-       ;;nix               ; I hereby declare "nix geht mehr!"
+       nix               ; I hereby declare "nix geht mehr!"
        ;;ocaml             ; an objective camel
        org               ; organize your plain life in plain text
        ;;perl              ; write code no one else can comprehend
