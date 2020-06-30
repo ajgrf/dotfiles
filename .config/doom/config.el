@@ -485,46 +485,6 @@
   (set-popup-rule! "^\\*Ledger Report" :size 25)
   (set-popup-rule! "^\\*Guix" :size 0.35))
 
-;;; EMMS Emacs Multimedia System
-(let ((emms-print-metadata (executable-find "emms-print-metadata")))
-  (when emms-print-metadata
-    (map! :leader
-          (:prefix ("o" . "open")
-            :desc "Music player" "M" #'emms))
-
-    (use-package! emms
-      :commands emms
-      :config
-      (require 'emms)
-      (require 'emms-info-libtag)
-      (emms-all)
-      (emms-history-load)
-      (setq emms-info-functions '(emms-info-libtag)
-            emms-info-libtag-program-name emms-print-metadata
-            emms-mode-line-format "[%s]"
-            emms-mode-line-mode-line-function 'emms-mode-line-playlist-current
-            emms-player-list '(emms-player-mpv)
-            emms-playing-time-style 'downtime
-            emms-source-file-default-directory "~/music/")
-      (map! :localleader
-            :map emms-playlist-mode-map
-            "a" #'emms-browse-by-artist
-            "A" #'emms-browse-by-album
-            "b" #'emms-browse-by-genre
-            "d" #'emms-add-directory-tree
-            "f" #'emms-add-file
-            "u" #'emms-add-url
-            "g" #'emms-browse-by-genre
-            "y" #'emms-browse-by-year
-            "c" #'emms-browse-by-composer
-            "p" #'emms-browse-by-performer))
-
-    ;; Display the EMMS mode-line as a ticker to save space.
-    (use-package! emms-mode-line-cycle
-      :config
-      (setq emms-mode-line-cycle-max-width 24)
-      (emms-mode-line-cycle 1))))
-
 ;;; shrface
 (with-eval-after-load 'shr
   (require 'shrface)
