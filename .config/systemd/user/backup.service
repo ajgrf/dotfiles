@@ -2,5 +2,5 @@
 Description=daily backup
 
 [Service]
-Type=oneshot
+Type=simple
 ExecStart=/home/ajgrf/bin/backup
