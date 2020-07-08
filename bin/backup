@@ -2,7 +2,7 @@
 set -u
 
 main() {
-	set_xdg_dirs
+	setup_environment
 	for repo in $(lsrepos); do
 		backup "$repo"
 	done
@@ -27,8 +27,13 @@ lsrepos() {
 		sed -e 's/^.*restic\///' -e 's/\.gpg$//'
 }
 
-# These get used in the exclude file.
-set_xdg_dirs() {
+setup_environment() {
+	if ! test -f "$ENV"; then
+		test -f "$HOME/.profile" && . "$HOME/.profile"
+	fi
+
+	# These get used in the exclude file.
+
 	export XDG_CACHE_HOME="${XDG_CACHE_HOME:-$HOME/.cache}"
 	export XDG_CONFIG_HOME="${XDG_CONFIG_HOME:-$HOME/.config}"
 	export XDG_DATA_HOME="${XDG_DATA_HOME:-$HOME/.local/share}"
