@@ -1,5 +1,8 @@
 # youtube-dl configuration
 
+# IPv6 can get very slow on my network
+--force-ipv4
+
 # srsly no other options to change color output?!
 --no-color
 
