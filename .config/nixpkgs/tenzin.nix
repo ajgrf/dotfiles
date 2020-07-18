@@ -37,7 +37,7 @@
     grub = {
       enable = true;
       device = "/dev/sda";
-      gfxmodeBios = "848x480";
+      gfxmodeBios = "1280x720";
       extraEntries = ''
         menuentry "Debian GNU/Linux" {
           insmod part_gpt
