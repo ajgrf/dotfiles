@@ -2,7 +2,3 @@
 (job '(next-minute '(5))
      "tmux -f \"${XDG_CONFIG_HOME:-$HOME/.config}/tmux/tmux.conf\" new-session -d -t mysession \\; new-window -t mysession:0 -n backup 'backup; sleep 120'"
      "backup")
-
-;; Empty Trash items older than 30 days.
-(job '(next-hour (range 0 24 8))
-     "trash-empty 30")
