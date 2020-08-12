@@ -466,8 +466,6 @@
 
 ;;; :tools pdf
 (when (featurep! :tools pdf)
-  (setq pdf-view-midnight-colors '("#000000" . "#ffffea"))
-
   (add-hook! 'pdf-view-mode-hook
     (pdf-view-auto-slice-minor-mode 1)
     (pdf-view-midnight-minor-mode 1))
