@@ -27,8 +27,8 @@ zero:
     fields: images lyrics
     update_database: true
 convert:
-    format: opus
-    dest: ~/tmp/Portable Music
+    format: ogg
+    dest: ~/music
     album_art_maxwidth: 1000
     copy_album_art: yes
     embed: no
