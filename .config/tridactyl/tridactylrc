@@ -49,3 +49,5 @@ set allowautofocus false
 
 " redirect to old reddit design
 autocmd DocStart www.reddit.com js tri.excmds.urlmodify('-t', 'www', 'old')
+" redirect to Amazon Smile
+autocmd DocStart www.amazon.com js tri.excmds.urlmodify('-t', 'www', 'smile')
