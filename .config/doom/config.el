@@ -26,12 +26,9 @@
 ;; available. You can either set `doom-theme' or manually load a theme with the
 ;; `load-theme' function. This is the default:
 (use-package! parchment-theme
-  :init
-  (add-hook! 'doom-load-theme-hook :append
-    (when (equal doom-theme 'parchment)
-      (require 'solaire-mode)
-      (solaire-mode-swap-bg)))
   :config
+  (after! solaire-mode
+    (add-to-list 'solaire-mode-themes-to-face-swap "parchment"))
   (setq doom-theme 'parchment
         parchment-add-mode-hooks t
         parchment-want-modify-tty-colors t))
