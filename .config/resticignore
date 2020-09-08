@@ -1,5 +1,6 @@
 # annexed files are managed elsewhere
 ${HOME}/annex
+${HOME}/music
 
 # cache dirs
 ${XDG_CACHE_HOME}
