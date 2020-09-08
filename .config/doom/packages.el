@@ -51,16 +51,13 @@
 ;(package! builtin-package :recipe (:branch "develop"))
 
 (package! parchment-theme :recipe (:local-repo "~/src/parchment"))
-(package! minions :pin "c331c15161")    ; v0.3.3
+(package! minions :pin "36d39bd25a")    ; v0.3.4
 (package! vimrc-mode :pin "13bc150a87") ; November 2018
 (when (file-exists-p "/gnu/store")
-  (package! debbugs :pin "23fa83932b")  ; 0.22
+  (package! debbugs :pin "e657c0c07f")  ; 0.26
   (package! guix :pin "c2796e6886"))    ; v0.5.2
 (when (featurep! :email mu4e)
   (package! mu4e-conversation :pin "98110bb9c3")) ; June 2019
-(package! tramp
-  :recipe (:host nil :repo "https://git.savannah.gnu.org/git/tramp.git")
-  :pin "8f851af736")                    ; 2.4.3.4
 (package! shrface :pin "c82447df5b")    ; 2.6
 (package! eshell-did-you-mean :disable t)
 (package! pdf-tools :recipe (:type built-in))
