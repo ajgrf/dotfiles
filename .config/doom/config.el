@@ -29,6 +29,29 @@
 ;; `load-theme' function. This is the default:
 (setq doom-theme 'parchment)
 
+;; Select theme by time of day:
+(when (display-graphic-p)
+  (setq calendar-latitude 44.82
+        calendar-longitude -93.17)
+
+  ;; Light at sunrise
+  (run-at-time (nth 1 (split-string (sunrise-sunset)))
+               (* 60 60 24)
+               (lambda ()
+                 (load-theme 'parchment t)))
+
+  ;; White after noon
+  (run-at-time "12:00pm"
+               (* 60 60 24)
+               (lambda ()
+                 (load-theme 'modus-operandi t)))
+
+  ;; Dark at sunset
+  (run-at-time (nth 4 (split-string (sunrise-sunset)))
+               (* 60 60 24)
+               (lambda ()
+                 (load-theme 'modus-vivendi t))))
+
 ;; Configure modus-themes:
 (progn
   ;; Set variables for both themes.
