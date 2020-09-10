@@ -502,8 +502,7 @@
 ;;; :tools pdf
 (when (featurep! :tools pdf)
   (add-hook! 'pdf-view-mode-hook
-    (pdf-view-auto-slice-minor-mode 1)
-    (pdf-view-midnight-minor-mode 1))
+    (pdf-view-auto-slice-minor-mode 1))
 
   (map! :map pdf-view-mode-map
         :n "J" #'pdf-view-next-page
