@@ -63,6 +63,9 @@ in
       name = "fonts-env";
       paths = [
         go-font
+        unstable.iosevka
+        (unstable.iosevka.override { set = "aile"; })
+        (unstable.iosevka.override { set = "slab"; })
       ];
     };
 
