@@ -56,7 +56,14 @@
   (after! solaire-mode
     (add-to-list 'solaire-mode-themes-to-face-swap "parchment"))
   (setq parchment-add-mode-hooks t
-        parchment-want-modify-tty-colors t))
+        parchment-want-modify-tty-colors t)
+  ;; Switch to Go Mono when using parchment.
+  (let ((old-font doom-font))
+    (add-hook! 'doom-load-theme-hook :append
+      (setq doom-font (if (eq doom-theme 'parchment)
+                          (font-spec :family "Go Mono" :size 11.0)
+                        old-font))
+      (doom/reload-font))))
 
 ;; Only use one level of colored delimiters, which for parchment is unstyled.
 (setq rainbow-delimiters-max-face-count 1)
