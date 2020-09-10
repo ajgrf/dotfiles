@@ -25,12 +25,13 @@
 ;; There are two ways to load a theme. Both assume the theme is installed and
 ;; available. You can either set `doom-theme' or manually load a theme with the
 ;; `load-theme' function. This is the default:
+(setq doom-theme 'parchment)
+
 (use-package! parchment-theme
   :config
   (after! solaire-mode
     (add-to-list 'solaire-mode-themes-to-face-swap "parchment"))
-  (setq doom-theme 'parchment
-        parchment-add-mode-hooks t
+  (setq parchment-add-mode-hooks t
         parchment-want-modify-tty-colors t))
 
 ;; Only use one level of colored delimiters, which for parchment is unstyled.
