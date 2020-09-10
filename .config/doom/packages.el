@@ -61,3 +61,5 @@
 (package! shrface :pin "c82447df5b")    ; 2.6
 (package! eshell-did-you-mean :disable t)
 (package! pdf-tools :recipe (:type built-in))
+(package! modus-operandi-theme :pin "67554a6291") ; 0.12.0
+(package! modus-vivendi-theme :pin "67554a6291")  ; 0.12.0

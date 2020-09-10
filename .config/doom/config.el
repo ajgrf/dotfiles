@@ -27,6 +27,28 @@
 ;; `load-theme' function. This is the default:
 (setq doom-theme 'parchment)
 
+;; Configure modus-themes:
+(progn
+  ;; Set variables for both themes.
+  (defmacro modus-themes-format-sexp (sexp &rest objects)
+    `(eval (read (format ,(format "%S" sexp) ,@objects))))
+
+  (dolist (theme '("operandi" "vivendi"))
+    (modus-themes-format-sexp
+     (setq modus-%1$s-theme-slanted-constructs t
+           modus-%1$s-theme-prompts 'subtle
+           modus-%1$s-theme-completions 'opinionated
+           modus-%1$s-theme-fringes 'subtle
+           modus-%1$s-theme-org-blocks 'greyscale
+           modus-%1$s-theme-section-headings t
+           modus-%1$s-theme-scale-headings t
+           modus-%1$s-theme-variable-pitch-headings t)
+     theme))
+
+  ;; Fix eshell prompt color in modus-themes.
+  (custom-theme-set-faces! '(modus-operandi modus-vivendi)
+    '(eshell-prompt :inherit eshell-ls-directory)))
+
 (use-package! parchment-theme
   :config
   (after! solaire-mode
