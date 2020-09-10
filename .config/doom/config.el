@@ -65,8 +65,14 @@
                         old-font))
       (doom/reload-font))))
 
-;; Only use one level of colored delimiters, which for parchment is unstyled.
-(setq rainbow-delimiters-max-face-count 1)
+;; Rainbow delimiters can't be safely disabled in Doom, so just neuter it.
+(custom-set-faces!
+  '((rainbow-delimiters-depth-1-face rainbow-delimiters-depth-2-face
+     rainbow-delimiters-depth-3-face rainbow-delimiters-depth-4-face
+     rainbow-delimiters-depth-5-face rainbow-delimiters-depth-6-face
+     rainbow-delimiters-depth-7-face rainbow-delimiters-depth-8-face
+     rainbow-delimiters-depth-9-face)
+    :foreground nil :background nil :weight normal))
 
 ;; This determines the style of line numbers in effect. If set to `nil', line
 ;; numbers are disabled. For relative line numbers, set this to `relative'.
