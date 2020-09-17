@@ -4,5 +4,6 @@
    "gog-infinifactory"
    "gog-tis100"
    "glib"
+   "openmw"
    "papers-please"
    "scummvm"))
