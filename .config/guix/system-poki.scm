@@ -144,15 +144,13 @@
                   (qemu-binfmt-configuration
                    (guix-support? #t)
                    (platforms (lookup-qemu-platforms "arm" "aarch64"))))
-         ;; (modify-services %desktop-services
-         ;;   (gdm-service-type
-         ;;    config =>
-         ;;    (gdm-configuration
-         ;;     (inherit config)
-         ;;     (auto-login? #t)
-         ;;     (default-user "ajgrf")
-         ;;     (debug? #t))))
-         %desktop-services))
+         (modify-services %desktop-services
+           (gdm-service-type
+            config =>
+            (gdm-configuration
+             (inherit config)
+             (auto-login? #t)
+             (default-user "ajgrf"))))))
 
  ;; Allow resolution of '.local' host names with mDNS.
  (name-service-switch %mdns-host-lookup-nss))
