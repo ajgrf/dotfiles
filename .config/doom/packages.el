@@ -50,7 +50,9 @@
 ;; our package manager can't deal with; see raxod502/straight.el#279)
 ;(package! builtin-package :recipe (:branch "develop"))
 
-(package! parchment-theme :recipe (:local-repo "~/src/parchment"))
+(if (file-exists-p "~/src/parchment")
+    (package! parchment-theme :recipe (:local-repo "~/src/parchment"))
+  (package! parchment-theme))
 (package! minions :pin "36d39bd25a")    ; v0.3.4
 (package! vimrc-mode :pin "13bc150a87") ; November 2018
 (when (file-exists-p "/gnu/store")
@@ -60,6 +62,7 @@
   (package! mu4e-conversation :pin "98110bb9c3")) ; June 2019
 (package! shrface :pin "c82447df5b")    ; 2.6
 (package! eshell-did-you-mean :disable t)
-(package! pdf-tools :recipe (:type built-in))
+(when IS-LINUX
+  (package! pdf-tools :recipe (:type built-in)))
 (package! modus-operandi-theme :pin "67554a6291") ; 0.12.0
 (package! modus-vivendi-theme :pin "67554a6291")  ; 0.12.0
