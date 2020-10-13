@@ -172,19 +172,6 @@
 (setq delete-by-moving-to-trash t
       image-dired-external-viewermage nil)
 
-(after! tramp
-  ;; Add TRAMP method to integrate Magit with vcsh.
-  ;; https://github.com/magit/magit/issues/2939
-  (add-to-list 'tramp-methods
-               '("vcsh"
-                 (tramp-login-program "vcsh")
-                 (tramp-login-args (("enter") ("%h")))
-                 (tramp-remote-shell "/bin/sh")
-                 (tramp-remote-shell-args ("-c"))))
-
-  ;; Get TRAMP $PATH from "remote" profile
-  (add-to-list 'tramp-remote-path 'tramp-own-remote-path))
-
 ;;; :app rss
 (when (featurep! :app rss)
   (setq elfeed-enclosure-default-dir "~/tmp/"
@@ -525,8 +512,26 @@
 (setq direnv-always-show-summary nil)
 
 ;;; :tools magit
-(setq emacsql-sqlite-executable (executable-find "emacsql-sqlite")
-      forge-topic-list-limit -5)
+(when (featurep! :tools magit)
+  (setq emacsql-sqlite-executable (executable-find "emacsql-sqlite")
+        forge-topic-list-limit -5)
+
+  (defvar dotfiles-git-dir
+    (expand-file-name "~/.config/vcsh/repo.d/dotfiles.git")
+    "Location of dotfiles git directory.")
+
+  (defadvice! with-dotfiles-git-dir (orig-fn &optional directory cache)
+    "Support separate git directory for dotfiles in home."
+    :around 'magit-status
+    (let* ((git-dir-arg (concat "--git-dir=" dotfiles-git-dir))
+           (cache (if (member git-dir-arg magit-git-global-arguments)
+                      nil
+                    cache)))
+      (if (string= directory "~/")
+          (add-to-list 'magit-git-global-arguments git-dir-arg)
+        (setq magit-git-global-arguments
+              (remove git-dir-arg magit-git-global-arguments)))
+      (apply orig-fn (list directory cache)))))
 
 ;;; :tools pdf
 (when (featurep! :tools pdf)

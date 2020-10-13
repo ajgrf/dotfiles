@@ -4,7 +4,7 @@
 (defun ajgrf/dotfiles-magit-status ()
   "Call `magit-status' on the dotfiles vcsh repository."
   (interactive)
-  (magit-status "/vcsh:dotfiles:~"))
+  (magit-status "~/"))
 
 (defun ajgrf/kill-buffer-sentinel (process signal)
   "Sentinel to kill buffer when its process exits."
