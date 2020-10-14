@@ -56,7 +56,10 @@
     (run-at-time sunset
                  (* 60 60 24)
                  (lambda ()
-                   (load-theme 'modus-vivendi t)))))
+                   (load-theme 'modus-vivendi t)))
+
+    ;; Dark when Emacs is started between midnight and sunrise
+    (setq doom-theme 'modus-vivendi)))
 
 ;; Configure modus-themes:
 (progn
