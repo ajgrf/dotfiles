@@ -441,10 +441,34 @@
     ;; Prefer Powershell over cmd.exe
     (setq explicit-shell-file-name (executable-find "powershell")
           explicit-powershell.exe-args '("-NoLogo"))
-    ;; Remove input echoes
+
     (add-hook! shell-mode
-      (when IS-WINDOWS
-        (setq-local comint-process-echoes t))))
+      ;; Remove input echoes
+      (setq-local comint-process-echoes t)
+
+      ;; Enable persistent history. See:
+      ;; https://github.com/manzyuk/dotfiles/blob/130f86385f645f0a3a7ee6b31a479c6de2c5ce82/.emacs.d/init.el#L182
+      (setq-local comint-input-ring-file-name
+                  (or (getenv "HISTFILE")
+                      (concat "~/AppData/Roaming/Microsoft/Windows/PowerShell/"
+                              "PSReadLine/ConsoleHost_history.txt")))
+      (ajgrf/turn-on-comint-history)
+
+      ;; If the buffer associated with a process is killed, the process's
+      ;; sentinel is invoked when buffer-local variables  (in particular,
+      ;; `comint-input-ring-file-name' and `comint-input-ring') are gone.
+      ;; Therefore try to save the history every time a buffer is killed.
+      (add-hook! kill-buffer :local #'comint-write-input-ring))
+
+    ;; Apparently, when Emacs is killed, `kill-buffer-hook' is not run
+    ;; on individual buffers.  We circumvent that by adding a hook to
+    ;; `kill-emacs-hook' that walks the list of all buffers and writes
+    ;; the input ring (if it is available) of each buffer to a file.
+    (add-hook! kill-emacs
+      (mapc (lambda (buffer)
+              (with-current-buffer buffer
+                (comint-write-input-ring)))
+            (buffer-list))))
 
   (map! :map shell-mode-map
         :i "C-w" #'backward-delete-word

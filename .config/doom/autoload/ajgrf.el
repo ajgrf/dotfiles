@@ -41,3 +41,16 @@
   (interactive)
   (require 'mu4e)
   (mu4e~headers-jump-to-maildir "/Inbox"))
+
+(defun ajgrf/comint-write-history-on-exit (process event)
+  "Sentinel to write history file when its process exits."
+  (and (memq (process-status process) '(exit signal))
+       (buffer-live-p (process-buffer process))
+       (comint-write-input-ring)))
+
+;;;###autoload
+(defun ajgrf/turn-on-comint-history ()
+  "Enable persistent history in the current comint session."
+  (let ((process (get-buffer-process (current-buffer))))
+    (when process
+      (set-process-sentinel process #'ajgrf/comint-write-history-on-exit))))
