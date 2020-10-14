@@ -6,6 +6,33 @@ sanitise tridactyllocal tridactylsync
 
 source ~/.config/tridactyl/quickmarks.tri
 
+" dark theme looks better even when everything else is light
+set theme dark
+
+set editorcmd emacs
+set newtab about:blank
+set searchengine duckduckgo
+set wordpattern [^\s/#]+
+
+" narrow hints by typing link text, select with hint digits
+set hintfiltermode vimperator
+set hintchars 1234567890
+
+" tridactyl somehow gets these bindings backward despite being
+" built by vim users
+bind J tabnext
+bind K tabprev
+
+" ctrl-f should use the browser's native 'find' functionality
+unbind <C-f>
+" but also support Tridactyl search too
+bind / fillcmdline find
+bind ? fillcmdline find -?
+bind n findnext 1
+bind N findnext -1
+" remove search highlighting.
+bind ,<Space> nohlsearch
+
 bind gp pin
 bind --mode=ex <S-Backspace> text.kill_word
 
@@ -16,19 +43,30 @@ bind ;d hint -W ytdl
 bind yd composite get_current_url | ytdl
 bind yv composite get_current_url | exclaim_quiet mpv
 
-" tridactyl somehow gets these bindings backward despite being
-" built by vim users
-bind J tabnext
-bind K tabprev
+" Inject Google Translate
+" This (clearly) is remotely hosted code. Google will be sent the whole
+" contents of the page you are on if you run `:translate`
+" From https://github.com/jeremiahlee/page-translator
+command translate js let googleTranslateCallback = document.createElement('script'); googleTranslateCallback.innerHTML = 'function googleTranslateElementInit(){ new google.translate.TranslateElement(); }'; document.body.insertBefore(googleTranslateCallback, document.body.firstChild); let googleTranslateScript = document.createElement('script'); googleTranslateScript.charset='UTF-8'; googleTranslateScript.src = 'https://translate.google.com/translate_a/element.js?cb=googleTranslateElementInit&tl=&sl=&hl='; document.body.insertBefore(googleTranslateScript, document.body.firstChild);
 
-" narrow hints by typing link text, select with hint digits
-set hintfiltermode vimperator
-set hintchars 1234567890
+" Only hint search results on Google and DDG
+bindurl www.google.com f hint -Jc .rc > .r > a
+bindurl www.google.com F hint -Jbc .rc>.r>a
 
-set editorcmd emacs
-set newtab about:blank
-set searchengine duckduckgo
-set wordpattern [^\s/#]+
+bindurl ^https://duckduckgo.com f hint -Jc [class=result__a]
+bindurl ^https://duckduckgo.com F hint -Jbc [class=result__a]
+
+" redirect to old reddit design
+autocmd DocStart ^http(s?)://www.reddit.com js tri.excmds.urlmodify('-t', 'www', 'old')
+" redirect to Amazon Smile
+autocmd DocStart ^http(s?)://www.amazon.com js tri.excmds.urlmodify('-t', 'www', 'smile')
+
+" always open Facebook in its own container
+autocontain -s facebook\.com Facebook
+
+" don't let sites steal focus from tridactyl
+setpref browser.autofocus false
+set allowautofocus false
 
 setpref browser.homepage https://duckduckgo.com/
 " restore tabs on startup
@@ -41,13 +79,36 @@ setpref browser.urlbar.trimURLs false
 setpref browser.search.defaultenginename DuckDuckGo
 setpref browser.search.suggest.enabled false
 setpref signon.rememberSignons false
+
+" disable playback of DRM-protected content
+setpref media.eme.enabled false
+setpref media.gmp-widevinecdm.enabled false
+
+" various privacy settings taken from
+" https://www.privacytools.io/browsers/#about_config
+setpref app.shield.optoutstudies.enabled false
+setpref beacon.enabled false
+setpref browser.safebrowsing.downloads.remote.enabled false
+setpref browser.send_pings false
+setpref browser.sessionstore.privacy_level 2
+setpref browser.urlbar.speculativeConnect.enabled false
+" clipboard support is needed for browserpass
+"setpref dom.event.clipboardevents.enabled false
+setpref media.navigator.enabled false
+setpref network.cookie.cookieBehavior 1
+setpref network.http.referer.XOriginPolicy 2
+setpref network.http.referer.XOriginTrimmingPolicy 2
+setpref network.IDN_show_punycode true
+setpref privacy.firstparty.isolate true
 setpref privacy.resistFingerprinting true
+setpref privacy.trackingprotection.cryptomining.enabled true
+setpref privacy.trackingprotection.enabled true
+setpref privacy.trackingprotection.fingerprinting.enabled true
+setpref webgl.disabled true
 
-" " don't let sites steal focus from tridactyl
-setpref browser.autofocus false
-set allowautofocus false
-
-" redirect to old reddit design
-autocmd DocStart www.reddit.com js tri.excmds.urlmodify('-t', 'www', 'old')
-" redirect to Amazon Smile
-autocmd DocStart www.amazon.com js tri.excmds.urlmodify('-t', 'www', 'smile')
+" disable pre-fetching
+setpref network.dns.disablePrefetch true
+setpref network.dns.disablePrefetchFromHTTPS true
+setpref network.predictor.enabled false
+setpref network.predictor.enable-prefetch false
+setpref network.prefetch-next false
