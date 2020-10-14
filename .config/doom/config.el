@@ -437,6 +437,15 @@
         (concat comint-password-prompt-regexp
                 "\\|^doas (.*@.*) password: \\'"))
 
+  (when IS-WINDOWS
+    ;; Prefer Powershell over cmd.exe
+    (setq explicit-shell-file-name (executable-find "powershell")
+          explicit-powershell.exe-args '("-NoLogo"))
+    ;; Remove input echoes
+    (add-hook! shell-mode
+      (when IS-WINDOWS
+        (setq-local comint-process-echoes t))))
+
   (map! :map shell-mode-map
         :i "C-w" #'backward-delete-word
 
