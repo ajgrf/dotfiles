@@ -74,7 +74,7 @@
            modus-%1$s-theme-completions 'opinionated
            modus-%1$s-theme-fringes 'subtle
            modus-%1$s-theme-org-blocks 'greyscale
-           modus-%1$s-theme-section-headings t
+           modus-%1$s-theme-headings '((t . section))
            modus-%1$s-theme-scale-headings t
            modus-%1$s-theme-variable-pitch-headings t)
      theme))
