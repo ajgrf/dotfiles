@@ -516,6 +516,9 @@
   (setq emacsql-sqlite-executable (executable-find "emacsql-sqlite")
         forge-topic-list-limit -5)
 
+  (when IS-WINDOWS
+    (setenv "SSH_ASKPASS" "git-gui--askpass"))
+
   (defvar dotfiles-git-dir
     (expand-file-name "~/.config/vcsh/repo.d/dotfiles.git")
     "Location of dotfiles git directory.")
