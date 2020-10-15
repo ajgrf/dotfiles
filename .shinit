@@ -8,7 +8,7 @@ alias ll='ls -la'
 alias lh='ll -h'
 
 alias doch='eval sudo $(fc -ln -1)'
-alias dot='vcsh dotfiles'
+alias dot='git --git-dir="$XDG_CONFIG_HOME/vcsh/repo.d/dotfiles.git"'
 alias emacs='emacs -nw'
 alias feh='feh -. -Z -B black -D -10'
 alias nixos-rebuild='sudo env NIXOS_CONFIG="$XDG_CONFIG_HOME/nixpkgs/$HOSTNAME.nix" nixos-rebuild'
