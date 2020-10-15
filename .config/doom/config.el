@@ -37,7 +37,8 @@
   (setq calendar-latitude 44.82
         calendar-longitude -93.17)
 
-  (let* ((split-sunrise-sunset (split-string (sunrise-sunset) "," nil " "))
+  (let* ((sunrise-sunset (let ((inhibit-message t)) (sunrise-sunset)))
+         (split-sunrise-sunset (split-string sunrise-sunset "," nil " "))
          (split-sunrise (split-string (nth 0 split-sunrise-sunset)))
          (split-sunset  (split-string (nth 1 split-sunrise-sunset)))
          (sunrise (nth 1 split-sunrise))
