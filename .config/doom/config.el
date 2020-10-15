@@ -1,5 +1,7 @@
 ;;; $DOOMDIR/config.el -*- lexical-binding: t; -*-
 
+(require 'xdg)
+
 ;; Some functionality uses this to identify you, e.g. GPG configuration, email
 ;; clients, file templates and snippets.
 (setq user-full-name "Alex Griffin"
@@ -214,7 +216,9 @@
   (after! mu4e
     (setq mu4e-maildir          "~/mail"
           mu4e-attachment-dir   "~"
-          mu4e-get-mail-command "mbsync -c ~/.config/isync/mbsyncrc -a"))
+          mu4e-get-mail-command (concat "mbsync -c "
+                                        (xdg-config-home)
+                                        "/isync/mbsyncrc -a")))
 
   (set-email-account! "a@ajgrf.com"
     '((mu4e-sent-folder   "/Sent Items")
@@ -548,16 +552,16 @@
 (setq direnv-always-show-summary nil)
 
 ;;; :tools magit
+(defvar dotfiles-git-dir
+  (concat (xdg-config-home) "/vcsh/repo.d/dotfiles.git")
+  "Location of dotfiles git directory.")
+
 (when (featurep! :tools magit)
   (setq emacsql-sqlite-executable (executable-find "emacsql-sqlite")
         forge-topic-list-limit -5)
 
   (when IS-WINDOWS
     (setenv "SSH_ASKPASS" "git-gui--askpass"))
-
-  (defvar dotfiles-git-dir
-    (expand-file-name "~/.config/vcsh/repo.d/dotfiles.git")
-    "Location of dotfiles git directory.")
 
   (defadvice! with-dotfiles-git-dir (orig-fn &optional directory cache)
     "Support separate git directory for dotfiles in home."
