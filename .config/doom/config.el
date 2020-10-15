@@ -371,7 +371,8 @@
     (set-eshell-alias!
      "abcde" "abcde -c $XDG_CONFIG_HOME/abcde.conf"
      "date" "*date $*"
-     "dot" (concat "git --git-dir=" dotfiles-git-dir " $*")
+     "dot" (concat "git --git-dir=\"" dotfiles-git-dir
+                   "\" --work-tree=\"" (getenv "HOME") "\" $*")
      "edit" "find-file $1"
      "feh" "feh -. -Z -B black -D -10 $*"
      "ls" "ls -A -1 $*"
