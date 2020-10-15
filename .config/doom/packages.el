@@ -66,3 +66,6 @@
   (package! pdf-tools :recipe (:type built-in)))
 (package! modus-operandi-theme :pin "a5832c9310") ; 0.13.0
 (package! modus-vivendi-theme :pin "a5832c9310")  ; 0.13.0
+(package! kbd-mode
+  :recipe (:host github :repo "slotThe/kbd-mode")
+  :pin "058f39540c")                    ; October 2020
