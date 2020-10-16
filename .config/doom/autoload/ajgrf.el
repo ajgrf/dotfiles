@@ -36,12 +36,6 @@
   (interactive)
   (find-file-existing "~/org/plan.org"))
 
-;;;###autoload
-(defun ajgrf/mu4e-inbox ()
-  (interactive)
-  (require 'mu4e)
-  (mu4e~headers-jump-to-maildir "/Inbox"))
-
 (defun ajgrf/comint-write-history-on-exit (process event)
   "Sentinel to write history file when its process exits."
   (and (memq (process-status process) '(exit signal))

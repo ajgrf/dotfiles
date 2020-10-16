@@ -172,8 +172,7 @@
        ;;yaml              ; JSON, but readable
 
        :email
-       (:cond ((executable-find "mu")
-               mu4e))
+       ;;(mu4e +gmail)
        ;;notmuch
        ;;(wanderlust +gmail)
 

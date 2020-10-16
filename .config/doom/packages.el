@@ -52,8 +52,6 @@
 
 (package! minions :pin "36d39bd25a")    ; v0.3.4
 (package! vimrc-mode :pin "13bc150a87") ; November 2018
-(when (featurep! :email mu4e)
-  (package! mu4e-conversation :pin "98110bb9c3")) ; June 2019
 (package! shrface :pin "c82447df5b")    ; 2.6
 (package! eshell-did-you-mean :disable t)
 (when IS-LINUX

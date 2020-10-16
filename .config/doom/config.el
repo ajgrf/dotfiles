@@ -115,11 +115,9 @@
 
       :leader
       (:prefix ("o" . "open")
-        :desc "Calculator"           "c"  #'calc
-        (:when (featurep! :app rss)
-          :desc "Feed Reader"        "F" #'elfeed)
-        (:when (featurep! :email mu4e)
-          :desc "Email inbox"        "m" #'ajgrf/mu4e-inbox))
+       :desc "Calculator"           "c"  #'calc
+       (:when (featurep! :app rss)
+        :desc "Feed Reader"        "F" #'elfeed))
 
       (:when (featurep! :tools magit)
         (:prefix ("g" . "git")
@@ -178,30 +176,6 @@
             tex-mode         ; latexindent is broken
             latex-mode
             ledger-mode))    ; sorting mangles my file
-
-;;; :email mu4e
-(when (featurep! :email mu4e)
-  (after! mu4e
-    (setq mu4e-maildir          "~/mail"
-          mu4e-attachment-dir   "~"
-          mu4e-get-mail-command "mbsync -c ~/.config/isync/mbsyncrc -a"))
-
-  (set-email-account! "a@ajgrf.com"
-    '((mu4e-sent-folder   "/Sent Items")
-      (mu4e-drafts-folder "/Drafts")
-      (mu4e-trash-folder  "/Trash")))
-
-  ;; Support links to mu4e messages from Org.
-  (use-package! org-mu4e
-    :after mu4e
-    :config
-    (setq org-mu4e-link-query-in-headers-mode t))
-
-  ;; Show email threads in a unified conversation view.
-  (use-package! mu4e-conversation
-    :after mu4e
-    :config
-    (global-mu4e-conversation-mode)))
 
 ;;; :lang cc
 (add-hook! c-mode
