@@ -36,8 +36,8 @@
          (sunrise (nth 1 split-sunrise))
          (sunset  (nth 1 split-sunset)))
 
-    ;; White after noon
-    (run-at-time "12:00pm"
+    ;; Light at sunrise
+    (run-at-time sunrise
                  (* 60 60 24)
                  (lambda ()
                    (load-theme 'modus-operandi t)))
