@@ -8,7 +8,7 @@ alias ll='ls -la'
 alias lh='ll -h'
 
 alias doch='eval sudo $(fc -ln -1)'
-alias dot='git --git-dir="$XDG_CONFIG_HOME/vcsh/repo.d/dotfiles.git" --work-tree="$HOME"'
+alias dot='git --git-dir="$HOME/.dot" --work-tree="$HOME"'
 alias emacs='emacs -nw'
 alias feh='feh -. -Z -B black -D -10'
 alias nixos-rebuild='sudo env NIXOS_CONFIG="$XDG_CONFIG_HOME/nixpkgs/$HOSTNAME.nix" nixos-rebuild'
@@ -51,7 +51,6 @@ prompt() {
 		branch=$(git symbolic-ref --short HEAD 2>/dev/null)
 		env="${branch:+($branch)}"
 	fi
-	env="${env}${VCSH_REPO_NAME:+[$VCSH_REPO_NAME]}"
 
 	echo -n "${e:+$e|}${USER}@${HOSTNAME%%.*}:$(ppwd 28)${env:+ $env}$S "
 }

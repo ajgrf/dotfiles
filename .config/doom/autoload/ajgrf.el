@@ -2,7 +2,7 @@
 
 ;;;###autoload
 (defun ajgrf/dotfiles-magit-status ()
-  "Call `magit-status' on the dotfiles vcsh repository."
+  "Call `magit-status' on the dotfiles repository."
   (interactive)
   (magit-status "~/"))
 

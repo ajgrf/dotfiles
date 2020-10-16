@@ -517,7 +517,7 @@
 
 ;;; :tools magit
 (defvar dotfiles-git-dir
-  (concat (xdg-config-home) "/vcsh/repo.d/dotfiles.git")
+  (expand-file-name "~/.dot")
   "Location of dotfiles git directory.")
 
 (when (featurep! :tools magit)
