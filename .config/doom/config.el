@@ -7,9 +7,6 @@
 (setq user-full-name "Alex Griffin"
       user-mail-address "a@ajgrf.com")
 
-;; Focus follows mouse.
-(setq mouse-autoselect-window t)
-
 ;;; Appearance
 
 ;; Doom exposes five (optional) variables for controlling fonts in Doom. Here
