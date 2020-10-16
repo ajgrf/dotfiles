@@ -13,7 +13,6 @@ alias emacs='emacs -nw'
 alias nixos-rebuild='sudo env NIXOS_CONFIG="$XDG_CONFIG_HOME/nixpkgs/$HOSTNAME.nix" nixos-rebuild'
 
 # XDG Base Directories
-alias abcde='abcde -c "$XDG_CONFIG_HOME/abcde.conf"'
 alias tmux='tmux -f $XDG_CONFIG_HOME/tmux/tmux.conf'
 
 # pretty print working directory

@@ -298,10 +298,8 @@
 (when (featurep! :term eshell)
   (after! eshell
     (require 'em-tramp)                 ; For eshell's sudo.
-    (require 'xdg)
 
     (set-eshell-alias!
-     "abcde" (concat "abcde -c " (xdg-config-home) "/abcde.conf")
      "date" "*date $*"
      "dot" (concat "git --git-dir=\"" dotfiles-git-dir
                    "\" --work-tree=\"" (getenv "HOME") "\" $*")
