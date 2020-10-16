@@ -1,7 +1,5 @@
 ;;; $DOOMDIR/config.el -*- lexical-binding: t; -*-
 
-(require 'xdg)
-
 ;; Some functionality uses this to identify you, e.g. GPG configuration, email
 ;; clients, file templates and snippets.
 (setq user-full-name "Alex Griffin"
@@ -186,9 +184,7 @@
   (after! mu4e
     (setq mu4e-maildir          "~/mail"
           mu4e-attachment-dir   "~"
-          mu4e-get-mail-command (concat "mbsync -c "
-                                        (xdg-config-home)
-                                        "/isync/mbsyncrc -a")))
+          mu4e-get-mail-command "mbsync -c ~/.config/isync/mbsyncrc -a"))
 
   (set-email-account! "a@ajgrf.com"
     '((mu4e-sent-folder   "/Sent Items")
@@ -328,9 +324,10 @@
 (when (featurep! :term eshell)
   (after! eshell
     (require 'em-tramp)                 ; For eshell's sudo.
+    (require 'xdg)
 
     (set-eshell-alias!
-     "abcde" "abcde -c $XDG_CONFIG_HOME/abcde.conf"
+     "abcde" (concat "abcde -c " (xdg-config-home) "/abcde.conf")
      "date" "*date $*"
      "dot" (concat "git --git-dir=\"" dotfiles-git-dir
                    "\" --work-tree=\"" (getenv "HOME") "\" $*")
