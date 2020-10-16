@@ -50,9 +50,6 @@
 ;; our package manager can't deal with; see raxod502/straight.el#279)
 ;(package! builtin-package :recipe (:branch "develop"))
 
-(if (file-exists-p "~/src/parchment")
-    (package! parchment-theme :recipe (:local-repo "~/src/parchment"))
-  (package! parchment-theme))
 (package! minions :pin "36d39bd25a")    ; v0.3.4
 (package! vimrc-mode :pin "13bc150a87") ; November 2018
 (when (featurep! :email mu4e)

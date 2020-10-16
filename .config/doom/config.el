@@ -27,11 +27,6 @@
         doom-serif-font (font-spec :family "Iosevka Slab Light")
         doom-variable-pitch-font (font-spec :family "Iosevka Aile")))
 
-;; There are two ways to load a theme. Both assume the theme is installed and
-;; available. You can either set `doom-theme' or manually load a theme with the
-;; `load-theme' function. This is the default:
-(setq doom-theme 'parchment)
-
 ;; Select theme by time of day:
 (when (display-graphic-p)
   (setq calendar-latitude 44.82
@@ -43,12 +38,6 @@
          (split-sunset  (split-string (nth 1 split-sunrise-sunset)))
          (sunrise (nth 1 split-sunrise))
          (sunset  (nth 1 split-sunset)))
-
-    ;; Light at sunrise
-    (run-at-time sunrise
-                 (* 60 60 24)
-                 (lambda ()
-                   (load-theme 'parchment t)))
 
     ;; White after noon
     (run-at-time "12:00pm"
@@ -86,20 +75,6 @@
   ;; Fix eshell prompt color in modus-themes.
   (custom-theme-set-faces! '(modus-operandi modus-vivendi)
     '(eshell-prompt :inherit eshell-ls-directory)))
-
-(use-package! parchment-theme
-  :config
-  (after! solaire-mode
-    (add-to-list 'solaire-mode-themes-to-face-swap "parchment"))
-  (setq parchment-add-mode-hooks t
-        parchment-want-modify-tty-colors t)
-  ;; Switch to Go Mono when using parchment.
-  (let ((old-font doom-font))
-    (add-hook! 'doom-load-theme-hook :append
-      (setq doom-font (if (eq doom-theme 'parchment)
-                          (font-spec :family "Go Mono" :size 11.0)
-                        old-font))
-      (doom/reload-font))))
 
 ;; Rainbow delimiters can't be safely disabled in Doom, so just neuter it.
 (custom-set-faces!
