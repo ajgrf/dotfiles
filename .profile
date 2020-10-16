@@ -19,7 +19,6 @@ export RCLONE_PASSWORD_COMMAND="pass rclone/config"
 
 # Paths
 export GOBIN="$HOME/.local/bin"
-export LEDGER_FILE="$HOME/src/finances/all.ledger"
 
 # XDG Base Directories
 
@@ -31,8 +30,6 @@ if test -e "$XDG_CONFIG_HOME/user-dirs.dirs"; then
 	. "$XDG_CONFIG_HOME/user-dirs.dirs"
 fi
 
-export ANDROID_SDK_HOME="$XDG_DATA_HOME/android"
-export APL_LIB_ROOT="$XDG_DATA_HOME/gnu-apl"
 export ASPELL_CONF="per-conf $XDG_CONFIG_HOME/aspell/aspell.conf; personal $XDG_CONFIG_HOME/aspell/en.pws; repl $XDG_CONFIG_HOME/aspell/en.prepl"
 export GNUPGHOME="$XDG_DATA_HOME/gnupg"
 export GOPATH="$XDG_CACHE_HOME/go"
