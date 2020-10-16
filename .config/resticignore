@@ -35,7 +35,6 @@ ${XDG_DOWNLOAD_DIR}/torrents
 *.o
 ${HOME}/pkg
 ${HOME}/snap
-${HOME}/src/guix/**/*.go
 ${HOME}/.cabal
 ${HOME}/.cargo
 ${HOME}/.docsets

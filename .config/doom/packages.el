@@ -55,9 +55,6 @@
   (package! parchment-theme))
 (package! minions :pin "36d39bd25a")    ; v0.3.4
 (package! vimrc-mode :pin "13bc150a87") ; November 2018
-(when (file-exists-p "/gnu/store")
-  (package! debbugs :pin "e657c0c07f")  ; 0.26
-  (package! guix :pin "c2796e6886"))    ; v0.5.2
 (when (featurep! :email mu4e)
   (package! mu4e-conversation :pin "98110bb9c3")) ; June 2019
 (package! shrface :pin "c82447df5b")    ; 2.6

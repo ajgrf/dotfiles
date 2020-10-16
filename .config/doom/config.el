@@ -146,10 +146,6 @@
       :leader
       (:prefix ("o" . "open")
         :desc "Calculator"           "c"  #'calc
-        (:when (fboundp 'guix-popup)
-          :desc "Guix popup"         "g"  #'guix-popup)
-        (:when (fboundp 'debbugs-gnu)
-          :desc "Guix issues"        "G"  #'debbugs-gnu)
         (:when (featurep! :app rss)
           :desc "Feed Reader"        "F" #'elfeed)
         (:when (featurep! :email mu4e)
@@ -331,13 +327,6 @@
   (setq geiser-default-implementation 'guile)
   ;; Open files with .guile file extension in scheme-mode.
   (add-to-list 'auto-mode-alist '("\\.guile\\'" . scheme-mode) t))
-
-;; Show all Guix bugs and patches by default in debbugs.
-(setq debbugs-gnu-default-packages '("guix" "guix-patches")
-      debbugs-gnu-default-severities '("serious" "important" "normal"
-                                       "minor" "wishlist")
-      ;; Use Guix from git checkout
-      guix-load-path "~/src/guix")
 
 
 ;;; :lang sh
@@ -594,8 +583,7 @@
 
 ;;; :ui popup
 (when (featurep! :ui popup)
-  (set-popup-rule! "^\\*Ledger Report" :size 25)
-  (set-popup-rule! "^\\*Guix" :size 0.35))
+  (set-popup-rule! "^\\*Ledger Report" :size 25))
 
 ;;; shrface
 (with-eval-after-load 'shr

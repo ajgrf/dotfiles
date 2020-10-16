@@ -60,38 +60,6 @@ for p in "$HOME/.nix-profile" "" /run/current-system/profile; do
 done
 unset p
 
-# Configure Guix package manager
-export GUIX_EXTRA_PROFILES="$HOME/.local/guix"
-
-guix_activate() {
-	GUIX_PROFILE="$1"
-	if test -r "$GUIX_PROFILE/etc/profile"; then
-		. "$GUIX_PROFILE/etc/profile"
-		export MANPATH="$GUIX_PROFILE/share/man${MANPATH:+:}$MANPATH"
-		export XDG_DATA_DIRS="$GUIX_PROFILE/share${XDG_DATA_DIRS:+:}$XDG_DATA_DIRS"
-	fi
-	unset GUIX_PROFILE
-}
-
-for p in "$GUIX_EXTRA_PROFILES/"*; do
-	guix_activate "$p/${p##*/}"
-done
-unset p
-
-guix_activate "$XDG_CONFIG_HOME/guix/current"
-
-# Extra setup for Guix on foreign distros
-if ! test -d /run/current-system; then
-	guix_activate "$HOME/.guix-profile"
-
-	GUIX_PROFILE="$HOME/.guix-profile"
-	export GUIX_LOCPATH="$GUIX_PROFILE/lib/locale"
-	export INFOPATH="$XDG_CONFIG_HOME/guix/current/share/info${INFOPATH:+:}$INFOPATH"
-	export SSL_CERT_DIR="$GUIX_PROFILE/etc/ssl/certs"
-	export SSL_CERT_FILE="$GUIX_PROFILE/etc/ssl/certs/ca-certificates.crt"
-	unset GUIX_PROFILE
-fi
-
 # Put my scripts and executables at the front of $PATH
 export PATH="$HOME/bin:$HOME/.local/bin:$PATH"
 
