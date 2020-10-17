@@ -12,9 +12,6 @@ alias dot='git --git-dir="$HOME/.dot" --work-tree="$HOME"'
 alias emacs='emacs -nw'
 alias nixos-rebuild='sudo env NIXOS_CONFIG="$XDG_CONFIG_HOME/nixpkgs/$HOSTNAME.nix" nixos-rebuild'
 
-# XDG Base Directories
-alias tmux='tmux -f $XDG_CONFIG_HOME/tmux/tmux.conf'
-
 # pretty print working directory
 ppwd() {
 	local dir="${PWD}/" n="${1:-255}"
