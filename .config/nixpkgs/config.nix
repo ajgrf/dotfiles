@@ -97,6 +97,7 @@ in
         gitAndTools.git-annex-remote-rclone
         gitAndTools.gitRemoteGcrypt
         gnupg
+        gopass
         imagemagick
         ledger
         libnotify
