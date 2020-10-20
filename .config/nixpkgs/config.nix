@@ -85,7 +85,6 @@ in
       extraOutputsToInstall = [ "doc" "man" ];
       paths = [
         aria2
-        beets
         bitwarden
         bitwarden-cli
         brightnessctl
