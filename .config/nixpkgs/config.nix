@@ -96,7 +96,6 @@ in
         git
         gitAndTools.git-annex
         gitAndTools.git-annex-remote-rclone
-        gitAndTools.gitRemoteGcrypt
         gnupg
         imagemagick
         ledger
