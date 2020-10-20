@@ -23,9 +23,6 @@
     vim
   ];
 
-  # Enable browserpass host application for Chromium.
-  programs.browserpass.enable = true;
-
   # List services that you want to enable:
 
   # Enable the OpenSSH daemon.

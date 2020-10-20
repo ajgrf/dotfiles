@@ -92,7 +92,6 @@ setpref browser.safebrowsing.downloads.remote.enabled false
 setpref browser.send_pings false
 setpref browser.sessionstore.privacy_level 2
 setpref browser.urlbar.speculativeConnect.enabled false
-" clipboard support is needed for browserpass
 "setpref dom.event.clipboardevents.enabled false
 setpref media.navigator.enabled false
 setpref network.cookie.cookieBehavior 1

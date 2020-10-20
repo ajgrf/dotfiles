@@ -4,7 +4,6 @@ let
 in
 {
   allowUnfree = true;
-  firefox.enableBrowserpass = true;
   firefox.enableTridactylNative = true;
 
   packageOverrides = _: with stable.pkgs; rec {
@@ -87,6 +86,8 @@ in
       paths = [
         aria2
         beets
+        bitwarden
+        bitwarden-cli
         brightnessctl
         direnv
         feh
@@ -97,16 +98,15 @@ in
         gitAndTools.git-annex-remote-rclone
         gitAndTools.gitRemoteGcrypt
         gnupg
-        gopass
         imagemagick
         ledger
         libnotify
         moreutils
         mr
         mpv
-        (pass.withExtensions (ext: with ext; [ pass-otp ]))
         pinentry-gtk2
         poppler_utils
+        unstable.pkgs.rbw
         rclone
         reptyr
         restic
