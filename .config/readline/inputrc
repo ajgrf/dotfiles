@@ -8,10 +8,7 @@ set bind-tty-special-chars off
 "\e[5~": history-search-backward
 "\e[6~": history-search-forward
 
-# Alt-Enter pipes the current command through less
+# Space triggers history expansion
 $if bash
-	"\C-\M-j": "\C-e |less\n"
-	"\C-\M-m": "\C-e |less\n"
-
 	" ": magic-space
 $endif
