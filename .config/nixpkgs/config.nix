@@ -24,7 +24,6 @@ in
       extraOutputsToInstall = [ "doc" "man" ];
       paths = [
         anki
-        celluloid
         ungoogled-chromium
         firefox
         gnome3.gnome-boxes
@@ -37,6 +36,7 @@ in
         unstable.pkgs.tor-browser-bundle-bin
         transmission-gtk
         virt-manager
+        vlc
         xterm
       ];
     };
@@ -101,7 +101,6 @@ in
         libnotify
         moreutils
         mr
-        mpv
         pinentry-gtk2
         poppler_utils
         unstable.pkgs.rbw
