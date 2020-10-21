@@ -17,7 +17,7 @@ ppwd() {
 	dir="${dir%/}"
 
 	if test "${#dir}" -gt "$n"; then
-		n=$(( n - 3 ))
+		n=$((n - 3))
 		dir="...${dir:(-$n)}"
 	fi
 
@@ -42,15 +42,16 @@ vterm_prompt_end() {
 }
 
 case "$TERM" in
-xterm*|rxvt*|st*|screen*|tmux*)
+xterm* | rxvt* | st* | screen* | tmux*)
 	PS1="\[\e]0;\u@\h: \w\a\]$PS1"      # Set title
 	PS1="\[\e[1;34m\]$PS1\[\e[m\]"      # Color the prompt
 	PS1="$PS1"'\[$(vterm_prompt_end)\]' # vterm directory- & prompt-tracking
+	;;
 esac
 
 # enable programmable completion
 if test -f /usr/share/bash-completion/bash_completion; then
-	. /usr/share/bash-completion/bash_completion;
+	. /usr/share/bash-completion/bash_completion
 elif test -f /etc/bash_completion; then
 	. /etc/bash_completion
 elif test -f /run/current-system/profile/etc/profile.d/bash_completion.sh; then
