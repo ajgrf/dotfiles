@@ -145,7 +145,9 @@
 
 ;;; :app rss
 (when (featurep! :app rss)
-  (setq elfeed-enclosure-default-dir "~/tmp/"
+  (require 'xdg)
+  (setq elfeed-enclosure-default-dir (or (xdg-user-dir "DOWNLOAD")
+                                         "~/Downloads")
         rmh-elfeed-org-files (list "links.org"))
 
   (after! elfeed

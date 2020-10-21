@@ -17,28 +17,6 @@ export MANPAGER=less
 export NO_COLOR=1
 export RCLONE_PASSWORD_COMMAND="bw get password rclone"
 
-# Paths
-export GOBIN="$HOME/.local/bin"
-
-# XDG Base Directories
-
-export XDG_CACHE_HOME="$HOME/.cache"
-export XDG_CONFIG_HOME="$HOME/.config"
-export XDG_DATA_HOME="$HOME/.local/share"
-export XDG_DATA_DIRS="$XDG_DATA_HOME/flatpak/exports/share:/var/lib/flatpak/exports/share:${XDG_DATA_DIRS:-/usr/local/share:/usr/share}"
-if test -e "$XDG_CONFIG_HOME/user-dirs.dirs"; then
-	. "$XDG_CONFIG_HOME/user-dirs.dirs"
-fi
-
-export ASPELL_CONF="per-conf $XDG_CONFIG_HOME/aspell/aspell.conf; personal $XDG_CONFIG_HOME/aspell/en.pws; repl $XDG_CONFIG_HOME/aspell/en.prepl"
-export GNUPGHOME="$XDG_DATA_HOME/gnupg"
-export GOPATH="$XDG_CACHE_HOME/go"
-export HISTFILE="${XDG_DATA_HOME:-$HOME/.local/share}/sh_history"
-export ICEAUTHORITY="$XDG_CACHE_HOME/ICEauthority"
-export INPUTRC="$XDG_CONFIG_HOME/readline/inputrc"
-export LESSHISTFILE="$XDG_CACHE_HOME/less/history"
-export STACK_ROOT="$XDG_DATA_HOME/stack"
-
 # Configure Nix package manager
 for p in "$HOME/.nix-profile" "" /run/current-system/profile; do
 	if test -e "$p/etc/profile.d/nix.sh"; then

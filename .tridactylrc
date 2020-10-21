@@ -4,7 +4,7 @@
 " turn off persistent tridactyl settings to make it more dotfile-like
 sanitise tridactyllocal tridactylsync
 
-source ~/.config/tridactyl/quickmarks.tri
+source ~/.tridactyl/quickmarks.tri
 
 " dark theme looks better even when everything else is light
 set theme dark
