@@ -314,7 +314,8 @@
      "ll" "ls -la $*"
      "lh" "ll -h $*"
      "mkcd" "mkdir $1 && cd $1"
-     "sudo" "eshell/sudo $*")
+     "sudo" "eshell/sudo $*"
+     "youtube-dl" "ajgrf/youtube-dl-url $1")
 
     (setq eshell-banner-message "")
     (setq eshell-prompt-function
@@ -525,7 +526,13 @@
 
 ;;; :ui popup
 (when (featurep! :ui popup)
-  (set-popup-rule! "^\\*Ledger Report" :size 25))
+  (set-popup-rules!
+    '(("^\\*Ledger Report" :size 25)
+      ("^\\*youtube-dl"       :side bottom :vslot -2)
+      ("^\\*youtube-dl\\*<2>" :side bottom :vslot -3)
+      ("^\\*youtube-dl\\*<3>" :side bottom :vslot -4)
+      ("^\\*youtube-dl\\*<4>" :side bottom :vslot -5)
+      ("^\\*youtube-dl\\*<5>" :side bottom :vslot -6))))
 
 ;;; shrface
 (with-eval-after-load 'shr

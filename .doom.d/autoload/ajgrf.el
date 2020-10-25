@@ -8,9 +8,16 @@
 
 (defun ajgrf/kill-buffer-sentinel (process signal)
   "Sentinel to kill buffer when its process exits."
-  (and (memq (process-status process) '(exit signal))
-       (buffer-live-p (process-buffer process))
-       (evil-delete-buffer (process-buffer process))))
+  (let* ((buffer (process-buffer process))
+         (wins (get-buffer-window-list buffer nil t)))
+    (and (memq (process-status process) '(exit signal))
+         (buffer-live-p buffer)
+         (kill-buffer buffer)
+         (mapc #'(lambda (w)
+                   (condition-case nil
+                       (delete-window w)
+                     (error nil)))
+               wins))))
 
 (defun ajgrf/run-command-in-buffer (name args)
   (let* ((buffer-name (generate-new-buffer-name (concat "*" name "*")))
@@ -18,13 +25,16 @@
           (apply 'make-comint-in-buffer name buffer-name name nil args))
          (proc (get-buffer-process new-buffer)))
     (set-process-sentinel proc #'ajgrf/kill-buffer-sentinel)
-    (switch-to-buffer-other-window new-buffer)))
+    (display-buffer new-buffer)))
 
 ;;;###autoload
 (defun ajgrf/youtube-dl-url (&optional url)
   "Run 'youtube-dl' over the URL.  If URL is nil, use URL at point."
   (interactive)
-  (let ((url (or url (thing-at-point-url-at-point))))
+  (require 'xdg)
+  (let ((default-directory (or (xdg-user-dir "DOWNLOAD")
+                               "~/Downloads"))
+        (url (or url (thing-at-point-url-at-point))))
     (ajgrf/run-command-in-buffer "youtube-dl" (list url))))
 
 ;;;###autoload
