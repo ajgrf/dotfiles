@@ -65,11 +65,7 @@
            modus-%1$s-theme-headings '((t . section))
            modus-%1$s-theme-scale-headings t
            modus-%1$s-theme-variable-pitch-headings t)
-     theme))
-
-  ;; Fix eshell prompt color in modus-themes.
-  (custom-theme-set-faces! '(modus-operandi modus-vivendi)
-    '(eshell-prompt :inherit eshell-ls-directory)))
+     theme)))
 
 ;; Rainbow delimiters can't be safely disabled in Doom, so just neuter it.
 (custom-set-faces!
