@@ -279,7 +279,9 @@
 ;;; :term eshell
 (when (featurep! :term eshell)
   (after! eshell
-    (require 'em-tramp)                 ; For eshell's sudo.
+    (unless IS-WINDOWS
+      (require 'em-tramp)
+      (set-eshell-alias! "sudo" "eshell/sudo $*"))
 
     (set-eshell-alias!
      "date" "*date $*"
@@ -294,7 +296,6 @@
      "ll" "ls -la $*"
      "lh" "ll -h $*"
      "mkcd" "mkdir $1 && cd $1"
-     "sudo" "eshell/sudo $*"
      "youtube-dl" "ajgrf/youtube-dl-url $1")
 
     (setq eshell-banner-message "")
