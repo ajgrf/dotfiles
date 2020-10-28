@@ -99,6 +99,7 @@ in
         gitAndTools.git-annex-remote-rclone
         gnupg
         imagemagick
+        unstable.pkgs.kopia
         ledger
         libnotify
         moreutils
@@ -108,7 +109,6 @@ in
         unstable.pkgs.rbw
         rclone
         reptyr
-        restic
         rsync
         shellcheck
         shfmt
