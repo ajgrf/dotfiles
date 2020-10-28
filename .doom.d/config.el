@@ -23,31 +23,15 @@
         doom-variable-pitch-font (font-spec :family "Iosevka Aile")))
 
 ;; Select theme by time of day:
-(when (display-graphic-p)
-  (setq calendar-latitude 44.82
-        calendar-longitude -93.17)
-
-  (let* ((sunrise-sunset (let ((inhibit-message t)) (sunrise-sunset)))
-         (split-sunrise-sunset (split-string sunrise-sunset "," nil " "))
-         (split-sunrise (split-string (nth 0 split-sunrise-sunset)))
-         (split-sunset  (split-string (nth 1 split-sunrise-sunset)))
-         (sunrise (nth 1 split-sunrise))
-         (sunset  (nth 1 split-sunset)))
-
-    ;; Light at sunrise
-    (run-at-time sunrise
-                 (* 60 60 24)
-                 (lambda ()
-                   (load-theme 'modus-operandi t)))
-
-    ;; Dark at sunset
-    (run-at-time sunset
-                 (* 60 60 24)
-                 (lambda ()
-                   (load-theme 'modus-vivendi t)))
-
-    ;; Dark when Emacs is started between midnight and sunrise
-    (setq doom-theme 'modus-vivendi)))
+(use-package! circadian
+  :if window-system
+  :hook (after-init . circadian-setup)
+  :config
+  (let* ((location-set? (and calendar-latitude calendar-longitude t))
+         (day (if location-set? :sunrise "7:30"))
+         (night (if location-set? :sunset "19:30")))
+    (setq circadian-themes `((,day . modus-operandi)
+                             (,night . modus-vivendi)))))
 
 ;; Configure modus-themes:
 (progn
