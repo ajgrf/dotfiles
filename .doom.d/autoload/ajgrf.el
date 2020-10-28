@@ -19,7 +19,7 @@
                      (error nil)))
                wins))))
 
-(defun ajgrf/run-command-in-buffer (name args)
+(defun ajgrf/run-command-in-buffer (name &rest args)
   (let* ((buffer-name (generate-new-buffer-name (concat "*" name "*")))
          (new-buffer
           (apply 'make-comint-in-buffer name buffer-name name nil args))
@@ -35,7 +35,7 @@
   (let ((default-directory (or (xdg-user-dir "DOWNLOAD")
                                "~/Downloads"))
         (url (or url (thing-at-point-url-at-point))))
-    (ajgrf/run-command-in-buffer "youtube-dl" (list url))))
+    (ajgrf/run-command-in-buffer "youtube-dl" url)))
 
 ;;;###autoload
 (defun ajgrf/get-org-files ()
