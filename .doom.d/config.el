@@ -508,11 +508,11 @@
 (when (featurep! :ui popup)
   (set-popup-rules!
     '(("^\\*Ledger Report" :size 25)
-      ("^\\*youtube-dl"       :side bottom :vslot -2)
-      ("^\\*youtube-dl\\*<2>" :side bottom :vslot -3)
-      ("^\\*youtube-dl\\*<3>" :side bottom :vslot -4)
-      ("^\\*youtube-dl\\*<4>" :side bottom :vslot -5)
-      ("^\\*youtube-dl\\*<5>" :side bottom :vslot -6))))
+      ("^\\*youtube-dl"       :vslot -2)
+      ("^\\*youtube-dl\\*<2>" :vslot -3)
+      ("^\\*youtube-dl\\*<3>" :vslot -4)
+      ("^\\*youtube-dl\\*<4>" :vslot -5)
+      ("^\\*youtube-dl\\*<5>" :vslot -6))))
 
 ;;; shrface
 (with-eval-after-load 'shr
