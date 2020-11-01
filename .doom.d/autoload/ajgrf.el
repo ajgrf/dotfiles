@@ -25,6 +25,8 @@
           (apply 'make-comint-in-buffer name buffer-name name nil args))
          (proc (get-buffer-process new-buffer)))
     (set-process-sentinel proc #'ajgrf/kill-buffer-sentinel)
+    (with-current-buffer new-buffer
+      (setq-local truncate-lines nil))
     (display-buffer new-buffer)))
 
 ;;;###autoload
@@ -36,6 +38,14 @@
                                "~/Downloads"))
         (url (or url (thing-at-point-url-at-point))))
     (ajgrf/run-command-in-buffer "youtube-dl" url)))
+
+;;;###autoload
+(defun ajgrf/backup ()
+  "Back up home directory."
+  (interactive)
+  (customize-save-variable 'ajgrf/backup-timer-enabled t)
+  (ajgrf/run-command-in-buffer
+   "kopia" "snapshot" "create" (expand-file-name "~")))
 
 ;;;###autoload
 (defun ajgrf/get-org-files ()

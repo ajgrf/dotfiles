@@ -284,6 +284,7 @@
       (set-eshell-alias! "sudo" "eshell/sudo $*"))
 
     (set-eshell-alias!
+     "backup" "ajgrf/backup"
      "date" "*date $*"
      "dot" (concat "git --git-dir=\"" dotfiles-git-dir
                    "\" --work-tree=\"" (getenv "HOME") "\" $*")
@@ -513,7 +514,8 @@
       ("^\\*youtube-dl\\*<2>" :vslot -3)
       ("^\\*youtube-dl\\*<3>" :vslot -4)
       ("^\\*youtube-dl\\*<4>" :vslot -5)
-      ("^\\*youtube-dl\\*<5>" :vslot -6))))
+      ("^\\*youtube-dl\\*<5>" :vslot -6)
+      ("^\\*kopia" :vslot -7))))
 
 ;;; shrface
 (with-eval-after-load 'shr
@@ -539,6 +541,17 @@
   ;; mu4e support
   (with-eval-after-load 'mu4e
     (add-hook 'mu4e-view-mode-hook 'shrface-mode)))
+
+;;; Backups
+(defvar ajgrf/backup-timer-enabled nil
+  "Run regular system backups if non-nil.
+
+This is set by `ajgrf/backup', so running that manually will enable the
+timer on a new system.")
+
+(when ajgrf/backup-timer-enabled
+  ;; Emacs is my operating system now.
+  (run-at-time t (* 2 60 60) #'ajgrf/backup))
 
 
 ;; Local Variables:
