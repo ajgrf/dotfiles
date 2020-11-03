@@ -27,8 +27,9 @@
 ;; `load-theme' function.
 (setq doom-theme (if window-system 'doom-flatwhite 'doom-miramare))
 
-;; Configure modus-themes:
-(progn
+(use-package! modus-themes
+  :defer t
+  :init
   ;; Set variables for both themes.
   (defmacro modus-themes-format-sexp (sexp &rest objects)
     `(eval (read (format ,(format "%S" sexp) ,@objects))))
@@ -46,6 +47,7 @@
      theme)))
 
 (use-package! parchment-theme
+  :defer t
   :config
   (after! solaire-mode
     (add-to-list 'solaire-mode-themes-to-face-swap "parchment"))
