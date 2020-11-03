@@ -18,15 +18,10 @@ export NO_COLOR=1
 export RCLONE_PASSWORD_COMMAND="bw get password rclone"
 
 # Configure Nix package manager
-for p in "$HOME/.nix-profile" "" /run/current-system/profile; do
-	if test -e "$p/etc/profile.d/nix.sh"; then
-		. "$p/etc/profile.d/nix.sh"
-		export TERMINFO_DIRS="$HOME/.nix-profile/share/terminfo${TERMINFO_DIRS:+:}$TERMINFO_DIRS"
-		export XDG_DATA_DIRS="$HOME/.nix-profile/share${XDG_DATA_DIRS:+:}$XDG_DATA_DIRS"
-		break
-	fi
-done
-unset p
+if test -e "$HOME/.nix-profile/etc/profile.d/nix.sh"; then
+	. "$HOME/.nix-profile/etc/profile.d/nix.sh"
+	export XDG_DATA_DIRS="$HOME/.nix-profile/share${XDG_DATA_DIRS:+:}$XDG_DATA_DIRS"
+fi
 
 # Put my scripts and executables at the front of $PATH
 export PATH="$HOME/bin:$HOME/.local/bin:$PATH"
