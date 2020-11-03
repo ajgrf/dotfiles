@@ -9,10 +9,6 @@ alias doch='eval sudo $(fc -ln -1)'
 alias dot='git --git-dir="$HOME/.dot" --work-tree="$HOME"'
 alias emacs='emacs -nw'
 
-if type nixos-rebuild >/dev/null 2>&1; then
-	alias nixos-rebuild='sudo env NIXOS_CONFIG="$HOME/.nixpkgs/$HOSTNAME.nix" nixos-rebuild'
-fi
-
 # pretty print working directory
 ppwd() {
 	local dir="${PWD}/" n="${1:-255}"
