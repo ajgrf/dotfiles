@@ -60,4 +60,3 @@
 (package! modus-vivendi-theme :pin "a5832c9310")  ; 0.13.0
 (when IS-WINDOWS
   (package! ssh-agency :pin "a5377e4317"))        ; 0.4.1
-(package! circadian :pin "414127acad")            ; October 2018

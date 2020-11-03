@@ -16,22 +16,16 @@
 ;;   presentations or streaming.
 ;;
 ;; They all accept either a font-spec, font string ("Input Mono-12"), or xlfd
-;; font string. You generally only need these two:
+;; font string.
 (let ((size (if IS-WINDOWS 11.0 12.0)))
   (setq doom-font (font-spec :family "Iosevka" :size size)
         doom-serif-font (font-spec :family "Iosevka Slab Light")
         doom-variable-pitch-font (font-spec :family "Iosevka Aile")))
 
-;; Select theme by time of day:
-(use-package! circadian
-  :if window-system
-  :hook (after-init . circadian-setup)
-  :config
-  (let* ((location-set? (and calendar-latitude calendar-longitude t))
-         (day (if location-set? :sunrise "7:30"))
-         (night (if location-set? :sunset "19:30")))
-    (setq circadian-themes `((,day . modus-operandi)
-                             (,night . modus-vivendi)))))
+;; There are two ways to load a theme. Both assume the theme is installed and
+;; available. You can either set `doom-theme' or manually load a theme with the
+;; `load-theme' function.
+(setq doom-theme (if window-system 'doom-flatwhite 'doom-miramare))
 
 ;; Configure modus-themes:
 (progn
