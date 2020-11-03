@@ -301,10 +301,11 @@
           :i "<next>"    #'eshell-next-matching-input-from-input
           :i "S-<prior>" #'scroll-down-command
           :i "S-<next>"  #'scroll-up-command
-
-          :localleader
-          (:prefix ("t" . "toggle")
-           :desc "Scroll on output" "s" #'eshell-toggle-scroll-to-bottom-on-output)))
+          [remap evil-backward-section-begin] #'eshell-previous-prompt
+          [remap evil-forward-section-begin] #'eshell-next-prompt
+          (:localleader
+           (:prefix ("t" . "toggle")
+            :desc "Scroll on output" "s" #'eshell-toggle-scroll-to-bottom-on-output))))
 
   (after! eshell
     (setq +eshell-aliases
