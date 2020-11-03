@@ -45,6 +45,19 @@
            modus-%1$s-theme-variable-pitch-headings t)
      theme)))
 
+(use-package! parchment-theme
+  :config
+  (after! solaire-mode
+    (add-to-list 'solaire-mode-themes-to-face-swap "parchment"))
+  (setq parchment-add-mode-hooks t)
+  ;; Switch to Go Mono when using parchment.
+  (let ((old-font doom-font))
+    (add-hook! 'doom-load-theme-hook :append
+      (setq doom-font (if (eq doom-theme 'parchment)
+                          (font-spec :family "Go Mono" :size 11.0)
+                        old-font))
+      (doom/reload-font))))
+
 ;; Rainbow delimiters can't be safely disabled in Doom, so just neuter it.
 (custom-set-faces!
   '((rainbow-delimiters-depth-1-face rainbow-delimiters-depth-2-face
