@@ -3,6 +3,7 @@
 	email = a@ajgrf.com
 [core]
 	excludesFile = ~/.gitignore_global
+	longpaths = true
 [alias]
 	br = branch
 	ci = commit --verbose
