@@ -335,6 +335,9 @@
              (if (= (user-uid) 0) "# " "$ "))))
     (setq eshell-prompt-regexp "^[^#$\n]*[#$] ")
 
+    (setq eshell-history-size nil
+          eshell-scroll-to-bottom-on-input nil)
+
     (defun eshell-toggle-scroll-to-bottom-on-output ()
       "Toggle `eshell-scroll-to-bottom-on-output'."
       (interactive)
@@ -342,9 +345,7 @@
             (not eshell-scroll-to-bottom-on-output)))
 
     (add-hook! eshell-mode
-      (setenv "INSIDE_EMACS" (format "%s,eshell" emacs-version)))
-
-    (setq eshell-scroll-to-bottom-on-input nil)))
+      (setenv "INSIDE_EMACS" (format "%s,eshell" emacs-version)))))
 
 (when (or (featurep! :term shell)
           (featurep! :term eshell)
