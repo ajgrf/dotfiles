@@ -307,25 +307,19 @@
            :desc "Scroll on output" "s" #'eshell-toggle-scroll-to-bottom-on-output)))
 
   (after! eshell
+    (setq +eshell-aliases
+          `(("backup" "ajgrf/backup")
+            ("dot" ,(concat "git --git-dir=\"" dotfiles-git-dir
+                            "\" --work-tree=\"" (getenv "HOME") "\" $*"))
+            ("edit" "find-file $1")
+            ("la" "ls -A $*")
+            ("ll" "ls -lah $*")
+            ("mkcd" "mkdir $1 && cd $1")
+            ("youtube-dl" "ajgrf/youtube-dl-url $1")))
+
     (unless IS-WINDOWS
       (require 'em-tramp)
       (set-eshell-alias! "sudo" "eshell/sudo $*"))
-
-    (set-eshell-alias!
-     "backup" "ajgrf/backup"
-     "date" "*date $*"
-     "dot" (concat "git --git-dir=\"" dotfiles-git-dir
-                   "\" --work-tree=\"" (getenv "HOME") "\" $*")
-     "edit" "find-file $1"
-     "feh" "feh -. -Z -B black -D -10 $*"
-     "ls" "ls -A -1 $*"
-     "lc" "eshell/ls -A $*"
-     "l" "lc $*"
-     "la" "ls -a $*"
-     "ll" "ls -la $*"
-     "lh" "ll -h $*"
-     "mkcd" "mkdir $1 && cd $1"
-     "youtube-dl" "ajgrf/youtube-dl-url $1")
 
     (setq eshell-banner-message "")
     (setq eshell-prompt-function
