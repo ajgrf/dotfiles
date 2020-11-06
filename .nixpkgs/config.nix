@@ -24,6 +24,7 @@ in
       extraOutputsToInstall = [ "doc" "man" ];
       paths = [
         anki
+        bitwarden
         ungoogled-chromium
         firefox
         gnome3.gnome-boxes
@@ -87,7 +88,6 @@ in
       extraOutputsToInstall = [ "doc" "man" ];
       paths = [
         aria2
-        bitwarden
         bitwarden-cli
         brightnessctl
         direnv
