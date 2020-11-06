@@ -35,6 +35,7 @@ in
         lollypop
         protonmail-bridge
         # quodlibet
+        unstable.pkgs.signal-desktop
         spotify
         unstable.pkgs.tor-browser-bundle-bin
         transmission-gtk
