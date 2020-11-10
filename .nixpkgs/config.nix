@@ -37,7 +37,7 @@ in
         # quodlibet
         unstable.pkgs.signal-desktop
         spotify
-        unstable.pkgs.tor-browser-bundle-bin
+        # tor-browser-bundle-bin
         transmission-gtk
         virt-manager
         vlc
