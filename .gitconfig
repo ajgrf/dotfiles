@@ -1,6 +1,5 @@
 [user]
-	name = Alex Griffin
-	email = a@ajgrf.com
+	useConfigOnly = true
 [core]
 	excludesFile = ~/.gitignore_global
 	longpaths = true
@@ -20,7 +19,3 @@
 	decorate = short
 [push]
 	default = simple
-[gitlab]
-	user = ajgrf
-[github]
-	user = ajgrf
