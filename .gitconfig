@@ -20,3 +20,5 @@
 	decorate = short
 [push]
 	default = simple
+[include]
+	path = .gitconfig_profiles
