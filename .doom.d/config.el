@@ -550,9 +550,10 @@
 This is set by `ajgrf/backup', so running that manually will enable the
 timer on a new system.")
 
-(when ajgrf/backup-timer-enabled
-  ;; Emacs is my operating system now.
-  (run-at-time t (* 2 60 60) #'ajgrf/backup))
+(add-hook! 'after-init-hook
+  (when ajgrf/backup-timer-enabled
+    ;; Emacs is my operating system now.
+    (run-at-time t (* 2 60 60) #'ajgrf/backup)))
 
 
 ;; Local Variables:
