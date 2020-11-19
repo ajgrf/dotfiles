@@ -23,6 +23,10 @@
 
   # Enable System76 kernel modules and firmware daemon.
   hardware.system76.enableAll = true;
+  # Include firmware update utility as well.
+  environment.systemPackages = with pkgs; [
+    firmware-manager
+  ];
 
   # Edited results of the hardware scan (nixos-generate-config):
 
