@@ -20,5 +20,7 @@
 	decorate = short
 [push]
 	default = simple
+[init]
+	defaultBranch = master
 [include]
 	path = .gitconfig_profiles
