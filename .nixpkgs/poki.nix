@@ -36,11 +36,11 @@
   boot.extraModulePackages = [ ];
 
   fileSystems."/" =
-    { device = "/dev/disk/by-uuid/c8b62c49-5b6a-454f-aa63-74144ce2b43a";
+    { device = "/dev/disk/by-uuid/4b1dfc45-80da-4d6b-b0e5-ae4ec96013d9";
       fsType = "ext4";
     };
 
-  boot.initrd.luks.devices."cryptroot".device = "/dev/disk/by-uuid/881c583f-599c-4185-970d-e81875c400ce";
+  boot.initrd.luks.devices."cryptroot".device = "/dev/disk/by-uuid/888a5986-072f-4118-8083-378776ac4660";
 
   fileSystems."/boot/efi" =
     { device = "/dev/disk/by-uuid/D282-B1CE";
