@@ -307,7 +307,7 @@
            (:prefix ("t" . "toggle")
             :desc "Scroll on output" "s" #'eshell-toggle-scroll-to-bottom-on-output))))
 
-  (after! eshell
+  (after! em-alias
     (setq +eshell-aliases
           `(("backup" "ajgrf/backup")
             ("dot" ,(concat "git --git-dir=\"" dotfiles-git-dir
@@ -324,8 +324,9 @@
     (when (executable-find "nixos-rebuild")
       (set-eshell-alias!
        "nixos-rebuild"
-       "NIXOS_CONFIG=\"$HOME/.nixpkgs/$HOSTNAME.nix\" sudo nixos-rebuild $*"))
+       "NIXOS_CONFIG=\"$HOME/.nixpkgs/$HOSTNAME.nix\" sudo nixos-rebuild $*")))
 
+  (after! eshell
     (setq eshell-banner-message "")
     (setq eshell-prompt-function
           (lambda ()
