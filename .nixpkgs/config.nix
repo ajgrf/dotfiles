@@ -41,7 +41,7 @@ in
         keybase-gui
         libreoffice
         lollypop
-        protonmail-bridge
+        unstable.protonmail-bridge
         # quodlibet
         unstable.pkgs.signal-desktop
         spotify
@@ -114,6 +114,7 @@ in
         libnotify
         moreutils
         mr
+        pass
         pinentry-gtk2
         poppler_utils
         unstable.pkgs.rbw
