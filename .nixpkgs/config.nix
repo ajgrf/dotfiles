@@ -19,6 +19,14 @@ in
       ];
     };
 
+    minimal-env = buildEnv {
+      name = "minimal-env";
+      paths = [
+        emacs-env
+        tools-env
+      ];
+    };
+
     apps-env = buildEnv {
       name = "apps-env";
       extraOutputsToInstall = [ "doc" "man" ];
