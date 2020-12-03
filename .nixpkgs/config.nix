@@ -45,6 +45,7 @@ in
         # quodlibet
         unstable.pkgs.signal-desktop
         spotify
+        thunderbird
         tor-browser-bundle-bin
         transmission-gtk
         virt-manager
