@@ -320,11 +320,7 @@
 
     (unless IS-WINDOWS
       (require 'em-tramp)
-      (set-eshell-alias! "sudo" "eshell/sudo $*"))
-    (when (executable-find "nixos-rebuild")
-      (set-eshell-alias!
-       "nixos-rebuild"
-       "NIXOS_CONFIG=\"$HOME/.nixpkgs/$HOSTNAME.nix\" sudo nixos-rebuild $*")))
+      (set-eshell-alias! "sudo" "eshell/sudo $*")))
 
   (after! eshell
     (setq eshell-banner-message "")
