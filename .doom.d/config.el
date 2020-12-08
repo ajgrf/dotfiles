@@ -30,21 +30,14 @@
 (use-package! modus-themes
   :defer t
   :init
-  ;; Set variables for both themes.
-  (defmacro modus-themes-format-sexp (sexp &rest objects)
-    `(eval (read (format ,(format "%S" sexp) ,@objects))))
-
-  (dolist (theme '("operandi" "vivendi"))
-    (modus-themes-format-sexp
-     (setq modus-%1$s-theme-slanted-constructs t
-           modus-%1$s-theme-prompts 'subtle
-           modus-%1$s-theme-completions 'opinionated
-           modus-%1$s-theme-fringes 'subtle
-           modus-%1$s-theme-org-blocks 'greyscale
-           modus-%1$s-theme-headings '((t . section))
-           modus-%1$s-theme-scale-headings t
-           modus-%1$s-theme-variable-pitch-headings t)
-     theme)))
+  (setq modus-themes-slanted-constructs t
+        modus-themes-prompts 'subtle
+        modus-themes-completions 'opinionated
+        modus-themes-fringes 'subtle
+        modus-themes-org-blocks 'greyscale
+        modus-themes-headings '((t . section))
+        modus-themes-scale-headings t
+        modus-themes-variable-pitch-headings t))
 
 (use-package! parchment-theme
   :defer t

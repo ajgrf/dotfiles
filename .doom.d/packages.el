@@ -59,7 +59,6 @@
 (package! eshell-did-you-mean :disable t)
 (when IS-LINUX
   (package! pdf-tools :recipe (:type built-in)))
-(package! modus-operandi-theme :pin "a5832c9310") ; 0.13.0
-(package! modus-vivendi-theme :pin "a5832c9310")  ; 0.13.0
+(package! modus-themes :pin "ab0f558397")         ; 1.0.2
 (when IS-WINDOWS
   (package! ssh-agency :pin "a5377e4317"))        ; 0.4.1
