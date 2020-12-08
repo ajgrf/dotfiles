@@ -55,7 +55,7 @@
   (package! parchment-theme))
 (package! minions :pin "36d39bd25a")    ; v0.3.4
 (package! vimrc-mode :pin "13bc150a87") ; November 2018
-(package! shrface :pin "c82447df5b")    ; 2.6
+(package! shrface :pin "716b8a51ab")    ; 2.6.1
 (package! eshell-did-you-mean :disable t)
 (when IS-LINUX
   (package! pdf-tools :recipe (:type built-in)))
