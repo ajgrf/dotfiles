@@ -75,7 +75,9 @@
        eshell            ; the elisp shell that works everywhere
        ;;term              ; basic terminal emulator for Emacs
        (:if (and module-file-suffix
-                 (not IS-WINDOWS))
+                 (not IS-WINDOWS)
+                 (or (executable-find "clang")
+                     (file-exists-p "/nix/store")))
         vterm            ; the best terminal emulation in Emacs
         shell)           ; simple shell REPL for Emacs
 
