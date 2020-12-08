@@ -31,7 +31,7 @@ bind ? fillcmdline find -?
 bind n findnext 1
 bind N findnext -1
 " remove search highlighting.
-bind ,<Space> nohlsearch
+bind <Escape> composite mode normal; hidecmdline; nohlsearch
 
 bind gp pin
 bind --mode=ex <S-Backspace> text.kill_word
