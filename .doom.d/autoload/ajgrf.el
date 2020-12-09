@@ -43,7 +43,8 @@
 (defun ajgrf/backup ()
   "Back up home directory."
   (interactive)
-  (customize-save-variable 'ajgrf/backup-timer-enabled t)
+  (unless ajgrf/backup-timer-enabled
+    (customize-save-variable 'ajgrf/backup-timer-enabled t))
   (ajgrf/run-command-in-buffer
    "kopia" "snapshot" "create" (expand-file-name "~")))
 
