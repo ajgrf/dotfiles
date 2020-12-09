@@ -50,16 +50,16 @@
 ;; our package manager can't deal with; see raxod502/straight.el#279)
 ;(package! builtin-package :recipe (:branch "develop"))
 
+(package! eshell-did-you-mean :disable t)
+(package! minions :pin "36d39bd25a")              ; v0.3.4
+(package! modus-themes :pin "ab0f558397")         ; 1.0.2
 (if (file-exists-p "~/src/parchment")
     (package! parchment-theme :recipe (:local-repo "~/src/parchment"))
   (package! parchment-theme))
-(package! minions :pin "36d39bd25a")    ; v0.3.4
-(package! vimrc-mode :pin "13bc150a87") ; November 2018
-(package! shrface :pin "716b8a51ab")    ; 2.6.1
-(package! eshell-did-you-mean :disable t)
 ;; Nix profile includes pre-built pdf-tools:
 (when (file-exists-p "/nix/store")
   (package! pdf-tools :recipe (:type built-in)))
-(package! modus-themes :pin "ab0f558397")         ; 1.0.2
+(package! shrface :pin "716b8a51ab")              ; 2.6.1
 (when IS-WINDOWS
   (package! ssh-agency :pin "a5377e4317"))        ; 0.4.1
+(package! vimrc-mode :pin "13bc150a87")           ; November 2018
