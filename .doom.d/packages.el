@@ -57,7 +57,8 @@
 (package! vimrc-mode :pin "13bc150a87") ; November 2018
 (package! shrface :pin "716b8a51ab")    ; 2.6.1
 (package! eshell-did-you-mean :disable t)
-(when IS-LINUX
+;; Nix profile includes pre-built pdf-tools:
+(when (file-exists-p "/nix/store")
   (package! pdf-tools :recipe (:type built-in)))
 (package! modus-themes :pin "ab0f558397")         ; 1.0.2
 (when IS-WINDOWS
