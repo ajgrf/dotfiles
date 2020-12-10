@@ -55,7 +55,7 @@
 ;;;###autoload
 (defun ajgrf/find-plan-file ()
   (interactive)
-  (find-file-existing "~/org/plan.org"))
+  (find-file-existing (concat org-directory "/plan.org")))
 
 (defun ajgrf/comint-write-history-on-exit (process event)
   "Sentinel to write history file when its process exits."

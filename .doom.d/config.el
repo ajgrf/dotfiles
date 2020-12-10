@@ -209,25 +209,25 @@
         "RET" #'ledger-reconcile-finish))
 
 ;;; :lang org
-(setq org-directory "~/org/")
+(setq org-directory "~/Nextcloud/Org/")
 (when (featurep! :lang org)
   (map! :localleader
         :map org-mode-map
         :desc "Toggle link display" "L" #'org-toggle-link-display)
   (after! org
-    (setq org-agenda-files '("~/org/plan.org" "~/org/training.org")
+    (setq org-agenda-files (list org-directory)
           org-agenda-span 'day
           org-agenda-start-day nil
           org-agenda-timegrid-use-ampm t
           org-agenda-todo-ignore-scheduled t
           org-capture-templates
-          '(("t" "Task" entry (file+headline "~/org/plan.org" "Tasks")
+          '(("t" "Task" entry (file+headline "plan.org" "Tasks")
              "* TODO %?\n %i\n  %a\n")
-            ("a" "Appointment" entry (file+headline "~/org/plan.org" "Calendar")
+            ("a" "Appointment" entry (file+headline "plan.org" "Calendar")
              "* %?\n %i\n  %a\n")
-            ("f" "FOCUS Task" entry (file+headline "~/org/plan.org" "FOCUS")
+            ("f" "FOCUS Task" entry (file+headline "plan.org" "FOCUS")
              "* TODO %?\n %i\n  %a\n"))
-          org-default-notes-file "~/org/inbox.org"
+          org-default-notes-file (concat org-directory "/inbox.org")
           org-fontify-done-headline nil
           org-image-actual-width nil
           org-link-abbrev-alist '(("attach" . org-attach-expand-link))
