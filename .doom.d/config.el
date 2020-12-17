@@ -177,7 +177,8 @@
         ledger-post-amount-alignment-column 52
         ledger-reconcile-buffer-line-format "%(date)s  %-30(payee)s %-25(account)s %10(amount)s\n"
         ledger-reconcile-buffer-account-max-chars 25
-        ledger-reconcile-buffer-payee-max-chars 30)
+        ledger-reconcile-buffer-payee-max-chars 30
+        ledger-report-links-in-register nil)
 
   ;; Don't reindent previous line when inserting newline.
   (setq-hook! ledger-mode electric-indent-inhibit t)
