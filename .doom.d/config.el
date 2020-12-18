@@ -179,6 +179,11 @@
         ledger-reconcile-buffer-account-max-chars 25
         ledger-reconcile-buffer-payee-max-chars 30
         ledger-report-links-in-register nil)
+  (after! ledger-report
+    (setq ledger-reports
+          (append '(("balancesheet" "%(binary) -f %(ledger-file) balance --real Assets Liabilities")
+                    ("incomestatement" "%(binary) -f %(ledger-file) balance --invert Income Expenses"))
+                  ledger-reports)))
 
   ;; Don't reindent previous line when inserting newline.
   (setq-hook! ledger-mode electric-indent-inhibit t)
