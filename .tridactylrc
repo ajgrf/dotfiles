@@ -8,6 +8,8 @@ source ~/.tridactyl/quickmarks.tri
 
 " dark theme looks better even when everything else is light
 set theme dark
+" don't display the current mode over the page
+set modeindicator false
 
 set editorcmd emacs
 set newtab about:blank
