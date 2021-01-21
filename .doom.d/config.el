@@ -221,7 +221,7 @@
         :map org-mode-map
         :desc "Toggle link display" "L" #'org-toggle-link-display)
   (after! org
-    (setq org-agenda-files (list org-directory)
+    (setq org-agenda-files (concat org-directory "/agenda.txt")
           org-agenda-span 'day
           org-agenda-start-day nil
           org-agenda-timegrid-use-ampm t
