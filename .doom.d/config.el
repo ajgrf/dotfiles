@@ -25,7 +25,9 @@
 ;; There are two ways to load a theme. Both assume the theme is installed and
 ;; available. You can either set `doom-theme' or manually load a theme with the
 ;; `load-theme' function.
-(setq doom-theme (if window-system 'doom-flatwhite 'doom-tomorrow-night))
+(setq doom-theme (if (= (display-color-cells) 16777216)
+                     'doom-flatwhite
+                   'doom-tomorrow-night))
 
 (use-package! modus-themes
   :defer t
