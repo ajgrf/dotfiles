@@ -25,9 +25,18 @@
 ;; There are two ways to load a theme. Both assume the theme is installed and
 ;; available. You can either set `doom-theme' or manually load a theme with the
 ;; `load-theme' function.
-(setq doom-theme (if (= (display-color-cells) 16777216)
-                     'doom-flatwhite
-                   'doom-tomorrow-night))
+(setq doom-theme 'doom-tomorrow-night)
+
+;; Select theme by time of day:
+(use-package! circadian
+  :if (= (display-color-cells) 16777216)
+  :hook (after-init . circadian-setup)
+  :config
+  (let* ((location-set? (and calendar-latitude calendar-longitude t))
+         (day (if location-set? :sunrise "7:30"))
+         (night (if location-set? :sunset "19:30")))
+    (setq circadian-themes `((,day . doom-flatwhite)
+                             (,night . doom-tomorrow-night)))))
 
 (use-package! modus-themes
   :defer t

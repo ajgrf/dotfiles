@@ -50,6 +50,7 @@
 ;; our package manager can't deal with; see raxod502/straight.el#279)
 ;(package! builtin-package :recipe (:branch "develop"))
 
+(package! circadian :pin "414127acad")            ; October 2018
 (package! eshell-did-you-mean :disable t)
 (package! minions :pin "36d39bd25a")              ; v0.3.4
 (package! modus-themes :pin "ab0f558397")         ; 1.0.2
