@@ -42,7 +42,7 @@ vterm_prompt_end() {
 }
 
 case "$TERM" in
-xterm* | rxvt* | st* | screen* | tmux*)
+xterm* | alacritty* | rxvt* | st* | screen* | tmux*)
 	PS1="\[\e]0;\u@\h: \w\a\]$PS1"      # Set title
 	PS1="\[\e[1;34m\]$PS1\[\e[m\]"      # Color the prompt
 	PS1="$PS1"'\[$(vterm_prompt_end)\]' # vterm directory- & prompt-tracking

@@ -46,7 +46,7 @@ prompt() {
 PS1='$(prompt || echo "> ")'
 
 case "$TERM" in
-xterm* | rxvt* | st* | screen* | tmux*)
+xterm* | alacritty* | rxvt* | st* | screen* | tmux*)
 	printf '\e]0;%s\a' "${USER}@${HOSTNAME%%.*} ($0)"
 	;;
 esac
