@@ -81,6 +81,14 @@
 (setq frame-title-format "%b - GNU Emacs"
       icon-title-format frame-title-format)
 
+;; Update Terminal emulator title.
+(when (featurep! :os tty)
+  (add-hook! after-init :append
+    (use-package! xterm-title
+      :if (and (not window-system)
+               (not noninteractive))
+      :hook (post-command . xterm-title-update))))
+
 ;; Set initial window geometry to 90x50 characters.
 (add-to-list 'default-frame-alist '(width . 90))
 (add-to-list 'default-frame-alist '(height . 50))
