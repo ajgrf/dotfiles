@@ -34,8 +34,8 @@
   "Run 'youtube-dl' over the URL.  If URL is nil, use URL at point."
   (interactive)
   (require 'xdg)
-  (let ((default-directory (or (xdg-user-dir "DOWNLOAD")
-                               "~/Downloads"))
+  (let ((default-directory (or (xdg-user-dir "DESKTOP")
+                               "~/Desktop"))
         (url (or url (thing-at-point-url-at-point))))
     (ajgrf/run-command-in-buffer "youtube-dl" url)))
 

@@ -162,8 +162,8 @@
     :commands elfeed
     :config
     (require 'xdg)
-    (setq elfeed-enclosure-default-dir (or (xdg-user-dir "DOWNLOAD")
-                                           "~/Downloads")
+    (setq elfeed-enclosure-default-dir (or (xdg-user-dir "DESKTOP")
+                                           "~/Desktop")
           elfeed-search-filter "@1-month-ago +unread ")
     ;; Sync feeds with Nextcloud. Log in by running:
     ;; (customize-save-variable
