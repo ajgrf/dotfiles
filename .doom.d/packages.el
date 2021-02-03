@@ -51,6 +51,7 @@
 ;(package! builtin-package :recipe (:branch "develop"))
 
 (package! circadian :pin "414127acad")            ; October 2018
+(package! elfeed-protocol :pin "4a59e26216")      ; 0.8.0
 (package! eshell-did-you-mean :disable t)
 (package! minions :pin "36d39bd25a")              ; v0.3.4
 (package! modus-themes :pin "ab0f558397")         ; 1.0.2

@@ -146,27 +146,17 @@
 
 ;;; :app rss
 (when (featurep! :app rss)
-  (require 'xdg)
-  (setq elfeed-enclosure-default-dir (or (xdg-user-dir "DOWNLOAD")
-                                         "~/Downloads")
-        rmh-elfeed-org-files (list "links.org"))
-
-  (after! elfeed
-    (setq elfeed-search-filter "@1-month-ago +unread "))
-
-  (add-hook! 'elfeed-new-entry-hook
-    (elfeed-make-tagger :feed-title "LWN\\.net"
-                        :entry-title '("Kernel prepatch"
-                                       "Security-updates"
-                                       "Weekly Edition")
-                        :remove 'unread)
-    (elfeed-make-tagger :feed-title "Slate Star Codex"
-                        :entry-title '("Link" "OT" "Thread"
-                                       "Highlights")
-                        :remove 'unread)
-    (elfeed-make-tagger :feed-title "Barbell Logic Channel"
-                        :entry-title "^#[0-9]"
-                        :remove 'unread)))
+  (use-package! elfeed
+    :commands elfeed
+    :config
+    (require 'xdg)
+    (setq elfeed-enclosure-default-dir (or (xdg-user-dir "DOWNLOAD")
+                                           "~/Downloads")
+          elfeed-search-filter "@1-month-ago +unread ")
+    ;; Sync feeds with Nextcloud. Log in by running:
+    ;; (customize-save-variable
+    ;;  'elfeed-feeds '(("owncloud+http://user@server" :use-authinfo t)))
+    (elfeed-protocol-enable)))
 
 ;;; :completion ivy
 (setq ivy-magic-tilde nil
