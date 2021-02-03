@@ -144,6 +144,18 @@
 (setq delete-by-moving-to-trash t
       image-dired-external-viewermage nil)
 
+;; URL associations & trash fix on WSL. See:
+;; https://hungyi.net/posts/browse-emacs-urls-wsl/
+(defconst IS-WSL (and (eq system-type 'gnu/linux)
+                      (string-match "Linux.*Microsoft.*Linux"
+                                    (shell-command-to-string "uname -a"))
+                      t))
+(when IS-WSL
+  (setq browse-url-generic-program  "/mnt/c/Windows/System32/cmd.exe"
+        browse-url-generic-args     '("/c" "start")
+        browse-url-browser-function #'browse-url-generic
+        delete-by-moving-to-trash nil))
+
 ;;; :app rss
 (when (featurep! :app rss)
   (use-package! elfeed
