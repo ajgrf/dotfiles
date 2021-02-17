@@ -144,6 +144,10 @@
 (setq delete-by-moving-to-trash t
       image-dired-external-viewermage nil)
 
+;; Respect PATH on remote machines.
+(after! tramp
+  (add-to-list 'tramp-remote-path 'tramp-own-remote-path))
+
 ;; URL associations & trash fix on WSL. See:
 ;; https://hungyi.net/posts/browse-emacs-urls-wsl/
 (defconst IS-WSL (and (eq system-type 'gnu/linux)
