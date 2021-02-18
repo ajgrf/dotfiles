@@ -40,15 +40,6 @@
     (ajgrf/run-command-in-buffer "youtube-dl" url)))
 
 ;;;###autoload
-(defun ajgrf/backup ()
-  "Back up home directory."
-  (interactive)
-  (unless ajgrf/backup-timer-enabled
-    (customize-save-variable 'ajgrf/backup-timer-enabled t))
-  (ajgrf/run-command-in-buffer
-   "kopia" "snapshot" "create" (expand-file-name "~")))
-
-;;;###autoload
 (defun ajgrf/get-org-files ()
   (directory-files org-directory t "\.org$"))
 
