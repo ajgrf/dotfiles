@@ -116,9 +116,9 @@
 
       :leader
       (:prefix ("o" . "open")
-       :desc "Calculator"           "c"  #'calc
+       :desc "Calculator"            "c" #'calc
        (:when (featurep! :app rss)
-        :desc "Feed Reader"        "F" #'elfeed))
+        :desc "News Reader"          "n" #'elfeed))
 
       (:when (featurep! :tools magit)
         (:prefix ("g" . "git")
