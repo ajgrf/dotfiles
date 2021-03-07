@@ -54,14 +54,14 @@
 (package! elfeed-protocol :pin "4a59e26216")      ; 0.8.0
 (package! eshell-did-you-mean :disable t)
 (package! minions :pin "36d39bd25a")              ; v0.3.4
-(package! modus-themes :pin "ab0f558397")         ; 1.0.2
+(package! modus-themes :pin "0a36239baf")         ; 1.2.3
 (if (file-exists-p "~/src/parchment")
     (package! parchment-theme :recipe (:local-repo "~/src/parchment"))
   (package! parchment-theme))
 ;; Nix profile includes pre-built pdf-tools:
 (when (file-exists-p "/nix/store")
   (package! pdf-tools :recipe (:type built-in)))
-(package! shrface :pin "716b8a51ab")              ; 2.6.1
+(package! shrface :pin "3dc6b980a4")              ; 2.6.3
 (when IS-WINDOWS
   (package! ssh-agency :pin "a5377e4317"))        ; 0.4.1
 (package! vimrc-mode :pin "13bc150a87")           ; November 2018
