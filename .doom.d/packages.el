@@ -65,5 +65,3 @@
 (when IS-WINDOWS
   (package! ssh-agency :pin "a5377e4317"))        ; 0.4.1
 (package! vimrc-mode :pin "13bc150a87")           ; November 2018
-(package! xterm-frobs :pin "0832d58859")          ; December 2016
-(package! xterm-title :pin "b6ea73d297")          ; December 2009

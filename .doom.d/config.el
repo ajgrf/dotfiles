@@ -84,10 +84,10 @@
 ;; Update Terminal emulator title.
 (when (featurep! :os tty)
   (add-hook! after-init :append
-    (use-package! xterm-title
+    (use-package! term/xterm
       :if (and (not window-system)
                (not noninteractive))
-      :hook (post-command . xterm-title-update))))
+      :hook (post-command . xterm-set-window-title))))
 
 ;; Set initial window geometry to 90x50 characters.
 (add-to-list 'default-frame-alist '(width . 90))
