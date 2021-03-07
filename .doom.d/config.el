@@ -339,7 +339,7 @@
             ("la" "ls -A $*")
             ("ll" "ls -lah $*")
             ("mkcd" "mkdir $1 && cd $1")
-            ("youtube-dl" "ajgrf/youtube-dl-url $1")))
+            ("youtube-dl" "ajgrf/youtube-dl-url $*")))
 
     (unless IS-WINDOWS
       (require 'em-tramp)
