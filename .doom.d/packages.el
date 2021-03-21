@@ -53,6 +53,9 @@
 (package! circadian :pin "414127acad")            ; October 2018
 (package! elfeed-protocol :pin "4a59e26216")      ; 0.8.0
 (package! eshell-did-you-mean :disable t)
+(package! kbd-mode
+  :recipe (:host github :repo "slotThe/kbd-mode")
+  :pin "93bdd2300b")                              ; February 2021
 (package! minions :pin "36d39bd25a")              ; v0.3.4
 (package! modus-themes :pin "0a36239baf")         ; 1.2.3
 (if (file-exists-p "~/src/parchment")
