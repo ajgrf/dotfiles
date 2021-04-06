@@ -22,5 +22,13 @@
 	default = simple
 [init]
 	defaultBranch = master
-[include]
-	path = .gitconfig_profiles
+[user "personal"]
+	name = Alex Griffin
+	email = a@ajgrf.com
+[user "focus"]
+	name = Alex Griffin
+	email = alex.griffin@focusengineeringinc.com
+[github]
+	user = ajgrf
+[gitlab]
+	user = ajgrf
