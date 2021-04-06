@@ -1,0 +1,67 @@
+#!/bin/sh
+set -e
+
+# curl -L https://raw.githubusercontent.com/ajgrf/dotfiles/master/bin/setup-dotfiles | sh
+
+setup_nix() {
+	if ! type nix >/dev/null 2>&1; then
+		# Check prereqs
+		for exe in curl git xz; do
+			if ! type "$exe" >/dev/null 2>&1; then
+				echo "setup-dotfiles: prerequisite '$exe' not found" >&2
+				exit 127
+			fi
+		done
+
+		# Multi-user installation doesn't work on WSL
+		if ! grep -q -i microsoft /proc/sys/kernel/osrelease; then
+			INSTALL_NIX_OPTS=--daemon
+		fi
+
+		curl -L https://nixos.org/nix/install >install-nix
+		chmod +x install-nix
+		./install-nix $INSTALL_NIX_OPTS
+		rm ./install-nix
+
+		PATH="$HOME/.nix-profile/bin:$PATH"
+
+		nix-env -iA nixpkgs.nixFlakes
+		mkdir -p ~/.config/nix
+		echo "experimental-features = nix-command flakes ca-references" >~/.config/nix/nix.conf
+
+		mkdir ~/src
+		git clone https://github.com/ajgrf/nix-config.git ~/src/nix-config
+		cd ~/src/nix-config
+		git remote set-url origin git@github.com:ajgrf/nix-config.git
+		git config user.name "Alex Griffin"
+		git config user.email "a@ajgrf.com"
+		nix profile install .#minimal-env
+		cd -
+	fi
+}
+
+setup_dotfiles() {
+	if ! test -d ~/.dot; then
+		git clone https://github.com/ajgrf/dotfiles.git
+		cd dotfiles/
+		git remote set-url origin git@github.com:ajgrf/dotfiles.git
+		git config status.showuntrackedfiles no
+		git config user.name "Alex Griffin"
+		git config user.email "a@ajgrf.com"
+		cd ../
+		mv dotfiles/.git ~/.dot
+		rsync -a dotfiles/ ~/
+		rm -r dotfiles/
+	fi
+}
+
+setup_doom() {
+	if ! test -d ~/.emacs.d; then
+		git clone https://github.com/hlissner/doom-emacs.git ~/.emacs.d
+		~/.emacs.d/bin/doom install --no-env --no-fonts
+	fi
+}
+
+setup_nix
+setup_dotfiles
+setup_doom
