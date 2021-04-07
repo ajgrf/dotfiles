@@ -13,15 +13,7 @@ setup_nix() {
 			fi
 		done
 
-		# Multi-user installation doesn't work on WSL
-		if ! grep -q -i microsoft /proc/sys/kernel/osrelease; then
-			INSTALL_NIX_OPTS=--daemon
-		fi
-
-		curl -L https://nixos.org/nix/install >install-nix
-		chmod +x install-nix
-		./install-nix $INSTALL_NIX_OPTS
-		rm ./install-nix
+		curl -L https://nixos.org/nix/install | sh
 
 		PATH="$HOME/.nix-profile/bin:$PATH"
 
@@ -31,11 +23,13 @@ setup_nix() {
 
 		mkdir ~/src
 		git clone https://github.com/ajgrf/nix-config.git ~/src/nix-config
-		cd ~/src/nix-config
+		cd ~/src/nix-config/
 		git remote set-url origin git@github.com:ajgrf/nix-config.git
 		git config user.name "Alex Griffin"
 		git config user.email "a@ajgrf.com"
+
 		nix profile install .#minimal-env
+
 		cd -
 	fi
 }
