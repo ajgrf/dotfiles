@@ -24,7 +24,7 @@ if test -e "$HOME/.nix-profile/etc/profile.d/nix.sh"; then
 fi
 
 # Put my scripts and executables at the front of $PATH
-export PATH="$HOME/bin:$HOME/.local/bin:$PATH"
+export PATH="$HOME/bin:$HOME/.local/bin:$HOME/.emacs.d/bin:$PATH"
 
 # Set up GnuPG Agent
 if type gpgconf >/dev/null 2>&1; then
