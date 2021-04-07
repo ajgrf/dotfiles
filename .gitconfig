@@ -1,0 +1,36 @@
+[user]
+	useConfigOnly = true
+[core]
+	excludesFile = ~/.gitignore_global
+	longpaths = true
+[alias]
+	br = branch
+	ci = commit --verbose
+	co = checkout
+	com = commit --verbose
+	log1 = log --format=format:'%ad %h%d %s' --date=short
+	ls = ls-files
+	profile = "! { test \"$1\" && git config user.name \"$(git config user.\"$1\".name)\" && git config user.email \"$(git config user.\"$1\".email)\"; }; git config user.name; git config user.email; :"
+	st = status --short --branch
+	unmerged = log --format=format:'%ad %h%d %s' --date=short ^@{upstream} @
+	unpulled = log --format=format:'%ad %h%d %s' --date=short ^@ @{upstream}
+[color]
+	ui = false
+[log]
+	decorate = short
+[push]
+	default = simple
+[init]
+	defaultBranch = master
+[user "personal"]
+	name = Alex Griffin
+	email = a@ajgrf.com
+[user "focus"]
+	name = Alex Griffin
+	email = alex.griffin@focusengineeringinc.com
+[github]
+	user = ajgrf
+[gitlab]
+	user = ajgrf
+[credential]
+	helper = manager-core

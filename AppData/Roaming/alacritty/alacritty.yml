@@ -1,0 +1,39 @@
+# Configuration for Alacritty, the GPU enhanced terminal emulator.
+
+env:
+  TERM: xterm-256color
+
+# Colors (Tomorrow Night)
+colors:
+  primary:
+    background: '#1d1f21'
+    foreground: '#c5c8c6'
+  normal:
+    black:   '#1d1f21'
+    red:     '#cc6666'
+    green:   '#b5bd68'
+    yellow:  '#f0c674'
+    blue:    '#81a2be'
+    magenta: '#b294bb'
+    cyan:    '#8abeb7'
+    white:   '#c5c8c6'
+  bright:
+    black:   '#666666'
+    red:     '#d54e53'
+    green:   '#b9ca4a'
+    yellow:  '#e7c547'
+    blue:    '#7aa6da'
+    magenta: '#c397d8'
+    cyan:    '#70c0b1'
+    white:   '#eaeaea'
+
+draw_bold_text_with_bright_colors: false
+
+font:
+  normal:
+    family: Iosevka
+
+window:
+  dimensions:
+    columns: 90
+    lines: 50
