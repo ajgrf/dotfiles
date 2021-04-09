@@ -1,0 +1,113 @@
+#| --------------------------------------------------------------------------
+
+                                 KMonad: CLEAVE
+
+  This configuration file describes a layout for the Truly Ergonomic CLEAVE
+  keyboard. It assumes that the keyboard has been switched into "custom
+  layout" mode with Fn+Esc+Q to ensure each key emits a unique keycode.
+  The secondary ctrl should should also be set to F24 with Fn+Esc+P.
+
+
+  Copy-out the following template to quickly create a layer:
+
+(deflayer name
+  _    _    _    _    _    _    _    _    _    _    _    _    _    _    _    _
+       _    _    _    _    _    _    _    _    _    _    _    _    _    _    _
+  _    _    _    _    _    _    _    _    _    _    _    _    _    _    _    _
+  _         _    _    _    _    _    _    _    _    _    _    _    _    _    _
+  _         _    _    _    _    _              _    _    _    _    _    _    _
+  _         _    _    _    _    _    _    _    _    _    _    _    _    _
+  _    _         _         _                        _         _         _    _
+            _    _    _              _    _              _    _    _
+)
+
+  -------------------------------------------------------------------------- |#
+
+(defcfg
+  ;; For Linux
+  input  (device-file "/dev/input/by-...")
+  output (uinput-sink
+          "KMonad: CLEAVE"
+          "/run/current-system/sw/bin/sleep 1 && /run/current-system/sw/bin/setxkbmap -option compose:ralt)
+  ;; Set the compose key to `RightAlt'
+  cmp-seq ralt
+
+  ;; For Windows
+  ;; input  (low-level-hook)
+  ;; output (send-event-sink)
+
+  ;; For MacOS
+  ;; input  (iokit-name "my-keyboard-product-string")
+  ;; output (kext)
+
+  ;; Re-emit unhandled events
+  fallthrough true
+
+  ;; Disable command-execution
+  allow-cmd false
+)
+
+(defalias
+  ;; Source layer abbreviations
+  web  homepage
+  dir  computer
+  fnd  search
+  pau  pause
+  med  media
+  bkt  S-tab
+  pst  paste
+  prv  previoussong
+  pp   playpause
+  nxt  nextsong
+
+  ;; Multi-function keys
+  xcp (tap-hold-next 400 esc lctl)
+  spw (tap-hold-next 400 spc lmet)
+  slp (tap-hold-next 400 S-9 lsft)
+  srp (tap-hold-next 400 S-0 rsft)
+  meh C-A-S
+  )
+
+(defsrc
+  esc  f1   f2   f3   f4   f5   f6   caps rmet f7   f8   f9   f10  f11  f12  del
+       homepage computer search pause ins media prnt menu previoussong playpause nextsong mute vold volu slck
+  f16  grv  1    2    3    4    5    f22  f23  6    7    8    9    0    -    =
+  tab       q    w    e    r    t    f20  f21  y    u    i    o    p    [    ]
+  f24       a    s    d    f    g              h    j    k    l    ;    '    \
+  lsft      z    x    c    v    b    f19  bspc n    m    ,    .    /    rsft
+  lctl lalt      pgup      f17                      spc       up        ralt rctl
+            home pgdn end            f18  ret            left down rght
+)
+
+(deflayer qwerty
+  esc  f1   f2   f3   f4   f5   f6   caps rmet f7   f8   f9   f10  f11  f12  del
+       brup brdn @fnd @pau ins  @med prnt menu @prv @pp  @nxt mute vold volu slck
+  @bkt grv  1    2    3    4    5    @pst undo 6    7    8    9    0    -    =
+  tab       q    w    e    r    t    cut  copy y    u    i    o    p    [    ]
+  @xcp      a    s    d    f    g              h    j    k    l    ;    '    \
+  @slp      z    x    c    v    b    del  bspc n    m    ,    .    /    @srp
+  lctl lalt      pgup      @spw                     spc       up        ralt rctl
+            home pgdn end            @meh ret            left down rght
+)
+
+(deflayer name
+  _    _    _    _    _    _    _    _    _    _    _    _    _    _    _    _
+       _    _    _    _    _    _    _    _    _    _    _    _    _    _    _
+  _    _    _    _    _    _    _    _    _    _    _    _    _    _    _    _
+  _         _    _    _    _    _    _    _    _    _    _    _    A-f2 _    _
+  _         _    _    _    _    _              f13  f14  f15  f16  _    _    _
+  _         _    _    _    _    _    _    _    _    _    _    _    _    _
+  _    _         _         _                        _         _         _    _
+            _    _    _              _    _              _    _    _
+)
+
+;; (deflayer numpad
+;;   _    _    _    _    _    _    _    _    _    _    _    _    _    _    _    _
+;;        _    _    _    _    _    _    _    _    _    _    _    _    _    _    _
+;;   _    _    _    _    _    _    _    _    _    _    nlck kp/  kp*  kp-  _    _
+;;   _         _    _    _    _    _    _    _    _    kp7  kp8  kp9  kp+  _    _
+;;   _         _    _    _    _    _              _    kp4  kp5  kp6  kp+  _    _
+;;   _         _    _    _    _    _    _    _    _    kp1  kp2  kp3  _    _
+;;   _    _         _         _                        kp0       kp.       _    _
+;;             _    _    _              _    kprt           _    _    _
+;; )
