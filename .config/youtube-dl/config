@@ -1,0 +1,4 @@
+# youtube-dl configuration
+
+# format selection
+--format (bestvideo+bestaudio/best)[height<=?1080]
