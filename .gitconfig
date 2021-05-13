@@ -20,6 +20,8 @@
 	decorate = short
 [push]
 	default = simple
+[pull]
+	rebase = false
 [init]
 	defaultBranch = master
 [user "personal"]
