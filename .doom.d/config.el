@@ -148,12 +148,7 @@
 (after! tramp
   (add-to-list 'tramp-remote-path 'tramp-own-remote-path))
 
-;; URL associations & trash fix on WSL. See:
-;; https://hungyi.net/posts/browse-emacs-urls-wsl/
-(defconst IS-WSL (and (eq system-type 'gnu/linux)
-                      (string-match "Linux.*Microsoft.*Linux"
-                                    (shell-command-to-string "uname -a"))
-                      t))
+;; URL associations & trash fix on WSL.
 (when IS-WSL
   (setq browse-url-generic-program  "/mnt/c/Windows/System32/cmd.exe"
         browse-url-generic-args     '("/c" "start")

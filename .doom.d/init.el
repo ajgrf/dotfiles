@@ -14,6 +14,12 @@
 ;;      Alternatively, press 'gd' (or 'C-c c d') on a module to browse its
 ;;      directory (for easy access to its source code).
 
+;; https://hungyi.net/posts/browse-emacs-urls-wsl/
+(defconst IS-WSL (and (eq system-type 'gnu/linux)
+                      (string-match "Linux.*Microsoft.*Linux"
+                                    (shell-command-to-string "uname -a"))
+                      t))
+
 (doom! :input
        ;;chinese
        ;;japanese
