@@ -542,6 +542,14 @@
       ("^\\*youtube-dl\\*<4>" :vslot -5)
       ("^\\*youtube-dl\\*<5>" :vslot -6))))
 
+;;; alert-toast
+(when IS-WSL
+  (after! alert
+    (require 'alert-toast)
+    (setq alert-default-style 'toast)
+    (add-to-list 'alert-user-configuration
+                 '(((:category . "org-pomodoro")) toast nil))))
+
 ;;; shrface
 (with-eval-after-load 'shr
   (require 'shrface)

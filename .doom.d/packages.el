@@ -50,6 +50,10 @@
 ;; our package manager can't deal with; see raxod502/straight.el#279)
 ;(package! builtin-package :recipe (:branch "develop"))
 
+(when IS-WSL
+  (package! alert-toast
+    :recipe (:host github :repo "gkowzan/alert-toast")
+    :pin "9b34b05650"))                           ; March 2021
 (package! circadian :pin "414127acad")            ; October 2018
 (package! elfeed-protocol :pin "4a59e26216")      ; 0.8.0
 (package! eshell-did-you-mean :disable t)
