@@ -279,6 +279,16 @@
     (add-to-list 'org-modules 'org-depend)
     (add-to-list 'org-modules 'org-habit)))
 
+(when (featurep! :lang org +pomodoro)
+  (setq org-pomodoro-keep-killed-pomodoro-time t)
+  (map! :leader
+        (:prefix ("n" . "notes")
+         :desc "Toggle Pomodoro" "P" #'org-pomodoro)
+        :localleader
+        :map (org-mode-map org-agenda-mode-map)
+        (:prefix ("c" . "clock")
+         "p" #'org-pomodoro)))
+
 ;;; :lang scheme
 (when (featurep! :lang scheme)
   (setq geiser-default-implementation 'guile)
