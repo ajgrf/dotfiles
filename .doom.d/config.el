@@ -257,6 +257,7 @@
           org-fontify-done-headline nil
           org-image-actual-width nil
           org-link-abbrev-alist '(("attach" . org-attach-expand-link))
+          org-log-into-drawer "LOGBOOK"
           org-outline-path-complete-in-steps nil
           org-refile-allow-creating-parent-nodes 'confirm
           org-refile-targets '((ajgrf/get-org-files :maxlevel . 3))
