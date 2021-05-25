@@ -237,9 +237,6 @@
 ;;; :lang org
 (setq org-directory "~/Nextcloud/Org/")
 (when (featurep! :lang org)
-  (map! :localleader
-        :map org-mode-map
-        :desc "Toggle link display" "L" #'org-toggle-link-display)
   (after! org
     (setq org-agenda-files (concat org-directory "/agenda.txt")
           org-agenda-span 'day
