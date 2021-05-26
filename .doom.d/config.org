@@ -1,33 +1,62 @@
-;;; $DOOMDIR/config.el -*- lexical-binding: t; -*-
+#+TITLE: My Doom Emacs Configuration
+#+AUTHOR: Alex Griffin
+#+STARTUP: content
 
-;; Some functionality uses this to identify you, e.g. GPG configuration, email
-;; clients, file templates and snippets.
+* Introduction
+
+This file describes my Doom Emacs configuration in a literate programming style.
+Doom automatically tangles src blocks in this file to =DOOMDIR/config.el= on
+save or when ~doom sync~ is executed.
+
+Begin =config.el= by enabling lexical binding.
+
+#+BEGIN_SRC emacs-lisp
+;;; $DOOMDIR/config.el -*- lexical-binding: t; -*-
+#+END_SRC
+
+Some functionality uses this to identify you, e.g. GPG configuration, email
+clients, file templates and snippets.
+
+#+BEGIN_SRC emacs-lisp
 (setq user-full-name "Alex Griffin"
       user-mail-address "a@ajgrf.com")
+#+END_SRC
 
-;;; Appearance
+* Appearance
 
-;; Doom exposes five (optional) variables for controlling fonts in Doom. Here
-;; are the three important ones:
-;;
-;; + `doom-font'
-;; + `doom-variable-pitch-font'
-;; + `doom-big-font' -- used for `doom-big-font-mode'; use this for
-;;   presentations or streaming.
-;;
-;; They all accept either a font-spec, font string ("Input Mono-12"), or xlfd
-;; font string.
+** Fonts
+
+Doom exposes five (optional) variables for controlling fonts in Doom. Here
+are the three important ones:
+
++ ~doom-font~
++ ~doom-variable-pitch-font~
++ ~doom-big-font~ -- used for ~doom-big-font-mode~; use this for
+  presentations or streaming.
+
+They all accept either a font-spec, font string ("Input Mono-12"), or xlfd
+font string.
+
+#+BEGIN_SRC emacs-lisp
 (let ((size (if IS-WINDOWS 11.0 12.0)))
   (setq doom-font (font-spec :family "Iosevka" :size size)
         doom-serif-font (font-spec :family "Iosevka Slab Light")
         doom-variable-pitch-font (font-spec :family "Iosevka Aile")))
+#+END_SRC
 
-;; There are two ways to load a theme. Both assume the theme is installed and
-;; available. You can either set `doom-theme' or manually load a theme with the
-;; `load-theme' function.
+** Themes
+
+There are two ways to load a theme. Both assume the theme is installed and
+available. You can either set ~doom-theme~ or manually load a theme with the
+~load-theme~ function.
+
+#+BEGIN_SRC emacs-lisp
 (setq doom-theme 'doom-tomorrow-night)
+#+END_SRC
 
-;; Select theme by time of day:
+Select theme by time of day:
+
+#+BEGIN_SRC emacs-lisp
 (use-package! circadian
   :if (= (display-color-cells) 16777216)
   :hook (after-init . circadian-setup)
@@ -37,7 +66,14 @@
          (night (if location-set? :sunset "19:30")))
     (setq circadian-themes `((,day . doom-flatwhite)
                              (,night . doom-tomorrow-night)))))
+#+END_SRC
 
+*** Modus Themes
+
+A pair of highly accessible themes that conform with the WCAG AAA standard for
+colour contrast between background and foreground combinations.
+
+#+BEGIN_SRC emacs-lisp
 (use-package! modus-themes
   :defer t
   :init
@@ -49,7 +85,13 @@
         modus-themes-headings '((t . section))
         modus-themes-scale-headings t
         modus-themes-variable-pitch-headings t))
+#+END_SRC
 
+*** Parchment
+
+My own light editor theme for Vim and Emacs, inspired by Acme and Leuven.
+
+#+BEGIN_SRC emacs-lisp
 (use-package! parchment-theme
   :defer t
   :config
@@ -63,8 +105,13 @@
                           (font-spec :family "Go Mono" :size 11.0)
                         old-font))
       (doom/reload-font))))
+#+END_SRC
 
-;; Rainbow delimiters can't be safely disabled in Doom, so just neuter it.
+*** Disable Rainbow Delimiters
+
+Rainbow delimiters can't be safely disabled in Doom, so just neuter it.
+
+#+BEGIN_SRC emacs-lisp
 (custom-set-faces!
   '((rainbow-delimiters-depth-1-face rainbow-delimiters-depth-2-face
      rainbow-delimiters-depth-3-face rainbow-delimiters-depth-4-face
@@ -72,47 +119,72 @@
      rainbow-delimiters-depth-7-face rainbow-delimiters-depth-8-face
      rainbow-delimiters-depth-9-face)
     :foreground nil :background nil :weight normal))
+#+END_SRC
 
-;; This determines the style of line numbers in effect. If set to `nil', line
-;; numbers are disabled. For relative line numbers, set this to `relative'.
+** Interface Elements
+
+This determines the style of line numbers in effect. If set to =nil=, line
+numbers are disabled. For relative line numbers, set this to =relative=.
+
+#+BEGIN_SRC emacs-lisp
 (setq display-line-numbers-type t)
+#+END_SRC
 
-;; Remove Doom branding from title bar.
+Remove Doom branding from title bar.
+
+#+BEGIN_SRC emacs-lisp
 (setq frame-title-format "%b - GNU Emacs"
       icon-title-format frame-title-format)
+#+END_SRC
 
-;; Update Terminal emulator title.
+Update Terminal emulator title.
+
+#+BEGIN_SRC emacs-lisp
 (when (featurep! :os tty)
   (add-hook! after-init :append
     (use-package! term/xterm
       :if (and (not window-system)
                (not noninteractive))
       :hook (post-command . xterm-set-window-title))))
+#+END_SRC
 
-;; Set initial window geometry to 90x50 characters.
+Set initial window geometry to 90x50 characters.
+
+#+BEGIN_SRC emacs-lisp
 (add-to-list 'default-frame-alist '(width . 90))
 (add-to-list 'default-frame-alist '(height . 50))
+#+END_SRC
 
-;; List minor modes behind a menu in the mode-line.
+List minor modes behind a menu in the mode-line.
+
+#+BEGIN_SRC emacs-lisp
 (use-package! minions
   :config
   (setq doom-modeline-minor-modes t
         minions-direct '(emms))
   (minions-mode 1))
+#+END_SRC
 
-;;; Keybindings
+* Keybindings
 
-;; Set leader keys.
-(setq doom-leader-key "SPC")
-(setq doom-leader-alt-key "C-SPC")
-(setq doom-localleader-key "SPC m")
-(setq doom-localleader-alt-key "C-SPC m")
+Set leader keys.
 
-;; The comma key also works as the local leader.
+#+BEGIN_SRC emacs-lisp
+(setq doom-leader-key "SPC"
+      doom-leader-alt-key "C-SPC"
+      doom-localleader-key "SPC m"
+      doom-localleader-alt-key "C-SPC m")
+#+END_SRC
+
+The comma key also works as the local leader.
+
+#+BEGIN_SRC emacs-lisp
 (map! :nvm ","   (general-simulate-key "SPC m")
-      :ei  "C-," (general-simulate-key "C-SPC m")
+      :ei  "C-," (general-simulate-key "C-SPC m"))
+#+END_SRC
 
-      :n   "gY"  #'ajgrf/youtube-dl-url
+#+BEGIN_SRC emacs-lisp
+(map! :n   "gY"  #'ajgrf/youtube-dl-url
 
       :leader
       (:prefix ("o" . "open")
@@ -139,23 +211,172 @@
           :desc "Unhighlight regexp" "u" #'unhighlight-regexp
           :desc "Matching lines"     "l" #'highlight-lines-matching-regexp
           :desc "Hi Lock mode"       "U" #'hi-lock-mode)))
+#+END_SRC
 
-;;; File Management
+* File Management
+
+#+BEGIN_SRC emacs-lisp
 (setq delete-by-moving-to-trash t
       image-dired-external-viewermage nil)
+#+END_SRC
 
-;; Respect PATH on remote machines.
+Respect PATH on remote machines.
+
+#+BEGIN_SRC emacs-lisp
 (after! tramp
   (add-to-list 'tramp-remote-path 'tramp-own-remote-path))
+#+END_SRC
 
-;; URL associations & trash fix on WSL.
+URL associations & trash fix on WSL.
+
+#+BEGIN_SRC emacs-lisp
 (when IS-WSL
   (setq browse-url-generic-program  "/mnt/c/Windows/System32/cmd.exe"
         browse-url-generic-args     '("/c" "start")
         browse-url-browser-function #'browse-url-generic
         delete-by-moving-to-trash nil))
+#+END_SRC
 
-;;; :app rss
+* Editor
+** Completion (:completion ivy)
+
+#+BEGIN_SRC emacs-lisp
+(setq ivy-magic-tilde nil
+      counsel-projectile-switch-project-action 'dired)
+#+END_SRC
+
+** Auto-Formatting (:editor format)
+
+Disable automatic formatting for the following file types:
+
+#+BEGIN_SRC emacs-lisp
+(setq +format-on-save-enabled-modes
+      '(not emacs-lisp-mode  ; elisp's mechanisms are good enough
+            sql-mode         ; sqlformat is currently broken
+            tex-mode         ; latexindent is broken
+            latex-mode
+            ledger-mode))    ; sorting mangles my file
+#+END_SRC
+
+** Popup Rules (:ui popup)
+
+#+BEGIN_SRC emacs-lisp
+(when (featurep! :ui popup)
+  (set-popup-rules!
+    '(("^\\*Ledger Report" :size 25)
+      ("^\\*youtube-dl"       :vslot -2)
+      ("^\\*youtube-dl\\*<2>" :vslot -3)
+      ("^\\*youtube-dl\\*<3>" :vslot -4)
+      ("^\\*youtube-dl\\*<4>" :vslot -5)
+      ("^\\*youtube-dl\\*<5>" :vslot -6))))
+#+END_SRC
+
+* Org Mode (:lang org)
+
+My life in plain text.
+
+#+BEGIN_SRC emacs-lisp
+(setq org-directory "~/Nextcloud/Org/")
+(when (featurep! :lang org)
+  (after! org
+    (setq org-agenda-files (concat org-directory "/agenda.txt")
+          org-agenda-span 'day
+          org-agenda-start-day nil
+          org-agenda-timegrid-use-ampm t
+          org-agenda-todo-ignore-scheduled t
+          org-capture-templates
+          '(("t" "Task" entry (file+headline "plan.org" "Tasks")
+             "* TODO %?\n %i\n  %a\n")
+            ("a" "Appointment" entry (file+headline "plan.org" "Calendar")
+             "* %?\n %i\n  %a\n")
+            ("f" "FOCUS Task" entry (file+headline "plan.org" "FOCUS")
+             "* TODO %?\n %i\n  %a\n"))
+          org-default-notes-file (concat org-directory "/inbox.org")
+          org-fontify-done-headline nil
+          org-image-actual-width nil
+          org-link-abbrev-alist '(("attach" . org-attach-expand-link))
+          org-log-into-drawer "LOGBOOK"
+          org-outline-path-complete-in-steps nil
+          org-refile-allow-creating-parent-nodes 'confirm
+          org-refile-targets '((ajgrf/get-org-files :maxlevel . 3))
+          org-refile-use-outline-path 'file
+          org-return-follows-link t
+          org-startup-folded 'showall
+          org-startup-with-inline-images t
+          org-todo-keywords '((sequence "TODO(t)" "WAITING(w)" "DONE(d!)"))
+          holiday-bahai-holidays nil
+          holiday-hebrew-holidays nil
+          holiday-islamic-holidays nil
+          holiday-oriental-holidays nil
+          holiday-other-holidays '((holiday-fixed 5 5 "Cinco de Mayo")))
+    (add-to-list 'org-modules 'org-attach)
+    (add-to-list 'org-modules 'org-depend)
+    (add-to-list 'org-modules 'org-habit)))
+#+END_SRC
+
+** Pomodoro Support
+
+#+BEGIN_SRC emacs-lisp
+(when (featurep! :lang org +pomodoro)
+  (setq org-pomodoro-keep-killed-pomodoro-time t)
+  (map! :leader
+        (:prefix ("n" . "notes")
+         :desc "Toggle Pomodoro" "P" #'org-pomodoro)
+        :localleader
+        :map (org-mode-map org-agenda-mode-map)
+        (:prefix ("c" . "clock")
+         "p" #'org-pomodoro)))
+#+END_SRC
+
+** Alerts on WSL
+
+#+BEGIN_SRC emacs-lisp
+(when IS-WSL
+  (after! alert
+    (require 'alert-toast)
+    (setq alert-default-style 'toast)
+    (add-to-list 'alert-user-configuration
+                 '(((:category . "org-pomodoro")) toast nil))))
+
+#+END_SRC
+
+** [[https://github.com/chenyanming/shrface][Use Org Faces Elsewhere]]
+
+Extend shr/eww with Org features and faces.
+
+#+BEGIN_SRC emacs-lisp
+(with-eval-after-load 'shr
+  (require 'shrface)
+  (shrface-basic) ; enable shrfaces, must be called before loading eww/dash-docs/nov.el
+  (shrface-trial) ; enable shrface experimental face(s), must be called before loading eww/dash-docs/nov.el
+  (setq shrface-href-versatile t) ; enable versatile URL faces support
+                                  ; (http/https/ftp/file/mailto/other), if
+                                  ; `shrface-href-versatile' is nil, default
+                                  ; face `shrface-href-face' would be used.
+  (setq shrface-toggle-bullets nil) ; Set t if you do not like headline bullets
+
+  ;; eww support
+  (with-eval-after-load 'eww
+    (add-hook 'eww-after-render-hook 'shrface-mode))
+
+  ;; nov support
+  (with-eval-after-load 'nov
+    (setq nov-shr-rendering-functions '((img . nov-render-img) (title . nov-render-title))) ; reset nov-shr-rendering-functions, in case of the list get bigger and bigger
+    (setq nov-shr-rendering-functions (append nov-shr-rendering-functions shr-external-rendering-functions))
+    (add-hook 'nov-mode-hook 'shrface-mode))
+
+  ;; mu4e support
+  (with-eval-after-load 'mu4e
+    (add-hook 'mu4e-view-mode-hook 'shrface-mode)))
+#+END_SRC
+
+** TODO Set up [[https://github.com/akhramov/org-wild-notifier.el][org-wild-notifier.el]]
+
+* Applications
+
+** Feed Aggregator (:app rss)
+
+#+BEGIN_SRC emacs-lisp
 (when (featurep! :app rss)
   (use-package! elfeed
     :commands elfeed
@@ -168,30 +389,85 @@
     ;; (customize-save-variable
     ;;  'elfeed-feeds '(("owncloud+http://user@server" :use-authinfo t)))
     (elfeed-protocol-enable)))
+#+END_SRC
 
-;;; :completion ivy
-(setq ivy-magic-tilde nil
-      counsel-projectile-switch-project-action 'dired)
+* Tools
 
-;;; :editor format
-(setq +format-on-save-enabled-modes
-      '(not emacs-lisp-mode  ; elisp's mechanisms are good enough
-            sql-mode         ; sqlformat is currently broken
-            tex-mode         ; latexindent is broken
-            latex-mode
-            ledger-mode))    ; sorting mangles my file
+** direnv (:tools direnv)
 
-;;; :lang cc
+#+BEGIN_SRC emacs-lisp
+(setq direnv-always-show-summary nil)
+#+END_SRC
+
+** Git (:tools magit)
+
+#+BEGIN_SRC emacs-lisp
+(defvar dotfiles-git-dir
+  (expand-file-name "~/.dot")
+  "Location of dotfiles git directory.")
+
+(when (featurep! :tools magit)
+  (setq forge-topic-list-limit -5)
+
+  (when IS-WINDOWS
+    (setenv "SSH_ASKPASS" "git-gui--askpass"))
+
+  (defadvice! with-dotfiles-git-dir (orig-fn &optional directory cache)
+    "Support separate git directory for dotfiles in home."
+    :around 'magit-status
+    (let* ((git-dir-arg (concat "--git-dir=" dotfiles-git-dir))
+           (cache (if (member git-dir-arg magit-git-global-arguments)
+                      nil
+                    cache)))
+      (if (string= directory "~/")
+          (add-to-list 'magit-git-global-arguments git-dir-arg)
+        (setq magit-git-global-arguments
+              (remove git-dir-arg magit-git-global-arguments)))
+      (apply orig-fn (list directory cache)))))
+
+#+END_SRC
+
+** PDF Tools (:tools pdf)
+
+#+BEGIN_SRC emacs-lisp
+(when (featurep! :tools pdf)
+  (add-hook! 'pdf-view-mode-hook
+    (pdf-view-auto-slice-minor-mode 1))
+
+  (map! :map pdf-view-mode-map
+        :n "J" #'pdf-view-next-page
+        :n "K" #'pdf-view-previous-page
+        :n "<tab>" #'pdf-outline
+
+        :localleader
+        "t" #'pdf-view-midnight-minor-mode))
+#+END_SRC
+
+* Languages
+
+** C/C++ (:lang cc)
+
+Default to sane indent rules for C.
+
+#+BEGIN_SRC emacs-lisp
 (add-hook! c-mode
   (setq indent-tabs-mode t)
   (add-to-list 'c-default-style '(c-mode . "linux")))
+#+END_SRC
 
-;;; :lang javascript
+** JavaScript (:lang javascript)
+
+#+BEGIN_SRC emacs-lisp
 (setq js-indent-level 2
       json-reformat:indent-width 2
       typescript-indent-level 2)
+#+END_SRC
 
-;;; :lang ledger
+** Ledger (:lang ledger)
+
+Ledger is a powerful, double-entry accounting system.
+
+#+BEGIN_SRC emacs-lisp
 (when (featurep! :lang ledger)
   (setq ledger-clear-whole-transactions nil
         ledger-post-amount-alignment-column 52
@@ -233,86 +509,57 @@
         "," #'ledger-reconcile-toggle
         "t" #'ledger-reconcile-change-target
         "RET" #'ledger-reconcile-finish))
+#+END_SRC
 
-;;; :lang org
-(setq org-directory "~/Nextcloud/Org/")
-(when (featurep! :lang org)
-  (after! org
-    (setq org-agenda-files (concat org-directory "/agenda.txt")
-          org-agenda-span 'day
-          org-agenda-start-day nil
-          org-agenda-timegrid-use-ampm t
-          org-agenda-todo-ignore-scheduled t
-          org-capture-templates
-          '(("t" "Task" entry (file+headline "plan.org" "Tasks")
-             "* TODO %?\n %i\n  %a\n")
-            ("a" "Appointment" entry (file+headline "plan.org" "Calendar")
-             "* %?\n %i\n  %a\n")
-            ("f" "FOCUS Task" entry (file+headline "plan.org" "FOCUS")
-             "* TODO %?\n %i\n  %a\n"))
-          org-default-notes-file (concat org-directory "/inbox.org")
-          org-fontify-done-headline nil
-          org-image-actual-width nil
-          org-link-abbrev-alist '(("attach" . org-attach-expand-link))
-          org-log-into-drawer "LOGBOOK"
-          org-outline-path-complete-in-steps nil
-          org-refile-allow-creating-parent-nodes 'confirm
-          org-refile-targets '((ajgrf/get-org-files :maxlevel . 3))
-          org-refile-use-outline-path 'file
-          org-return-follows-link t
-          org-startup-folded 'showall
-          org-startup-with-inline-images t
-          org-todo-keywords '((sequence "TODO(t)" "WAITING(w)" "DONE(d!)"))
-          holiday-bahai-holidays nil
-          holiday-hebrew-holidays nil
-          holiday-islamic-holidays nil
-          holiday-oriental-holidays nil
-          holiday-other-holidays '((holiday-fixed 5 5 "Cinco de Mayo")))
-    (add-to-list 'org-modules 'org-attach)
-    (add-to-list 'org-modules 'org-depend)
-    (add-to-list 'org-modules 'org-habit)))
+** Scheme (:lang scheme)
 
-(when (featurep! :lang org +pomodoro)
-  (setq org-pomodoro-keep-killed-pomodoro-time t)
-  (map! :leader
-        (:prefix ("n" . "notes")
-         :desc "Toggle Pomodoro" "P" #'org-pomodoro)
-        :localleader
-        :map (org-mode-map org-agenda-mode-map)
-        (:prefix ("c" . "clock")
-         "p" #'org-pomodoro)))
-
-;;; :lang scheme
+#+BEGIN_SRC emacs-lisp
 (when (featurep! :lang scheme)
   (setq geiser-default-implementation 'guile)
   ;; Open files with .guile file extension in scheme-mode.
   (add-to-list 'auto-mode-alist '("\\.guile\\'" . scheme-mode) t))
+#+END_SRC
 
+** sh (:lang sh)
 
-;;; :lang sh
+Configure shell script indentation style to match =shfmt=.
+
+#+BEGIN_SRC emacs-lisp
 (add-to-list 'auto-mode-alist '("\\.shinit\\'" . sh-mode) t)
 (setq-hook! sh-mode
-  ;; Configure shell script indentation style to match shfmt.
   indent-tabs-mode t
   tab-width 4
   sh-basic-offset tab-width
   sh-indent-after-continuation 'always
   sh-indent-for-case-alt '+
   sh-indent-for-case-label 0)
+#+END_SRC
 
-;;; :lang web
+** HTML/CSS (:lang web)
+
+#+BEGIN_SRC emacs-lisp
 (when (featurep! :lang web)
   (setq css-indent-offset 2
         web-mode-code-indent-offset 2
         web-mode-css-indent-offset 2
         web-mode-markup-indent-offset 2)
   (add-to-list 'auto-mode-alist '("\\.ejs\\'" . web-mode) t))
+#+END_SRC
 
-;;; vimscript
+** Vim script
+
+#+BEGIN_SRC emacs-lisp
 (use-package! vimrc-mode
     :mode "\\.vim\\(rc\\)?\\'")
+#+END_SRC
 
-;;; :term eshell
+* Terminals
+
+** Emacs Shell (:term eshell)
+
+A shell written entirely in elisp.
+
+#+BEGIN_SRC emacs-lisp
 (when (featurep! :term eshell)
   (after! esh-mode
     (map! :map eshell-mode-map
@@ -382,8 +629,13 @@
     (let ((default-directory (or (projectile-project-root)
                                  default-directory)))
       (apply orig-fn args))))
+#+END_SRC
 
-;;; :term shell
+** Shell (:term shell)
+
+Set up inferior shell, for running a shell in an Emacs buffer.
+
+#+BEGIN_SRC emacs-lisp :noweb yes
 (when (featurep! :term shell)
   (setq comint-completion-addsuffix '("/" . " "))
   ;; Recognize the password prompt from doas.
@@ -465,6 +717,15 @@
       (modify-syntax-entry c "w"))
     (modify-syntax-entry ?/ "-"))
 
+  <<apt-progress-bars)
+#+END_SRC
+
+*** Apt Progress Bars
+
+Show =apt= progress bars in the minibuffer.
+
+#+NAME: apt-progress-bars
+#+BEGIN_SRC emacs-lisp :tangle no
   ;; Show =apt= progress bars in the minibuffer.
   ;; https://oremacs.com/2019/03/24/shell-apt/
   (advice-add 'ansi-color-apply-on-region :before 'ora-ansi-color-apply-on-region)
@@ -488,93 +749,7 @@
     (message
      (replace-regexp-in-string
       "%" "%%"
-      (ansi-color-apply progress)))))
+      (ansi-color-apply progress))))
+#+END_SRC
 
-;;; :tools direnv
-(setq direnv-always-show-summary nil)
-
-;;; :tools magit
-(defvar dotfiles-git-dir
-  (expand-file-name "~/.dot")
-  "Location of dotfiles git directory.")
-
-(when (featurep! :tools magit)
-  (setq forge-topic-list-limit -5)
-
-  (when IS-WINDOWS
-    (setenv "SSH_ASKPASS" "git-gui--askpass"))
-
-  (defadvice! with-dotfiles-git-dir (orig-fn &optional directory cache)
-    "Support separate git directory for dotfiles in home."
-    :around 'magit-status
-    (let* ((git-dir-arg (concat "--git-dir=" dotfiles-git-dir))
-           (cache (if (member git-dir-arg magit-git-global-arguments)
-                      nil
-                    cache)))
-      (if (string= directory "~/")
-          (add-to-list 'magit-git-global-arguments git-dir-arg)
-        (setq magit-git-global-arguments
-              (remove git-dir-arg magit-git-global-arguments)))
-      (apply orig-fn (list directory cache)))))
-
-;;; :tools pdf
-(when (featurep! :tools pdf)
-  (add-hook! 'pdf-view-mode-hook
-    (pdf-view-auto-slice-minor-mode 1))
-
-  (map! :map pdf-view-mode-map
-        :n "J" #'pdf-view-next-page
-        :n "K" #'pdf-view-previous-page
-        :n "<tab>" #'pdf-outline
-
-        :localleader
-        "t" #'pdf-view-midnight-minor-mode))
-
-;;; :ui popup
-(when (featurep! :ui popup)
-  (set-popup-rules!
-    '(("^\\*Ledger Report" :size 25)
-      ("^\\*youtube-dl"       :vslot -2)
-      ("^\\*youtube-dl\\*<2>" :vslot -3)
-      ("^\\*youtube-dl\\*<3>" :vslot -4)
-      ("^\\*youtube-dl\\*<4>" :vslot -5)
-      ("^\\*youtube-dl\\*<5>" :vslot -6))))
-
-;;; alert-toast
-(when IS-WSL
-  (after! alert
-    (require 'alert-toast)
-    (setq alert-default-style 'toast)
-    (add-to-list 'alert-user-configuration
-                 '(((:category . "org-pomodoro")) toast nil))))
-
-;;; shrface
-(with-eval-after-load 'shr
-  (require 'shrface)
-  (shrface-basic) ; enable shrfaces, must be called before loading eww/dash-docs/nov.el
-  (shrface-trial) ; enable shrface experimental face(s), must be called before loading eww/dash-docs/nov.el
-  (setq shrface-href-versatile t) ; enable versatile URL faces support
-                                  ; (http/https/ftp/file/mailto/other), if
-                                  ; `shrface-href-versatile' is nil, default
-                                  ; face `shrface-href-face' would be used.
-  (setq shrface-toggle-bullets nil) ; Set t if you do not like headline bullets
-
-  ;; eww support
-  (with-eval-after-load 'eww
-    (add-hook 'eww-after-render-hook 'shrface-mode))
-
-  ;; nov support
-  (with-eval-after-load 'nov
-    (setq nov-shr-rendering-functions '((img . nov-render-img) (title . nov-render-title))) ; reset nov-shr-rendering-functions, in case of the list get bigger and bigger
-    (setq nov-shr-rendering-functions (append nov-shr-rendering-functions shr-external-rendering-functions))
-    (add-hook 'nov-mode-hook 'shrface-mode))
-
-  ;; mu4e support
-  (with-eval-after-load 'mu4e
-    (add-hook 'mu4e-view-mode-hook 'shrface-mode)))
-
-
-;; Local Variables:
-;; outline-regexp: ";;;"
-;; eval: (outline-hide-body)
-;; End:
+* TODO Integrate =autoload/ajgrf.el= and =packages.el= into this file
