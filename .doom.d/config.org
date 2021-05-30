@@ -231,8 +231,8 @@ URL associations & trash fix on WSL.
 
 #+BEGIN_SRC emacs-lisp
 (when IS-WSL
-  (setq browse-url-generic-program  "/mnt/c/Windows/System32/cmd.exe"
-        browse-url-generic-args     '("/c" "start")
+  (setq browse-url-generic-program  "wslview"
+        browse-url-generic-args     '()
         browse-url-browser-function #'browse-url-generic
         delete-by-moving-to-trash nil))
 #+END_SRC
