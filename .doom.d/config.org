@@ -61,11 +61,21 @@ Select theme by time of day:
   :if (= (display-color-cells) 16777216)
   :hook (after-init . circadian-setup)
   :config
+  (defun ajgrf/load-kde-theme (theme)
+    (let ((kde-theme (if (eq theme 'doom-tomorrow-night)
+                         "org.kde.breezedark.desktop"
+                       "org.kde.breezetwilight.desktop")))
+      (start-process "lookandfeeltool" nil "lookandfeeltool"
+                     "--apply" kde-theme)))
+
   (let* ((location-set? (and calendar-latitude calendar-longitude t))
          (day (if location-set? :sunrise "7:30"))
          (night (if location-set? :sunset "19:30")))
     (setq circadian-themes `((,day . doom-flatwhite)
-                             (,night . doom-tomorrow-night)))))
+                             (,night . doom-tomorrow-night)))
+
+    (when (executable-find "lookandfeeltool")
+      (add-hook! 'circadian-after-load-theme-hook #'ajgrf/load-kde-theme))))
 #+END_SRC
 
 *** Modus Themes
