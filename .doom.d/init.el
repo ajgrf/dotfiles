@@ -91,7 +91,8 @@
        :checkers
        syntax              ; tasing you for every semicolon you forget
        (:if (not IS-WINDOWS)
-        spell)           ; tasing you for misspelling mispelling
+        (spell +flyspell ; tasing you for misspelling mispelling
+               +hunspell))
        ;;grammar           ; tasing grammar mistake every you make
 
        :tools
