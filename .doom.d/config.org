@@ -270,19 +270,11 @@ Disable automatic formatting for the following file types:
 
 ** Spellchecking
 
-Set up spellchecking powered by =hunspell=:
+Set up spellchecking powered by =aspell=:
 
 #+BEGIN_SRC emacs-lisp
-(when (featurep! :checkers spell)
-  (setq-default ispell-local-dictionary "en_US")
-  (setq ispell-local-dictionary-alist '(("en_US" "[[:alpha:]]" "[^[:alpha:]]" "[']" nil ("-d" "en_US") nil utf-8)))
-  ;; new variable `ispell-hunspell-dictionary-alist' is defined in Emacs
-  ;; If it's nil, Emacs tries to automatically set up the dictionaries.
-  (when (boundp 'ispell-hunspell-dictionary-alist)
-    (setq ispell-hunspell-dictionary-alist ispell-local-dictionary-alist)))
+(setq-default ispell-local-dictionary "en")
 #+END_SRC
-
-https://emacs.stackexchange.com/a/22240/202
 
 ** Popup Rules (:ui popup)
 
