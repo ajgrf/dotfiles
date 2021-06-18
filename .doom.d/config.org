@@ -362,6 +362,20 @@ My life in plain text.
 
 #+END_SRC
 
+** Multiple Clocks
+
+Support running multiple org-clocks in parallel.
+
+#+BEGIN_SRC emacs-lisp
+(when (featurep! :lang org)
+  (use-package! org-multi-clock
+    :config
+    (map! [remap org-clock-in] #'omc-make-new-parallel-clock
+          :leader
+          (:prefix ("n" . "notes")
+           :desc "Set active org-clock" ":" #'omc-set-active-clock))))
+#+END_SRC
+
 ** [[https://github.com/chenyanming/shrface][Use Org Faces Elsewhere]]
 
 Extend shr/eww with Org features and faces.

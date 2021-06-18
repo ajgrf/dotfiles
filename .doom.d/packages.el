@@ -62,6 +62,9 @@
   :pin "93bdd2300b")                              ; February 2021
 (package! minions :pin "36d39bd25a")              ; v0.3.4
 (package! modus-themes :pin "0a36239baf")         ; 1.2.3
+(package! org-multi-clock
+  :recipe (:host gitlab :repo "OlMon/org-multi-clock")
+  :pin "cda91b2823")                              ; April 2021
 (if (file-exists-p "~/src/parchment")
     (package! parchment-theme :recipe (:local-repo "~/src/parchment"))
   (package! parchment-theme))
