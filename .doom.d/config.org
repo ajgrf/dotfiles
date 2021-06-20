@@ -332,6 +332,8 @@ My life in plain text.
     (add-to-list 'org-modules 'org-habit)
 
     (map! :localleader
+          :map org-mode-map
+          "u" #'org-update-all-dblocks
           :map org-agenda-mode-map
           "l" #'org-agenda-log-mode)))
 #+END_SRC
