@@ -51,7 +51,7 @@ available. You can either set ~doom-theme~ or manually load a theme with the
 ~load-theme~ function.
 
 #+BEGIN_SRC emacs-lisp
-(setq doom-theme 'doom-tomorrow-night)
+(setq doom-theme 'doom-gruvbox)
 #+END_SRC
 
 Select theme by time of day:
@@ -62,7 +62,7 @@ Select theme by time of day:
   :hook (after-init . circadian-setup)
   :config
   (defun ajgrf/load-kde-theme (theme)
-    (let ((kde-theme (if (eq theme 'doom-tomorrow-night)
+    (let ((kde-theme (if (eq theme 'doom-gruvbox)
                          "org.kde.breezedark.desktop"
                        "org.kde.breezetwilight.desktop")))
       (start-process "lookandfeeltool" nil "lookandfeeltool"
@@ -71,11 +71,17 @@ Select theme by time of day:
   (let* ((location-set? (and calendar-latitude calendar-longitude t))
          (day (if location-set? :sunrise "7:30"))
          (night (if location-set? :sunset "19:30")))
-    (setq circadian-themes `((,day . doom-flatwhite)
-                             (,night . doom-tomorrow-night)))
+    (setq circadian-themes `((,day . doom-gruvbox-light)
+                             (,night . doom-gruvbox)))
 
     (when (executable-find "lookandfeeltool")
       (add-hook! 'circadian-after-load-theme-hook #'ajgrf/load-kde-theme))))
+#+END_SRC
+
+*** Doom Themes
+
+#+BEGIN_SRC emacs-lisp
+(setq doom-gruvbox-light-variant "hard")
 #+END_SRC
 
 *** Modus Themes
