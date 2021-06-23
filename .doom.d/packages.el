@@ -61,7 +61,7 @@
   :recipe (:host github :repo "slotThe/kbd-mode")
   :pin "93bdd2300b")                              ; February 2021
 (package! minions :pin "36d39bd25a")              ; v0.3.4
-(package! modus-themes :pin "0a36239baf")         ; 1.2.3
+(package! modus-themes :pin "15c973f716")         ; 1.4.0
 (package! org-multi-clock
   :recipe (:host gitlab :repo "OlMon/org-multi-clock")
   :pin "cda91b2823")                              ; April 2021
