@@ -96,6 +96,7 @@ image.
   `(doom-modeline-buffer-path :foreground ,(doom-color 'blue) :inherit bold)
   `(doom-modeline-project-dir :inherit doom-modeline-buffer-path)
   `(eshell-prompt :foreground ,(doom-color 'blue) :inherit bold)
+  `(eshell-syntax-highlighting-shell-command-face :foreground ,(doom-color 'fg))
   `(font-lock-builtin-face :foreground ,(doom-color 'blue))
   `(font-lock-doc-face :foreground ,(doom-color 'green))
   `(font-lock-preprocessor-face :foreground ,(doom-color 'violet))
