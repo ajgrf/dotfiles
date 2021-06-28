@@ -3,7 +3,7 @@
 env:
   TERM: xterm-256color
 
-# Colors (Tomorrow Night)
+# Colors (Gruvbox)
 colors:
   primary:
     background: '#282828'
