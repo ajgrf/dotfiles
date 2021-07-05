@@ -38,10 +38,9 @@ They all accept either a font-spec, font string ("Input Mono-12"), or xlfd
 font string.
 
 #+BEGIN_SRC emacs-lisp
-(let ((size (if IS-WINDOWS 11.0 12.0)))
-  (setq doom-font (font-spec :family "Iosevka" :size size)
-        doom-serif-font (font-spec :family "Iosevka Slab Light")
-        doom-variable-pitch-font (font-spec :family "Iosevka Aile")))
+(setq doom-font (font-spec :family "Iosevka" :size 12.0)
+      doom-serif-font (font-spec :family "Iosevka Slab Light")
+      doom-variable-pitch-font (font-spec :family "Iosevka Aile"))
 #+END_SRC
 
 ** Themes
