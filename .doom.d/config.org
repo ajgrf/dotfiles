@@ -145,6 +145,7 @@ image.
   `(org-property-value :foreground ,(doom-color 'fg))
   `(org-table :foreground ,(doom-color 'cyan))
   `(org-meta-line :inherit font-lock-comment-face)
+  `(region :background ,(doom-color 'region) :extend nil)
   `(transient-key :foreground ,(doom-color 'violet))
   `(web-mode-html-attr-name-face :foreground ,(doom-color 'fg))
   `(which-key-command-description-face :foreground ,(doom-color 'fg))
