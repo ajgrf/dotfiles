@@ -522,6 +522,9 @@ Extend shr/eww with Org features and faces.
 (when (featurep! :tools magit)
   (setq forge-topic-list-limit -5)
 
+  (add-to-list 'magit-section-initial-visibility-alist '(unpulled . show))
+  (add-to-list 'magit-section-initial-visibility-alist '(unpushed . show))
+
   (when IS-WINDOWS
     (setenv "SSH_ASKPASS" "git-gui--askpass"))
 
