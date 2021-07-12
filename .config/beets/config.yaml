@@ -21,7 +21,7 @@ match:
         original_year: yes
 plugins: convert fetchart info lastgenre replaygain scrub zero
 replaygain:
-    backend: bs1770gain
+    backend: ffmpeg
     overwrite: yes
 zero:
     fields: images lyrics
