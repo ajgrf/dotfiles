@@ -483,6 +483,30 @@ Extend shr/eww with Org features and faces.
     (add-hook 'mu4e-view-mode-hook 'shrface-mode)))
 #+END_SRC
 
+** Egnyte Links
+
+Custom link type for files on a shared Egnyte drive.
+
+#+BEGIN_SRC emacs-lisp
+(after! ol
+  (org-link-set-parameters "egnyte" :follow #'org-egnyte-open)
+
+  (defvar org-egnyte-program
+    (cond (IS-WSL "wslview")
+          (t      "xdg-open"))
+    "Program to use to visit `egnyte:' links.")
+
+  (defvar org-egnyte-prefix
+    (cond (IS-WSL "Z:/")
+          (t      "davs://mycompany.egnyte.com/webdav/"))
+    "Prefix to append to the path of `egnyte:' links.")
+
+  (defun org-egnyte-open (path _)
+    "Visit the file on Egnyte at PATH."
+    (call-process org-egnyte-program nil 0 nil
+                  (concat org-egnyte-prefix path))))
+#+END_SRC
+
 ** TODO Set up [[https://github.com/akhramov/org-wild-notifier.el][org-wild-notifier.el]]
 
 * Applications
